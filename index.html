@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oliver Williams | Visual Strategist</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        cream: '#F0EFEA',
+                        surface: '#FFFFFF',
+                        'dark-bg': '#18181B',
+                        'dark-surface': '#27272A',
+                        primary: '#111827',
+                        'primary-dark': '#FAFAFA',
+                        success: '#059669',
+                    },
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    borderRadius: {
+                        'xl': '1rem',
+                        '2xl': '1.5rem',
+                        '3xl': '2rem',
+                    },
+                    boxShadow: {
+                        'soft': '0 4px 20px -2px rgba(0, 0, 0, 0.05)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { transition: background-color 0.5s ease, color 0.5s ease; }
+        .glass-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .glass-card:hover { transform: translateY(-4px); box-shadow: 0 10px 30px -4px rgba(0, 0, 0, 0.1); }
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #D1D5DB; border-radius: 10px; border: 2px solid #F0EFEA; }
+        .dark ::-webkit-scrollbar-thumb { background: #3F3F46; border: 2px solid #18181B; }
+    </style>
+</head>
+<body class="bg-cream dark:bg-dark-bg text-gray-800 dark:text-gray-200 font-sans selection:bg-gray-200 dark:selection:bg-gray-700 flex flex-col min-h-screen">
+
+    <!-- NAVIGATION -->
+    <nav class="fixed top-4 left-0 right-0 z-50 px-4 md:px-8">
+        <div class="max-w-7xl mx-auto bg-surface/80 dark:bg-dark-surface/80 backdrop-blur-md rounded-2xl shadow-soft px-6 py-4 flex justify-between items-center border border-gray-100 dark:border-gray-700 transition-all duration-500">
+            <div class="flex items-center gap-3 group cursor-pointer" onclick="window.location.href='index.html'">
+                <div class="bg-gray-100 dark:bg-gray-700 p-2 rounded-xl transition-colors">
+                    <i data-lucide="anchor" class="text-gray-900 dark:text-white w-5 h-5"></i>
+                </div>
+                <span class="font-bold text-gray-900 dark:text-white text-sm tracking-tight hidden md:block">Oliver Williams</span>
+            </div>
+            <div class="flex items-center gap-2 md:gap-6">
+                <div class="hidden md:flex items-center gap-1 bg-gray-100 dark:bg-gray-800 p-1 rounded-xl">
+                    <a href="#work" class="px-4 py-2 rounded-lg text-sm font-medium text-gray-600 dark:text-gray-400 hover:bg-white dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white hover:shadow-sm transition-all">Work</a>
+                    <a href="#contact" class="px-4 py-2 rounded-lg text-sm font-medium text-gray-600 dark:text-gray-400 hover:bg-white dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white hover:shadow-sm transition-all">Contact</a>
+                </div>
+                <button onclick="toggleTheme()" class="p-2.5 rounded-xl bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-400 transition-colors">
+                    <i class="fa-solid fa-sun hidden dark:block text-sm"></i>
+                    <i class="fa-solid fa-moon block dark:hidden text-sm"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="pt-32 pb-20 px-4 md:px-8 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-8 flex-grow">
+        <div class="col-span-12 md:col-span-7 flex flex-col">
+            <div class="bg-surface dark:bg-dark-surface rounded-3xl p-8 md:p-12 shadow-soft border border-gray-100 dark:border-gray-700 transition-colors duration-500 h-full flex flex-col justify-center">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-green-100 dark:bg-green-900/30 text-success text-xs font-bold uppercase tracking-wider mb-8 self-start">
+                    <span class="w-2 h-2 rounded-full bg-success animate-pulse"></span>
+                    Available for work
+                </div>
+                <h1 class="text-5xl md:text-7xl font-bold text-gray-900 dark:text-white mb-6 tracking-tight leading-tight">
+                    Graphic Design <br>
+                    <span class="text-gray-400 dark:text-gray-600">& Data Analysis</span>
+                </h1>
+                <p class="text-gray-600 dark:text-gray-400 text-lg md:text-xl leading-relaxed mb-10 max-w-lg">
+                    I'm Oliver Williams, a visual strategist helping brands find clarity through precision design, structured identity systems, and functional aesthetics.
+                </p>
+                <div class="flex flex-row gap-4 mt-auto md:mt-0">
+                    <a href="resume.html" class="bg-primary dark:bg-primary-dark text-white dark:text-gray-900 px-6 md:px-8 py-4 rounded-xl font-semibold hover:opacity-90 transition-opacity flex items-center gap-2 text-sm md:text-base whitespace-nowrap">
+                        <i class="fa-solid fa-file-lines"></i>
+                        View Resume
+                    </a>
+                    <a href="mailto:oliver_tw@icloud.com" class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-900 dark:text-white px-6 md:px-8 py-4 rounded-xl font-semibold hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors text-sm md:text-base whitespace-nowrap">
+                        Get in Touch
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-span-12 md:col-span-5 flex flex-col gap-6">
+            <div class="bg-surface dark:bg-dark-surface rounded-3xl p-2 shadow-soft border border-gray-100 dark:border-gray-700 h-64 md:h-auto md:flex-1 relative overflow-hidden group transition-colors duration-500 min-h-[300px]">
+                <div class="absolute inset-0 bg-gray-50 dark:bg-gray-800 m-2 rounded-2xl flex items-center justify-center overflow-hidden">
+                    <!-- IMAGE PLACEHOLDER -->
+                    <img src="home_anchor.png" alt="Anchor Graphic" class="w-full h-full object-cover rounded-xl">
+                </div>
+            </div>
+            <div class="bg-surface dark:bg-dark-surface p-6 rounded-3xl shadow-soft border border-gray-100 dark:border-gray-700 transition-colors duration-500 shrink-0">
+                <span class="text-gray-400 dark:text-gray-500 text-xs font-bold uppercase tracking-wider block mb-2">Toolkit</span>
+                <p class="text-gray-900 dark:text-white font-semibold text-lg leading-snug">Adobe Suite, Python, R, WordPress</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROJECTS SECTION -->
+    <section id="work" class="py-20 px-4 md:px-8 max-w-7xl mx-auto">
+        <div class="flex items-center justify-between mb-12">
+            <h2 class="text-2xl font-bold text-gray-900 dark:text-white">Recent Projects</h2>
+            <div class="hidden md:block h-px flex-1 bg-gray-200 dark:bg-gray-700 mx-8"></div>
+            <a href="archive.html" class="text-sm font-semibold text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors flex items-center gap-1">
+                View All <i class="fa-solid fa-arrow-right text-xs"></i>
+            </a>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="glass-card bg-surface dark:bg-dark-surface rounded-3xl p-3 shadow-soft border border-gray-100 dark:border-gray-700 group cursor-pointer transition-colors duration-500" onclick="window.location.href='mainframe.html'">
+                <div class="relative aspect-[4/3] bg-gray-100 dark:bg-gray-800 rounded-2xl overflow-hidden mb-4">
+                    <!-- IMAGE PLACEHOLDER -->
+                    <img src="images/mainframe1.png" alt="Mainframe Studios" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute top-4 right-4 bg-white/90 dark:bg-black/80 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-gray-900 dark:text-white border border-white/20">Advertising</div>
+                </div>
+                <div class="px-2 pb-2">
+                    <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-1">Mainframe Studios</h3>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 line-clamp-2">Unique typeface and poster for a non-profit art studio in Des Moines, Iowa.</p>
+                </div>
+            </div>
+            <div class="glass-card bg-surface dark:bg-dark-surface rounded-3xl p-3 shadow-soft border border-gray-100 dark:border-gray-700 group cursor-pointer transition-colors duration-500" onclick="window.location.href='forged.html'">
+                <div class="relative aspect-[4/3] bg-gray-100 dark:bg-gray-800 rounded-2xl overflow-hidden mb-4">
+                    <!-- IMAGE PLACEHOLDER -->
+                    <img src="images/forged1.png" alt="The Forged Group" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute top-4 right-4 bg-white/90 dark:bg-black/80 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-gray-900 dark:text-white border border-white/20">Branding</div>
+                </div>
+                <div class="px-2 pb-2">
+                    <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-1">The Forged Group</h3>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 line-clamp-2">Visual identity system for a financial consultation firm based in North Carolina.</p>
+                </div>
+            </div>
+            <div class="glass-card bg-surface dark:bg-dark-surface rounded-3xl p-3 shadow-soft border border-gray-100 dark:border-gray-700 group cursor-pointer transition-colors duration-500" onclick="window.location.href='relays.html'">
+                <div class="relative aspect-[4/3] bg-gray-100 dark:bg-gray-800 rounded-2xl overflow-hidden mb-4">
+                    <!-- IMAGE PLACEHOLDER -->
+                    <img src="images/relays1.png" alt="Drake Relays" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute top-4 right-4 bg-white/90 dark:bg-black/80 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-gray-900 dark:text-white border border-white/20">Event</div>
+                </div>
+                <div class="px-2 pb-2">
+                    <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-1">Drake Relays 2025</h3>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 line-clamp-2">Relays event logo & theme for Drake University: "Racing Through Time".</p>
+                </div>
+            </div>
+        </div>
+        <div class="mt-12 text-center md:hidden">
+            <a href="archive.html" class="inline-block px-8 py-4 bg-white dark:bg-dark-surface border border-gray-200 dark:border-gray-700 rounded-xl font-semibold text-gray-900 dark:text-white shadow-sm">View All Projects</a>
+        </div>
+    </section>
+
+    <!-- CALL TO ACTION -->
+    <section id="contact" class="px-4 md:px-8 pb-20">
+        <div class="max-w-7xl mx-auto bg-surface dark:bg-dark-surface rounded-3xl p-8 md:p-12 shadow-soft border border-gray-100 dark:border-gray-700 transition-colors duration-500 text-center">
+            <h2 class="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">Let's work together!</h2>
+            <p class="text-gray-500 dark:text-gray-400 text-lg mb-8 max-w-xl mx-auto">
+                Looking for assistance in graphic design? Please reach out and let me know how I can help.
+            </p>
+            <a href="mailto:oliver_tw@icloud.com" class="inline-flex items-center gap-2 bg-primary dark:bg-primary-dark text-white dark:text-gray-900 px-8 py-4 rounded-xl font-bold hover:opacity-90 transition-opacity">
+                <i class="fa-solid fa-envelope"></i>
+                Email Me
+            </a>
+        </div>
+    </section>
+
+    <!-- BOTTOM FOOTER (Connected) -->
+    <footer class="w-full bg-surface dark:bg-dark-surface border-t border-gray-200 dark:border-gray-700 py-8 px-4 md:px-8 mt-auto">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-sm">
+            <div class="text-gray-500 dark:text-gray-400">
+                &copy; 2025 Oliver Williams.
+            </div>
+            
+            <div class="flex flex-wrap justify-center items-center gap-6">
+                <!-- Contact Text -->
+                <div class="flex items-center gap-6">
+                    <a href="mailto:oliver_tw@icloud.com" class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white font-medium transition-colors">oliver_tw@icloud.com</a>
+                    <span class="text-gray-300 dark:text-gray-700">•</span>
+                    <span class="text-gray-600 dark:text-gray-400 font-medium">+1 (317) 914-8047</span>
+                    <span class="text-gray-300 dark:text-gray-700 hidden md:inline">•</span>
+                </div>
+
+                <!-- Social Icons -->
+                <div class="flex items-center gap-4">
+                    <a href="#" class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors text-lg" aria-label="Instagram">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+                    <a href="#" class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors text-lg" aria-label="LinkedIn">
+                        <i class="fa-brands fa-linkedin"></i>
+                    </a>
+                    <a href="#" class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors text-lg" aria-label="GitHub">
+                        <i class="fa-brands fa-github"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+        function toggleTheme() {
+            const html = document.documentElement;
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+            } else {
+                html.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+        if (localStorage.theme === 'light' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: light)').matches)) {
+            document.documentElement.classList.remove('dark');
+        } else {
+            document.documentElement.classList.add('dark');
+        }
+    </script>
+</body>
+</html>

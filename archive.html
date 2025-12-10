@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Archive | Oliver Williams</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        cream: '#F0EFEA',
+                        surface: '#FFFFFF',
+                        'dark-bg': '#18181B',
+                        'dark-surface': '#27272A',
+                        primary: '#111827',
+                        'primary-dark': '#FAFAFA',
+                        success: '#059669',
+                    },
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    borderRadius: {
+                        'xl': '1rem',
+                        '2xl': '1.5rem',
+                        '3xl': '2rem',
+                    },
+                    boxShadow: {
+                        'soft': '0 4px 20px -2px rgba(0, 0, 0, 0.05)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { transition: background-color 0.5s ease, color 0.5s ease; }
+        .glass-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .glass-card:hover { transform: translateY(-4px); box-shadow: 0 10px 30px -4px rgba(0, 0, 0, 0.1); }
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #D1D5DB; border-radius: 10px; border: 2px solid #F0EFEA; }
+        .dark ::-webkit-scrollbar-thumb { background: #3F3F46; border: 2px solid #18181B; }
+    </style>
+</head>
+<body class="bg-cream dark:bg-dark-bg text-gray-800 dark:text-gray-200 font-sans selection:bg-gray-200 dark:selection:bg-gray-700 flex flex-col min-h-screen transition-colors duration-500">
+
+    <!-- NAV -->
+    <nav class="fixed top-4 left-0 right-0 z-50 px-4 md:px-8">
+        <div class="max-w-7xl mx-auto bg-surface/80 dark:bg-dark-surface/80 backdrop-blur-md rounded-2xl shadow-soft px-6 py-4 flex justify-between items-center border border-gray-100 dark:border-gray-700 transition-all duration-500">
+            <div class="flex items-center gap-3 cursor-pointer" onclick="window.location.href='index.html'">
+                <div class="bg-gray-100 dark:bg-gray-700 p-2 rounded-xl">
+                    <i data-lucide="arrow-left" class="text-gray-900 dark:text-white w-5 h-5"></i>
+                </div>
+                <span class="font-bold text-gray-900 dark:text-white text-sm">Back to Home</span>
+            </div>
+            
+            <button onclick="toggleTheme()" class="p-2.5 rounded-xl bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400">
+                <i class="fa-solid fa-sun hidden dark:block text-sm"></i>
+                <i class="fa-solid fa-moon block dark:hidden text-sm"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- CONTENT -->
+    <main class="pt-32 pb-20 px-4 md:px-8 max-w-7xl mx-auto flex-grow">
+        
+        <header class="mb-16">
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">Project Archive</h1>
+            <p class="text-gray-500 dark:text-gray-400 max-w-2xl text-lg">
+                A complete collection of commercial works, branding exercises, and typographic experiments.
+            </p>
+        </header>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+            <!-- 1. Mainframe -->
+            <div class="glass-card bg-surface dark:bg-dark-surface rounded-3xl p-3 shadow-soft border border-gray-100 dark:border-gray-700 group cursor-pointer" onclick="window.location.href='mainframe.html'">
+                <div class="relative aspect-[4/3] bg-gray-100 dark:bg-gray-800 rounded-2xl overflow-hidden mb-4">
+                    <!-- IMAGE PLACEHOLDER -->
+                    <img src="images/mainframe1.png" alt="Mainframe" class="w-full h-full object-cover">
+                </div>
+                <div class="px-2 pb-2">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="text-lg font-bold text-gray-900 dark:text-white">Mainframe Studios</h3>
+                        <span class="text-xs font-semibold bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 px-2 py-1 rounded-lg">Ads</span>
+                    </div>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">Typography & Poster System</p>
+                </div>
+            </div>
+
+            <!-- 2. Forged Group -->
+            <div class="glass-card bg-surface dark:bg-dark-surface rounded-3xl p-3 shadow-soft border border-gray-100 dark:border-gray-700 group cursor-pointer" onclick="window.location.href='forged.html'">
+                <div class="relative aspect-[4/3] bg-gray-100 dark:bg-gray-800 rounded-2xl overflow-hidden mb-4">
+                    <!-- IMAGE PLACEHOLDER -->
+                    <img src="images/forged1.png" alt="Forged" class="w-full h-full object-cover">
+                </div>
+                <div class="px-2 pb-2">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="text-lg font-bold text-gray-900 dark:text-white">The Forged Group</h3>
+                        <span class="text-xs font-semibold bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 px-2 py-1 rounded-lg">Brand</span>
+                    </div>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">Identity Strategy</p>
+                </div>
+            </div>
+
+            <!-- 3. Drake Relays -->
+            <div class="glass-card bg-surface dark:bg-dark-surface rounded-3xl p-3 shadow-soft border border-gray-100 dark:border-gray-700 group cursor-pointer" onclick="window.location.href='relays.html'">
+                <div class="relative aspect-[4/3] bg-gray-100 dark:bg-gray-800 rounded-2xl overflow-hidden mb-4">
+                    <!-- IMAGE PLACEHOLDER -->
+                    <img src="images/relays1.png" alt="Drake" class="w-full h-full object-cover">
+                </div>
+                <div class="px-2 pb-2">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="text-lg font-bold text-gray-900 dark:text-white">Drake Relays 2025</h3>
+                        <span class="text-xs font-semibold bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 px-2 py-1 rounded-lg">Event</span>
+                    </div>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">Campaign Visuals</p>
+                </div>
+            </div>
+
+            <!-- 4. Pyrkia -->
+            <div class="glass-card bg-surface dark:bg-dark-surface rounded-3xl p-3 shadow-soft border border-gray-100 dark:border-gray-700 group cursor-pointer" onclick="window.location.href='pyrkia.html'">
+                <div class="relative aspect-[4/3] bg-gray-100 dark:bg-gray-800 rounded-2xl overflow-hidden mb-4">
+                    <!-- IMAGE PLACEHOLDER -->
+                    <img src="images/pyrkia1.png" alt="Pyrkia" class="w-full h-full object-cover">
+                </div>
+                <div class="px-2 pb-2">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="text-lg font-bold text-gray-900 dark:text-white">Pyrkia Health</h3>
+                        <span class="text-xs font-semibold bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 px-2 py-1 rounded-lg">Logo</span>
+                    </div>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">Wellness Branding</p>
+                </div>
+            </div>
+
+            <!-- 5. Music Promo -->
+            <div class="glass-card bg-surface dark:bg-dark-surface rounded-3xl p-3 shadow-soft border border-gray-100 dark:border-gray-700 group cursor-pointer" onclick="window.location.href='music.html'">
+                <div class="relative aspect-[4/3] bg-gray-100 dark:bg-gray-800 rounded-2xl overflow-hidden mb-4">
+                    <!-- IMAGE PLACEHOLDER -->
+                    <img src="images/music1.png" alt="Music" class="w-full h-full object-cover">
+                </div>
+                <div class="px-2 pb-2">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="text-lg font-bold text-gray-900 dark:text-white">Local Music</h3>
+                        <span class="text-xs font-semibold bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 px-2 py-1 rounded-lg">Print</span>
+                    </div>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">Gig Posters</p>
+                </div>
+            </div>
+
+            <!-- 6. Shorewood -->
+            <div class="glass-card bg-surface dark:bg-dark-surface rounded-3xl p-3 shadow-soft border border-gray-100 dark:border-gray-700 group cursor-pointer" onclick="window.location.href='citymap.html'">
+                <div class="relative aspect-[4/3] bg-gray-100 dark:bg-gray-800 rounded-2xl overflow-hidden mb-4">
+                    <!-- IMAGE PLACEHOLDER -->
+                    <img src="images/citymap1.png" alt="Map" class="w-full h-full object-cover">
+                </div>
+                <div class="px-2 pb-2">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="text-lg font-bold text-gray-900 dark:text-white">Lake Pinnetonka</h3>
+                        <span class="text-xs font-semibold bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 px-2 py-1 rounded-lg">Illu</span>
+                    </div>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">City Map Design</p>
+                </div>
+            </div>
+
+            <!-- 7. Shorewood Internship -->
+            <div class="glass-card bg-surface dark:bg-dark-surface rounded-3xl p-3 shadow-soft border border-gray-100 dark:border-gray-700 group cursor-pointer" onclick="window.location.href='cityintern.html'">
+                <div class="relative aspect-[4/3] bg-gray-100 dark:bg-gray-800 rounded-2xl overflow-hidden mb-4">
+                    <!-- IMAGE PLACEHOLDER -->
+                    <img src="images/cityintern1.png" alt="Forms" class="w-full h-full object-cover">
+                </div>
+                <div class="px-2 pb-2">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="text-lg font-bold text-gray-900 dark:text-white">Shorewood Govt</h3>
+                        <span class="text-xs font-semibold bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 px-2 py-1 rounded-lg">Docs</span>
+                    </div>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">Internship Work</p>
+                </div>
+            </div>
+
+            <!-- 8. DMARC Food Pantry -->
+            <div class="glass-card bg-surface dark:bg-dark-surface rounded-3xl p-3 shadow-soft border border-gray-100 dark:border-gray-700 group cursor-pointer" onclick="window.location.href='dmarc.html'">
+                <div class="relative aspect-[4/3] bg-gray-100 dark:bg-gray-800 rounded-2xl overflow-hidden mb-4">
+                    <!-- IMAGE PLACEHOLDER -->
+                    <img src="images/dmarc1.png" alt="Data" class="w-full h-full object-cover">
+                </div>
+                <div class="px-2 pb-2">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="text-lg font-bold text-gray-900 dark:text-white">DMARC Analytics</h3>
+                        <span class="text-xs font-semibold bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 px-2 py-1 rounded-lg">Data</span>
+                    </div>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">Predictive Modeling</p>
+                </div>
+            </div>
+
+            <!-- 9. Christmas in Excelsior -->
+            <div class="glass-card bg-surface dark:bg-dark-surface rounded-3xl p-3 shadow-soft border border-gray-100 dark:border-gray-700 group cursor-pointer" onclick="window.location.href='xmas.html'">
+                <div class="relative aspect-[4/3] bg-gray-100 dark:bg-gray-800 rounded-2xl overflow-hidden mb-4">
+                    <!-- IMAGE PLACEHOLDER -->
+                    <img src="images/xmas1.png" alt="Xmas" class="w-full h-full object-cover">
+                </div>
+                <div class="px-2 pb-2">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="text-lg font-bold text-gray-900 dark:text-white">Xmas in Excelsior</h3>
+                        <span class="text-xs font-semibold bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 px-2 py-1 rounded-lg">Map</span>
+                    </div>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">Event Map</p>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="w-full bg-surface dark:bg-dark-surface border-t border-gray-200 dark:border-gray-700 py-8 px-4 md:px-8 mt-auto">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-sm">
+            <div class="text-gray-500 dark:text-gray-400">
+                &copy; 2025 Oliver Williams.
+            </div>
+            
+            <div class="flex flex-wrap justify-center items-center gap-6">
+                <!-- Contact Text -->
+                <div class="flex items-center gap-6">
+                    <a href="mailto:oliver_tw@icloud.com" class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white font-medium transition-colors">oliver_tw@icloud.com</a>
+                    <span class="text-gray-300 dark:text-gray-700">•</span>
+                    <span class="text-gray-600 dark:text-gray-400 font-medium">+1 (317) 914-8047</span>
+                    <span class="text-gray-300 dark:text-gray-700 hidden md:inline">•</span>
+                </div>
+
+                <!-- Social Icons -->
+                <div class="flex items-center gap-4">
+                    <a href="https://www.instagram.com/oliver_williams1212/" class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors text-lg" aria-label="Instagram">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/oliver-t-williams/" class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors text-lg" aria-label="LinkedIn">
+                        <i class="fa-brands fa-linkedin"></i>
+                    </a>
+                    <a href="https://github.com/olivertw12" class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors text-lg" aria-label="GitHub">
+                        <i class="fa-brands fa-github"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+        function toggleTheme() {
+            const html = document.documentElement;
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+            } else {
+                html.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+        if (localStorage.theme === 'light' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: light)').matches)) {
+            document.documentElement.classList.remove('dark');
+        } else {
+            document.documentElement.classList.add('dark');
+        }
+    </script>
+</body>
+</html>

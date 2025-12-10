@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume | Oliver Williams</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        cream: '#F0EFEA',
+                        surface: '#FFFFFF',
+                        'dark-bg': '#18181B', // Zinc 950
+                        'dark-surface': '#27272A', // Zinc 800
+                        primary: '#111827',
+                        'primary-dark': '#FAFAFA',
+                        success: '#059669',
+                    },
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    borderRadius: {
+                        'xl': '1rem',
+                        '2xl': '1.5rem',
+                        '3xl': '2rem',
+                    },
+                    boxShadow: {
+                        'soft': '0 4px 20px -2px rgba(0, 0, 0, 0.05)',
+                        'paper': '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { transition: background-color 0.5s ease, color 0.5s ease; }
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #D1D5DB; border-radius: 10px; border: 2px solid #F0EFEA; }
+        .dark ::-webkit-scrollbar-thumb { background: #3F3F46; border: 2px solid #18181B; }
+        
+        /* Print Styles for actual PDF-like output */
+@media print {
+    /* 1. ELIMINATE BROWSER MARGINS */
+    @page {
+        margin: 0; /* Removes default browser header/footer white space */
+        size: auto; 
+    }
+
+    body {
+        background-color: white;
+        color: black;
+        margin: 1cm; /* Add back a small, safe white border (optional) */
+        
+        /* 2. SCALE DOWN TO FIT ONE PAGE */
+        /* This shrinks everything by 10% to ensure it fits on one sheet */
+        zoom: 90%; 
+        
+        /* Ensures background graphics (if any) print correctly */
+        -webkit-print-color-adjust: exact; 
+        print-color-adjust: exact;
+    }
+
+    nav, button, footer { 
+        display: none !important; /* Force hide these */
+    }
+
+    .print-container {
+        box-shadow: none;
+        border: none;
+        padding: 0;
+        margin: 0 auto; /* Center it */
+        width: 100%;
+        max-width: 100%;
+    }
+
+    a {
+        text-decoration: none;
+        color: black;
+    }
+}
+    </style>
+    
+    <!-- Font Awesome for Solid Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-cream dark:bg-dark-bg text-gray-800 dark:text-gray-200 font-sans selection:bg-gray-200 dark:selection:bg-gray-700 flex flex-col min-h-screen transition-colors duration-500">
+
+    <!-- NAVIGATION -->
+    <nav class="fixed top-4 left-0 right-0 z-50 px-4 md:px-8 print:hidden">
+        <div class="max-w-7xl mx-auto bg-surface/80 dark:bg-dark-surface/80 backdrop-blur-md rounded-2xl shadow-soft px-6 py-4 flex justify-between items-center border border-gray-100 dark:border-gray-700 transition-all duration-500">
+            <div class="flex items-center gap-3 cursor-pointer" onclick="window.location.href='index.html'">
+                <div class="bg-gray-100 dark:bg-gray-700 p-2 rounded-xl">
+                    <i class="fa-solid fa-arrow-left text-gray-900 dark:text-white text-lg"></i>
+                </div>
+                <span class="font-bold text-gray-900 dark:text-white text-sm">Back to Portfolio</span>
+            </div>
+            
+            <div class="flex items-center gap-4">
+                <button onclick="window.print()" class="hidden md:flex items-center gap-2 text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors">
+                    <i class="fa-solid fa-print"></i>
+                    Print / Save PDF
+                </button>
+                <button onclick="toggleTheme()" class="p-2.5 rounded-xl bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+                    <i class="fa-solid fa-sun hidden dark:block"></i>
+                    <i class="fa-solid fa-moon block dark:hidden"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- RESUME CONTENT -->
+    <main class="pt-32 pb-20 px-4 md:px-8 flex-grow flex justify-center mb-20"> <!-- Added mb-20 for extra padding above footer -->
+        
+        <!-- Paper Container -->
+        <div class="print-container w-full max-w-[1000px] bg-white dark:bg-dark-surface p-8 md:p-12 lg:p-16 rounded-3xl shadow-paper border border-gray-100 dark:border-gray-700 transition-colors duration-500">
+            
+            <!-- Header -->
+            <header class="-mt-6 mb-8 flex flex-col items-center text-center">
+                <h1 class="text-4xl md:text-6xl font-extrabold text-gray-900 dark:text-white tracking-tight leading-none mb-4">
+                    OLIVER T. WILLIAMS
+                </h1>
+                <!-- Contact Info Centered -->
+                <div class="flex flex-col md:flex-row md:items-center justify-center gap-2 md:gap-6 text-sm font-medium text-gray-600 dark:text-gray-300">
+                    <a href="tel:3179148047" class="hover:text-success transition-colors flex items-center gap-2 justify-center">
+                        <i class="fa-solid fa-phone text-xs"></i> 317-914-8047
+                    </a>
+                    <span class="hidden md:inline text-gray-300 dark:text-gray-600">|</span>
+                    <a href="mailto:oliver_tw@icloud.com" class="hover:text-success transition-colors flex items-center gap-2 justify-center">
+                        <i class="fa-solid fa-envelope text-xs"></i> oliver_tw@icloud.com
+                    </a>
+                    <span class="hidden md:inline text-gray-300 dark:text-gray-600">|</span>
+                    <a href="https://olivertwilliams.com" target="_blank" class="hover:text-success transition-colors flex items-center gap-2 justify-center">
+                        <i class="fa-solid fa-globe text-xs"></i> olivertwilliams.com
+                    </a>
+                </div>
+            </header>
+
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-12">
+                
+                <!-- Left Sidebar -->
+                <aside class="col-span-1 md:col-span-4 space-y-12">
+                    
+                    <!-- Profile -->
+                    <section>
+                        <h3 class="text-xs font-bold uppercase tracking-widest text-gray-400 dark:text-gray-500 mb-4 border-b border-gray-200 dark:border-gray-700 pb-2">Profile</h3>
+                        <p class="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
+                            Graphic Designer and Data Analyst with expertise in combining design thinking and technical skills to solve complex problems. Proficient in data-driven visualizations and corporate branding using Adobe Suite, with experience in project leadership and client management in collaborative environments.
+                        </p>
+                    </section>
+
+                    <!-- Education -->
+                    <section>
+                        <h3 class="text-xs font-bold uppercase tracking-widest text-gray-400 dark:text-gray-500 mb-4 border-b border-gray-200 dark:border-gray-700 pb-2">Education</h3>
+                        
+                        <div class="mb-6">
+                            <h4 class="font-bold text-gray-900 dark:text-white">BA Graphic Design</h4>
+                            <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Drake University, Des Moines, IA</p>
+                            <p class="text-xs text-gray-500 dark:text-gray-500 mt-1">Graduated: May 2025</p>
+                        </div>
+
+                        <div>
+                            <h4 class="font-bold text-gray-900 dark:text-white">BS Data Analytics</h4>
+                            <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Drake University, Des Moines, IA</p>
+                            <p class="text-xs text-gray-500 dark:text-gray-500 mt-1">Graduated: May 2025</p>
+                        </div>
+                    </section>
+
+                    <!-- Skills -->
+                    <section>
+                        <h3 class="text-xs font-bold uppercase tracking-widest text-gray-400 dark:text-gray-500 mb-4 border-b border-gray-200 dark:border-gray-700 pb-2">Skills</h3>
+                        
+                        <div class="mb-6">
+                            <h4 class="text-xs font-bold text-gray-900 dark:text-white uppercase mb-2">Hard Skills</h4>
+                            <ul class="text-sm text-gray-600 dark:text-gray-400 space-y-1 list-disc list-inside marker:text-gray-400">
+                                <li>Adobe Illustrator</li>
+                                <li>InDesign</li>
+                                <li>Photoshop</li>
+                                <li>R (Tidyverse)</li>
+                                <li>Python (Pandas)</li>
+                                <li>WordPress</li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <h4 class="text-xs font-bold text-gray-900 dark:text-white uppercase mb-2">Soft Skills</h4>
+                            <ul class="text-sm text-gray-600 dark:text-gray-400 space-y-1 list-disc list-inside marker:text-gray-400">
+                                <li>Strong Communication</li>
+                                <li>Detail-Oriented</li>
+                                <li>Problem-Solving</li>
+                                <li>Leadership & Collaboration</li>
+                                <li>Design Thinking</li>
+                            </ul>
+                        </div>
+                    </section>
+
+                </aside>
+
+                <!-- Right Content -->
+                <div class="col-span-1 md:col-span-8 space-y-12">
+                    
+                    <!-- Job Experience -->
+                    <section>
+                        <h3 class="text-xs font-bold uppercase tracking-widest text-gray-400 dark:text-gray-500 mb-6 border-b border-gray-200 dark:border-gray-700 pb-2">Job Experience</h3>
+                        
+                        <!-- Job 1 -->
+                        <div class="mb-8">
+                            <div class="flex justify-between items-baseline mb-2">
+                                <h4 class="text-lg font-bold text-gray-900 dark:text-white">Park Attendant / Graphic Design Intern</h4>
+                                <span class="text-sm font-mono text-gray-500 dark:text-gray-400">2023–2025</span>
+                            </div>
+                            <p class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">City of Shorewood</p>
+                            <ul class="list-disc list-outside ml-4 text-sm text-gray-600 dark:text-gray-400 space-y-2 leading-relaxed marker:text-gray-300">
+                                <li>Designed print and digital materials with Adobe Suite for community events.</li>
+                                <li>Standardized all public forms by implementing the city branding kit.</li>
+                                <li>Developed and deployed new pages for the employee intranet.</li>
+                                <li>Contributed design expertise in planning meetings for events.</li>
+                            </ul>
+                        </div>
+
+                        <!-- Job 2 -->
+                        <div class="mb-8">
+                            <div class="flex justify-between items-baseline mb-2">
+                                <h4 class="text-lg font-bold text-gray-900 dark:text-white">Drake Relays Logo Designer</h4>
+                                <span class="text-sm font-mono text-gray-500 dark:text-gray-400">2024–2025</span>
+                            </div>
+                            <p class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">Drake University</p>
+                            <ul class="list-disc list-outside ml-4 text-sm text-gray-600 dark:text-gray-400 space-y-2 leading-relaxed marker:text-gray-300">
+                                <li>Selected from 11 interviewees as the official designer for the 2025 Drake Relays logo.</li>
+                                <li>Logo featured on merchandise from t-shirts to neon signs, for 5,000+ attendees.</li>
+                            </ul>
+                        </div>
+
+                        <!-- Job 3 -->
+                        <div>
+                            <div class="flex justify-between items-baseline mb-2">
+                                <h4 class="text-lg font-bold text-gray-900 dark:text-white">Data Club President</h4>
+                                <span class="text-sm font-mono text-gray-500 dark:text-gray-400">2022–2025</span>
+                            </div>
+                            <p class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">Drake University</p>
+                            <ul class="list-disc list-outside ml-4 text-sm text-gray-600 dark:text-gray-400 space-y-2 leading-relaxed marker:text-gray-300">
+                                <li>Led the Data Club, directing weekly meetings and delegating tasks to a core group.</li>
+                                <li>Created all promotional materials to promote club activities.</li>
+                            </ul>
+                        </div>
+                    </section>
+
+                    <!-- Projects -->
+                    <section>
+                        <h3 class="text-xs font-bold uppercase tracking-widest text-gray-400 dark:text-gray-500 mb-6 border-b border-gray-200 dark:border-gray-700 pb-2">Projects</h3>
+                        
+                        <!-- Project 1 -->
+                        <div class="mb-8">
+                            <div class="flex justify-between items-baseline mb-2">
+                                <h4 class="text-lg font-bold text-gray-900 dark:text-white">Freelance Branding & Design</h4>
+                                <span class="text-sm font-mono text-gray-500 dark:text-gray-400">2021–Present</span>
+                            </div>
+                            <p class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">Various Clients</p>
+                            <ul class="list-disc list-outside ml-4 text-sm text-gray-600 dark:text-gray-400 space-y-2 leading-relaxed marker:text-gray-300">
+                                <li>Created visual identities, including logos and branding packages for two small business startups: Forged Business Consulting and Pyrkia Health Services.</li>
+                                <li>Implemented design concepts on apparel, business cards, and merchandise.</li>
+                            </ul>
+                        </div>
+
+                        <!-- Project 2 -->
+                        <div>
+                            <div class="flex justify-between items-baseline mb-2">
+                                <h4 class="text-lg font-bold text-gray-900 dark:text-white">Data Visualization & Predictive Modeling</h4>
+                                <span class="text-sm font-mono text-gray-500 dark:text-gray-400">Fall 2024</span>
+                            </div>
+                            <p class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">Des Moines Area Religious Council Food Pantry</p>
+                            <ul class="list-disc list-outside ml-4 text-sm text-gray-600 dark:text-gray-400 space-y-2 leading-relaxed marker:text-gray-300">
+                                <li>Analyzed and integrated private data with ACS data to identify at-risk populations.</li>
+                                <li>Designed data visualizations to communicate demographic trends to stakeholders.</li>
+                                <li>Developed a predictive model to forecast future client needs.</li>
+                            </ul>
+                        </div>
+                    </section>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="w-full bg-white dark:bg-dark-surface border-t border-gray-200 dark:border-gray-700 py-8 px-4 md:px-8 mt-auto print:hidden">
+        <div class="max-w-[1000px] mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-sm">
+            <div class="text-gray-500 dark:text-gray-400">
+                &copy; 2025 Oliver Williams.
+            </div>
+            
+            <div class="flex flex-wrap justify-center items-center gap-6">
+                <!-- Contact Text -->
+                <div class="flex items-center gap-6">
+                    <a href="mailto:oliver_tw@icloud.com" class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white font-medium transition-colors">oliver_tw@icloud.com</a>
+                    <span class="text-gray-300 dark:text-gray-700">•</span>
+                    <span class="text-gray-600 dark:text-gray-400 font-medium">+1 (317) 914-8047</span>
+                    <span class="text-gray-300 dark:text-gray-700 hidden md:inline">•</span>
+                </div>
+
+                <!-- Social Icons -->
+                <div class="flex items-center gap-4">
+                    <a href="https://www.instagram.com/oliver_williams1212/" class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors text-lg" aria-label="Instagram">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/oliver-t-williams/" class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors text-lg" aria-label="LinkedIn">
+                        <i class="fa-brands fa-linkedin"></i>
+                    </a>
+                    <a href="https://github.com/olivertw12" class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors text-lg" aria-label="GitHub">
+                        <i class="fa-brands fa-github"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Lucide is no longer needed for these specific icons, but kept for non-FA icons if any remain
+        // lucide.createIcons(); 
+        
+        function toggleTheme() {
+            const html = document.documentElement;
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+            } else {
+                html.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+        if (localStorage.theme === 'light' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: light)').matches)) {
+            document.documentElement.classList.remove('dark');
+        } else {
+            document.documentElement.classList.add('dark');
+        }
+    </script>
+</body>
+</html>

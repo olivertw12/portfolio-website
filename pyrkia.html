@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pyrkia Health | Oliver Williams</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        cream: '#F0EFEA',
+                        surface: '#FFFFFF',
+                        'dark-bg': '#18181B', // Zinc 950
+                        'dark-surface': '#27272A', // Zinc 800
+                        primary: '#111827',
+                        'primary-dark': '#FAFAFA',
+                        success: '#059669',
+                    },
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    borderRadius: {
+                        'xl': '1rem',
+                        '2xl': '1.5rem',
+                        '3xl': '2rem',
+                    },
+                    boxShadow: {
+                        'soft': '0 4px 20px -2px rgba(0, 0, 0, 0.05)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { transition: background-color 0.5s ease, color 0.5s ease; }
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #D1D5DB; border-radius: 10px; border: 2px solid #F0EFEA; }
+        .dark ::-webkit-scrollbar-thumb { background: #3F3F46; border: 2px solid #18181B; }
+    </style>
+</head>
+<body class="bg-cream dark:bg-dark-bg text-gray-800 dark:text-gray-200 font-sans selection:bg-gray-200 dark:selection:bg-gray-700 flex flex-col min-h-screen transition-colors duration-500">
+
+    <!-- NAVIGATION -->
+    <nav class="fixed top-4 left-0 right-0 z-50 px-4 md:px-8">
+        <div class="max-w-7xl mx-auto bg-surface/80 dark:bg-dark-surface/80 backdrop-blur-md rounded-2xl shadow-soft px-6 py-4 flex justify-between items-center border border-gray-100 dark:border-gray-700 transition-all duration-500">
+            <div class="flex items-center gap-3 cursor-pointer" onclick="window.location.href='index.html'">
+                <div class="bg-gray-100 dark:bg-gray-700 p-2 rounded-xl">
+                    <i data-lucide="arrow-left" class="text-gray-900 dark:text-white w-5 h-5"></i>
+                </div>
+                <span class="font-bold text-gray-900 dark:text-white text-sm">Back to Home</span>
+            </div>
+            
+            <button onclick="toggleTheme()" class="p-2.5 rounded-xl bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+                <i class="fa-solid fa-sun hidden dark:block text-sm"></i>
+                <i class="fa-solid fa-moon block dark:hidden text-sm"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- PROJECT CONTENT -->
+    <main class="pt-32 pb-20 px-4 md:px-8 max-w-7xl mx-auto flex-grow">
+        
+        <!-- Project Header -->
+        <header class="mb-12">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 text-xs font-bold uppercase tracking-wider mb-6">
+                Brand Identity
+            </div>
+            <h1 class="text-5xl md:text-7xl font-bold text-gray-900 dark:text-white mb-8 tracking-tight">
+                Pyrkia Health
+            </h1>
+            
+            <!-- Project Meta Data -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 border-y border-gray-200 dark:border-gray-700 py-6">
+                <div>
+                    <span class="text-xs font-bold uppercase text-gray-400 dark:text-gray-500 tracking-wider block mb-1">Client</span>
+                    <span class="text-gray-900 dark:text-white font-medium">Pyrkia Health Services</span>
+                </div>
+                <div>
+                    <span class="text-xs font-bold uppercase text-gray-400 dark:text-gray-500 tracking-wider block mb-1">Role</span>
+                    <span class="text-gray-900 dark:text-white font-medium">Logo Design</span>
+                </div>
+                <div>
+                    <span class="text-xs font-bold uppercase text-gray-400 dark:text-gray-500 tracking-wider block mb-1">Year</span>
+                    <span class="text-gray-900 dark:text-white font-medium">2024</span>
+                </div>
+                <div>
+                    <span class="text-xs font-bold uppercase text-gray-400 dark:text-gray-500 tracking-wider block mb-1">Deliverables</span>
+                    <span class="text-gray-900 dark:text-white font-medium">Logo, Brand Assets</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Hero Image -->
+        <figure class="mb-20">
+            <div class="w-full aspect-video bg-gray-200 dark:bg-dark-surface rounded-3xl overflow-hidden shadow-soft mb-4 border border-gray-100 dark:border-gray-700">
+                <!-- IMAGE PLACEHOLDER -->
+                <img src="pyrkia1.png" alt="Pyrkia Health Branding" class="w-full h-full object-cover">
+            </div>
+            <figcaption class="text-sm text-gray-500 dark:text-gray-400 text-center italic">
+                Primary brand visual emphasizing balance and nature.
+            </figcaption>
+        </figure>
+
+        <!-- Narrative Section -->
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-y-16 gap-x-12 mb-24">
+            
+            <!-- 1. Background -->
+            <div class="col-span-12 md:col-span-4">
+                <div class="flex items-baseline gap-3">
+                    <span class="text-success font-mono font-bold text-xl">01</span>
+                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white">Background</h2>
+                </div>
+            </div>
+            <div class="col-span-12 md:col-span-8">
+                <p class="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+                    Pyrkia Health Services is a nature-focused health program dedicated to holistic wellness. Their mission is to integrate physical health with the restorative power of the natural world, fostering a sense of unity between the individual and their environment. They commissioned a new visual identity to better communicate these core values to potential clients.
+                </p>
+            </div>
+
+            <!-- 2. Challenge -->
+            <div class="col-span-12 md:col-span-4">
+                <div class="flex items-baseline gap-3">
+                    <span class="text-success font-mono font-bold text-xl">02</span>
+                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white">The Challenge</h2>
+                </div>
+            </div>
+            <div class="col-span-12 md:col-span-8">
+                <p class="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+                    The health and wellness sector is crowded with generic imagery. The client needed a logo that was distinct yet immediately recognizable as a symbol of care and unity. The challenge was to create a mark that felt organic and human-centered without relying on clichéd health tropes, effectively capturing the client's specific vision of "holistic wellness."
+                </p>
+            </div>
+
+            <!-- 3. Solution -->
+            <div class="col-span-12 md:col-span-4">
+                <div class="flex items-baseline gap-3">
+                    <span class="text-success font-mono font-bold text-xl">03</span>
+                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white">The Solution</h2>
+                </div>
+            </div>
+            <div class="col-span-12 md:col-span-8">
+                <p class="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+                    I developed the client's vision by focusing on an abstract figure that symbolizes the human element within the natural world. To reinforce the concepts of completeness and self-emphasis, I integrated this figure with a prominent abstract circle. This geometric form represents the cycle of health, unity, and the holistic nature of the program.
+                </p>
+            </div>
+
+            <!-- 4. Result -->
+            <div class="col-span-12 md:col-span-4">
+                <div class="flex items-baseline gap-3">
+                    <span class="text-success font-mono font-bold text-xl">04</span>
+                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white">The Result</h2>
+                </div>
+            </div>
+            <div class="col-span-12 md:col-span-8">
+                <p class="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+                    The final design is a clean, modern logo that successfully bridges the gap between professional healthcare and organic wellness. The abstract circle and figure create a memorable icon that anchors the brand's visual identity, providing a strong foundation for future marketing materials, merchandise, and digital presence.
+                </p>
+            </div>
+
+        </div>
+
+        <!-- Image Gallery -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
+            <!-- Image 1 -->
+            <figure>
+                <div class="bg-gray-100 dark:bg-dark-surface rounded-3xl overflow-hidden aspect-[4/3] border border-gray-100 dark:border-gray-700 shadow-soft group mb-3">
+                    <!-- IMAGE PLACEHOLDER -->
+                    <img src="pyrkia2.png" alt="Branded Tote Bag" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                </div>
+                <figcaption class="text-sm text-gray-500 dark:text-gray-400 px-1">
+                    Logo application on eco-friendly merchandise.
+                </figcaption>
+            </figure>
+
+            <!-- Image 2 -->
+            <figure>
+                <div class="bg-gray-100 dark:bg-dark-surface rounded-3xl overflow-hidden aspect-[4/3] border border-gray-100 dark:border-gray-700 shadow-soft group mb-3">
+                    <!-- IMAGE PLACEHOLDER -->
+                    <img src="pyrkia3.png" alt="Website Header Mockup" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                </div>
+                <figcaption class="text-sm text-gray-500 dark:text-gray-400 px-1">
+                    Digital presence highlighting the brand's color palette.
+                </figcaption>
+            </figure>
+
+             <!-- Full Width Image 3 -->
+             <figure class="md:col-span-2">
+                <div class="bg-gray-100 dark:bg-dark-surface rounded-3xl overflow-hidden aspect-video border border-gray-100 dark:border-gray-700 shadow-soft group mb-3">
+                    <!-- IMAGE PLACEHOLDER -->
+                    <img src="pyrkia4.png" alt="Wellness Context" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                </div>
+                <figcaption class="text-sm text-gray-500 dark:text-gray-400 px-1">
+                    The brand identity in action within a wellness environment.
+                </figcaption>
+            </figure>
+        </div>
+
+        <!-- Next Project Navigation -->
+        <div class="border-t border-gray-200 dark:border-gray-700 pt-12 flex justify-between items-center">
+            <span class="text-gray-500 dark:text-gray-400 text-sm font-medium">Next Project</span>
+            <a href="xmas.html" class="group flex items-center gap-4 text-xl md:text-3xl font-bold text-gray-900 dark:text-white hover:text-success transition-colors">
+                Christmas in Excelsior
+                <i data-lucide="arrow-right" class="w-6 h-6 md:w-8 md:h-8 group-hover:translate-x-2 transition-transform"></i>
+            </a>
+        </div>
+
+    </main>
+
+    <!-- CALL TO ACTION (CTA) -->
+    <section id="contact" class="px-4 md:px-8 pb-20">
+        <div class="max-w-7xl mx-auto bg-surface dark:bg-dark-surface rounded-3xl p-8 md:p-12 shadow-soft border border-gray-100 dark:border-gray-700 transition-colors duration-500 text-center">
+            <h2 class="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">Let's work together.</h2>
+            <p class="text-gray-500 dark:text-gray-400 text-lg mb-8 max-w-xl mx-auto">
+                Ready to start your next project? Drop me a line and let's create something functional and beautiful.
+            </p>
+            <a href="mailto:oliver_tw@icloud.com" class="inline-flex items-center gap-2 bg-primary dark:bg-primary-dark text-white dark:text-gray-900 px-8 py-4 rounded-xl font-bold hover:opacity-90 transition-opacity">
+                <i class="fa-solid fa-envelope"></i>
+                Email Me
+            </a>
+        </div>
+    </section>
+
+    <!-- BOTTOM FOOTER (Connected) -->
+    <footer class="w-full bg-surface dark:bg-dark-surface border-t border-gray-200 dark:border-gray-700 py-8 px-4 md:px-8 mt-auto">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-sm">
+            <div class="text-gray-500 dark:text-gray-400">
+                &copy; 2025 Oliver Williams.
+            </div>
+            
+            <div class="flex flex-wrap justify-center items-center gap-6">
+                <!-- Contact Text -->
+                <div class="flex items-center gap-6">
+                    <a href="mailto:oliver_tw@icloud.com" class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white font-medium transition-colors">oliver_tw@icloud.com</a>
+                    <span class="text-gray-300 dark:text-gray-700">•</span>
+                    <span class="text-gray-600 dark:text-gray-400 font-medium">+1 (317) 914-8047</span>
+                    <span class="text-gray-300 dark:text-gray-700 hidden md:inline">•</span>
+                </div>
+
+                <!-- Social Icons -->
+                <div class="flex items-center gap-4">
+                    <a href="https://www.instagram.com/oliver_williams1212/" class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors text-lg" aria-label="Instagram">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/oliver-t-williams/" class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors text-lg" aria-label="LinkedIn">
+                        <i class="fa-brands fa-linkedin"></i>
+                    </a>
+                    <a href="https://github.com/olivertw12" class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors text-lg" aria-label="GitHub">
+                        <i class="fa-brands fa-github"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+        function toggleTheme() {
+            const html = document.documentElement;
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+            } else {
+                html.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+        if (localStorage.theme === 'light' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: light)').matches)) {
+            document.documentElement.classList.remove('dark');
+        } else {
+            document.documentElement.classList.add('dark');
+        }
+    </script>
+</body>
+</html>
