@@ -64,6 +64,7 @@
             padding: 0;
             width: 100%;
             min-width: 1024px; /* Forces horizontal scrolling if viewport tag fails */
+            height: auto; /* Ensure height is determined by content */
         }
         
         img, video {
@@ -125,7 +126,8 @@
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body class="bg-cream dark:bg-dark-bg text-gray-800 dark:text-gray-200 font-sans selection:bg-gray-200 dark:selection:bg-gray-700 flex flex-col min-h-screen transition-colors duration-500">
+<!-- MODIFIED: Removed min-h-screen to stop forcing full height -->
+<body class="bg-cream dark:bg-dark-bg text-gray-800 dark:text-gray-200 font-sans selection:bg-gray-200 dark:selection:bg-gray-700 flex flex-col transition-colors duration-500">
 
     <nav class="fixed top-4 left-0 right-0 z-50 px-8 print:hidden">
         <div class="max-w-7xl mx-auto bg-surface/80 dark:bg-dark-surface/80 backdrop-blur-md rounded-2xl shadow-soft px-6 py-4 flex justify-between items-center border border-gray-100 dark:border-gray-700 transition-all duration-500">
@@ -149,11 +151,13 @@
         </div>
     </nav>
 
-    <main class="pt-32 pb-20 px-8 flex-grow flex justify-center mb-20"> 
+    <!-- MODIFIED: Reduced top padding (pt-32 -> pt-24) and removed flex-grow to tighten vertical space -->
+    <main class="pt-24 pb-12 px-8 flex justify-center mb-12"> 
         
-        <div class="print-container w-full max-w-[1000px] bg-white dark:bg-dark-surface p-16 rounded-3xl shadow-paper border border-gray-100 dark:border-gray-700 transition-colors duration-500">
+        <!-- MODIFIED: Reduced internal padding (p-16 -> p-12) to shrink the paper height -->
+        <div class="print-container w-full max-w-[1000px] bg-white dark:bg-dark-surface p-12 rounded-3xl shadow-paper border border-gray-100 dark:border-gray-700 transition-colors duration-500">
             
-            <header class="-mt-6 mb-8 flex flex-col items-center text-center">
+            <header class="-mt-4 mb-8 flex flex-col items-center text-center">
                 <h1 class="text-6xl font-extrabold text-gray-900 dark:text-white tracking-tight leading-none mb-4">
                     OLIVER T. WILLIAMS
                 </h1>
@@ -175,7 +179,7 @@
             <!-- MODIFIED: Removed responsive prefixes (md:) to lock grid layout -->
             <div class="grid grid-cols-12 gap-12">
                 
-                <aside class="col-span-4 space-y-12">
+                <aside class="col-span-4 space-y-10">
                     
                     <section>
                         <h3 class="text-xs font-bold uppercase tracking-widest text-gray-400 dark:text-gray-500 mb-4 border-b border-gray-200 dark:border-gray-700 pb-2">Profile</h3>
@@ -229,12 +233,12 @@
 
                 </aside>
 
-                <div class="col-span-8 space-y-12">
+                <div class="col-span-8 space-y-10">
                     
                     <section>
                         <h3 class="text-xs font-bold uppercase tracking-widest text-gray-400 dark:text-gray-500 mb-6 border-b border-gray-200 dark:border-gray-700 pb-2">Job Experience</h3>
                         
-                        <div class="mb-8">
+                        <div class="mb-6">
                             <div class="flex justify-between items-baseline mb-2">
                                 <h4 class="text-lg font-bold text-gray-900 dark:text-white">Park Attendant / Graphic Design Intern</h4>
                                 <span class="text-sm font-mono text-gray-500 dark:text-gray-400">2023–2025</span>
@@ -248,7 +252,7 @@
                             </ul>
                         </div>
 
-                        <div class="mb-8">
+                        <div class="mb-6">
                             <div class="flex justify-between items-baseline mb-2">
                                 <h4 class="text-lg font-bold text-gray-900 dark:text-white">Drake Relays Logo Designer</h4>
                                 <span class="text-sm font-mono text-gray-500 dark:text-gray-400">2024–2025</span>
@@ -276,7 +280,7 @@
                     <section>
                         <h3 class="text-xs font-bold uppercase tracking-widest text-gray-400 dark:text-gray-500 mb-6 border-b border-gray-200 dark:border-gray-700 pb-2">Projects</h3>
                         
-                        <div class="mb-8">
+                        <div class="mb-6">
                             <div class="flex justify-between items-baseline mb-2">
                                 <h4 class="text-lg font-bold text-gray-900 dark:text-white">Freelance Branding & Design</h4>
                                 <span class="text-sm font-mono text-gray-500 dark:text-gray-400">2021–Present</span>
@@ -307,7 +311,8 @@
         </div>
     </main>
 
-    <footer class="w-full bg-white dark:bg-dark-surface border-t border-gray-200 dark:border-gray-700 py-8 px-8 mt-auto print:hidden">
+    <!-- MODIFIED: Removed mt-auto so footer sits directly below content -->
+    <footer class="w-full bg-white dark:bg-dark-surface border-t border-gray-200 dark:border-gray-700 py-8 px-8 print:hidden">
         <div class="max-w-[1000px] mx-auto flex flex-row justify-between items-center gap-4 text-sm">
             <div class="text-gray-500 dark:text-gray-400">
                 &copy; 2025 Oliver T. Williams.
