@@ -3,17 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Oliver Williams | Visual Strategist</title>
+    <title>Oliver T. Williams | Design & Data</title>
     
-    <!-- Tailwind CSS -->
+    <meta name="description" content="Portfolio of Oliver T. Williams. Bridging the gap between visual strategy and data intelligence. View my work in branding, advertising, and predictive modeling.">
+    <meta property="og:title" content="Oliver T. Williams | Design & Data">
+    <meta property="og:description" content="Portfolio of Oliver T. Williams. Bridging the gap between visual strategy and data intelligence.">
+    <meta property="og:image" content="https://olivertwilliams.com/images/og-image.png">
+    <meta property="og:url" content="https://olivertwilliams.com">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <!-- Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -30,6 +33,7 @@
                         primary: '#111827',
                         'primary-dark': '#FAFAFA',
                         success: '#059669',
+                        accent: '#3B82F6',
                     },
                     fontFamily: {
                         sans: ['"Plus Jakarta Sans"', 'sans-serif'],
@@ -41,9 +45,16 @@
                     },
                     boxShadow: {
                         'soft': '0 4px 20px -2px rgba(0, 0, 0, 0.05)',
+                        'glow': '0 0 15px rgba(59, 130, 246, 0.5)',
                     }
                 }
             }
+        }
+
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
         }
     </script>
 
@@ -51,27 +62,36 @@
         body { transition: background-color 0.5s ease, color 0.5s ease; }
         .glass-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
         .glass-card:hover { transform: translateY(-4px); box-shadow: 0 10px 30px -4px rgba(0, 0, 0, 0.1); }
-        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar { width: 10px; height: 8px; }
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: #D1D5DB; border-radius: 10px; border: 2px solid #F0EFEA; }
         .dark ::-webkit-scrollbar-thumb { background: #3F3F46; border: 2px solid #18181B; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        @keyframes drawLine {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        .animate-draw {
+            animation: drawLine 2s ease-out forwards;
+        }
     </style>
 </head>
 <body class="bg-cream dark:bg-dark-bg text-gray-800 dark:text-gray-200 font-sans selection:bg-gray-200 dark:selection:bg-gray-700 flex flex-col min-h-screen">
 
-    <!-- NAVIGATION -->
     <nav class="fixed top-4 left-0 right-0 z-50 px-4 md:px-8">
         <div class="max-w-7xl mx-auto bg-surface/80 dark:bg-dark-surface/80 backdrop-blur-md rounded-2xl shadow-soft px-6 py-4 flex justify-between items-center border border-gray-100 dark:border-gray-700 transition-all duration-500">
             <div class="flex items-center gap-3 group cursor-pointer" onclick="window.location.href='index.html'">
                 <div class="bg-gray-100 dark:bg-gray-700 p-2 rounded-xl transition-colors">
                     <i data-lucide="anchor" class="text-gray-900 dark:text-white w-5 h-5"></i>
                 </div>
-                <span class="font-bold text-gray-900 dark:text-white text-sm tracking-tight hidden md:block">Oliver Williams</span>
+                <span class="font-bold text-gray-900 dark:text-white text-sm tracking-tight hidden md:block">Oliver T. Williams</span>
             </div>
             <div class="flex items-center gap-2 md:gap-6">
                 <div class="hidden md:flex items-center gap-1 bg-gray-100 dark:bg-gray-800 p-1 rounded-xl">
-                    <a href="#work" class="px-4 py-2 rounded-lg text-sm font-medium text-gray-600 dark:text-gray-400 hover:bg-white dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white hover:shadow-sm transition-all">Work</a>
-                    <a href="#contact" class="px-4 py-2 rounded-lg text-sm font-medium text-gray-600 dark:text-gray-400 hover:bg-white dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white hover:shadow-sm transition-all">Contact</a>
+                    <a href="#design" class="px-4 py-2 rounded-[12px] text-sm font-medium text-gray-600 dark:text-gray-400 hover:bg-white dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white hover:shadow-sm transition-all">Design</a>
+                    <a href="#data" class="px-4 py-2 rounded-[12px] text-sm font-medium text-gray-600 dark:text-gray-400 hover:bg-white dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white hover:shadow-sm transition-all">Data</a>
+                    <a href="#contact" class="px-4 py-2 rounded-[12px] text-sm font-medium text-gray-600 dark:text-gray-400 hover:bg-white dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white hover:shadow-sm transition-all">Contact</a>
                 </div>
                 <button onclick="toggleTheme()" class="p-2.5 rounded-xl bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-400 transition-colors">
                     <i class="fa-solid fa-sun hidden dark:block text-sm"></i>
@@ -81,118 +101,194 @@
         </div>
     </nav>
 
-    <!-- HERO SECTION -->
-    <section class="pt-32 pb-20 px-4 md:px-8 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-8 flex-grow">
-        <div class="col-span-12 md:col-span-7 flex flex-col">
-            <div class="bg-surface dark:bg-dark-surface rounded-3xl p-8 md:p-12 shadow-soft border border-gray-100 dark:border-gray-700 transition-colors duration-500 h-full flex flex-col justify-center">
-                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-green-100 dark:bg-green-900/30 text-success text-xs font-bold uppercase tracking-wider mb-8 self-start">
-                    <span class="w-2 h-2 rounded-full bg-success animate-pulse"></span>
-                    Available for work
+    <!-- NEW HERO SECTION: FULL WIDTH / FULL BLEED -->
+    <section class="pt-32 pb-8 w-full">
+        
+        <!-- Full Width Container (Transparent, no borders) -->
+        <div class="w-full transition-colors duration-500 relative overflow-hidden flex flex-col justify-center min-h-[50vh]">
+            
+            <!-- Background Element: Soft Gradient Orb -->
+            <!-- Changed bg-blue-100/80 to bg-blue-400/30 for better visibility in light mode -->
+            <div class="absolute right-[-10%] md:right-[-5%] top-1/2 -translate-y-1/2 w-[300px] h-[300px] md:w-[600px] md:h-[600px] bg-blue-400/30 dark:bg-blue-900/20 rounded-full blur-[80px] pointer-events-none -z-10"></div>
+
+            <!-- Anchor Icon: Centered on gradient, color of page background to create cutout effect -->
+            <div class="absolute right-[-10%] md:right-[-5%] top-1/2 -translate-y-1/2 w-[300px] h-[300px] md:w-[600px] md:h-[600px] flex items-center justify-center pointer-events-none -z-10">
+                <i data-lucide="anchor" class="w-48 h-48 md:w-96 md:h-96 text-cream dark:text-dark-bg stroke-1 opacity-100"></i>
+            </div>
+
+            <!-- Content Wrapper (Constrained only for alignment with Nav) -->
+            <div class="w-full max-w-7xl mx-auto px-6 py-12 md:py-20 relative z-10">
+                
+                <div class="flex items-center gap-2 mb-6 opacity-80">
+                    <div class="w-2 h-2 rounded-full bg-success animate-pulse"></div>
+                    <span class="text-xs font-semibold uppercase tracking-widest text-gray-500 dark:text-gray-400">Available for work</span>
                 </div>
-                <h1 class="text-5xl md:text-7xl font-bold text-gray-900 dark:text-white mb-6 tracking-tight leading-tight">
-                    Graphic Design <br>
-                    <span class="text-gray-400 dark:text-gray-600">& Data Analysis</span>
+
+                <h1 class="text-4xl md:text-7xl font-medium text-gray-900 dark:text-white mb-6 tracking-tight leading-[1.1]">
+                    Bridging visual strategy <br class="hidden lg:block">
+                    <span class="text-gray-400 dark:text-gray-600">and data intelligence.</span>
                 </h1>
-                <p class="text-gray-600 dark:text-gray-400 text-lg md:text-xl leading-relaxed mb-10 max-w-lg">
-                    I'm Oliver Williams, a visual strategist helping brands find clarity through precision design, structured identity systems, and functional aesthetics.
+                
+                <p class="text-gray-600 dark:text-gray-400 text-lg md:text-xl leading-relaxed mb-8 max-w-2xl">
+                    Hi! I'm Oliver Williams. I am a graphic designer and data analyst with expertise in combining design thinking and technical skills to solve complex problems. I specialize in data-driven visualizations and corporate branding using the Adobe Suite, working with clients to craft the best results possible.
                 </p>
-                <div class="flex flex-row gap-4 mt-auto md:mt-0">
-                    <a href="resume.html" class="bg-primary dark:bg-primary-dark text-white dark:text-gray-900 px-6 md:px-8 py-4 rounded-xl font-semibold hover:opacity-90 transition-opacity flex items-center gap-2 text-sm md:text-base whitespace-nowrap">
-                        <i class="fa-solid fa-file-lines"></i>
-                        View Resume
+                
+                <div class="flex flex-row items-center gap-8">
+                    <a href="resume.html" class="bg-primary dark:bg-primary-dark text-white dark:text-gray-900 px-8 py-4 rounded-xl font-semibold hover:opacity-90 transition-opacity flex items-center gap-2 text-sm md:text-base">
+                       View Resume
+                       <i class="fa-solid fa-arrow-right -rotate-45 group-hover:rotate-0 transition-transform"></i>
                     </a>
-                    <a href="mailto:oliver_tw@icloud.com" class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-900 dark:text-white px-6 md:px-8 py-4 rounded-xl font-semibold hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors text-sm md:text-base whitespace-nowrap">
+                    <a href="mailto:oliver_tw@icloud.com" class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors font-medium border-b border-gray-300 dark:border-gray-700 hover:border-gray-900 dark:hover:border-white pb-0.5">
                         Get in Touch
                     </a>
                 </div>
             </div>
+
         </div>
-        <div class="col-span-12 md:col-span-5 flex flex-col gap-6">
-            <div class="bg-surface dark:bg-dark-surface rounded-3xl p-2 shadow-soft border border-gray-100 dark:border-gray-700 h-64 md:h-auto md:flex-1 relative overflow-hidden group transition-colors duration-500 min-h-[300px]">
-                <div class="absolute inset-0 bg-gray-50 dark:bg-gray-800 m-2 rounded-2xl flex items-center justify-center overflow-hidden">
-                    <!-- IMAGE PLACEHOLDER -->
-                    <img src="home_anchor.png" alt="Anchor Graphic" class="w-full h-full object-cover rounded-xl">
-                </div>
-            </div>
-            <div class="bg-surface dark:bg-dark-surface p-6 rounded-3xl shadow-soft border border-gray-100 dark:border-gray-700 transition-colors duration-500 shrink-0">
-                <span class="text-gray-400 dark:text-gray-500 text-xs font-bold uppercase tracking-wider block mb-2">Toolkit</span>
-                <p class="text-gray-900 dark:text-white font-semibold text-lg leading-snug">Adobe Suite, Python, R, WordPress</p>
-            </div>
-        </div>
+
     </section>
 
-    <!-- PROJECTS SECTION -->
-    <section id="work" class="py-20 px-4 md:px-8 max-w-7xl mx-auto">
-        <div class="flex items-center justify-between mb-12">
-            <h2 class="text-2xl font-bold text-gray-900 dark:text-white">Recent Projects</h2>
-            <div class="hidden md:block h-px flex-1 bg-gray-200 dark:bg-gray-700 mx-8"></div>
-            <a href="archive.html" class="text-sm font-semibold text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors flex items-center gap-1">
-                View All <i class="fa-solid fa-arrow-right text-xs"></i>
+    <!-- DESIGN SECTION -->
+    <section id="design" class="py-12 px-4 md:px-8 max-w-7xl mx-auto border-t border-gray-200 dark:border-gray-800">
+        <div class="flex items-end justify-between mb-8 pt-8">
+            <div>
+                <span class="text-accent text-sm font-bold tracking-wider uppercase mb-2 block">Part 01</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">Visual Identity & Design</h2>
+            </div>
+            <a href="archive.html" class="hidden md:flex items-center gap-2 text-sm font-semibold text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors">
+                Full Archive <i class="fa-solid fa-arrow-right"></i>
             </a>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div class="glass-card bg-surface dark:bg-dark-surface rounded-3xl p-3 shadow-soft border border-gray-100 dark:border-gray-700 group cursor-pointer transition-colors duration-500" onclick="window.location.href='mainframe.html'">
-                <div class="relative aspect-[4/3] bg-gray-100 dark:bg-gray-800 rounded-2xl overflow-hidden mb-4">
-                    <!-- IMAGE PLACEHOLDER -->
-                    <img src="images/mainframe1.png" alt="Mainframe Studios" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                    <div class="absolute top-4 right-4 bg-white/90 dark:bg-black/80 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-gray-900 dark:text-white border border-white/20">Advertising</div>
-                </div>
-                <div class="px-2 pb-2">
-                    <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-1">Mainframe Studios</h3>
-                    <p class="text-sm text-gray-500 dark:text-gray-400 line-clamp-2">Unique typeface and poster for a non-profit art studio in Des Moines, Iowa.</p>
-                </div>
-            </div>
-            <div class="glass-card bg-surface dark:bg-dark-surface rounded-3xl p-3 shadow-soft border border-gray-100 dark:border-gray-700 group cursor-pointer transition-colors duration-500" onclick="window.location.href='forged.html'">
-                <div class="relative aspect-[4/3] bg-gray-100 dark:bg-gray-800 rounded-2xl overflow-hidden mb-4">
-                    <!-- IMAGE PLACEHOLDER -->
-                    <img src="images/forged1.png" alt="The Forged Group" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                    <div class="absolute top-4 right-4 bg-white/90 dark:bg-black/80 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-gray-900 dark:text-white border border-white/20">Branding</div>
-                </div>
-                <div class="px-2 pb-2">
-                    <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-1">The Forged Group</h3>
-                    <p class="text-sm text-gray-500 dark:text-gray-400 line-clamp-2">Visual identity system for a financial consultation firm based in North Carolina.</p>
-                </div>
-            </div>
-            <div class="glass-card bg-surface dark:bg-dark-surface rounded-3xl p-3 shadow-soft border border-gray-100 dark:border-gray-700 group cursor-pointer transition-colors duration-500" onclick="window.location.href='relays.html'">
-                <div class="relative aspect-[4/3] bg-gray-100 dark:bg-gray-800 rounded-2xl overflow-hidden mb-4">
-                    <!-- IMAGE PLACEHOLDER -->
-                    <img src="images/relays1.png" alt="Drake Relays" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                    <div class="absolute top-4 right-4 bg-white/90 dark:bg-black/80 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-gray-900 dark:text-white border border-white/20">Event</div>
-                </div>
-                <div class="px-2 pb-2">
-                    <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-1">Drake Relays 2025</h3>
-                    <p class="text-sm text-gray-500 dark:text-gray-400 line-clamp-2">Relays event logo & theme for Drake University: "Racing Through Time".</p>
-                </div>
-            </div>
+        
+        <div id="design-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
         </div>
-        <div class="mt-12 text-center md:hidden">
-            <a href="archive.html" class="inline-block px-8 py-4 bg-white dark:bg-dark-surface border border-gray-200 dark:border-gray-700 rounded-xl font-semibold text-gray-900 dark:text-white shadow-sm">View All Projects</a>
+
+        <div class="md:hidden text-center">
+            <a href="archive.html" class="text-sm font-semibold text-gray-500 underline">View all design projects</a>
         </div>
     </section>
 
-    <!-- CALL TO ACTION -->
-    <section id="contact" class="px-4 md:px-8 pb-20">
-        <div class="max-w-7xl mx-auto bg-surface dark:bg-dark-surface rounded-3xl p-8 md:p-12 shadow-soft border border-gray-100 dark:border-gray-700 transition-colors duration-500 text-center">
-            <h2 class="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">Let's work together!</h2>
-            <p class="text-gray-500 dark:text-gray-400 text-lg mb-8 max-w-xl mx-auto">
-                Looking for assistance in graphic design? Please reach out and let me know how I can help.
-            </p>
-            <a href="mailto:oliver_tw@icloud.com" class="inline-flex items-center gap-2 bg-primary dark:bg-primary-dark text-white dark:text-gray-900 px-8 py-4 rounded-xl font-bold hover:opacity-90 transition-opacity">
-                <i class="fa-solid fa-envelope"></i>
-                Email Me
-            </a>
+    <section id="data" class="py-12 px-4 md:px-8 max-w-7xl mx-auto">
+        <div class="mb-8">
+             <span class="text-accent text-sm font-bold tracking-wider uppercase mb-2 block">Part 02</span>
+             <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">Data Analytics & Insight</h2>
+        </div>
+
+        <div class="bg-white dark:bg-dark-surface rounded-3xl overflow-hidden shadow-soft border border-gray-100 dark:border-gray-700 transition-colors duration-500">
+            <div class="grid grid-cols-1 lg:grid-cols-2 min-h-[500px]">
+                
+                <div class="p-8 md:p-12 flex flex-col justify-center relative z-10">
+                    <div class="mb-6">
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 text-xs font-bold uppercase tracking-wider mb-4 border border-blue-100 dark:border-blue-800">
+                            <i data-lucide="bar-chart-2" class="w-3 h-3"></i> Capstone Project
+                        </div>
+                        <h3 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">DMARC Network Analysis</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-lg leading-relaxed mb-6">
+                            A collaborative analysis of DMARC food pantry datasets to optimize resource distribution. We cleaned massive visitor logs, merged them with ACS Census data, and identified high-need zip codes (specifically 50314 & 50316). I developed predictive models in R to forecast 2025 visitor spikes, revealing a critical rise in need within Hispanic/Latino communities.
+                        </p>
+                    </div>
+
+                    <div class="mb-8">
+                        <h4 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">Technologies Used</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-2 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg text-sm font-medium flex items-center gap-2">
+                                <i class="fa-brands fa-r-project text-gray-400"></i> R (Tidyverse)
+                            </span>
+                            <span class="px-3 py-2 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg text-sm font-medium flex items-center gap-2">
+                                <i class="fa-solid fa-map text-gray-400"></i> Geospatial Mapping
+                            </span>
+                            <span class="px-3 py-2 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg text-sm font-medium flex items-center gap-2">
+                                <i class="fa-solid fa-chart-line text-gray-400"></i> Predictive Modeling
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="mt-auto">
+                        <a href="project.html?id=dmarc" class="inline-flex items-center gap-2 bg-gray-900 dark:bg-white text-white dark:text-gray-900 px-8 py-3 rounded-xl font-semibold hover:opacity-90 transition-opacity">
+                            View Case Study <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="bg-gray-50 dark:bg-gray-800/50 p-8 md:p-12 flex items-center justify-center border-t lg:border-t-0 lg:border-l border-gray-100 dark:border-gray-700 relative overflow-hidden">
+                    <div class="absolute inset-0 opacity-[0.03] dark:opacity-[0.05]" style="background-image: radial-gradient(#6B7280 1px, transparent 1px); background-size: 20px 20px;"></div>
+                    
+                    <div class="w-full max-w-md bg-white dark:bg-gray-900 rounded-xl shadow-xl border border-gray-200 dark:border-gray-700 p-6 transform transition-transform hover:scale-[1.02] duration-500 flex flex-col gap-6">
+                        
+                        <div class="flex items-center justify-between border-b border-gray-100 dark:border-gray-800 pb-4">
+                            <div>
+                                <div class="h-2 w-32 bg-gray-200 dark:bg-gray-700 rounded mb-2"></div>
+                                <div class="h-1 w-20 bg-gray-100 dark:bg-gray-800 rounded"></div>
+                            </div>
+                            <div class="text-right">
+                                <span class="text-xs font-bold text-green-500">+12%</span>
+                                <div class="h-1 w-8 bg-gray-100 dark:bg-gray-800 rounded ml-auto mt-1"></div>
+                            </div>
+                        </div>
+
+                        <div class="relative h-40 w-full bg-gray-50 dark:bg-gray-800/50 rounded-lg border border-gray-100 dark:border-gray-700 p-4 flex items-end overflow-hidden">
+                            <div class="absolute inset-0 flex flex-col justify-between p-4 opacity-10">
+                                <div class="w-full h-px bg-gray-500"></div>
+                                <div class="w-full h-px bg-gray-500"></div>
+                                <div class="w-full h-px bg-gray-500"></div>
+                                <div class="w-full h-px bg-gray-500"></div>
+                            </div>
+                            
+                            <svg class="w-full h-full overflow-visible" viewBox="0 0 100 100" preserveAspectRatio="none">
+                                <path d="M0,80 Q10,70 20,75 T40,60 T60,40" fill="none" stroke="#3B82F6" stroke-width="3" stroke-linecap="round" />
+                                <path d="M60,40 Q75,20 100,10" fill="none" stroke="#3B82F6" stroke-width="3" stroke-dasharray="4,4" stroke-linecap="round" class="opacity-60" />
+                                <circle cx="60" cy="40" r="2" fill="#3B82F6" />
+                                <circle cx="100" cy="10" r="2" fill="#3B82F6" class="animate-pulse" />
+                            </svg>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-100 dark:border-gray-700">
+                                <div class="text-xs text-gray-400 font-bold uppercase mb-1">Top Zip Code</div>
+                                <div class="text-lg font-bold text-gray-900 dark:text-white">50314</div>
+                                <div class="w-full h-1 bg-gray-200 dark:bg-gray-700 rounded-full mt-2 overflow-hidden">
+                                    <div class="w-[88%] h-full bg-red-400 rounded-full"></div>
+                                </div>
+                            </div>
+                            <div class="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-100 dark:border-gray-700 flex flex-col justify-between">
+                                <div class="text-xs text-gray-400 font-bold uppercase">At-Risk Areas</div>
+                                <div class="flex gap-1 mt-2">
+                                    <div class="h-6 w-6 rounded bg-red-400 opacity-90"></div>
+                                    <div class="h-6 w-6 rounded bg-red-400 opacity-60"></div>
+                                    <div class="h-6 w-6 rounded bg-red-400 opacity-30"></div>
+                                    <div class="h-6 w-6 rounded bg-gray-200 dark:bg-gray-600"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- BOTTOM FOOTER (Connected) -->
+    <section id="contact" class="px-4 md:px-8 pb-20 pt-10">
+        <div class="max-w-7xl mx-auto bg-surface dark:bg-dark-surface rounded-3xl p-8 md:p-12 shadow-soft border border-gray-100 dark:border-gray-700 transition-colors duration-500 text-center relative overflow-hidden">
+            <div class="relative z-10">
+                <h2 class="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">Let's work together!</h2>
+                <p class="text-gray-500 dark:text-gray-400 text-lg mb-8 max-w-xl mx-auto">
+                    Looking for assistance with a project? Please reach out and let me know how I can help.
+                </p>
+                <a href="mailto:oliver_tw@icloud.com" class="inline-flex items-center gap-2 bg-primary dark:bg-primary-dark text-white dark:text-gray-900 px-8 py-4 rounded-xl font-bold hover:opacity-90 transition-opacity">
+                    <i class="fa-solid fa-envelope"></i>
+                    Email Me
+                </a>
+            </div>
+        </div>
+    </section>
+
     <footer class="w-full bg-surface dark:bg-dark-surface border-t border-gray-200 dark:border-gray-700 py-8 px-4 md:px-8 mt-auto">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-sm">
             <div class="text-gray-500 dark:text-gray-400">
-                &copy; 2025 Oliver Williams.
+                &copy; 2025 Oliver T. Williams.
             </div>
             
             <div class="flex flex-wrap justify-center items-center gap-6">
-                <!-- Contact Text -->
                 <div class="flex items-center gap-6">
                     <a href="mailto:oliver_tw@icloud.com" class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white font-medium transition-colors">oliver_tw@icloud.com</a>
                     <span class="text-gray-300 dark:text-gray-700">•</span>
@@ -200,15 +296,14 @@
                     <span class="text-gray-300 dark:text-gray-700 hidden md:inline">•</span>
                 </div>
 
-                <!-- Social Icons -->
                 <div class="flex items-center gap-4">
-                    <a href="#" class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors text-lg" aria-label="Instagram">
+                    <a href="https://www.instagram.com/oliver_williams1212/" class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors text-lg" aria-label="Instagram">
                         <i class="fa-brands fa-instagram"></i>
                     </a>
-                    <a href="#" class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors text-lg" aria-label="LinkedIn">
+                    <a href="https://www.linkedin.com/in/oliver-t-williams/" class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors text-lg" aria-label="LinkedIn">
                         <i class="fa-brands fa-linkedin"></i>
                     </a>
-                    <a href="#" class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors text-lg" aria-label="GitHub">
+                    <a href="https://github.com/olivertw12" class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors text-lg" aria-label="GitHub">
                         <i class="fa-brands fa-github"></i>
                     </a>
                 </div>
@@ -218,6 +313,57 @@
 
     <script>
         lucide.createIcons();
+
+        const designProjects = [
+            {
+                id: "mainframe",
+                title: "Mainframe Studios",
+                category: "Advertising",
+                desc: "Unique typeface and poster for a non-profit art studio.",
+                image: "images/mainframe2.png"
+            },
+            {
+                id: "forged",
+                title: "The Forged Group",
+                category: "Branding",
+                desc: "Visual identity system for a financial consultation firm.",
+                image: "images/forged2.png"
+            },
+            {
+                id: "relays",
+                title: "Drake Relays 2025",
+                category: "Event",
+                desc: "Relays event logo & theme for Drake University.",
+                image: "images/relays2.png"
+            }
+        ];
+
+        function renderDesignProjects() {
+            const grid = document.getElementById('design-grid');
+            let html = '';
+
+            designProjects.forEach(project => {
+                html += `
+                <div class="glass-card bg-surface dark:bg-dark-surface rounded-3xl p-3 shadow-soft border border-gray-100 dark:border-gray-700 group cursor-pointer transition-colors duration-500 flex flex-col h-full" onclick="window.location.href='project.html?id=${project.id}'">
+                    <div class="relative aspect-[4/3] bg-gray-100 dark:bg-gray-800 rounded-2xl overflow-hidden mb-4 shrink-0 transition-colors">
+                        <img src="${project.image}" onerror="this.src='https://placehold.co/600x400?text=No+Image'" alt="${project.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute top-4 right-4 bg-white/90 dark:bg-black/80 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-gray-900 dark:text-white border border-white/20">
+                            ${project.category}
+                        </div>
+                    </div>
+                    <div class="px-2 pb-2 flex-grow">
+                        <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-1">${project.title}</h3>
+                        <p class="text-sm text-gray-500 dark:text-gray-400 line-clamp-2">${project.desc}</p>
+                    </div>
+                </div>
+                `;
+            });
+
+            grid.innerHTML = html;
+        }
+
+        renderDesignProjects();
+
         function toggleTheme() {
             const html = document.documentElement;
             if (html.classList.contains('dark')) {
@@ -227,11 +373,6 @@
                 html.classList.add('dark');
                 localStorage.setItem('theme', 'dark');
             }
-        }
-        if (localStorage.theme === 'light' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: light)').matches)) {
-            document.documentElement.classList.remove('dark');
-        } else {
-            document.documentElement.classList.add('dark');
         }
     </script>
 </body>

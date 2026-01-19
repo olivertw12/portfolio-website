@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project View | Oliver T. Williams</title>
+    
+    <meta name="description" content="Detailed case study of a project by Oliver T. Williams.">
+    <meta property="og:title" content="Project Case Study | Oliver T. Williams">
+    <meta property="og:description" content="In-depth look at the design process and results.">
+    <meta property="og:image" content="https://olivertwilliams.com/images/og-image.png">
+    <meta property="og:url" content="https://olivertwilliams.com/project.html">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        cream: '#F0EFEA',
+                        surface: '#FFFFFF',
+                        'dark-bg': '#18181B',
+                        'dark-surface': '#27272A',
+                        primary: '#111827',
+                        'primary-dark': '#FAFAFA',
+                        success: '#059669',
+                        accent: '#3B82F6', 
+                    },
+                    fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'] },
+                    borderRadius: { 'xl': '1rem', '2xl': '1.5rem', '3xl': '2rem' },
+                    boxShadow: { 'soft': '0 4px 20px -2px rgba(0, 0, 0, 0.05)' }
+                }
+            }
+        }
+
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
+
+    <style>
+        body { transition: background-color 0.5s ease, color 0.5s ease; }
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #D1D5DB; border-radius: 10px; border: 2px solid #F0EFEA; }
+        .dark ::-webkit-scrollbar-thumb { background: #3F3F46; border: 2px solid #18181B; }
+    </style>
+</head>
+<body class="bg-cream dark:bg-dark-bg text-gray-800 dark:text-gray-200 font-sans selection:bg-gray-200 dark:selection:bg-gray-700 flex flex-col min-h-screen transition-colors duration-500">
+
+    <div id="lightbox" class="fixed inset-0 z-[100] bg-black/95 hidden flex flex-col items-center justify-center opacity-0 transition-opacity duration-300 backdrop-blur-sm">
+        
+        <button onclick="closeLightbox()" class="absolute top-6 right-6 text-white/70 hover:text-white p-2 transition-colors z-[110] bg-white/10 rounded-full hover:bg-white/20">
+            <i data-lucide="x" class="w-6 h-6"></i>
+        </button>
+
+        <button onclick="changeLbImage(event, -1)" class="absolute left-2 md:left-8 z-[110] text-white/50 hover:text-white transition-colors p-4 hover:bg-white/10 rounded-full group">
+            <i data-lucide="chevron-left" class="w-8 h-8 md:w-12 md:h-12 group-hover:-translate-x-1 transition-transform"></i>
+        </button>
+        <button onclick="changeLbImage(event, 1)" class="absolute right-2 md:right-8 z-[110] text-white/50 hover:text-white transition-colors p-4 hover:bg-white/10 rounded-full group">
+            <i data-lucide="chevron-right" class="w-8 h-8 md:w-12 md:h-12 group-hover:translate-x-1 transition-transform"></i>
+        </button>
+
+        <div class="w-full h-full flex items-center justify-center p-4" onclick="closeLightboxOnBg(event)">
+            
+            <div class="relative max-w-full max-h-full inline-block group">
+                <img id="lb-image" src="" alt="Full view" class="max-w-full max-h-[85vh] object-contain shadow-2xl rounded-sm transition-transform duration-300">
+                
+                <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/90 via-black/60 to-transparent rounded-b-sm transition-opacity duration-300 group-hover:opacity-0">
+                    <p id="lb-caption" class="text-white text-sm md:text-base font-medium italic tracking-wide text-center drop-shadow-md"></p>
+                    <p id="lb-counter" class="text-gray-400 text-xs mt-1 uppercase tracking-widest text-center"></p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <nav class="fixed top-4 left-0 right-0 z-50 px-4 md:px-8">
+        <div class="max-w-7xl mx-auto bg-surface/80 dark:bg-dark-surface/80 backdrop-blur-md rounded-2xl shadow-soft px-6 py-4 flex justify-between items-center border border-gray-100 dark:border-gray-700 transition-all duration-500">
+            <div class="flex items-center gap-3 cursor-pointer" onclick="window.location.href='index.html'">
+                <div class="bg-gray-100 dark:bg-gray-700 p-2 rounded-xl">
+                    <i data-lucide="arrow-left" class="text-gray-900 dark:text-white w-5 h-5"></i>
+                </div>
+                <span class="font-bold text-gray-900 dark:text-white text-sm">Back to Home</span>
+            </div>
+            
+            <button onclick="toggleTheme()" class="p-2.5 rounded-xl bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+                <i class="fa-solid fa-sun hidden dark:block text-sm"></i>
+                <i class="fa-solid fa-moon block dark:hidden text-sm"></i>
+            </button>
+        </div>
+    </nav>
+
+    <main id="main-content" class="pt-32 pb-20 px-4 md:px-8 max-w-7xl mx-auto flex-grow opacity-0 transition-opacity duration-500">
+        
+        <header class="mb-12">
+            <div id="p-category" class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 text-xs font-bold uppercase tracking-wider mb-6">
+            </div>
+            <h1 id="p-title" class="text-5xl md:text-7xl font-bold text-gray-900 dark:text-white mb-8 tracking-tight">
+            </h1>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 border-y border-gray-200 dark:border-gray-700 py-6">
+                <div>
+                    <span class="text-xs font-bold uppercase text-gray-400 dark:text-gray-500 tracking-wider block mb-1">Client</span>
+                    <span id="p-client" class="text-gray-900 dark:text-white font-medium"></span>
+                </div>
+                <div>
+                    <span class="text-xs font-bold uppercase text-gray-400 dark:text-gray-500 tracking-wider block mb-1">Role</span>
+                    <span id="p-role" class="text-gray-900 dark:text-white font-medium"></span>
+                </div>
+                <div>
+                    <span class="text-xs font-bold uppercase text-gray-400 dark:text-gray-500 tracking-wider block mb-1">Year</span>
+                    <span id="p-year" class="text-gray-900 dark:text-white font-medium"></span>
+                </div>
+                <div>
+                    <span class="text-xs font-bold uppercase text-gray-400 dark:text-gray-500 tracking-wider block mb-1">Deliverables</span>
+                    <span id="p-deliverables" class="text-gray-900 dark:text-white font-medium"></span>
+                </div>
+            </div>
+        </header>
+
+        <figure class="mb-20">
+            <div class="w-full aspect-video bg-gray-200 dark:bg-dark-surface rounded-3xl overflow-hidden shadow-soft mb-4 border border-gray-100 dark:border-gray-700 group cursor-pointer relative" onclick="openLightbox(0)">
+                <img id="p-hero" src="" alt="Hero Image" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100 duration-300">
+                    <div class="bg-white/20 backdrop-blur-md p-3 rounded-full">
+                        <i data-lucide="maximize-2" class="text-white w-6 h-6"></i>
+                    </div>
+                </div>
+            </div>
+            <figcaption id="p-hero-cap" class="text-sm text-gray-500 dark:text-gray-400 text-center italic">
+            </figcaption>
+        </figure>
+
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-y-16 gap-x-12 mb-24">
+            
+            <div class="col-span-12 md:col-span-4">
+                <div class="flex items-baseline gap-3">
+                    <span class="text-accent font-mono font-bold text-xl">01</span>
+                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white">Background</h2>
+                </div>
+            </div>
+            <div class="col-span-12 md:col-span-8">
+                <p id="p-background" class="text-lg text-gray-600 dark:text-gray-300 leading-relaxed"></p>
+            </div>
+
+            <div class="col-span-12 md:col-span-4">
+                <div class="flex items-baseline gap-3">
+                    <span class="text-accent font-mono font-bold text-xl">02</span>
+                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white">The Challenge</h2>
+                </div>
+            </div>
+            <div class="col-span-12 md:col-span-8">
+                <p id="p-challenge" class="text-lg text-gray-600 dark:text-gray-300 leading-relaxed"></p>
+            </div>
+
+            <div class="col-span-12 md:col-span-4">
+                <div class="flex items-baseline gap-3">
+                    <span class="text-accent font-mono font-bold text-xl">03</span>
+                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white">The Solution</h2>
+                </div>
+            </div>
+            <div class="col-span-12 md:col-span-8">
+                <p id="p-solution" class="text-lg text-gray-600 dark:text-gray-300 leading-relaxed"></p>
+            </div>
+
+            <div class="col-span-12 md:col-span-4">
+                <div class="flex items-baseline gap-3">
+                    <span class="text-accent font-mono font-bold text-xl">04</span>
+                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white">The Result</h2>
+                </div>
+            </div>
+            <div class="col-span-12 md:col-span-8">
+                <p id="p-result" class="text-lg text-gray-600 dark:text-gray-300 leading-relaxed"></p>
+            </div>
+
+        </div>
+
+        <div id="p-gallery" class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
+        </div>
+
+        <div class="border-t border-gray-200 dark:border-gray-700 pt-12 flex justify-between items-center">
+            <span class="text-gray-500 dark:text-gray-400 text-sm font-medium">Next Project</span>
+            <a id="p-next-link" href="#" class="group flex items-center gap-4 text-xl md:text-3xl font-bold text-gray-900 dark:text-white hover:text-success transition-colors">
+                <span id="p-next-title">Next Project Name</span>
+                <i data-lucide="arrow-right" class="w-6 h-6 md:w-8 md:h-8 group-hover:translate-x-2 transition-transform"></i>
+            </a>
+        </div>
+
+    </main>
+
+    <div id="error-screen" class="hidden fixed inset-0 flex flex-col items-center justify-center bg-cream dark:bg-dark-bg z-40">
+        <section class="flex flex-col items-center justify-center text-center px-4">
+            <div class="mb-6 p-4 bg-gray-100 dark:bg-dark-surface rounded-full shadow-soft">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-12 h-12 text-gray-400">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m3.75 9v6m3-3H9m1.5-12H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
+                </svg>
+            </div>
+            <h1 class="text-3xl font-bold mb-4 text-gray-900 dark:text-white">Case Study In Progress</h1>
+            <p class="max-w-md text-gray-500 dark:text-gray-400 mb-8">I am currently documenting the process for this project.</p>
+            <a href="archive.html" class="inline-flex items-center gap-2 px-6 py-3 bg-black dark:bg-white text-white dark:text-black rounded-full font-medium hover:opacity-80 transition-opacity">Back to Portfolio</a>
+        </section>
+    </div>
+
+    <section id="contact" class="px-4 md:px-8 pb-20">
+        <div class="max-w-7xl mx-auto bg-surface dark:bg-dark-surface rounded-3xl p-8 md:p-12 shadow-soft border border-gray-100 dark:border-gray-700 transition-colors duration-500 text-center">
+            <h2 class="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">Let's work together!</h2>
+            <p class="text-gray-500 dark:text-gray-400 text-lg mb-8 max-w-xl mx-auto">Looking for assistance with a project? Please reach out and let me know how I can help.</p>
+            <a href="mailto:oliver_tw@icloud.com" class="inline-flex items-center gap-2 bg-primary dark:bg-primary-dark text-white dark:text-gray-900 px-8 py-4 rounded-xl font-bold hover:opacity-90 transition-opacity">
+                <i class="fa-solid fa-envelope"></i> Email Me
+            </a>
+        </div>
+    </section>
+
+    <footer class="w-full bg-surface dark:bg-dark-surface border-t border-gray-200 dark:border-gray-700 py-8 px-4 md:px-8 mt-auto">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-sm">
+            <div class="text-gray-500 dark:text-gray-400">&copy; 2025 Oliver T. Williams.</div>
+            <div class="flex items-center gap-6">
+                <a href="mailto:oliver_tw@icloud.com" class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white font-medium transition-colors">oliver_tw@icloud.com</a>
+                <div class="flex items-center gap-4">
+                    <a href="https://www.instagram.com/oliver_williams1212/" class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://www.linkedin.com/in/oliver-t-williams/" class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="https://github.com/olivertw12" class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"><i class="fa-brands fa-github"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        const projectData = {
+            
+            "mainframe": {
+                category: "Advertising & Typography",
+                title: "Mainframe Studios",
+                client: "Anderson Gallery",
+                role: "Visual Design",
+                year: "2023",
+                deliverables: "Poster, Typeface",
+                hero: "images/mainframe2.png",
+                heroCaption: "The final poster design displayed in the Anderson Gallery.",
+                background: "Mainframe Studios is one of the largest non-profit art studios in the nation, providing permanent, affordable workspaces for hundreds of artists in Des Moines, Iowa. They are known for their vibrant creative community and their visually iconic building.",
+                challenge: "The studio needed a unique poster design that was not only promotional but also served as an authentic representation of its brand. The primary challenge was to capture the essence of their most recognizable asset, the colorful, geometric-painted exterior, without simply resorting to photography.",
+                solution: "To solve this, the design process began with an in-depth analysis of the studio's exterior, deconstructing its geometric patterns and bold color palette. These core shapes and angles were then abstracted and systematized to build the letterforms of a new custom display typeface.",
+                result: "The resulting poster provided Mainframe Studios with a powerful and original piece of visual communication that was a true extension of its physical identity. The design was highly successful and received significant external recognition, winning an award at the 52nd Annual Juried Student Exhibition.",
+                gallery: [
+                    { src: "images/mainframe3.png", caption: "View of Mainframe Studios in Des Moines." },
+                    { src: "images/mainframe4.png", caption: "Conceptual merchandise with the custom typography." },
+                    { src: "images/mainframe5.png", caption: "Mockup of the poster in a studio environment." }
+                ]
+            },
+
+            "forged": {
+                category: "Brand Identity",
+                title: "The Forged Group",
+                client: "Forged Consulting",
+                role: "Brand Strategy",
+                year: "2024",
+                deliverables: "Identity System, Print",
+                hero: "images/forged2.png",
+                heroCaption: "Business cards and stationery showcasing the primary brand identity.",
+                background: "The Forged Group is a financial consultation firm based in North Carolina, specializing in business consulting and human resources optimization. As a firm dealing with high-level corporate strategy and financial health, they required a brand image that conveyed strength, stability, and professional reliability to their diverse clientele.",
+                challenge: "The primary challenge was to create a brand identity that was flexible enough to house multiple distinct sub-brands, specifically 'Forged Human Resources', 'Forged Financial Services' and 'Forged Operational Excellence', without fracturing the overall brand image. The system needed to feel unified and monolithic while allowing each division to have its own clear designation on business cards, stationery, and digital assets.",
+                solution: "We developed a visual system anchored by a stylized 'Anvil' icon, a symbol of craftsmanship, durability, and creation. This icon serves as the unifying element across all collateral. A clean, typographic hierarchy was established to differentiate the sub-brands, ensuring that while the parent identity remains dominant, the specific service area is immediately clear to the client.",
+                result: "The final deliverable was a comprehensive brand identity suite, including logo variations for each sub-brand, a stationery package (business cards, letterheads, notebooks), and merchandise assets like mugs and pens. The result is a cohesive, professional visual language that projects authority and trust, perfectly aligning with the firm's financial consultation services.",
+                gallery: [
+                    { src: "images/forged3.png", caption: "Branded notebooks featuring the unified Anvil icon." },
+                    { src: "images/forged4.png", caption: "Merchandise application demonstrating the logo's versatility." },
+                    { src: "images/forged5.png", caption: "The visual system applied to office signage and environments." }
+                ]
+            },
+
+            "relays": {
+                category: "Event Branding",
+                title: "Drake Relays 2025",
+                client: "Drake University",
+                role: "Visual Design",
+                year: "2025",
+                deliverables: "Logo, Merch, Signage",
+                hero: "images/relays2.png",
+                heroCaption: "Primary visual theme featuring the retro-futurist neon aesthetic.",
+                background: "The Drake Relays is a premier athletic event held annually at Drake University. It is a long-standing tradition that attracts athletes from around the world. Each year, a student is selected through a competitive process to design the official logo and visual theme for the relays, ensuring the event maintains a fresh and student-centric identity.",
+                challenge: "The mandated theme for the 2025 Relays was \"Racing Through Time.\" The challenge was to interpret this broad concept into a cohesive visual brand that felt energetic and athletic while honoring the history of the event. The design needed to be versatile enough to work on large-scale campus banners, small merchandise items, and digital media without losing legibility or impact.",
+                solution: "I developed a logo and visual system anchored in a retro-futurist aesthetic, utilizing a neon-inspired color palette to evoke speed and energy. A key component of the design was the integration of the Des Moines city skyline, grounding the \"Racing Through Time\" concept in the specific location of the event. This created a visual bridge between the city's history and the forward momentum of the races.",
+                result: "The final design was implemented successfully across the entire event ecosystem. The logo was placed prominently around the Drake University campus, creating an immersive atmosphere for attendees. Additionally, the design was adapted into a wide range of popular merchandise, solidifying the 2025 Relays' visual identity as a memorable chapter in the event's history.",
+                gallery: [
+                    { src: "images/relays3.png", caption: "Merchandise application on steel cups, handed out at events." },
+                    { src: "images/relays4.png", caption: "Raffle prize given at reveal event." },
+                    { src: "images/relays5.png", caption: "Banner displayed on Drake campus grounds." }
+                ]
+            },
+
+            "music": {
+                category: "Print Design",
+                title: "Local Music Scene",
+                client: "Becky Hoffman Mgmt",
+                role: "Art Direction",
+                year: "2024",
+                deliverables: "Flyers, Posters",
+                hero: "images/music2.png",
+                heroCaption: "A spread of flyers created for the 2024 tour season.",
+                background: "The local music scene in Minnesota is vibrant but highly competitive. An independent artist manager needed professional promotional materials to help their roster of musicians gain visibility for upcoming performances.",
+                challenge: "Concert promotion requires immediate visual impact. Flyers and posters often have only a split second to grab a passerby's attention. The challenge was to balance essential information with compelling artistic direction that varied significantly from artist to artist.",
+                solution: "I adopted a flexible design approach, creating a series of custom posters and flyers. For each event, I focused on a key visual hook, whether a manipulated photograph or a bold typographic treatment, that resonated with the specific genre of music.",
+                result: "The campaign successfully elevated the visual presence of the artists. The distinct designs helped cut through the noise of local bulletin boards and social media feeds.",
+                gallery: [
+                    { src: "images/music3.png", caption: "Bold typography for headline acts." },
+                    { src: "images/music4.png", caption: "Flyers distributed at local record stores." },
+                    { src: "images/music5.png", caption: "Visuals capturing the live performance energy." }
+                ]
+            },
+
+            "pyrkia": {
+                category: "Brand Identity",
+                title: "Pyrkia Health",
+                client: "Pyrkia Health Services",
+                role: "Logo Design",
+                year: "2024",
+                deliverables: "Logo, Brand Assets",
+                hero: "images/pyrkia2.png",
+                heroCaption: "Primary brand visual emphasizing balance and nature.",
+                background: "Pyrkia Health Services is a nature-focused health program dedicated to holistic wellness. Their mission is to integrate physical health with the restorative power of the natural world, fostering a sense of unity between the individual and their environment. They commissioned a new visual identity to better communicate these core values to potential clients.",
+                challenge: "The health and wellness sector is crowded with generic imagery. The client needed a logo that was distinct yet immediately recognizable as a symbol of care and unity. The challenge was to create a mark that felt organic and human-centered without relying on clichéd health tropes, effectively capturing the client's specific vision of \"holistic wellness.\"",
+                solution: "I developed the client's vision by focusing on an abstract figure that symbolizes the human element within the natural world. To reinforce the concepts of completeness and self-emphasis, I integrated this figure with a prominent abstract circle. This geometric form represents the cycle of health, unity, and the holistic nature of the program.",
+                result: "The final design is a clean, modern logo that successfully bridges the gap between professional healthcare and organic wellness. The abstract circle and figure create a memorable icon that anchors the brand's visual identity, providing a strong foundation for future marketing materials, merchandise, and digital presence.",
+                gallery: [
+                    { src: "images/pyrkia3.png", caption: "Logo application on eco-friendly merchandise." },
+                    { src: "images/pyrkia4.png", caption: "Digital presence highlighting the brand's color palette." },
+                    { src: "images/pyrkia5.png", caption: "The brand identity in action within a wellness environment." }
+                ]
+            },
+
+            "duolingo": {
+                category: "Advertising Campaign",
+                title: "Duolingo Ad Campaign",
+                client: "Young Ones Competition",
+                role: "Co-Creator",
+                year: "2024",
+                deliverables: "Campaign Deck, Video",
+                hero: "images/duolingo2.png",
+                heroCaption: "Concept art for the Duolingo x Rocket League crossover.",
+                background: "This project was a submission for the \"Young Ones\" national advertising competition. The brief challenged participants to help Duolingo, a language learning app, expand its user base by targeting a specific, untapped demographic.",
+                challenge: "While Duolingo has broad appeal, the challenge was to penetrate the gaming community, a group that communicates constantly but often across language barriers. We needed a campaign that felt authentic to gamer culture rather than intrusive or overly educational.",
+                solution: "My partner and I developed a strategic partnership pitch expanding Duolingo into the world of Rocket League. We designed a suite of in-game integrations, including custom car decals and a multilingual 'quick-chat' feature that would teach gamers phrases in real-time. This was presented through a 3-minute concept video and a comprehensive campaign deck.",
+                result: "The project resulted in a polished, professional pitch that demonstrated how utility-based learning could seamlessly fit into a competitive gaming environment. The campaign assets successfully showcased a fun, low-friction way for gamers to learn new languages while playing.",
+                gallery: [
+                    { src: "images/duolingo3.png", caption: "In-game car decal concepts." },
+                    { src: "images/duolingo4.png", caption: "Mockup of the multilingual quick-chat feature." }
+                ]
+            },
+
+            "art": {
+                category: "Fine Art",
+                title: "Traditional Artwork",
+                client: "Personal",
+                role: "Artist",
+                year: "2021-2024",
+                deliverables: "Mixed Media Studies",
+                hero: "images/art2.png",
+                heroCaption: "A study in charcoal exploring high contrast and texture.",
+                background: "While my professional work focuses on digital design and analytics, I maintain a dedicated practice in traditional fine art. This collection represents a compilation of personal studies created between 2021 and 2024.",
+                challenge: "The challenge in traditional media is the lack of an 'undo' button. Working with charcoal and ink requires commitment to every stroke and a deep understanding of physical materials. My goal is to explore texture, lighting, and composition in a raw, tactile environment.",
+                solution: "I primarily work with mixed media, often blending charcoal, ink, and graphite. My studies focus on organic forms and high-contrast lighting scenarios. By stripping away color, I force myself to rely on value and texture to communicate volume and emotion.",
+                result: "This ongoing practice keeps my fundamental artistic skills sharp. The discipline required for traditional drawing directly translates to my digital work, improving my eye for composition and balance across all design projects.",
+                gallery: [
+                    { src: "images/art3.png", caption: "Ink study of organic forms." },
+                    { src: "images/art4.png", caption: "Mixed media composition exploring depth." }
+                ]
+            },
+
+            "cityintern": {
+                category: "Editorial & UI Design",
+                title: "Shorewood Internship",
+                client: "City of Shorewood",
+                role: "Graphic Design Intern",
+                year: "2024",
+                deliverables: "Fillable Forms, PDFs",
+                hero: "images/cityintern2.png",
+                heroCaption: "A selection of standardized, fillable PDF forms created for the city government.",
+                background: "The City of Shorewood, Minnesota, manages a wide variety of administrative processes that require documentation, from permits to internal HR forms. As a local government entity, it is crucial that these documents are professional, accessible, and easy for both citizens and staff to process. I joined the team as a Graphic Design Intern to assist in modernizing their communication materials.",
+                challenge: "Many of the city's existing documents were outdated, visually inconsistent, and difficult to use. Some were static files that required printing and hand-filling, creating friction for users and inefficiencies for data entry staff. The challenge was to audit these legacy documents and transform them into a cohesive system that aligned with the official Shorewood Branding Kit while drastically improving usability.",
+                solution: "I utilized Adobe Acrobat and InDesign to redesign and engineer a suite of fillable PDFs. I strictly applied the Shorewood Branding Kit using approved typography, color palettes, and logos to ensure every document looked official and trustworthy. Beyond aesthetics, I focused on user experience by adding interactive form fields, dropdown menus, and clear instructional hierarchy to make digital completion intuitive.",
+                result: "The project resulted in a library of modernized, user-friendly documents that streamlined administrative workflows. The shift to fillable PDFs reduced paper waste and data entry errors, providing a smoother experience for Shorewood residents. The visual consistency across all forms reinforced the professionalism and reliability of the city government's brand.",
+                gallery: [
+                    { src: "images/cityintern3.png", caption: "Detail of interactive fields and clear typography." },
+                    { src: "images/cityintern4.png", caption: "Application of the official Shorewood Branding Kit." }
+                ]
+            },
+
+            "xmas": {
+                category: "Map Design & Illustration",
+                title: "Christmas in Excelsior",
+                client: "International Lions Club",
+                role: "Map Illustration",
+                year: "2024",
+                deliverables: "Event Map, Pamphlet",
+                hero: "images/xmas2.png",
+                heroCaption: "Overview of the event map designed for the first-ever Christmas Market in Excelsior.",
+                background: "The International Lions Club organized the first-ever Christmas Market in Excelsior, a major community initiative aimed at bringing residents and visitors together for the holiday season. As a volunteer-led effort, the event was ambitious in scope, anticipating an estimated attendance of 50,000 people over the course of the market.",
+                challenge: "With such a significant influx of visitors to a new event layout, clarity and navigation were critical safety and logistical concerns. Attendees needed to be able to intuitively find specific vendor zones, food areas, restrooms, and event features. Without a clear guide, the risk of congestion and confusion for the 50,000 guests was high.",
+                solution: "I volunteered to design a comprehensive area map that prioritized readability and functional navigation. The design clearly highlighted efficient walking routes, distinct vendor zones, and key landmarks. The layout was optimized for print, ensuring it was legible even when scaled down for the event pamphlet.",
+                result: "The map became a central piece of the visitor experience, distributed in printed pamphlets to the estimated audience of 50,000. It successfully directed foot traffic, reduced bottlenecks, and helped families navigate the market features with ease, contributing to the overall success of Excelsior's inaugural Christmas Market.",
+                gallery: [
+                    { src: "images/xmas3.png", caption: "The printed pamphlet distributed to attendees." },
+                    { src: "images/xmas4.png", caption: "Crowd navigation assisted by clear signage and mapping." }
+                ]
+            },
+
+            "citymap": {
+                category: "Illustration & Product Design",
+                title: "City of Shorewood Map",
+                client: "Community Prototype",
+                role: "Illustrator",
+                year: "2024",
+                deliverables: "Rug Design, Map",
+                hero: "images/citymap2.png",
+                heroCaption: "A custom illustrated rug designed to help children visualize their community.",
+                background: "This project began as a university initiative to design a functional prototype that would benefit a local community of our choice. The goal was to create an educational tool that fostered a sense of place and belonging for younger residents, helping them understand the layout of their city and its relationship to surrounding townships in an engaging, tactile way.",
+                challenge: "Learning city layouts and navigation can be abstract and difficult for children when relying on traditional 2D maps or digital screens. The challenge was to translate complex geographic data, including roads, landmarks, and city borders, into a format that was intuitive, playful, and physically interactive, without sacrificing geographic accuracy.",
+                solution: "I developed a custom illustrated rug that functions as a large-scale play mat. The design features a stylized yet accurate map of Shorewood and its neighboring areas. Key landmarks like city hall, parks, and schools were illustrated with distinct icons to serve as navigational anchors. The roads were designed to be wide enough for toy cars, encouraging active play that reinforces spatial learning.",
+                result: "The final prototype effectively depicts Shorewood, Minnesota, along with its real city landmarks and surrounding townships. It successfully bridges the gap between a toy and an educational resource, providing a tangible way for children to explore their community from the safety of a classroom or living room.",
+                gallery: [
+                    { src: "images/citymap3.png", caption: "View of the rug at eye-level." },
+                    { src: "images/citymap4.png", caption: "2nd view of the rug at eye-level." }
+                ]
+            },
+
+            "icymi": {
+                category: "Brand Identity & Print",
+                title: "ICYMI Podcast",
+                client: "Student Media",
+                role: "Co-Host & Designer",
+                year: "2022",
+                deliverables: "Podcast Cover, Weekly Posters",
+                hero: "images/icymi2.png",
+                heroCaption: "The official cover art for the ICYMI (In Case You Missed It) podcast.",
+                background: "ICYMI was a weekly news podcast dedicated to covering stories around Drake University and the greater Des Moines area. As both a co-host and the lead designer, I was deeply embedded in the production process, aiming to keep the student body informed and engaged with local current events through an accessible audio format.",
+                challenge: "Podcasts are an audio medium, making visual discoverability a significant hurdle, especially on a physical campus. We needed a strong visual identity that could translate from a digital thumbnail on Spotify to physical posters on crowded bulletin boards. Additionally, the weekly release schedule required a promotional workflow that was efficient without sacrificing quality.",
+                solution: "I designed a bold, distinct podcast cover that served as the anchor for our visual brand. Leveraging this aesthetic, I developed a templated poster system for our weekly episode rollouts. This allowed us to quickly generate fresh promotional assets for every new release, ensuring that our physical presence on campus remained current and active throughout the semester.",
+                result: "The visual campaign successfully established ICYMI's presence across Drake University. The consistent poster distribution helped drive listenership and built a recognizable brand on campus. The project demonstrated the power of integrating content creation with strategic visual promotion to build an audience from the ground up.",
+                gallery: [
+                    { src: "images/icymi3.png", caption: "Posters displayed on campus bulletin boards." },
+                    { src: "images/icymi4.png", caption: "Digital cover art used on streaming platforms." }
+                ]
+            },
+
+            "church": {
+                category: "Social Media Strategy",
+                title: "St. Victoria Church",
+                client: "St. Victoria Parish",
+                role: "Social Media Manager",
+                year: "2024",
+                deliverables: "Content Strategy, Posts",
+                hero: "images/church2.png",
+                heroCaption: "A selection of social media posts designed to engage the parish community.",
+                background: "St. Victoria Parish had existing social media accounts, but they had fallen dormant over time. The church was hosting events and services, but they weren't effectively communicating with their congregation online, missing a key opportunity to build community engagement.",
+                challenge: "The primary challenge was to revive these 'mostly abandoned' accounts without alienating the existing follower base. We needed to transition from sporadic silence to a consistent, reliable stream of content that felt authentic to the church's values while capturing the attention of a modern audience scrolling through their feeds.",
+                solution: "I took full ownership of the church's Instagram and Facebook presence. I developed a consistent content calendar and posting strategy, committing to multiple high-quality posts every week. I designed graphics and wrote copy that highlighted upcoming events, shared community stories, and reflected the welcoming atmosphere of the parish.",
+                result: "This initiative successfully launched a 'new era' for the church's digital presence. The consistent activity re-engaged the community, increasing interaction and awareness for church events. It transformed their social media from a neglected afterthought into a vibrant, active hub for the congregation.",
+                gallery: [
+                    { src: "images/church3.png", caption: "Event announcement post." },
+                    { src: "images/church4.png", caption: "Community spotlight feature." }
+                ]
+            },
+
+            "dmarc": {
+                category: "Data Analytics",
+                title: "DMARC Analytics",
+                client: "DMARC",
+                role: "Predictive Modeling",
+                year: "2024",
+                deliverables: "Model, Analysis",
+                hero: "images/dmarc2.png",
+                heroCaption: "Visualizing the gap between food pantry locations and high-need populations.",
+                background: "DMARC runs a network of food pantries across Des Moines, generating a massive amount of transactional visitor data. However, this data was often messy and disconnected from broader demographic trends, making it difficult to see the full picture of community need.",
+                challenge: "The organization needed to know not just who was visiting, but where future needs would arise so they could deploy their mobile units effectively. The challenge was to clean this unstructured data and derive actionable insights about future visitor trends.",
+                solution: "I cleaned the raw dataset and merged it with ACS Census data. This allowed us to identify specific 'at-risk' neighborhoods that were geographically underserved. I then built a predictive model using R to forecast visitor numbers for the upcoming year based on historical patterns.",
+                result: "Our analysis revealed that while overall visits were increasing, specific demographic groups were growing significantly faster than others. My predictive model provided DMARC with a data-driven forecast to help them anticipate this surge and allocate resources more efficiently.",
+                gallery: [
+                    { src: "images/dmarc3.png", caption: "Heatmap showing pantry density vs. need." },
+                    { src: "images/dmarc4.png", caption: "Projected visitor growth chart." }
+                ]
+            }
+        };
+
+        const params = new URLSearchParams(window.location.search);
+        const projectId = params.get('id');
+        const data = projectData[projectId];
+
+        let lbImages = [];
+        let currentLbIndex = 0;
+
+        function openLightbox(index) {
+            currentLbIndex = index;
+            updateLightbox();
+            document.getElementById('lightbox').classList.remove('hidden');
+            setTimeout(() => {
+                document.getElementById('lightbox').classList.remove('opacity-0');
+            }, 10);
+            document.body.style.overflow = 'hidden'; 
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.add('opacity-0');
+            setTimeout(() => {
+                document.getElementById('lightbox').classList.add('hidden');
+            }, 300);
+            document.body.style.overflow = 'auto'; 
+        }
+
+        function closeLightboxOnBg(e) {
+            if (e.target.id === 'lb-image') return; 
+            if (e.target.closest('button')) return; 
+            closeLightbox();
+        }
+
+        function changeLbImage(event, direction) {
+            event.stopPropagation(); 
+            currentLbIndex = (currentLbIndex + direction + lbImages.length) % lbImages.length;
+            updateLightbox();
+        }
+
+        function updateLightbox() {
+            const imgData = lbImages[currentLbIndex];
+            const imgElement = document.getElementById('lb-image');
+            
+            imgElement.style.opacity = '0';
+            setTimeout(() => {
+                imgElement.src = imgData.src;
+                document.getElementById('lb-caption').innerText = imgData.caption || "";
+                document.getElementById('lb-counter').innerText = `${currentLbIndex + 1} / ${lbImages.length}`;
+                imgElement.style.opacity = '1';
+            }, 150);
+        }
+
+        document.addEventListener('keydown', function(e) {
+            if (document.getElementById('lightbox').classList.contains('hidden')) return;
+            
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowLeft') changeLbImage(e, -1);
+            if (e.key === 'ArrowRight') changeLbImage(e, 1);
+        });
+
+
+        if (data) {
+            document.getElementById('p-category').innerText = data.category;
+            document.getElementById('p-title').innerText = data.title;
+            document.getElementById('p-client').innerText = data.client;
+            document.getElementById('p-role').innerText = data.role;
+            document.getElementById('p-year').innerText = data.year;
+            document.getElementById('p-deliverables').innerText = data.deliverables;
+            document.getElementById('p-hero-cap').innerText = data.heroCaption;
+            document.getElementById('p-background').innerText = data.background;
+            document.getElementById('p-challenge').innerText = data.challenge;
+            document.getElementById('p-solution').innerText = data.solution;
+            document.getElementById('p-result').innerText = data.result;
+            
+            document.getElementById('p-hero').src = data.hero;
+
+            lbImages.push({ src: data.hero, caption: data.heroCaption });
+            data.gallery.forEach(img => lbImages.push(img));
+
+
+            const keys = Object.keys(projectData); 
+            const currentIndex = keys.indexOf(projectId);
+            
+            if (currentIndex !== -1) {
+                const nextIndex = (currentIndex + 1) % keys.length;
+                const nextKey = keys[nextIndex];
+                const nextProject = projectData[nextKey];
+
+                document.getElementById('p-next-title').innerText = nextProject.title;
+                document.getElementById('p-next-link').href = `project.html?id=${nextKey}`;
+            }
+
+            const galleryContainer = document.getElementById('p-gallery');
+            let galleryHTML = '';
+            
+            const isLargeGallery = data.gallery.length > 3;
+
+            if (isLargeGallery) {
+                galleryContainer.className = 'grid grid-cols-1 md:grid-cols-3 gap-8 mb-20';
+            } else {
+                galleryContainer.className = 'grid grid-cols-1 md:grid-cols-2 gap-8 mb-20';
+            }
+            
+            data.gallery.forEach((img, index) => {
+                let spanClass = '';
+                let aspectClass = 'aspect-[4/3]'; 
+
+                if (isLargeGallery) {
+                    aspectClass = 'aspect-[4/3]'; 
+                } else {
+                    const isFullWidth = (index + 1) % 3 === 0; 
+                    if (isFullWidth) {
+                        spanClass = 'md:col-span-2';
+                        aspectClass = 'aspect-video';
+                    }
+                }
+
+                const lbIndex = index + 1;
+
+                galleryHTML += `
+                <figure class="${spanClass} group cursor-pointer relative" onclick="openLightbox(${lbIndex})">
+                    <div class="bg-gray-100 dark:bg-dark-surface rounded-3xl overflow-hidden ${aspectClass} border border-gray-100 dark:border-gray-700 shadow-soft mb-3 relative">
+                        <img src="${img.src}" alt="${img.caption}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                        
+                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100 duration-300">
+                            <div class="bg-white/20 backdrop-blur-md p-3 rounded-full">
+                                <i data-lucide="maximize-2" class="text-white w-6 h-6"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <figcaption class="text-sm text-gray-500 dark:text-gray-400 px-1">
+                        ${img.caption}
+                    </figcaption>
+                </figure>
+                `;
+            });
+            galleryContainer.innerHTML = galleryHTML;
+
+            document.getElementById('main-content').classList.remove('opacity-0');
+
+        } else {
+            document.getElementById('error-screen').classList.remove('hidden');
+        }
+
+        function toggleTheme() {
+            const html = document.documentElement;
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+            } else {
+                html.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+    </script>
+</body>
+</html>

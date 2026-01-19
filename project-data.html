@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DMARC Analysis | Oliver Williams</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        cream: '#F0EFEA',
+                        surface: '#FFFFFF',
+                        'dark-bg': '#18181B',
+                        'dark-surface': '#27272A',
+                        primary: '#111827',
+                        'primary-dark': '#FAFAFA',
+                        success: '#059669',
+                        accent: '#3B82F6',
+                        code: '#1e1e1e',
+                    },
+                    fontFamily: { 
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                    },
+                    borderRadius: { 'xl': '1rem', '2xl': '1.5rem', '3xl': '2rem' },
+                    boxShadow: { 'soft': '0 4px 20px -2px rgba(0, 0, 0, 0.05)' }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { transition: background-color 0.5s ease, color 0.5s ease; }
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #D1D5DB; border-radius: 10px; border: 2px solid #F0EFEA; }
+        .dark ::-webkit-scrollbar-thumb { background: #3F3F46; border: 2px solid #18181B; }
+        
+        /* Syntax highlighting simulation for code blocks */
+        .token-keyword { color: #c678dd; }
+        .token-function { color: #61afef; }
+        .token-string { color: #98c379; }
+        .token-comment { color: #7f848e; font-style: italic; }
+    </style>
+</head>
+<body class="bg-cream dark:bg-dark-bg text-gray-800 dark:text-gray-200 font-sans selection:bg-gray-200 dark:selection:bg-gray-700 flex flex-col min-h-screen transition-colors duration-500">
+
+    <!-- NAVIGATION -->
+    <nav class="fixed top-4 left-0 right-0 z-50 px-4 md:px-8">
+        <div class="max-w-7xl mx-auto bg-surface/80 dark:bg-dark-surface/80 backdrop-blur-md rounded-2xl shadow-soft px-6 py-4 flex justify-between items-center border border-gray-100 dark:border-gray-700 transition-all duration-500">
+            <div class="flex items-center gap-3 cursor-pointer" onclick="window.location.href='index.html'">
+                <div class="bg-gray-100 dark:bg-gray-700 p-2 rounded-xl">
+                    <i data-lucide="arrow-left" class="text-gray-900 dark:text-white w-5 h-5"></i>
+                </div>
+                <span class="font-bold text-gray-900 dark:text-white text-sm">Back to Home</span>
+            </div>
+            
+            <button onclick="toggleTheme()" class="p-2.5 rounded-xl bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+                <i class="fa-solid fa-sun hidden dark:block text-sm"></i>
+                <i class="fa-solid fa-moon block dark:hidden text-sm"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- CONTENT WRAPPER -->
+    <main class="pt-32 pb-20 px-4 md:px-8 max-w-7xl mx-auto flex-grow">
+        
+        <!-- PROJECT HEADER -->
+        <header class="mb-12">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-xs font-bold uppercase tracking-wider mb-6">
+                Data Pipeline & Modeling
+            </div>
+            <h1 class="text-5xl md:text-7xl font-bold text-gray-900 dark:text-white mb-8 tracking-tight">
+                DMARC Network Analysis
+            </h1>
+            
+            <!-- META DATA GRID -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 border-y border-gray-200 dark:border-gray-700 py-6">
+                <div>
+                    <span class="text-xs font-bold uppercase text-gray-400 dark:text-gray-500 tracking-wider block mb-1">Organization</span>
+                    <span class="text-gray-900 dark:text-white font-medium">DMARC Food Pantry</span>
+                </div>
+                <div>
+                    <span class="text-xs font-bold uppercase text-gray-400 dark:text-gray-500 tracking-wider block mb-1">Role</span>
+                    <span class="text-gray-900 dark:text-white font-medium">Predictive Modeling</span>
+                </div>
+                <div>
+                    <span class="text-xs font-bold uppercase text-gray-400 dark:text-gray-500 tracking-wider block mb-1">Tech Stack</span>
+                    <span class="text-gray-900 dark:text-white font-medium">R, Tidyverse, GIS</span>
+                </div>
+                <div>
+                    <span class="text-xs font-bold uppercase text-gray-400 dark:text-gray-500 tracking-wider block mb-1">Focus</span>
+                    <span class="text-gray-900 dark:text-white font-medium">Methodology & Arch</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- INTRO NARRATIVE -->
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-20">
+            <div class="col-span-12 md:col-span-8 md:col-start-3 text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+                <!-- NDA ALERT -->
+                <div class="bg-gray-100 dark:bg-gray-800 border-l-4 border-gray-400 dark:border-gray-600 p-4 mb-8 rounded-r-lg">
+                    <div class="flex items-center gap-2 text-sm font-bold text-gray-900 dark:text-white mb-1">
+                        <i data-lucide="lock" class="w-4 h-4"></i>
+                        Confidentiality Notice
+                    </div>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">
+                        Specific datasets, statistical outcomes, and internal visualizations have been redacted from this case study in compliance with a Non-Disclosure Agreement (NDA). This page focuses on the technical pipeline, code structure, and analytical methodology.
+                    </p>
+                </div>
+
+                <p class="mb-6">
+                    <strong class="text-gray-900 dark:text-white">The Challenge:</strong> The DMARC Food Pantry Network generates a massive dataset of transactional visitor logs. The data was unstructured and lacked the demographic context needed to make informed decisions about resource allocation.
+                </p>
+                <p>
+                    <strong class="text-gray-900 dark:text-white">The Goal:</strong> To build a reproducible data pipeline that cleans raw logs, enriches them with ACS Census demographics, and utilizes predictive modeling to identify future service gaps without exposing individual user data.
+                </p>
+            </div>
+        </div>
+
+        <!-- PHASE 1: DATA CLEANING -->
+        <section class="mb-24">
+            <div class="flex items-baseline gap-3 mb-6">
+                <span class="text-accent font-mono font-bold text-xl">01</span>
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-white">Standardization Pipeline</h2>
+            </div>
+            
+            <div class="bg-surface dark:bg-dark-surface rounded-3xl p-8 border border-gray-100 dark:border-gray-700 shadow-soft mb-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                    <div>
+                        <p class="text-gray-600 dark:text-gray-300 mb-6">
+                            The foundation of the project was a robust cleaning script designed to handle inconsistencies across 90+ pantry locations. We focused on making the data "universal" for downstream analysis.
+                        </p>
+                        <h4 class="font-bold text-sm uppercase tracking-wider text-gray-900 dark:text-white mb-4">Key Transformation Steps</h4>
+                        <ul class="space-y-3 mb-6 text-sm text-gray-600 dark:text-gray-400">
+                            <li class="flex items-start gap-3">
+                                <span class="bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 px-2 py-0.5 rounded text-xs font-mono font-bold mt-0.5">MUTE</span>
+                                <span>Converted "Date Visited" to <strong>Age</strong> integers.</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 px-2 py-0.5 rounded text-xs font-mono font-bold mt-0.5">ENRICH</span>
+                                <span>Calculated <strong>Income Brackets</strong> relative to Federal Poverty Levels.</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 px-2 py-0.5 rounded text-xs font-mono font-bold mt-0.5">DROP</span>
+                                <span>Removed high-variance columns (Housing Type) to reduce noise.</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Code Snippet -->
+                    <div class="bg-code rounded-xl overflow-hidden shadow-lg border border-gray-700 flex flex-col h-full">
+                        <div class="flex items-center justify-between px-4 py-2 bg-[#252526] border-b border-gray-700 shrink-0">
+                            <span class="text-xs text-gray-400 font-mono">clean_dmarc_data.R</span>
+                            <div class="flex gap-1.5">
+                                <div class="w-3 h-3 rounded-full bg-red-500/50"></div>
+                                <div class="w-3 h-3 rounded-full bg-yellow-500/50"></div>
+                                <div class="w-3 h-3 rounded-full bg-green-500/50"></div>
+                            </div>
+                        </div>
+                        <div class="p-4 overflow-x-auto flex-grow">
+<pre><code class="text-sm font-mono text-gray-300">
+<span class="token-comment"># Converting Birthdate to Age for Trend Analysis</span>
+df <span class="token-keyword">&lt;-</span> df <span class="token-keyword">%&gt;%</span>
+  mutate(Age = as.numeric(difftime(Sys.Date(), DOB, units = <span class="token-string">"weeks"</span>)) / 52.25) <span class="token-keyword">%&gt;%</span>
+  filter(Age > 0 & Age < 110) <span class="token-comment"># Remove outliers</span>
+
+<span class="token-comment"># Create Income Brackets based on Federal Poverty Levels</span>
+df <span class="token-keyword">&lt;-</span> df <span class="token-keyword">%&gt;%</span>
+  mutate(Poverty_Level = case_when(
+    Income < 15000 ~ <span class="token-string">"Extremely Low"</span>,
+    Income >= 15000 & Income < 30000 ~ <span class="token-string">"Low"</span>,
+    TRUE ~ <span class="token-string">"Moderate/High"</span>
+  ))
+</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PHASE 2: GEOSPATIAL ANALYSIS -->
+        <section class="mb-24">
+            <div class="flex items-baseline gap-3 mb-6">
+                <span class="text-accent font-mono font-bold text-xl">02</span>
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-white">Geospatial Merge Strategy</h2>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                <div class="col-span-12 lg:col-span-5 order-2 lg:order-1">
+                    <p class="text-gray-600 dark:text-gray-300 mb-6">
+                        We needed to identify "At-Risk" zones—areas with high poverty density but low resource availability. To do this, we architected a merge between internal DMARC data and external ACS Census data.
+                    </p>
+                    <p class="text-gray-600 dark:text-gray-300 mb-6">
+                        By joining datasets on <strong>Zip Code</strong> keys, we calculated a "Pantry Density" score. This allowed us to mathematically pinpoint specific neighborhoods (redacted) that were under-served despite having high visitor rates.
+                    </p>
+                    
+                    <div class="bg-gray-100 dark:bg-dark-surface p-6 rounded-2xl border border-gray-200 dark:border-gray-700">
+                        <h4 class="font-bold text-sm uppercase tracking-wider text-gray-500 mb-4">Zip Code Grouping Logic</h4>
+                        <div class="space-y-4">
+                            <div>
+                                <span class="text-sm font-bold text-gray-900 dark:text-white">Core Urban</span>
+                                <p class="text-xs text-gray-500">Filtered for population density > 4,000/sq mi</p>
+                            </div>
+                            <div>
+                                <span class="text-sm font-bold text-gray-900 dark:text-white">Suburban Ring</span>
+                                <p class="text-xs text-gray-500">Filtered for residential zoning & distance > 5mi from center</p>
+                            </div>
+                            <div>
+                                <span class="text-sm font-bold text-gray-900 dark:text-white">Rural Satellite</span>
+                                <p class="text-xs text-gray-500">Filtered for low pantry density index</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-span-12 lg:col-span-7 order-1 lg:order-2">
+                    <!-- LOGIC FLOW VISUALIZATION (Replacing Map) -->
+                    <div class="w-full aspect-video bg-gray-50 dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 flex flex-col items-center justify-center p-8 relative overflow-hidden">
+                        
+                        <!-- Background Grid -->
+                        <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(#3B82F6 1px, transparent 1px); background-size: 20px 20px;"></div>
+
+                        <!-- Diagram -->
+                        <div class="flex items-center gap-4 w-full justify-center relative z-10">
+                            <!-- Input 1 -->
+                            <div class="flex flex-col items-center">
+                                <div class="w-24 h-24 bg-white dark:bg-gray-700 rounded-xl border border-gray-300 dark:border-gray-600 flex items-center justify-center shadow-lg mb-3">
+                                    <i data-lucide="database" class="w-8 h-8 text-blue-500"></i>
+                                </div>
+                                <span class="text-xs font-bold text-gray-500 uppercase">DMARC Logs</span>
+                            </div>
+
+                            <i data-lucide="plus" class="text-gray-400"></i>
+
+                            <!-- Input 2 -->
+                            <div class="flex flex-col items-center">
+                                <div class="w-24 h-24 bg-white dark:bg-gray-700 rounded-xl border border-gray-300 dark:border-gray-600 flex items-center justify-center shadow-lg mb-3">
+                                    <i data-lucide="globe" class="w-8 h-8 text-green-500"></i>
+                                </div>
+                                <span class="text-xs font-bold text-gray-500 uppercase">ACS Census</span>
+                            </div>
+
+                            <i data-lucide="arrow-right" class="text-gray-400"></i>
+
+                            <!-- Output -->
+                            <div class="flex flex-col items-center">
+                                <div class="w-24 h-24 bg-blue-500 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/20 mb-3">
+                                    <i data-lucide="map-pin" class="w-8 h-8 text-white"></i>
+                                </div>
+                                <span class="text-xs font-bold text-blue-600 dark:text-blue-400 uppercase">Gap Analysis</span>
+                            </div>
+                        </div>
+
+                        <div class="absolute bottom-4 right-4 bg-white/50 dark:bg-black/50 backdrop-blur px-3 py-1 rounded border border-gray-200 dark:border-gray-700">
+                            <span class="text-xs font-mono text-gray-500 dark:text-gray-400">Methodology: Inner Join on Zip Code</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PHASE 3: PREDICTIVE MODELING -->
+        <section class="mb-24">
+            <div class="flex items-baseline gap-3 mb-6">
+                <span class="text-accent font-mono font-bold text-xl">03</span>
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-white">Time-Series Forecasting</h2>
+            </div>
+
+            <div class="bg-surface dark:bg-dark-surface rounded-3xl p-8 border border-gray-100 dark:border-gray-700 shadow-soft">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                    <!-- Model Architecture Card (Replacing Result Chart) -->
+                    <div class="flex flex-col gap-4">
+                        <div class="w-full aspect-[4/3] bg-gray-900 rounded-2xl border border-gray-700 p-6 relative overflow-hidden flex flex-col justify-center">
+                            
+                            <!-- Terminal / Specs Look -->
+                            <div class="font-mono text-sm space-y-4 relative z-10">
+                                <div class="flex justify-between border-b border-gray-700 pb-2">
+                                    <span class="text-gray-400">Model Type</span>
+                                    <span class="text-green-400 font-bold">ARIMA (Auto-Regressive)</span>
+                                </div>
+                                <div class="flex justify-between border-b border-gray-700 pb-2">
+                                    <span class="text-gray-400">Forecast Horizon</span>
+                                    <span class="text-white">12 Months (2025)</span>
+                                </div>
+                                <div class="flex justify-between border-b border-gray-700 pb-2">
+                                    <span class="text-gray-400">Confidence Interval</span>
+                                    <span class="text-white">95%</span>
+                                </div>
+                                <div class="flex justify-between pb-2">
+                                    <span class="text-gray-400">Variables</span>
+                                    <div class="text-right">
+                                        <span class="block text-white text-xs">Visits_Per_Month</span>
+                                        <span class="block text-white text-xs">Demographic_Segment</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="absolute -right-10 -bottom-10 opacity-10">
+                                <i data-lucide="trending-up" class="w-48 h-48 text-white"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col justify-center">
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Forecasting Demographic Shifts</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-6">
+                            When new data arrived later in the semester, we lost zip code granularity but gained longitude/latitude data. We pivoted to analyzing specific demographic segments over time.
+                        </p>
+                        <p class="text-gray-600 dark:text-gray-300 mb-6">
+                            I utilized the `forecast` library in R to train models on 5 years of historical data. The model identified seasonality patterns (winter peaks) and general upward trends for specific sub-groups, allowing DMARC to anticipate staffing needs for the upcoming year.
+                        </p>
+                        
+                        <div class="bg-code rounded-xl overflow-hidden shadow-lg border border-gray-700">
+                            <div class="flex items-center justify-between px-4 py-2 bg-[#252526] border-b border-gray-700">
+                                <span class="text-xs text-gray-400 font-mono">predictive_modelling.R</span>
+                            </div>
+                            <div class="p-4 overflow-x-auto">
+<pre><code class="text-sm font-mono text-gray-300">
+<span class="token-comment"># Time Series Forecasting for 2025</span>
+model <span class="token-keyword">&lt;-</span> auto.arima(visitors_ts)
+forecast_2025 <span class="token-keyword">&lt;-</span> forecast(model, h=12)
+
+<span class="token-comment"># Plotting the prediction structure</span>
+autoplot(forecast_2025) +
+  labs(title=<span class="token-string">"Projected Visitor Volume (Segmented)"</span>, 
+       y=<span class="token-string">"Monthly Visits"</span>)
+</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA / FOOTER NAV -->
+        <div class="border-t border-gray-200 dark:border-gray-700 pt-12 flex justify-between items-center">
+            <a href="index.html#data" class="group flex items-center gap-4 text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors">
+                <i data-lucide="arrow-left" class="w-4 h-4 group-hover:-translate-x-1 transition-transform"></i>
+                Back to Data Projects
+            </a>
+            <!-- Removed Request Code Samples button -->
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="w-full bg-surface dark:bg-dark-surface border-t border-gray-200 dark:border-gray-700 py-8 px-4 md:px-8 mt-auto">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-sm">
+            <div class="text-gray-500 dark:text-gray-400">
+                &copy; 2025 Oliver Williams.
+            </div>
+            
+            <div class="flex flex-wrap justify-center items-center gap-6">
+                <!-- Contact Text -->
+                <div class="flex items-center gap-6">
+                    <a href="mailto:oliver_tw@icloud.com" class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white font-medium transition-colors">oliver_tw@icloud.com</a>
+                    <span class="text-gray-300 dark:text-gray-700">•</span>
+                    <span class="text-gray-600 dark:text-gray-400 font-medium">+1 (317) 914-8047</span>
+                    <span class="text-gray-300 dark:text-gray-700 hidden md:inline">•</span>
+                </div>
+
+                <!-- Social Icons -->
+                <div class="flex items-center gap-4">
+                    <a href="https://www.instagram.com/oliver_williams1212/" class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors text-lg" aria-label="Instagram">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/oliver-t-williams/" class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors text-lg" aria-label="LinkedIn">
+                        <i class="fa-brands fa-linkedin"></i>
+                    </a>
+                    <a href="https://github.com/olivertw12" class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors text-lg" aria-label="GitHub">
+                        <i class="fa-brands fa-github"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        // Theme Toggle Logic
+        function toggleTheme() {
+            const html = document.documentElement;
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+            } else {
+                html.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+        if (localStorage.theme === 'light' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: light)').matches)) {
+            document.documentElement.classList.remove('dark');
+        } else {
+            document.documentElement.classList.add('dark');
+        }
+    </script>
+</body>
+</html>
