@@ -53,6 +53,23 @@
             max-width: 100%;
             box-sizing: border-box; 
         }
+        img, video {
+    max-width: 100%;
+    height: auto;
+}
+
+/* 2. Fix the text container */
+/* This targets generic containers. If you named your main box "wrapper" or "container", add that class here too, like .container */
+div, section, main, header, footer {
+    max-width: 100%;
+    box-sizing: border-box; /* Keeps padding inside the box */
+}
+
+/* 3. Ensure text wraps and doesn't overflow */
+p, h1, h2, h3, h4, h5, h6, li {
+    overflow-wrap: break-word; /* Breaks long words if they are too wide */
+    max-width: 100%;
+}
         body { transition: background-color 0.5s ease, color 0.5s ease; }
         ::-webkit-scrollbar { width: 10px; }
         ::-webkit-scrollbar-track { background: transparent; }

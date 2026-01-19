@@ -50,24 +50,48 @@
     </script>
 
     <style>
-        /* 2. Global Width Fixes (CSS goes inside these style tags) */
+        /* --- MOBILE FIXES --- */
+        
+        /* 1. The Magic Bullet: Allow flex/grid items to shrink below their content size */
+        * {
+            min-width: 0;
+        }
+
+        /* 2. Global Resets */
         body, html {
             margin: 0;
             padding: 0;
-            overflow-x: hidden; /* Stops side-to-side scrolling */
+            overflow-x: hidden; /* Stops side-to-side scrolling on the whole page */
             width: 100%;
+            position: relative;
         }
 
-        footer {
-            width: 100%;
+        /* 3. Fluid Images */
+        img, video {
             max-width: 100%;
-            box-sizing: border-box; 
+            height: auto;
+            display: block; /* Removes bottom spacing bugs */
         }
-        body { transition: background-color 0.5s ease, color 0.5s ease; }
+
+        /* 4. Aggressive Word Breaking for Mobile */
+        p, h1, h2, h3, h4, h5, h6, li, span, a {
+            overflow-wrap: anywhere; /* Forces breaks even in long URLs or titles */
+            hyphens: auto;
+        }
+
+        /* 5. Container Constraints */
+        div, section, main, header, footer {
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+
+        /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 10px; }
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: #D1D5DB; border-radius: 10px; border: 2px solid #F0EFEA; }
         .dark ::-webkit-scrollbar-thumb { background: #3F3F46; border: 2px solid #18181B; }
+        
+        body { transition: background-color 0.5s ease, color 0.5s ease; }
     </style>
 </head>
 <body class="bg-cream dark:bg-dark-bg text-gray-800 dark:text-gray-200 font-sans selection:bg-gray-200 dark:selection:bg-gray-700 flex flex-col min-h-screen transition-colors duration-500">
@@ -100,45 +124,47 @@
     </div>
 
     <nav class="fixed top-4 left-0 right-0 z-50 px-4 md:px-8">
-        <div class="max-w-7xl mx-auto bg-surface/80 dark:bg-dark-surface/80 backdrop-blur-md rounded-2xl shadow-soft px-6 py-4 flex justify-between items-center border border-gray-100 dark:border-gray-700 transition-all duration-500">
-            <div class="flex items-center gap-3 cursor-pointer" onclick="window.location.href='index.html'">
+        <div class="max-w-7xl mx-auto bg-surface/80 dark:bg-dark-surface/80 backdrop-blur-md rounded-2xl shadow-soft px-4 md:px-6 py-4 flex justify-between items-center border border-gray-100 dark:border-gray-700 transition-all duration-500">
+            <div class="flex items-center gap-3 cursor-pointer shrink-0" onclick="window.location.href='index.html'">
                 <div class="bg-gray-100 dark:bg-gray-700 p-2 rounded-xl">
                     <i data-lucide="arrow-left" class="text-gray-900 dark:text-white w-5 h-5"></i>
                 </div>
                 <span class="font-bold text-gray-900 dark:text-white text-sm">Back to Home</span>
             </div>
             
-            <button onclick="toggleTheme()" class="p-2.5 rounded-xl bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+            <button onclick="toggleTheme()" class="p-2.5 rounded-xl bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors shrink-0">
                 <i class="fa-solid fa-sun hidden dark:block text-sm"></i>
                 <i class="fa-solid fa-moon block dark:hidden text-sm"></i>
             </button>
         </div>
     </nav>
 
-    <main id="main-content" class="pt-32 pb-20 px-4 md:px-8 max-w-7xl mx-auto flex-grow opacity-0 transition-opacity duration-500">
+    <!-- Removed overflow-hidden from here to prevent text clipping -->
+    <main id="main-content" class="pt-32 pb-20 px-4 md:px-8 max-w-7xl mx-auto flex-grow opacity-0 transition-opacity duration-500 w-full">
         
         <header class="mb-12">
-            <div id="p-category" class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 text-xs font-bold uppercase tracking-wider mb-6">
+            <!-- Added flex-wrap to prevent category blowout -->
+            <div id="p-category" class="inline-flex flex-wrap items-center gap-2 px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 text-xs font-bold uppercase tracking-wider mb-6">
             </div>
-            <h1 id="p-title" class="text-5xl md:text-7xl font-bold text-gray-900 dark:text-white mb-8 tracking-tight">
+            <h1 id="p-title" class="text-4xl md:text-5xl lg:text-7xl font-bold text-gray-900 dark:text-white mb-8 tracking-tight break-words">
             </h1>
             
             <div class="grid grid-cols-2 md:grid-cols-4 gap-6 border-y border-gray-200 dark:border-gray-700 py-6">
-                <div>
+                <div class="min-w-0"> <!-- min-w-0 allows truncation -->
                     <span class="text-xs font-bold uppercase text-gray-400 dark:text-gray-500 tracking-wider block mb-1">Client</span>
-                    <span id="p-client" class="text-gray-900 dark:text-white font-medium"></span>
+                    <span id="p-client" class="text-gray-900 dark:text-white font-medium block"></span>
                 </div>
-                <div>
+                <div class="min-w-0">
                     <span class="text-xs font-bold uppercase text-gray-400 dark:text-gray-500 tracking-wider block mb-1">Role</span>
-                    <span id="p-role" class="text-gray-900 dark:text-white font-medium"></span>
+                    <span id="p-role" class="text-gray-900 dark:text-white font-medium block"></span>
                 </div>
-                <div>
+                <div class="min-w-0">
                     <span class="text-xs font-bold uppercase text-gray-400 dark:text-gray-500 tracking-wider block mb-1">Year</span>
-                    <span id="p-year" class="text-gray-900 dark:text-white font-medium"></span>
+                    <span id="p-year" class="text-gray-900 dark:text-white font-medium block"></span>
                 </div>
-                <div>
+                <div class="min-w-0">
                     <span class="text-xs font-bold uppercase text-gray-400 dark:text-gray-500 tracking-wider block mb-1">Deliverables</span>
-                    <span id="p-deliverables" class="text-gray-900 dark:text-white font-medium"></span>
+                    <span id="p-deliverables" class="text-gray-900 dark:text-white font-medium block"></span>
                 </div>
             </div>
         </header>
@@ -152,50 +178,52 @@
                     </div>
                 </div>
             </div>
-            <figcaption id="p-hero-cap" class="text-sm text-gray-500 dark:text-gray-400 text-center italic">
+            <figcaption id="p-hero-cap" class="text-sm text-gray-500 dark:text-gray-400 text-center italic px-4">
             </figcaption>
         </figure>
 
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-y-16 gap-x-12 mb-24">
+        <!-- CHANGED: Switched from GRID to FLEX on mobile to avoid column blowouts -->
+        <div class="flex flex-col md:grid md:grid-cols-12 gap-y-10 md:gap-x-12 mb-24">
             
-            <div class="col-span-12 md:col-span-4">
+            <div class="w-full md:col-span-4">
                 <div class="flex items-baseline gap-3">
                     <span class="text-accent font-mono font-bold text-xl">01</span>
                     <h2 class="text-2xl font-bold text-gray-900 dark:text-white">Background</h2>
                 </div>
             </div>
-            <div class="col-span-12 md:col-span-8">
-                <p id="p-background" class="text-lg text-gray-600 dark:text-gray-300 leading-relaxed"></p>
+            <div class="w-full md:col-span-8">
+                <!-- Added break-words and adjusted text size for mobile -->
+                <p id="p-background" class="text-base md:text-lg text-gray-600 dark:text-gray-300 leading-relaxed break-words"></p>
             </div>
 
-            <div class="col-span-12 md:col-span-4">
+            <div class="w-full md:col-span-4">
                 <div class="flex items-baseline gap-3">
                     <span class="text-accent font-mono font-bold text-xl">02</span>
                     <h2 class="text-2xl font-bold text-gray-900 dark:text-white">The Challenge</h2>
                 </div>
             </div>
-            <div class="col-span-12 md:col-span-8">
-                <p id="p-challenge" class="text-lg text-gray-600 dark:text-gray-300 leading-relaxed"></p>
+            <div class="w-full md:col-span-8">
+                <p id="p-challenge" class="text-base md:text-lg text-gray-600 dark:text-gray-300 leading-relaxed break-words"></p>
             </div>
 
-            <div class="col-span-12 md:col-span-4">
+            <div class="w-full md:col-span-4">
                 <div class="flex items-baseline gap-3">
                     <span class="text-accent font-mono font-bold text-xl">03</span>
                     <h2 class="text-2xl font-bold text-gray-900 dark:text-white">The Solution</h2>
                 </div>
             </div>
-            <div class="col-span-12 md:col-span-8">
-                <p id="p-solution" class="text-lg text-gray-600 dark:text-gray-300 leading-relaxed"></p>
+            <div class="w-full md:col-span-8">
+                <p id="p-solution" class="text-base md:text-lg text-gray-600 dark:text-gray-300 leading-relaxed break-words"></p>
             </div>
 
-            <div class="col-span-12 md:col-span-4">
+            <div class="w-full md:col-span-4">
                 <div class="flex items-baseline gap-3">
                     <span class="text-accent font-mono font-bold text-xl">04</span>
                     <h2 class="text-2xl font-bold text-gray-900 dark:text-white">The Result</h2>
                 </div>
             </div>
-            <div class="col-span-12 md:col-span-8">
-                <p id="p-result" class="text-lg text-gray-600 dark:text-gray-300 leading-relaxed"></p>
+            <div class="w-full md:col-span-8">
+                <p id="p-result" class="text-base md:text-lg text-gray-600 dark:text-gray-300 leading-relaxed break-words"></p>
             </div>
 
         </div>
@@ -203,11 +231,12 @@
         <div id="p-gallery" class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
         </div>
 
-        <div class="border-t border-gray-200 dark:border-gray-700 pt-12 flex justify-between items-center">
+        <!-- Modified footer to stack on mobile to prevent overflow -->
+        <div class="border-t border-gray-200 dark:border-gray-700 pt-12 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
             <span class="text-gray-500 dark:text-gray-400 text-sm font-medium">Next Project</span>
-            <a id="p-next-link" href="#" class="group flex items-center gap-4 text-xl md:text-3xl font-bold text-gray-900 dark:text-white hover:text-success transition-colors">
-                <span id="p-next-title">Next Project Name</span>
-                <i data-lucide="arrow-right" class="w-6 h-6 md:w-8 md:h-8 group-hover:translate-x-2 transition-transform"></i>
+            <a id="p-next-link" href="#" class="group flex items-center gap-4 text-xl md:text-3xl font-bold text-gray-900 dark:text-white hover:text-success transition-colors w-full md:w-auto">
+                <span id="p-next-title" class="break-words">Next Project Name</span>
+                <i data-lucide="arrow-right" class="w-6 h-6 md:w-8 md:h-8 group-hover:translate-x-2 transition-transform shrink-0"></i>
             </a>
         </div>
 
@@ -238,7 +267,7 @@
 
     <footer class="w-full bg-surface dark:bg-dark-surface border-t border-gray-200 dark:border-gray-700 py-8 px-4 md:px-8 mt-auto">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-sm">
-            <div class="text-gray-500 dark:text-gray-400">&copy; 2025 Oliver T. Williams.</div>
+            <div class="text-gray-500 dark:text-gray-400 text-center md:text-left">&copy; 2025 Oliver T. Williams.</div>
             <div class="flex items-center gap-6">
                 <a href="mailto:oliver_tw@icloud.com" class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white font-medium transition-colors">oliver_tw@icloud.com</a>
                 <div class="flex items-center gap-4">
