@@ -2,7 +2,8 @@
 <html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- MODIFIED: Fixed viewport width to force desktop view on mobile -->
+    <meta name="viewport" content="width=1280">
     <title>Resume | Oliver T. Williams</title>
     
     <meta name="description" content="Resume of Oliver T. Williams. Graphic Designer and Data Analyst specializing in branding, visual strategy, and predictive modeling.">
@@ -57,84 +58,76 @@
     </script>
 
     <style>
-        /* 2. Global Width Fixes (CSS goes inside these style tags) */
+        /* MODIFIED: Hard-coded min-width to prevent squishing */
         body, html {
             margin: 0;
             padding: 0;
-            overflow-x: hidden; /* Stops side-to-side scrolling */
             width: 100%;
+            min-width: 1024px; /* Forces horizontal scrolling if viewport tag fails */
         }
+        
         img, video {
-    max-width: 100%;
-    height: auto;
-}
-
-/* 2. Fix the text container */
-/* This targets generic containers. If you named your main box "wrapper" or "container", add that class here too, like .container */
-div, section, main, header, footer {
-    max-width: 100%;
-    box-sizing: border-box; /* Keeps padding inside the box */
-}
-
-/* 3. Ensure text wraps and doesn't overflow */
-p, h1, h2, h3, h4, h5, h6, li {
-    overflow-wrap: break-word; /* Breaks long words if they are too wide */
-    max-width: 100%;
-}
-
-        footer {
-            width: 100%;
             max-width: 100%;
+            height: auto;
+        }
+
+        div, section, main, header, footer {
             box-sizing: border-box; 
         }
+
+        p, h1, h2, h3, h4, h5, h6, li {
+            overflow-wrap: break-word; 
+        }
+
         body { transition: background-color 0.5s ease, color 0.5s ease; }
+        
+        /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 10px; }
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: #D1D5DB; border-radius: 10px; border: 2px solid #F0EFEA; }
         .dark ::-webkit-scrollbar-thumb { background: #3F3F46; border: 2px solid #18181B; }
         
-@media print {
-    @page {
-        margin: 0; 
-        size: auto; 
-    }
+        @media print {
+            @page {
+                margin: 0; 
+                size: auto; 
+            }
 
-    body {
-        background-color: white;
-        color: black;
-        margin: 1cm; 
-        
-        zoom: 90%; 
-        
-        -webkit-print-color-adjust: exact; 
-        print-color-adjust: exact;
-    }
+            body {
+                background-color: white;
+                color: black;
+                margin: 1cm; 
+                zoom: 90%; 
+                min-width: 0; /* Reset for print */
+                -webkit-print-color-adjust: exact; 
+                print-color-adjust: exact;
+            }
 
-    nav, button, footer { 
-        display: none !important; 
-    }
+            nav, button, footer { 
+                display: none !important; 
+            }
 
-    .print-container {
-        box-shadow: none;
-        border: none;
-        padding: 0;
-        margin: 0 auto; 
-        width: 100%;
-        max-width: 100%;
-    }
+            .print-container {
+                box-shadow: none;
+                border: none;
+                padding: 0;
+                margin: 0 auto; 
+                width: 100%;
+                max-width: 100%;
+            }
 
-    a {
-        text-decoration: none;
-        color: black;
-    }
-}
+            a {
+                text-decoration: none;
+                color: black;
+            }
+        }
     </style>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body class="bg-cream dark:bg-dark-bg text-gray-800 dark:text-gray-200 font-sans selection:bg-gray-200 dark:selection:bg-gray-700 flex flex-col min-h-screen transition-colors duration-500">
 
-    <nav class="fixed top-4 left-0 right-0 z-50 px-4 md:px-8 print:hidden">
+    <nav class="fixed top-4 left-0 right-0 z-50 px-8 print:hidden">
         <div class="max-w-7xl mx-auto bg-surface/80 dark:bg-dark-surface/80 backdrop-blur-md rounded-2xl shadow-soft px-6 py-4 flex justify-between items-center border border-gray-100 dark:border-gray-700 transition-all duration-500">
             <div class="flex items-center gap-3 cursor-pointer" onclick="window.location.href='index.html'">
                 <div class="bg-gray-100 dark:bg-gray-700 p-2 rounded-xl">
@@ -144,7 +137,7 @@ p, h1, h2, h3, h4, h5, h6, li {
             </div>
             
             <div class="flex items-center gap-4">
-                <button onclick="window.print()" class="hidden md:flex items-center gap-2 text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors">
+                <button onclick="window.print()" class="flex items-center gap-2 text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors">
                     <i class="fa-solid fa-print"></i>
                     Print / Save PDF
                 </button>
@@ -156,32 +149,33 @@ p, h1, h2, h3, h4, h5, h6, li {
         </div>
     </nav>
 
-    <main class="pt-32 pb-20 px-4 md:px-8 flex-grow flex justify-center mb-20"> 
+    <main class="pt-32 pb-20 px-8 flex-grow flex justify-center mb-20"> 
         
-        <div class="print-container w-full max-w-[1000px] bg-white dark:bg-dark-surface p-8 md:p-12 lg:p-16 rounded-3xl shadow-paper border border-gray-100 dark:border-gray-700 transition-colors duration-500">
+        <div class="print-container w-full max-w-[1000px] bg-white dark:bg-dark-surface p-16 rounded-3xl shadow-paper border border-gray-100 dark:border-gray-700 transition-colors duration-500">
             
             <header class="-mt-6 mb-8 flex flex-col items-center text-center">
-                <h1 class="text-4xl md:text-6xl font-extrabold text-gray-900 dark:text-white tracking-tight leading-none mb-4">
+                <h1 class="text-6xl font-extrabold text-gray-900 dark:text-white tracking-tight leading-none mb-4">
                     OLIVER T. WILLIAMS
                 </h1>
-                <div class="flex flex-col md:flex-row md:items-center justify-center gap-2 md:gap-6 text-sm font-medium text-gray-600 dark:text-gray-300">
+                <div class="flex flex-row items-center justify-center gap-6 text-sm font-medium text-gray-600 dark:text-gray-300">
                     <a href="tel:3179148047" class="hover:text-success transition-colors flex items-center gap-2 justify-center">
                         <i class="fa-solid fa-phone text-xs"></i> 317-914-8047
                     </a>
-                    <span class="hidden md:inline text-gray-300 dark:text-gray-600">|</span>
+                    <span class="inline text-gray-300 dark:text-gray-600">|</span>
                     <a href="mailto:oliver_tw@icloud.com" class="hover:text-success transition-colors flex items-center gap-2 justify-center">
                         <i class="fa-solid fa-envelope text-xs"></i> oliver_tw@icloud.com
                     </a>
-                    <span class="hidden md:inline text-gray-300 dark:text-gray-600">|</span>
+                    <span class="inline text-gray-300 dark:text-gray-600">|</span>
                     <a href="https://olivertwilliams.com" target="_blank" class="hover:text-success transition-colors flex items-center gap-2 justify-center">
                         <i class="fa-solid fa-globe text-xs"></i> olivertwilliams.com
                     </a>
                 </div>
             </header>
 
-            <div class="grid grid-cols-1 md:grid-cols-12 gap-12">
+            <!-- MODIFIED: Removed responsive prefixes (md:) to lock grid layout -->
+            <div class="grid grid-cols-12 gap-12">
                 
-                <aside class="col-span-1 md:col-span-4 space-y-12">
+                <aside class="col-span-4 space-y-12">
                     
                     <section>
                         <h3 class="text-xs font-bold uppercase tracking-widest text-gray-400 dark:text-gray-500 mb-4 border-b border-gray-200 dark:border-gray-700 pb-2">Profile</h3>
@@ -235,7 +229,7 @@ p, h1, h2, h3, h4, h5, h6, li {
 
                 </aside>
 
-                <div class="col-span-1 md:col-span-8 space-y-12">
+                <div class="col-span-8 space-y-12">
                     
                     <section>
                         <h3 class="text-xs font-bold uppercase tracking-widest text-gray-400 dark:text-gray-500 mb-6 border-b border-gray-200 dark:border-gray-700 pb-2">Job Experience</h3>
@@ -313,8 +307,8 @@ p, h1, h2, h3, h4, h5, h6, li {
         </div>
     </main>
 
-    <footer class="w-full bg-white dark:bg-dark-surface border-t border-gray-200 dark:border-gray-700 py-8 px-4 md:px-8 mt-auto print:hidden">
-        <div class="max-w-[1000px] mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-sm">
+    <footer class="w-full bg-white dark:bg-dark-surface border-t border-gray-200 dark:border-gray-700 py-8 px-8 mt-auto print:hidden">
+        <div class="max-w-[1000px] mx-auto flex flex-row justify-between items-center gap-4 text-sm">
             <div class="text-gray-500 dark:text-gray-400">
                 &copy; 2025 Oliver T. Williams.
             </div>
@@ -324,7 +318,7 @@ p, h1, h2, h3, h4, h5, h6, li {
                     <a href="mailto:oliver_tw@icloud.com" class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white font-medium transition-colors">oliver_tw@icloud.com</a>
                     <span class="text-gray-300 dark:text-gray-700">•</span>
                     <span class="text-gray-600 dark:text-gray-400 font-medium">+1 (317) 914-8047</span>
-                    <span class="text-gray-300 dark:text-gray-700 hidden md:inline">•</span>
+                    <span class="text-gray-300 dark:text-gray-700 inline">•</span>
                 </div>
 
                 <div class="flex items-center gap-4">
@@ -343,7 +337,6 @@ p, h1, h2, h3, h4, h5, h6, li {
     </footer>
 
     <script>
-        
         function toggleTheme() {
             const html = document.documentElement;
             if (html.classList.contains('dark')) {
