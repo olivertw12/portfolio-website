@@ -5,14 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DMARC Analysis | Oliver Williams</title>
 
-    <!-- Default / Light Mode Icon -->
-<link rel="icon" href="images/favicon-light.png" media="(prefers-color-scheme: light)">
-
-<!-- Dark Mode Icon -->
-<link rel="icon" href="images/favicon-dark.png" media="(prefers-color-scheme: dark)">
-
-<!-- Fallback for older browsers -->
-<link rel="icon" href="images/favicon-light.png">
+    <link rel="icon" href="images/favicon-dark.png" media="(prefers-color-scheme: light)">
+    <link rel="icon" href="images/favicon-light.png" media="(prefers-color-scheme: dark)">
+    <link rel="icon" href="images/favicon-dark.png">
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -49,52 +44,27 @@
     </script>
 
     <style>
-        /* 2. Global Width Fixes (CSS goes inside these style tags) */
-        body, html {
-            margin: 0;
-            padding: 0;
-            overflow-x: hidden; /* Stops side-to-side scrolling */
-            width: 100%;
-        }
-
-        footer {
-            width: 100%;
-            max-width: 100%;
-            box-sizing: border-box; 
-        }
-        img, video {
-    max-width: 100%;
-    height: auto;
-}
-
-/* 2. Fix the text container */
-/* This targets generic containers. If you named your main box "wrapper" or "container", add that class here too, like .container */
-div, section, main, header, footer {
-    max-width: 100%;
-    box-sizing: border-box; /* Keeps padding inside the box */
-}
-
-/* 3. Ensure text wraps and doesn't overflow */
-p, h1, h2, h3, h4, h5, h6, li {
-    overflow-wrap: break-word; /* Breaks long words if they are too wide */
-    max-width: 100%;
-}
+        body, html { margin: 0; padding: 0; overflow-x: hidden; width: 100%; }
+        footer { width: 100%; max-width: 100%; box-sizing: border-box; }
+        img, video { max-width: 100%; height: auto; }
+        div, section, main, header, footer { max-width: 100%; box-sizing: border-box; }
+        p, h1, h2, h3, h4, h5, h6, li { overflow-wrap: break-word; max-width: 100%; }
         body { transition: background-color 0.5s ease, color 0.5s ease; }
         ::-webkit-scrollbar { width: 10px; }
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: #D1D5DB; border-radius: 10px; border: 2px solid #F0EFEA; }
         .dark ::-webkit-scrollbar-thumb { background: #3F3F46; border: 2px solid #18181B; }
         
-        /* Syntax highlighting simulation for code blocks */
-        .token-keyword { color: #c678dd; }
-        .token-function { color: #61afef; }
-        .token-string { color: #98c379; }
-        .token-comment { color: #7f848e; font-style: italic; }
+        /* Simple Syntax Highlighting for R */
+        .token-func { color: #61afef; } /* Blue */
+        .token-str { color: #98c379; }  /* Green */
+        .token-kw { color: #c678dd; }   /* Purple */
+        .token-num { color: #d19a66; }  /* Orange */
+        .token-comment { color: #7f848e; font-style: italic; } /* Grey */
     </style>
 </head>
 <body class="bg-cream dark:bg-dark-bg text-gray-800 dark:text-gray-200 font-sans selection:bg-gray-200 dark:selection:bg-gray-700 flex flex-col min-h-screen transition-colors duration-500">
 
-    <!-- NAVIGATION -->
     <nav class="fixed top-4 left-0 right-0 z-50 px-4 md:px-8">
         <div class="max-w-7xl mx-auto bg-surface/80 dark:bg-dark-surface/80 backdrop-blur-md rounded-2xl shadow-soft px-6 py-4 flex justify-between items-center border border-gray-100 dark:border-gray-700 transition-all duration-500">
             <div class="flex items-center gap-3 cursor-pointer" onclick="window.location.href='index.html'">
@@ -111,10 +81,8 @@ p, h1, h2, h3, h4, h5, h6, li {
         </div>
     </nav>
 
-    <!-- CONTENT WRAPPER -->
     <main class="pt-32 pb-20 px-4 md:px-8 max-w-7xl mx-auto flex-grow">
         
-        <!-- PROJECT HEADER -->
         <header class="mb-12">
             <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-xs font-bold uppercase tracking-wider mb-6">
                 Data Pipeline & Modeling
@@ -123,7 +91,6 @@ p, h1, h2, h3, h4, h5, h6, li {
                 DMARC Network Analysis
             </h1>
             
-            <!-- META DATA GRID -->
             <div class="grid grid-cols-2 md:grid-cols-4 gap-6 border-y border-gray-200 dark:border-gray-700 py-6">
                 <div>
                     <span class="text-xs font-bold uppercase text-gray-400 dark:text-gray-500 tracking-wider block mb-1">Organization</span>
@@ -144,264 +111,275 @@ p, h1, h2, h3, h4, h5, h6, li {
             </div>
         </header>
 
-        <!-- INTRO NARRATIVE -->
         <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-20">
-            <div class="col-span-12 md:col-span-8 md:col-start-3 text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
-                <!-- NDA ALERT -->
-                <div class="bg-gray-100 dark:bg-gray-800 border-l-4 border-gray-400 dark:border-gray-600 p-4 mb-8 rounded-r-lg">
-                    <div class="flex items-center gap-2 text-sm font-bold text-gray-900 dark:text-white mb-1">
-                        <i data-lucide="lock" class="w-4 h-4"></i>
-                        Confidentiality Notice
-                    </div>
-                    <p class="text-sm text-gray-500 dark:text-gray-400">
-                        Specific datasets, statistical outcomes, and internal visualizations have been redacted from this case study in compliance with a Non-Disclosure Agreement (NDA). This page focuses on the technical pipeline, code structure, and analytical methodology.
-                    </p>
-                </div>
-
+            <div class="col-span-12 md:col-span-12 text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
                 <p class="mb-6">
-                    <strong class="text-gray-900 dark:text-white">The Challenge:</strong> The DMARC Food Pantry Network generates a massive dataset of transactional visitor logs. The data was unstructured and lacked the demographic context needed to make informed decisions about resource allocation.
+                    <strong class="text-gray-900 dark:text-white">The Challenge:</strong> The DMARC Food Pantry Network generates a massive dataset of transactional visitor logs. However, the data was unstructured and lacked the demographic context needed to make informed decisions about resource allocation and new pantry locations.
                 </p>
                 <p>
-                    <strong class="text-gray-900 dark:text-white">The Goal:</strong> To build a reproducible data pipeline that cleans raw logs, enriches them with ACS Census demographics, and utilizes predictive modeling to identify future service gaps without exposing individual user data.
+                    <strong class="text-gray-900 dark:text-white">The Solution:</strong> I built a reproducible data pipeline in R that cleaned raw logs, enriched them with ACS Census demographics, and utilized predictive modeling. This analysis provided DMARC with actionable insights into seasonal trends, shifting demographics, and geographic service gaps.
                 </p>
             </div>
         </div>
 
-        <!-- PHASE 1: DATA CLEANING -->
         <section class="mb-24">
             <div class="flex items-baseline gap-3 mb-6">
                 <span class="text-accent font-mono font-bold text-xl">01</span>
-                <h2 class="text-3xl font-bold text-gray-900 dark:text-white">Standardization Pipeline</h2>
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-white">Data Standardization Pipeline</h2>
             </div>
             
-            <div class="bg-surface dark:bg-dark-surface rounded-3xl p-8 border border-gray-100 dark:border-gray-700 shadow-soft mb-8">
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                    <div>
-                        <p class="text-gray-600 dark:text-gray-300 mb-6">
-                            The foundation of the project was a robust cleaning script designed to handle inconsistencies across 90+ pantry locations. We focused on making the data "universal" for downstream analysis.
-                        </p>
-                        <h4 class="font-bold text-sm uppercase tracking-wider text-gray-900 dark:text-white mb-4">Key Transformation Steps</h4>
-                        <ul class="space-y-3 mb-6 text-sm text-gray-600 dark:text-gray-400">
-                            <li class="flex items-start gap-3">
-                                <span class="bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 px-2 py-0.5 rounded text-xs font-mono font-bold mt-0.5">MUTE</span>
-                                <span>Converted "Date Visited" to <strong>Age</strong> integers.</span>
-                            </li>
-                            <li class="flex items-start gap-3">
-                                <span class="bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 px-2 py-0.5 rounded text-xs font-mono font-bold mt-0.5">ENRICH</span>
-                                <span>Calculated <strong>Income Brackets</strong> relative to Federal Poverty Levels.</span>
-                            </li>
-                            <li class="flex items-start gap-3">
-                                <span class="bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 px-2 py-0.5 rounded text-xs font-mono font-bold mt-0.5">DROP</span>
-                                <span>Removed high-variance columns (Housing Type) to reduce noise.</span>
-                            </li>
-                        </ul>
+            <p class="text-gray-600 dark:text-gray-300 mb-8 w-full text-lg">
+                The first step involved ingesting raw transaction logs from over 90 pantry locations. I wrote a cleaning script to standardize variables, calculate visitor ages from birthdates, and bucket income levels according to Federal Poverty Guidelines. This created a "universal" dataset ready for downstream analysis.
+            </p>
+
+            <div class="bg-surface dark:bg-dark-surface rounded-3xl p-6 border border-gray-100 dark:border-gray-700 shadow-soft">
+                <div class="bg-code rounded-xl overflow-hidden shadow-lg border border-gray-700 flex flex-col w-full">
+                    <div class="flex items-center justify-between px-4 py-2 bg-[#252526] border-b border-gray-700 shrink-0">
+                        <span class="text-xs text-gray-400 font-mono">clean_dmarc_data.R</span>
+                        <div class="flex gap-1.5">
+                            <div class="w-3 h-3 rounded-full bg-red-500/50"></div>
+                            <div class="w-3 h-3 rounded-full bg-yellow-500/50"></div>
+                            <div class="w-3 h-3 rounded-full bg-green-500/50"></div>
+                        </div>
                     </div>
+                    <div class="p-4 overflow-x-auto flex-grow font-mono text-sm text-gray-300">
+<pre><code><span class="token-comment"># 3c: Fixing age from DOB</span>
+data <span class="token-kw">&lt;-</span> data <span class="token-kw">%&gt;%</span> 
+  <span class="token-func">mutate</span>(
+    dob <span class="token-kw">=</span> <span class="token-func">ymd</span>(dob),
+    served_date <span class="token-kw">=</span> <span class="token-func">ymd</span>(served_date),  
+    age <span class="token-kw">=</span> <span class="token-func">round</span>(<span class="token-func">as.numeric</span>(<span class="token-func">difftime</span>(served_date, dob, units <span class="token-kw">=</span> <span class="token-str">"days"</span>)) / <span class="token-num">365.25</span>)
+  ) <span class="token-kw">%&gt;%</span>
+  <span class="token-func">filter</span>(age <span class="token-kw">&gt;</span> <span class="token-num">-0.1</span>, age <span class="token-kw">&lt;=</span> <span class="token-num">102</span>)
+
+<span class="token-comment"># 4a: Binning Income into Federal Poverty Brackets</span>
+data <span class="token-kw">&lt;-</span> data <span class="token-kw">%&gt;%</span>
+  <span class="token-func">mutate</span>(
+    fed_bracket <span class="token-kw">=</span> <span class="token-func">case_when</span>(
+      poverty_level <span class="token-kw">==</span> <span class="token-num">0</span> <span class="token-kw">~</span> <span class="token-str">"0"</span>,
+      poverty_level <span class="token-kw">&lt;=</span> <span class="token-num">25</span> <span class="token-kw">~</span> <span class="token-str">"0 - 25"</span>,
+      poverty_level <span class="token-kw">&lt;=</span> <span class="token-num">50</span> <span class="token-kw">~</span> <span class="token-str">"25 - 50"</span>,
+      poverty_level <span class="token-kw">&lt;=</span> <span class="token-num">100</span> <span class="token-kw">~</span> <span class="token-str">"50 - 100"</span>,
+      TRUE <span class="token-kw">~</span> <span class="token-str">"Over 100"</span>
+    )
+  )</code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-24">
+            <div class="flex items-baseline gap-3 mb-6">
+                <span class="text-accent font-mono font-bold text-xl">02</span>
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-white">Geographic Visit Density</h2>
+            </div>
+            
+            <p class="text-gray-600 dark:text-gray-300 mb-8 w-full text-lg">
+                I utilized Leaflet to map the density of repeat visitors across Central Iowa. The analysis revealed that while Des Moines proper has high engagement (up to 8.2% of the population in certain zip codes), there is significant variation in the suburbs, with areas like Urbandale and Windsor Heights showing distinct utilization patterns.
+            </p>
+
+            <div class="bg-surface dark:bg-dark-surface rounded-3xl p-6 border border-gray-100 dark:border-gray-700 shadow-soft">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                     
-                    <!-- Code Snippet -->
-                    <div class="bg-code rounded-xl overflow-hidden shadow-lg border border-gray-700 flex flex-col h-full">
+                    <div class="bg-code rounded-xl overflow-hidden shadow-lg border border-gray-700 flex flex-col h-full min-h-[300px]">
                         <div class="flex items-center justify-between px-4 py-2 bg-[#252526] border-b border-gray-700 shrink-0">
-                            <span class="text-xs text-gray-400 font-mono">clean_dmarc_data.R</span>
+                            <span class="text-xs text-gray-400 font-mono">zip_map_final.R</span>
                             <div class="flex gap-1.5">
                                 <div class="w-3 h-3 rounded-full bg-red-500/50"></div>
                                 <div class="w-3 h-3 rounded-full bg-yellow-500/50"></div>
                                 <div class="w-3 h-3 rounded-full bg-green-500/50"></div>
                             </div>
                         </div>
-                        <div class="p-4 overflow-x-auto flex-grow">
-<pre><code class="text-sm font-mono text-gray-300">
-<span class="token-comment"># Converting Birthdate to Age for Trend Analysis</span>
-df <span class="token-keyword">&lt;-</span> df <span class="token-keyword">%&gt;%</span>
-  mutate(Age = as.numeric(difftime(Sys.Date(), DOB, units = <span class="token-string">"weeks"</span>)) / 52.25) <span class="token-keyword">%&gt;%</span>
-  filter(Age > 0 & Age < 110) <span class="token-comment"># Remove outliers</span>
-
-<span class="token-comment"># Create Income Brackets based on Federal Poverty Levels</span>
-df <span class="token-keyword">&lt;-</span> df <span class="token-keyword">%&gt;%</span>
-  mutate(Poverty_Level = case_when(
-    Income < 15000 ~ <span class="token-string">"Extremely Low"</span>,
-    Income >= 15000 & Income < 30000 ~ <span class="token-string">"Low"</span>,
-    TRUE ~ <span class="token-string">"Moderate/High"</span>
-  ))
-</code></pre>
+                        <div class="p-4 overflow-x-auto flex-grow font-mono text-sm text-gray-300">
+<pre><code><span class="token-comment"># Create the Leaflet map</span>
+leaflet_map <span class="token-kw">&lt;-</span> <span class="token-func">leaflet</span>(iowa_map_data) <span class="token-kw">%&gt;%</span>
+  
+  <span class="token-comment"># Add zip code polygons</span>
+  <span class="token-func">addPolygons</span>(
+    fillColor <span class="token-kw">=</span> <span class="token-kw">~</span><span class="token-func">pal</span>(individual_density <span class="token-kw">*</span> <span class="token-num">100</span>), 
+    color <span class="token-kw">=</span> <span class="token-str">"grey80"</span>,
+    weight <span class="token-kw">=</span> <span class="token-num">0.4</span>,
+    opacity <span class="token-kw">=</span> <span class="token-num">1</span>,
+    fillOpacity <span class="token-kw">=</span> <span class="token-num">0.3</span>,
+    label <span class="token-kw">=</span> <span class="token-kw">~</span><span class="token-func">paste0</span>(
+      <span class="token-func">ifelse</span>(individual_density <span class="token-kw">&gt;</span> <span class="token-num">0</span>,
+             <span class="token-func">sprintf</span>(<span class="token-str">"%.1f%%"</span>, individual_density <span class="token-kw">*</span> <span class="token-num">100</span>),
+             <span class="token-str">"No Data"</span>)
+    )
+  ) <span class="token-kw">%&gt;%</span>
+  <span class="token-func">addProviderTiles</span>(providers<span class="token-kw">$</span>CartoDB.Positron)</code></pre>
                         </div>
                     </div>
+
+                    <div class="relative bg-gray-100 dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 flex flex-col items-center justify-center min-h-[300px] overflow-hidden group">
+                        <img src="images/dmarc1.png" alt="Visitor Density Map" class="w-full h-auto object-contain rounded-xl shadow-sm">
+                    </div>
+
                 </div>
             </div>
         </section>
 
-        <!-- PHASE 2: GEOSPATIAL ANALYSIS -->
-        <section class="mb-24">
-            <div class="flex items-baseline gap-3 mb-6">
-                <span class="text-accent font-mono font-bold text-xl">02</span>
-                <h2 class="text-3xl font-bold text-gray-900 dark:text-white">Geospatial Merge Strategy</h2>
-            </div>
-
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-                <div class="col-span-12 lg:col-span-5 order-2 lg:order-1">
-                    <p class="text-gray-600 dark:text-gray-300 mb-6">
-                        We needed to identify "At-Risk" zones—areas with high poverty density but low resource availability. To do this, we architected a merge between internal DMARC data and external ACS Census data.
-                    </p>
-                    <p class="text-gray-600 dark:text-gray-300 mb-6">
-                        By joining datasets on <strong>Zip Code</strong> keys, we calculated a "Pantry Density" score. This allowed us to mathematically pinpoint specific neighborhoods (redacted) that were under-served despite having high visitor rates.
-                    </p>
-                    
-                    <div class="bg-gray-100 dark:bg-dark-surface p-6 rounded-2xl border border-gray-200 dark:border-gray-700">
-                        <h4 class="font-bold text-sm uppercase tracking-wider text-gray-500 mb-4">Zip Code Grouping Logic</h4>
-                        <div class="space-y-4">
-                            <div>
-                                <span class="text-sm font-bold text-gray-900 dark:text-white">Core Urban</span>
-                                <p class="text-xs text-gray-500">Filtered for population density > 4,000/sq mi</p>
-                            </div>
-                            <div>
-                                <span class="text-sm font-bold text-gray-900 dark:text-white">Suburban Ring</span>
-                                <p class="text-xs text-gray-500">Filtered for residential zoning & distance > 5mi from center</p>
-                            </div>
-                            <div>
-                                <span class="text-sm font-bold text-gray-900 dark:text-white">Rural Satellite</span>
-                                <p class="text-xs text-gray-500">Filtered for low pantry density index</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="col-span-12 lg:col-span-7 order-1 lg:order-2">
-                    <!-- LOGIC FLOW VISUALIZATION (Replacing Map) -->
-                    <div class="w-full aspect-video bg-gray-50 dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 flex flex-col items-center justify-center p-8 relative overflow-hidden">
-                        
-                        <!-- Background Grid -->
-                        <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(#3B82F6 1px, transparent 1px); background-size: 20px 20px;"></div>
-
-                        <!-- Diagram -->
-                        <div class="flex items-center gap-4 w-full justify-center relative z-10">
-                            <!-- Input 1 -->
-                            <div class="flex flex-col items-center">
-                                <div class="w-24 h-24 bg-white dark:bg-gray-700 rounded-xl border border-gray-300 dark:border-gray-600 flex items-center justify-center shadow-lg mb-3">
-                                    <i data-lucide="database" class="w-8 h-8 text-blue-500"></i>
-                                </div>
-                                <span class="text-xs font-bold text-gray-500 uppercase">DMARC Logs</span>
-                            </div>
-
-                            <i data-lucide="plus" class="text-gray-400"></i>
-
-                            <!-- Input 2 -->
-                            <div class="flex flex-col items-center">
-                                <div class="w-24 h-24 bg-white dark:bg-gray-700 rounded-xl border border-gray-300 dark:border-gray-600 flex items-center justify-center shadow-lg mb-3">
-                                    <i data-lucide="globe" class="w-8 h-8 text-green-500"></i>
-                                </div>
-                                <span class="text-xs font-bold text-gray-500 uppercase">ACS Census</span>
-                            </div>
-
-                            <i data-lucide="arrow-right" class="text-gray-400"></i>
-
-                            <!-- Output -->
-                            <div class="flex flex-col items-center">
-                                <div class="w-24 h-24 bg-blue-500 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/20 mb-3">
-                                    <i data-lucide="map-pin" class="w-8 h-8 text-white"></i>
-                                </div>
-                                <span class="text-xs font-bold text-blue-600 dark:text-blue-400 uppercase">Gap Analysis</span>
-                            </div>
-                        </div>
-
-                        <div class="absolute bottom-4 right-4 bg-white/50 dark:bg-black/50 backdrop-blur px-3 py-1 rounded border border-gray-200 dark:border-gray-700">
-                            <span class="text-xs font-mono text-gray-500 dark:text-gray-400">Methodology: Inner Join on Zip Code</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- PHASE 3: PREDICTIVE MODELING -->
         <section class="mb-24">
             <div class="flex items-baseline gap-3 mb-6">
                 <span class="text-accent font-mono font-bold text-xl">03</span>
                 <h2 class="text-3xl font-bold text-gray-900 dark:text-white">Time-Series Forecasting</h2>
             </div>
+            
+            <p class="text-gray-600 dark:text-gray-300 mb-8 w-full text-lg">
+                To help DMARC prepare for future demand, I developed a Poisson regression model combined with Generalized Additive Models (GAMs) to forecast monthly visits. The model accounts for seasonal trends and predicts a continued rise in pantry usage, estimating a new peak of approximately 40,000 monthly visits by late 2025.
+            </p>
 
-            <div class="bg-surface dark:bg-dark-surface rounded-3xl p-8 border border-gray-100 dark:border-gray-700 shadow-soft">
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                    <!-- Model Architecture Card (Replacing Result Chart) -->
-                    <div class="flex flex-col gap-4">
-                        <div class="w-full aspect-[4/3] bg-gray-900 rounded-2xl border border-gray-700 p-6 relative overflow-hidden flex flex-col justify-center">
-                            
-                            <!-- Terminal / Specs Look -->
-                            <div class="font-mono text-sm space-y-4 relative z-10">
-                                <div class="flex justify-between border-b border-gray-700 pb-2">
-                                    <span class="text-gray-400">Model Type</span>
-                                    <span class="text-green-400 font-bold">ARIMA (Auto-Regressive)</span>
-                                </div>
-                                <div class="flex justify-between border-b border-gray-700 pb-2">
-                                    <span class="text-gray-400">Forecast Horizon</span>
-                                    <span class="text-white">12 Months (2025)</span>
-                                </div>
-                                <div class="flex justify-between border-b border-gray-700 pb-2">
-                                    <span class="text-gray-400">Confidence Interval</span>
-                                    <span class="text-white">95%</span>
-                                </div>
-                                <div class="flex justify-between pb-2">
-                                    <span class="text-gray-400">Variables</span>
-                                    <div class="text-right">
-                                        <span class="block text-white text-xs">Visits_Per_Month</span>
-                                        <span class="block text-white text-xs">Demographic_Segment</span>
-                                    </div>
-                                </div>
+            <div class="bg-surface dark:bg-dark-surface rounded-3xl p-6 border border-gray-100 dark:border-gray-700 shadow-soft">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    
+                    <div class="bg-code rounded-xl overflow-hidden shadow-lg border border-gray-700 flex flex-col h-full min-h-[300px]">
+                        <div class="flex items-center justify-between px-4 py-2 bg-[#252526] border-b border-gray-700 shrink-0">
+                            <span class="text-xs text-gray-400 font-mono">predictive_modelling.R</span>
+                            <div class="flex gap-1.5">
+                                <div class="w-3 h-3 rounded-full bg-red-500/50"></div>
+                                <div class="w-3 h-3 rounded-full bg-yellow-500/50"></div>
+                                <div class="w-3 h-3 rounded-full bg-green-500/50"></div>
                             </div>
+                        </div>
+                        <div class="p-4 overflow-x-auto flex-grow font-mono text-sm text-gray-300">
+<pre><code><span class="token-comment"># Fit GLM for visits with seasonal factors</span>
+glm_fit <span class="token-kw">&lt;-</span> <span class="token-func">glm</span>(
+  total_visits <span class="token-kw">~</span> time_index <span class="token-kw">+</span> <span class="token-func">factor</span>(month) <span class="token-kw">+</span> avg_age <span class="token-kw">+</span> avg_household,
+  data <span class="token-kw">=</span> monthly_data,
+  family <span class="token-kw">=</span> <span class="token-func">poisson</span>()
+)
 
-                            <div class="absolute -right-10 -bottom-10 opacity-10">
-                                <i data-lucide="trending-up" class="w-48 h-48 text-white"></i>
-                            </div>
+<span class="token-comment"># Generate forecast with confidence interval</span>
+pred <span class="token-kw">&lt;-</span> <span class="token-func">predict</span>(glm_fit, newdata <span class="token-kw">=</span> future_df, type <span class="token-kw">=</span> <span class="token-str">"link"</span>, se.fit <span class="token-kw">=</span> TRUE)
+future_df <span class="token-kw">&lt;-</span> future_df <span class="token-kw">%&gt;%</span>
+  <span class="token-func">mutate</span>(
+    predicted_visits <span class="token-kw">=</span> <span class="token-func">exp</span>(pred<span class="token-kw">$</span>fit),
+    lower <span class="token-kw">=</span> <span class="token-func">exp</span>(pred<span class="token-kw">$</span>fit <span class="token-kw">-</span> <span class="token-num">1.96</span> <span class="token-kw">*</span> pred<span class="token-kw">$</span>se.fit),
+    upper <span class="token-kw">=</span> <span class="token-func">exp</span>(pred<span class="token-kw">$</span>fit <span class="token-kw">+</span> <span class="token-num">1.96</span> <span class="token-kw">*</span> pred<span class="token-kw">$</span>se.fit)
+  )</code></pre>
                         </div>
                     </div>
 
-                    <div class="flex flex-col justify-center">
-                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Forecasting Demographic Shifts</h3>
-                        <p class="text-gray-600 dark:text-gray-300 mb-6">
-                            When new data arrived later in the semester, we lost zip code granularity but gained longitude/latitude data. We pivoted to analyzing specific demographic segments over time.
-                        </p>
-                        <p class="text-gray-600 dark:text-gray-300 mb-6">
-                            I utilized the `forecast` library in R to train models on 5 years of historical data. The model identified seasonality patterns (winter peaks) and general upward trends for specific sub-groups, allowing DMARC to anticipate staffing needs for the upcoming year.
-                        </p>
-                        
-                        <div class="bg-code rounded-xl overflow-hidden shadow-lg border border-gray-700">
-                            <div class="flex items-center justify-between px-4 py-2 bg-[#252526] border-b border-gray-700">
-                                <span class="text-xs text-gray-400 font-mono">predictive_modelling.R</span>
-                            </div>
-                            <div class="p-4 overflow-x-auto">
-<pre><code class="text-sm font-mono text-gray-300">
-<span class="token-comment"># Time Series Forecasting for 2025</span>
-model <span class="token-keyword">&lt;-</span> auto.arima(visitors_ts)
-forecast_2025 <span class="token-keyword">&lt;-</span> forecast(model, h=12)
-
-<span class="token-comment"># Plotting the prediction structure</span>
-autoplot(forecast_2025) +
-  labs(title=<span class="token-string">"Projected Visitor Volume (Segmented)"</span>, 
-       y=<span class="token-string">"Monthly Visits"</span>)
-</code></pre>
-                            </div>
-                        </div>
+                    <div class="relative bg-gray-100 dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 flex flex-col items-center justify-center min-h-[300px] overflow-hidden group">
+                         <img src="images/dmarc2.png" alt="Predictive Model Graph" class="w-full h-auto object-contain rounded-xl shadow-sm">
                     </div>
+
                 </div>
             </div>
         </section>
 
-        <!-- CTA / FOOTER NAV -->
+        <section class="mb-24">
+            <div class="flex items-baseline gap-3 mb-6">
+                <span class="text-accent font-mono font-bold text-xl">04</span>
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-white">Analyzing Demographic Shifts</h2>
+            </div>
+            
+            <p class="text-gray-600 dark:text-gray-300 mb-8 w-full text-lg">
+                By comparing visitor data from 2018 to 2024, I identified the fastest-growing demographic groups accessing DMARC services. The data shows that Hispanic families (specifically adults and minors below the poverty line without SNAP benefits) have nearly doubled their visit share, rising from roughly 4% to 8% of the total visitor base.
+            </p>
+
+            <div class="bg-surface dark:bg-dark-surface rounded-3xl p-6 border border-gray-100 dark:border-gray-700 shadow-soft">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    
+                    <div class="bg-code rounded-xl overflow-hidden shadow-lg border border-gray-700 flex flex-col h-full min-h-[300px]">
+                        <div class="flex items-center justify-between px-4 py-2 bg-[#252526] border-b border-gray-700 shrink-0">
+                            <span class="text-xs text-gray-400 font-mono">acs_compatible_demographics.R</span>
+                            <div class="flex gap-1.5">
+                                <div class="w-3 h-3 rounded-full bg-red-500/50"></div>
+                                <div class="w-3 h-3 rounded-full bg-yellow-500/50"></div>
+                                <div class="w-3 h-3 rounded-full bg-green-500/50"></div>
+                            </div>
+                        </div>
+                        <div class="p-4 overflow-x-auto flex-grow font-mono text-sm text-gray-300">
+<pre><code><span class="token-comment"># Recode demographics for comparison</span>
+current_recode <span class="token-kw">&lt;-</span> current <span class="token-kw">%&gt;%</span>
+  <span class="token-func">mutate</span>(
+    acs_demo_ext <span class="token-kw">=</span> <span class="token-func">paste</span>(acs_age_group, acs_race, acs_snap, 
+                         acs_poverty, acs_household_structure, sep <span class="token-kw">=</span> <span class="token-str">" | "</span>)
+  )
+
+<span class="token-comment"># Plot top 5 growing visitor types</span>
+top_growth <span class="token-kw">&lt;-</span> type_changes <span class="token-kw">%&gt;%</span>
+  <span class="token-func">slice_max</span>(order_by <span class="token-kw">=</span> change, n <span class="token-kw">=</span> <span class="token-num">5</span>)
+
+<span class="token-func">ggplot</span>(top_growth, <span class="token-func">aes</span>(x <span class="token-kw">=</span> <span class="token-func">reorder</span>(acs_demo_ext, change), y <span class="token-kw">=</span> change)) <span class="token-kw">+</span>
+  <span class="token-func">geom_col</span>() <span class="token-kw">+</span>
+  <span class="token-func">coord_flip</span>()</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="relative bg-gray-100 dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 flex flex-col items-center justify-center min-h-[300px] overflow-hidden group">
+                        <img src="images/dmarc3.png" alt="Demographic Growth Chart" class="w-full h-auto object-contain rounded-xl shadow-sm">
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-24">
+            <div class="flex items-baseline gap-3 mb-6">
+                <span class="text-accent font-mono font-bold text-xl">05</span>
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-white">Strategic Gap Analysis</h2>
+            </div>
+            
+            <p class="text-gray-600 dark:text-gray-300 mb-8 w-full text-lg">
+                Finally, I performed a gap analysis by overlaying ACS Census data onto the pantry network map. I calculated the density of the "Target Demographic" (Hispanic adults, No SNAP, Below Poverty) per zip code. This revealed underserved "hotspots," particularly in the River Bend area, where the target population density is high (approx. 2.8%) but pantry coverage is low.
+            </p>
+
+            <div class="bg-surface dark:bg-dark-surface rounded-3xl p-6 border border-gray-100 dark:border-gray-700 shadow-soft">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    
+                    <div class="bg-code rounded-xl overflow-hidden shadow-lg border border-gray-700 flex flex-col h-full min-h-[300px]">
+                        <div class="flex items-center justify-between px-4 py-2 bg-[#252526] border-b border-gray-700 shrink-0">
+                            <span class="text-xs text-gray-400 font-mono">acs_zipmap.R</span>
+                            <div class="flex gap-1.5">
+                                <div class="w-3 h-3 rounded-full bg-red-500/50"></div>
+                                <div class="w-3 h-3 rounded-full bg-yellow-500/50"></div>
+                                <div class="w-3 h-3 rounded-full bg-green-500/50"></div>
+                            </div>
+                        </div>
+                        <div class="p-4 overflow-x-auto flex-grow font-mono text-sm text-gray-300">
+<pre><code><span class="token-comment"># Calculate Target Group Density</span>
+acs <span class="token-kw">&lt;-</span> acs <span class="token-kw">%&gt;%</span>
+  <span class="token-func">mutate</span>(
+    target_group_count <span class="token-kw">=</span> <span class="token-func">round</span>(
+      total_pop <span class="token-kw">*</span> combined_adult_prop <span class="token-kw">*</span> hispanic_prop <span class="token-kw">*</span> (<span class="token-num">1</span> <span class="token-kw">-</span> snap_rate) <span class="token-kw">*</span> poverty_rate
+    ),
+    target_group_density <span class="token-kw">=</span> target_group_count / total_pop
+  )
+
+<span class="token-comment"># Join with Iowa Zip Shapefiles</span>
+iowa_map_data <span class="token-kw">&lt;-</span> iowa_zips <span class="token-kw">%&gt;%</span>
+  <span class="token-func">left_join</span>(acs, by <span class="token-kw">=</span> <span class="token-func">c</span>(<span class="token-str">"zip"</span> <span class="token-kw">=</span> <span class="token-str">"ZIP"</span>)) <span class="token-kw">%&gt;%</span>
+  <span class="token-func">filter</span>(<span class="token-op">!</span><span class="token-func">is.na</span>(target_group_density))</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="relative bg-gray-100 dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 flex flex-col items-center justify-center min-h-[300px] overflow-hidden group">
+                        <img src="images/dmarc4.png" alt="Target Demographic Map" class="w-full h-auto object-contain rounded-xl shadow-sm">
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
         <div class="border-t border-gray-200 dark:border-gray-700 pt-12 flex justify-between items-center">
             <a href="index.html#data" class="group flex items-center gap-4 text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors">
                 <i data-lucide="arrow-left" class="w-4 h-4 group-hover:-translate-x-1 transition-transform"></i>
                 Back to Data Projects
             </a>
-            <!-- Removed Request Code Samples button -->
         </div>
 
     </main>
 
-    <!-- FOOTER -->
     <footer class="w-full bg-surface dark:bg-dark-surface border-t border-gray-200 dark:border-gray-700 py-8 px-4 md:px-8 mt-auto">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-sm">
             <div class="text-gray-500 dark:text-gray-400">
-                &copy; 2025 Oliver Williams.
+                &copy; 2025 Oliver T. Williams.
             </div>
             
             <div class="flex flex-wrap justify-center items-center gap-6">
-                <!-- Contact Text -->
                 <div class="flex items-center gap-6">
                     <a href="mailto:oliver_tw@icloud.com" class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white font-medium transition-colors">oliver_tw@icloud.com</a>
                     <span class="text-gray-300 dark:text-gray-700">•</span>
@@ -409,7 +387,6 @@ autoplot(forecast_2025) +
                     <span class="text-gray-300 dark:text-gray-700 hidden md:inline">•</span>
                 </div>
 
-                <!-- Social Icons -->
                 <div class="flex items-center gap-4">
                     <a href="https://www.instagram.com/oliver_williams1212/" class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors text-lg" aria-label="Instagram">
                         <i class="fa-brands fa-instagram"></i>
@@ -427,7 +404,6 @@ autoplot(forecast_2025) +
 
     <script>
         lucide.createIcons();
-
         // Theme Toggle Logic
         function toggleTheme() {
             const html = document.documentElement;

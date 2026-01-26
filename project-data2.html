@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Development | Oliver Williams</title>
+
+    <link rel="icon" href="images/favicon-dark.png" media="(prefers-color-scheme: light)">
+    <link rel="icon" href="images/favicon-light.png" media="(prefers-color-scheme: dark)">
+    <link rel="icon" href="images/favicon-dark.png">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        cream: '#F0EFEA',
+                        surface: '#FFFFFF',
+                        'dark-bg': '#18181B',
+                        'dark-surface': '#27272A',
+                        primary: '#111827',
+                        'primary-dark': '#FAFAFA',
+                        success: '#059669',
+                        accent: '#3B82F6',
+                        code: '#1e1e1e',
+                    },
+                    fontFamily: { 
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                    },
+                    borderRadius: { 'xl': '1rem', '2xl': '1.5rem', '3xl': '2rem' },
+                    boxShadow: { 'soft': '0 4px 20px -2px rgba(0, 0, 0, 0.05)' }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body, html { margin: 0; padding: 0; overflow-x: hidden; width: 100%; }
+        footer { width: 100%; max-width: 100%; box-sizing: border-box; }
+        div, section, main, header, footer { max-width: 100%; box-sizing: border-box; }
+        p, h1, h2, h3, h4, h5, h6, li { overflow-wrap: break-word; max-width: 100%; }
+        body { transition: background-color 0.5s ease, color 0.5s ease; }
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #D1D5DB; border-radius: 10px; border: 2px solid #F0EFEA; }
+        .dark ::-webkit-scrollbar-thumb { background: #3F3F46; border: 2px solid #18181B; }
+        
+        /* Syntax Highlighting */
+        .token-tag { color: #e06c75; } 
+        .token-attr { color: #d19a66; } 
+        .token-str { color: #98c379; }  
+        .token-kw { color: #c678dd; }   
+        .token-comment { color: #7f848e; font-style: italic; } 
+    </style>
+</head>
+<body class="bg-cream dark:bg-dark-bg text-gray-800 dark:text-gray-200 font-sans selection:bg-gray-200 dark:selection:bg-gray-700 flex flex-col min-h-screen transition-colors duration-500">
+
+    <nav class="fixed top-4 left-0 right-0 z-50 px-4 md:px-8">
+        <div class="max-w-7xl mx-auto bg-surface/80 dark:bg-dark-surface/80 backdrop-blur-md rounded-2xl shadow-soft px-6 py-4 flex justify-between items-center border border-gray-100 dark:border-gray-700 transition-all duration-500">
+            <div class="flex items-center gap-3 cursor-pointer" onclick="window.location.href='index.html'">
+                <div class="bg-gray-100 dark:bg-gray-700 p-2 rounded-xl">
+                    <i data-lucide="arrow-left" class="text-gray-900 dark:text-white w-5 h-5"></i>
+                </div>
+                <span class="font-bold text-gray-900 dark:text-white text-sm">Back to Home</span>
+            </div>
+            
+            <button onclick="toggleTheme()" class="p-2.5 rounded-xl bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+                <i class="fa-solid fa-sun hidden dark:block text-sm"></i>
+                <i class="fa-solid fa-moon block dark:hidden text-sm"></i>
+            </button>
+        </div>
+    </nav>
+
+    <main class="pt-32 pb-20 px-4 md:px-8 max-w-7xl mx-auto flex-grow">
+        
+        <header class="mb-12">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-xs font-bold uppercase tracking-wider mb-6">
+                Web Development
+            </div>
+            <h1 class="text-5xl md:text-7xl font-bold text-gray-900 dark:text-white mb-8 tracking-tight">
+                Personal Site Build
+            </h1>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 border-y border-gray-200 dark:border-gray-700 py-6">
+                <div>
+                    <span class="text-xs font-bold uppercase text-gray-400 dark:text-gray-500 tracking-wider block mb-1">Project Type</span>
+                    <span class="text-gray-900 dark:text-white font-medium">Static Website</span>
+                </div>
+                <div>
+                    <span class="text-xs font-bold uppercase text-gray-400 dark:text-gray-500 tracking-wider block mb-1">Role</span>
+                    <span class="text-gray-900 dark:text-white font-medium">Development</span>
+                </div>
+                <div>
+                    <span class="text-xs font-bold uppercase text-gray-400 dark:text-gray-500 tracking-wider block mb-1">Stack</span>
+                    <span class="text-gray-900 dark:text-white font-medium">HTML, Tailwind, Git</span>
+                </div>
+                <div>
+                    <span class="text-xs font-bold uppercase text-gray-400 dark:text-gray-500 tracking-wider block mb-1">Deployment</span>
+                    <span class="text-gray-900 dark:text-white font-medium">Cloudflare Pages</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-20">
+            <div class="col-span-12 md:col-span-12 text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+                <p class="mb-6">
+                    <strong class="text-gray-900 dark:text-white">The Goal:</strong> I previously hosted my portfolio on Canva. While it was easy to set up, I found it incredibly restrictive, I couldn't control the details, the code, or the SEO. I also didn't want to pay monthly subscription fees for a simple portfolio site.
+                </p>
+                <p>
+                    <strong class="text-gray-900 dark:text-white">The Solution:</strong> I decided to build a static site from scratch using standard HTML and Tailwind CSS. It was a good opportunity to get more comfortable with code and set up a proper development workflow. Now, I have full control over the domain and hosting without the overhead of a website builder.
+                </p>
+            </div>
+        </div>
+
+        <section class="mb-24">
+            <div class="flex items-baseline gap-3 mb-6">
+                <span class="text-accent font-mono font-bold text-xl">01</span>
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-white">Escaping the "Builder" Trap</h2>
+            </div>
+            
+            <p class="text-gray-600 dark:text-gray-300 mb-8 w-full text-lg">
+                The main driver for this project was cost and flexibility. Website builders are convenient, but they lock you into their ecosystem. By switching to raw HTML, I could create the exact minimalist layout I wanted without fighting against pre-made templates. I used Tailwind CSS to handle the styling because it keeps the CSS file small and easy to manage.
+            </p>
+
+            <div class="bg-surface dark:bg-dark-surface rounded-3xl p-6 border border-gray-100 dark:border-gray-700 shadow-soft">
+                 <div class="bg-code rounded-xl overflow-hidden shadow-lg border border-gray-700 flex flex-col w-full">
+                    <div class="flex items-center justify-between px-4 py-2 bg-[#252526] border-b border-gray-700 shrink-0">
+                        <span class="text-xs text-gray-400 font-mono">tailwind.config.js</span>
+                        <div class="flex gap-1.5">
+                            <div class="w-3 h-3 rounded-full bg-red-500/50"></div>
+                            <div class="w-3 h-3 rounded-full bg-yellow-500/50"></div>
+                            <div class="w-3 h-3 rounded-full bg-green-500/50"></div>
+                        </div>
+                    </div>
+                    <div class="p-4 overflow-x-auto flex-grow font-mono text-sm text-gray-300">
+<pre><code><span class="token-kw">module</span>.exports <span class="token-kw">=</span> {
+  <span class="token-attr">darkMode</span>: <span class="token-str">'class'</span>,
+  <span class="token-attr">theme</span>: {
+    <span class="token-attr">extend</span>: {
+      <span class="token-attr">colors</span>: {
+        <span class="token-comment">// Defining my own simple palette rather than </span>
+        <span class="token-comment">// relying on a builder's preset themes.</span>
+        <span class="token-attr">cream</span>: <span class="token-str">'#F0EFEA'</span>,
+        <span class="token-attr">surface</span>: <span class="token-str">'#FFFFFF'</span>,
+        <span class="token-attr">'dark-bg'</span>: <span class="token-str">'#18181B'</span>,
+      }
+    }
+  }
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-24">
+            <div class="flex items-baseline gap-3 mb-6">
+                <span class="text-accent font-mono font-bold text-xl">02</span>
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-white">The Deployment Workflow</h2>
+            </div>
+            
+            <p class="text-gray-600 dark:text-gray-300 mb-8 w-full text-lg">
+                I wanted the site to be as easy to update as possible. I set up a continuous deployment pipeline using GitHub and Cloudflare Pages. Now, when I want to add a new project or fix a typo, I just edit the code on my laptop and push the changes to the repository. Cloudflare detects the commit and rebuilds the site automatically in seconds.
+            </p>
+
+            <div class="bg-surface dark:bg-dark-surface rounded-3xl p-6 border border-gray-100 dark:border-gray-700 shadow-soft">
+                <div class="bg-code rounded-xl overflow-hidden shadow-lg border border-gray-700 flex flex-col w-full">
+                    <div class="flex items-center justify-between px-4 py-2 bg-[#252526] border-b border-gray-700 shrink-0">
+                        <span class="text-xs text-gray-400 font-mono">Terminal</span>
+                        <div class="flex gap-1.5">
+                            <div class="w-3 h-3 rounded-full bg-red-500/50"></div>
+                            <div class="w-3 h-3 rounded-full bg-yellow-500/50"></div>
+                            <div class="w-3 h-3 rounded-full bg-green-500/50"></div>
+                        </div>
+                    </div>
+                    <div class="p-4 overflow-x-auto flex-grow font-mono text-sm text-gray-300">
+<pre><code><span class="token-comment"># The entire update process takes three commands</span>
+$ git add .
+$ git commit -m "Added new case study"
+$ git push origin main
+
+<span class="token-comment"># ... Cloudflare automatically builds and deploys to https://olivertwilliams.com</span>
+</code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-24">
+            <div class="flex items-baseline gap-3 mb-6">
+                <span class="text-accent font-mono font-bold text-xl">03</span>
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-white">The "One Template" System</h2>
+            </div>
+            
+            <p class="text-gray-600 dark:text-gray-300 mb-8 w-full text-lg">
+                I realized early on that creating a separate HTML file for every new project would be a maintenance nightmare. If I wanted to change the layout, I’d have to edit twenty different files. Instead, I built a single reusable template and a central "database" in JavaScript.
+            </p>
+
+            <div class="bg-surface dark:bg-dark-surface rounded-3xl p-6 border border-gray-100 dark:border-gray-700 shadow-soft">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    
+                    <div class="bg-code rounded-xl overflow-hidden shadow-lg border border-gray-700 flex flex-col h-full min-h-[300px]">
+                        <div class="flex items-center justify-between px-4 py-2 bg-[#252526] border-b border-gray-700 shrink-0">
+                            <span class="text-xs text-gray-400 font-mono">projects.js</span>
+                            <div class="flex gap-1.5">
+                                <div class="w-3 h-3 rounded-full bg-red-500/50"></div>
+                                <div class="w-3 h-3 rounded-full bg-yellow-500/50"></div>
+                                <div class="w-3 h-3 rounded-full bg-green-500/50"></div>
+                            </div>
+                        </div>
+                        <div class="p-4 overflow-x-auto flex-grow font-mono text-sm text-gray-300">
+<pre><code><span class="token-kw">const</span> projects <span class="token-kw">=</span> [
+    {
+        <span class="token-attr">title</span>: <span class="token-str">"Mainframe Studios"</span>,
+        <span class="token-attr">category</span>: <span class="token-str">"Advertising"</span>,
+        <span class="token-attr">desc</span>: <span class="token-str">"Unique typeface and poster..."</span>,
+        <span class="token-attr">image</span>: <span class="token-str">"images/mainframe2.png"</span>,
+        
+        <span class="token-comment">// This link tells the template which data to load</span>
+        <span class="token-attr">link</span>: <span class="token-str">"project.html?id=mainframe"</span>
+    },
+    <span class="token-comment">// ... other projects follow the same structure</span>
+];</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col justify-center text-gray-600 dark:text-gray-300">
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">How It Works</h3>
+                        <p class="mb-4">
+                            This array acts as the central nervous system for the portfolio. When you click a project, you aren't going to a unique page, you are going to a master template (<code>project.html</code>) that checks the URL.
+                        </p>
+                        <p>
+                            It sees <code>?id=mainframe</code>, looks up the corresponding object in this array, and dynamically injects the title, image, and description into the DOM. This means I can add a new case study just by adding one block of text to this file, instead of having to write a new HTML page.
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <div class="border-t border-gray-200 dark:border-gray-700 pt-12 flex justify-between items-center">
+            <a href="index.html" class="group flex items-center gap-4 text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors">
+                <i data-lucide="arrow-left" class="w-4 h-4 group-hover:-translate-x-1 transition-transform"></i>
+                Back to Portfolio
+            </a>
+        </div>
+
+    </main>
+
+    <footer class="w-full bg-surface dark:bg-dark-surface border-t border-gray-200 dark:border-gray-700 py-8 px-4 md:px-8 mt-auto">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-sm">
+            <div class="text-gray-500 dark:text-gray-400">
+                &copy; 2025 Oliver T. Williams.
+            </div>
+            
+            <div class="flex flex-wrap justify-center items-center gap-6">
+                <div class="flex items-center gap-6">
+                    <a href="mailto:oliver_tw@icloud.com" class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white font-medium transition-colors">oliver_tw@icloud.com</a>
+                    <span class="text-gray-300 dark:text-gray-700">•</span>
+                    <span class="text-gray-600 dark:text-gray-400 font-medium">+1 (317) 914-8047</span>
+                    <span class="text-gray-300 dark:text-gray-700 hidden md:inline">•</span>
+                </div>
+
+                <div class="flex items-center gap-4">
+                    <a href="https://www.instagram.com/oliver_williams1212/" class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors text-lg" aria-label="Instagram">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/oliver-t-williams/" class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors text-lg" aria-label="LinkedIn">
+                        <i class="fa-brands fa-linkedin"></i>
+                    </a>
+                    <a href="https://github.com/olivertw12" class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors text-lg" aria-label="GitHub">
+                        <i class="fa-brands fa-github"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+        // Theme Toggle Logic
+        function toggleTheme() {
+            const html = document.documentElement;
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+            } else {
+                html.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+        if (localStorage.theme === 'light' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: light)').matches)) {
+            document.documentElement.classList.remove('dark');
+        } else {
+            document.documentElement.classList.add('dark');
+        }
+    </script>
+</body>
+</html>
+
+```
