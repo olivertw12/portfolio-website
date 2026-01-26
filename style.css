@@ -1,0 +1,71 @@
+/* style.css */
+
+/* 1. Font Imports - MUST BE AT THE VERY TOP */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* 2. Global Resets & Width Fixes */
+body, html {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    width: 100%;
+    transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+/* 3. Typography */
+/* Applies Plus Jakarta Sans globally */
+body {
+    font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+/* Helper for code blocks (used in the Home page code editor) */
+.font-mono {
+    font-family: "JetBrains Mono", monospace;
+}
+
+/* 4. Utilities */
+img, video { 
+    max-width: 100%; 
+    height: auto; 
+}
+
+/* Ensure footer stays contained */
+footer { 
+    width: 100%; 
+    max-width: 100%; 
+    box-sizing: border-box; 
+}
+
+/* Fix generic containers */
+div, section, main, header, footer {
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+/* Ensure text wraps to prevent horizontal scroll */
+p, h1, h2, h3, h4, h5, h6, li {
+    overflow-wrap: break-word;
+    max-width: 100%;
+}
+
+/* 5. Custom Scrollbar */
+::-webkit-scrollbar { width: 10px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #D1D5DB; border-radius: 10px; border: 2px solid #F0EFEA; }
+.dark ::-webkit-scrollbar-thumb { background: #3F3F46; border: 2px solid #18181B; }
+
+/* Hide scrollbar utility */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* 6. Animations & Effects */
+.glass-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+.glass-card:hover { transform: translateY(-4px); box-shadow: 0 10px 30px -4px rgba(0, 0, 0, 0.1); }
+
+@keyframes drawLine {
+    from { width: 0; }
+    to { width: 100%; }
+}
+.animate-draw {
+    animation: drawLine 2s ease-out forwards;
+}
