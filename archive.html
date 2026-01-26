@@ -5,6 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Archive | Oliver T. Williams</title>
     
+    <script>
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
+    
     <link rel="icon" href="images/favicon-dark.png" media="(prefers-color-scheme: light)">
     <link rel="icon" href="images/favicon-light.png" media="(prefers-color-scheme: dark)">
     <link rel="icon" href="images/favicon-dark.png">
@@ -19,7 +27,6 @@
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="tailwind-config.js"></script>
-    
     <link rel="stylesheet" href="style.css">
     
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -46,7 +53,6 @@
     <footer id="footer-placeholder" class="w-full bg-surface dark:bg-dark-surface border-t border-gray-200 dark:border-gray-700 py-8 px-4 md:px-8 mt-auto"></footer>
 
     <script src="components.js"></script>
-
     <script>
         const projects = [
             {

@@ -4,81 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio Development | Oliver Williams</title>
-
+    <script>
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
+    
     <link rel="icon" href="images/favicon-dark.png" media="(prefers-color-scheme: light)">
     <link rel="icon" href="images/favicon-light.png" media="(prefers-color-scheme: dark)">
     <link rel="icon" href="images/favicon-dark.png">
     
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="tailwind-config.js"></script>
+    <link rel="stylesheet" href="style.css">
+
     <script src="https://unpkg.com/lucide@latest"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        cream: '#F0EFEA',
-                        surface: '#FFFFFF',
-                        'dark-bg': '#18181B',
-                        'dark-surface': '#27272A',
-                        primary: '#111827',
-                        'primary-dark': '#FAFAFA',
-                        success: '#059669',
-                        accent: '#3B82F6',
-                        code: '#1e1e1e',
-                    },
-                    fontFamily: { 
-                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-                        mono: ['"JetBrains Mono"', 'monospace'],
-                    },
-                    borderRadius: { 'xl': '1rem', '2xl': '1.5rem', '3xl': '2rem' },
-                    boxShadow: { 'soft': '0 4px 20px -2px rgba(0, 0, 0, 0.05)' }
-                }
-            }
-        }
-    </script>
-
-    <style>
-        body, html { margin: 0; padding: 0; overflow-x: hidden; width: 100%; }
-        footer { width: 100%; max-width: 100%; box-sizing: border-box; }
-        div, section, main, header, footer { max-width: 100%; box-sizing: border-box; }
-        p, h1, h2, h3, h4, h5, h6, li { overflow-wrap: break-word; max-width: 100%; }
-        body { transition: background-color 0.5s ease, color 0.5s ease; }
-        ::-webkit-scrollbar { width: 10px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: #D1D5DB; border-radius: 10px; border: 2px solid #F0EFEA; }
-        .dark ::-webkit-scrollbar-thumb { background: #3F3F46; border: 2px solid #18181B; }
-        
-        /* Syntax Highlighting */
-        .token-tag { color: #e06c75; } 
-        .token-attr { color: #d19a66; } 
-        .token-str { color: #98c379; }  
-        .token-kw { color: #c678dd; }   
-        .token-comment { color: #7f848e; font-style: italic; } 
-    </style>
 </head>
 <body class="bg-cream dark:bg-dark-bg text-gray-800 dark:text-gray-200 font-sans selection:bg-gray-200 dark:selection:bg-gray-700 flex flex-col min-h-screen transition-colors duration-500">
 
-    <nav class="fixed top-4 left-0 right-0 z-50 px-4 md:px-8">
-        <div class="max-w-7xl mx-auto bg-surface/80 dark:bg-dark-surface/80 backdrop-blur-md rounded-2xl shadow-soft px-6 py-4 flex justify-between items-center border border-gray-100 dark:border-gray-700 transition-all duration-500">
-            <div class="flex items-center gap-3 cursor-pointer" onclick="window.location.href='index.html'">
-                <div class="bg-gray-100 dark:bg-gray-700 p-2 rounded-xl">
-                    <i data-lucide="arrow-left" class="text-gray-900 dark:text-white w-5 h-5"></i>
-                </div>
-                <span class="font-bold text-gray-900 dark:text-white text-sm">Back to Home</span>
-            </div>
-            
-            <button onclick="toggleTheme()" class="p-2.5 rounded-xl bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
-                <i class="fa-solid fa-sun hidden dark:block text-sm"></i>
-                <i class="fa-solid fa-moon block dark:hidden text-sm"></i>
-            </button>
-        </div>
-    </nav>
+    <nav id="navbar-placeholder" data-type="project" class="fixed top-4 left-0 right-0 z-50 px-4 md:px-8"></nav>
 
     <main class="pt-32 pb-20 px-4 md:px-8 max-w-7xl mx-auto flex-grow">
         
@@ -255,55 +202,8 @@ $ git push origin main
 
     </main>
 
-    <footer class="w-full bg-surface dark:bg-dark-surface border-t border-gray-200 dark:border-gray-700 py-8 px-4 md:px-8 mt-auto">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-sm">
-            <div class="text-gray-500 dark:text-gray-400">
-                &copy; 2025 Oliver T. Williams.
-            </div>
-            
-            <div class="flex flex-wrap justify-center items-center gap-6">
-                <div class="flex items-center gap-6">
-                    <a href="mailto:oliver_tw@icloud.com" class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white font-medium transition-colors">oliver_tw@icloud.com</a>
-                    <span class="text-gray-300 dark:text-gray-700">•</span>
-                    <span class="text-gray-600 dark:text-gray-400 font-medium">+1 (317) 914-8047</span>
-                    <span class="text-gray-300 dark:text-gray-700 hidden md:inline">•</span>
-                </div>
+    <footer id="footer-placeholder" class="w-full bg-surface dark:bg-dark-surface border-t border-gray-200 dark:border-gray-700 py-8 px-4 md:px-8 mt-auto"></footer>
 
-                <div class="flex items-center gap-4">
-                    <a href="https://www.instagram.com/oliver_williams1212/" class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors text-lg" aria-label="Instagram">
-                        <i class="fa-brands fa-instagram"></i>
-                    </a>
-                    <a href="https://www.linkedin.com/in/oliver-t-williams/" class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors text-lg" aria-label="LinkedIn">
-                        <i class="fa-brands fa-linkedin"></i>
-                    </a>
-                    <a href="https://github.com/olivertw12" class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors text-lg" aria-label="GitHub">
-                        <i class="fa-brands fa-github"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        lucide.createIcons();
-        // Theme Toggle Logic
-        function toggleTheme() {
-            const html = document.documentElement;
-            if (html.classList.contains('dark')) {
-                html.classList.remove('dark');
-                localStorage.setItem('theme', 'light');
-            } else {
-                html.classList.add('dark');
-                localStorage.setItem('theme', 'dark');
-            }
-        }
-        if (localStorage.theme === 'light' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: light)').matches)) {
-            document.documentElement.classList.remove('dark');
-        } else {
-            document.documentElement.classList.add('dark');
-        }
-    </script>
+    <script src="components.js"></script>
 </body>
 </html>
-
-```
