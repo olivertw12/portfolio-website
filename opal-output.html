@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1280">
+    <title>Oliver T. Williams | Resume & Cover Letter</title>
+   
+   <script>
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+
+    <link rel="icon" href="images/favicon-dark.png" media="(prefers-color-scheme: light)">
+    <link rel="icon" href="images/favicon-light.png" media="(prefers-color-scheme: dark)">
+    <link rel="icon" href="images/favicon-dark.png">
+
+    <meta name="description" content="Resume and Cover Letter of Oliver T. Williams.">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="tailwind-config.js"></script>
+    <link rel="stylesheet" href="style.css">
+    
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* Print Configuration */
+        @media print {
+            /* 1. Reset Page Margins so browser doesn't add extra whitespace */
+            @page {
+                margin: 0;
+                size: letter;
+            }
+
+            /* 2. Hide Interface Elements */
+            #control-bar, #main-footer, nav { 
+                display: none !important; 
+            }
+            
+            /* 3. Container Reset - Removes on-screen styling (shadows/borders) 
+                  but KEEPS the padding defined in the HTML classes */
+            .print-container {
+                width: 100% !important;
+                max-width: 100% !important;
+                box-shadow: none !important;
+                border: none !important;
+                border-radius: 0 !important;
+                margin: 0 !important;
+                min-height: auto !important;
+                /* Note: We do NOT force padding: 0 here. 
+                   We let print:p-8 and print:p-12 handle it. */
+            }
+            
+            /* 4. Selection Logic */
+            body.print-resume #cover-letter-section { display: none !important; }
+            body.print-cover-letter #resume-section { display: none !important; }
+            
+            /* 5. Page Break for "Download Both" */
+            body.print-all #resume-section { 
+                break-after: page; 
+                page-break-after: always; 
+            }
+            
+            /* 6. Ensure Backgrounds Print Correctly */
+            body {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+                background-color: white !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-cream dark:bg-dark-bg text-gray-800 dark:text-gray-200 font-sans selection:bg-gray-200 dark:selection:bg-gray-700 flex flex-col transition-colors duration-500">
+
+    <div id="control-bar" class="fixed top-0 left-0 right-0 z-50 bg-white/90 dark:bg-gray-900/90 backdrop-blur border-b border-gray-200 dark:border-gray-700 py-4 px-8 flex flex-col sm:flex-row justify-between items-center gap-4 print:hidden">
+        <div>
+            <h1 class="font-bold text-gray-900 dark:text-white text-lg">Oliver T. Williams</h1>
+            <p class="text-xs text-gray-500">Portfolio Documents</p>
+        </div>
+        <div class="flex flex-wrap gap-3">
+            <button onclick="handlePrint('resume')" class="px-4 py-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200 text-sm font-medium rounded-lg transition-colors flex items-center gap-2">
+                <i class="fa-solid fa-file-user"></i> Download Resume
+            </button>
+            <button onclick="handlePrint('cover-letter')" class="px-4 py-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200 text-sm font-medium rounded-lg transition-colors flex items-center gap-2">
+                <i class="fa-solid fa-envelope-open-text"></i> Download Cover Letter
+            </button>
+            <button onclick="handlePrint('all')" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition-colors flex items-center gap-2">
+                <i class="fa-solid fa-layer-group"></i> Download Both
+            </button>
+        </div>
+    </div>
+
+    <main class="pt-32 pb-12 px-8 flex flex-col items-center gap-12 print:p-0 print:m-0 print:gap-0 print:block"> 
+        
+        <div id="resume-section" class="w-full flex justify-center print:block print:w-full">
+            <div class="print-container w-[8.5in] min-h-[11in] bg-white dark:bg-dark-surface p-12 rounded-3xl shadow-paper border border-gray-100 dark:border-gray-700 transition-colors duration-500 box-border print:w-full print:shadow-none print:border-none print:rounded-none print:p-8">
+                
+                <header class="flex flex-row justify-between items-center mb-10 print:mb-8">
+                    <div class="flex flex-col">
+                        <div class="flex items-center">
+                            <h1 class="text-4xl font-extrabold text-gray-900 dark:text-white tracking-tight leading-none">Oliver T. Williams</h1>
+                            <i data-lucide="anchor" class="hidden print:inline-block text-gray-900 dark:text-white w-6 h-6 ml-3 opacity-90 stroke-[2.5]"></i>
+                        </div>
+
+                        <p class="text-lg text-gray-500 dark:text-gray-400 mt-1">Graphic Designer & Data Analyst</p>
+                    </div>
+                    <div class="grid grid-cols-[1fr_auto_1fr] gap-x-4 gap-y-1 text-sm font-medium text-gray-600 dark:text-gray-300 print:text-base">
+        
+                        <a href="tel:3179148047" class="justify-self-end hover:text-success transition-colors flex items-center gap-2">
+                            317-914-8047 <i class="fa-solid fa-phone text-xs text-gray-400"></i>
+                        </a>
+                        
+                        <span class="h-4 w-px bg-gray-300 dark:bg-gray-600 self-center"></span>
+                        
+                        <span class="justify-self-start flex items-center gap-2">
+                            Minneapolis, MN <i class="fa-solid fa-location-dot text-xs text-gray-400"></i>
+                        </span>
+                    
+                        <a href="mailto:oliver_tw@icloud.com" class="justify-self-end hover:text-success transition-colors flex items-center gap-2">
+                            oliver_tw@icloud.com <i class="fa-solid fa-envelope text-xs text-gray-400"></i>
+                        </a>
+                    
+                        <span class="h-4 w-px bg-gray-300 dark:bg-gray-600 self-center"></span>
+                    
+                        <a href="https://olivertwilliams.com" target="_blank" class="justify-self-start hover:text-success transition-colors flex items-center gap-2">
+                            olivertwilliams.com <i class="fa-solid fa-globe text-xs text-gray-400"></i>
+                        </a>
+                    
+                    </div>
+                </header>
+
+                <div class="grid grid-cols-12 gap-12">
+                    
+                    <aside class="col-span-4 space-y-10">
+                        
+                        <section>
+                            <h3 class="text-sm font-bold text-gray-600 dark:text-gray-400 mb-4 border-b border-gray-200 dark:border-gray-700 pb-2">Profile</h3>
+                            <p class="text-sm text-gray-700 dark:text-gray-300 leading-relaxed print:text-base print:leading-relaxed">
+                                Thoughtful problem solver and Graphic Designer with expertise in building clean production files for digital and print channels. Skilled in Adobe Creative Suite, Figma, and data-driven design for technical industries.
+                            </p>
+                        </section>
+
+                        <section>
+                            <h3 class="text-sm font-bold text-gray-600 dark:text-gray-400 mb-4 border-b border-gray-200 dark:border-gray-700 pb-2">Skills & Tools</h3>
+                            <div class="mb-6">
+                                <ul class="text-sm text-gray-600 dark:text-gray-400 space-y-1 list-disc list-inside marker:text-gray-400 print:text-base print:leading-relaxed">
+                                    <li class="font-medium text-gray-800 dark:text-gray-200">Adobe InDesign</li>
+                                    <li class="font-medium text-gray-800 dark:text-gray-200">Adobe Illustrator</li>
+                                    <li class="font-medium text-gray-800 dark:text-gray-200">Adobe Photoshop</li>
+                                    <li>Figma</li>
+                                    <li>PowerPoint</li>
+                                    <li>Acrobat Pro</li>
+                                    <li>UI/UX Principles</li>
+                                    <li>HTML / CSS</li>
+                                    <li>Motion Design Principles</li>
+                                    <li>Print & Digital Production</li>
+                                </ul>
+                            </div>
+                        </section>
+
+                        <section>
+                            <h3 class="text-sm font-bold text-gray-600 dark:text-gray-400 mb-4 border-b border-gray-200 dark:border-gray-700 pb-2">Education</h3>
+                            <div class="mb-6">
+                                <h4 class="font-bold text-gray-900 dark:text-white print:text-lg">BA Graphic Design</h4>
+                                <p class="text-sm text-gray-600 dark:text-gray-400 mt-1 print:text-base">Drake University</p>
+                                <p class="text-xs text-gray-500 dark:text-gray-500 mt-1 print:text-sm">May 2025</p>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900 dark:text-white print:text-lg">BS Data Analytics</h4>
+                                <p class="text-sm text-gray-600 dark:text-gray-400 mt-1 print:text-base">Drake University</p>
+                                <p class="text-xs text-gray-500 dark:text-gray-500 mt-1 print:text-sm">May 2025</p>
+                            </div>
+                        </section>
+
+                    </aside>
+
+                    <div class="col-span-8 space-y-10">
+                        
+                        <section>
+                            <h3 class="text-sm font-bold text-gray-600 dark:text-gray-400 mb-6 border-b border-gray-200 dark:border-gray-700 pb-2">Experience</h3>
+                            
+                            <div class="mb-6">
+                                <div class="flex justify-between items-baseline mb-2">
+                                    <h4 class="text-lg font-bold text-gray-900 dark:text-white print:text-xl">Graphic Design Intern & Park Staff</h4>
+                                    <span class="text-sm font-mono text-gray-500 dark:text-gray-400 print:text-base">2023–2025</span>
+                                </div>
+                                <p class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3 print:text-base">City of Shorewood</p>
+                                <ul class="list-disc list-outside ml-4 text-sm text-gray-600 dark:text-gray-400 space-y-2 leading-relaxed marker:text-gray-300 print:text-base print:leading-relaxed">
+                                    <li>Designed print and digital assets including social media graphics and brochures, ensuring strict adherence to municipal branding guidelines and regulated standards.</li>
+                                    <li>Managed production files for public use by converting legacy documents into accessible, fillable PDFs using Adobe Acrobat Pro, prioritizing user experience and compliance.</li>
+                                </ul>
+                            </div>
+
+                            <div class="mb-6">
+                                <div class="flex justify-between items-baseline mb-2">
+                                    <h4 class="text-lg font-bold text-gray-900 dark:text-white print:text-xl">Drake Relays Logo Designer</h4>
+                                    <span class="text-sm font-mono text-gray-500 dark:text-gray-400 print:text-base">2024–2025</span>
+                                </div>
+                                <p class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3 print:text-base">Drake University</p>
+                                <ul class="list-disc list-outside ml-4 text-sm text-gray-600 dark:text-gray-400 space-y-2 leading-relaxed marker:text-gray-300 print:text-base print:leading-relaxed">
+                                    <li>Selected to design the official logo and visual theme for the 2025 Drake Relays, collaborating with stakeholders to deliver effective marketing solutions across digital and print formats.</li>
+                                </ul>
+                            </div>
+
+                            <div>
+                                <div class="flex justify-between items-baseline mb-2">
+                                    <h4 class="text-lg font-bold text-gray-900 dark:text-white print:text-xl">Data Club President</h4>
+                                    <span class="text-sm font-mono text-gray-500 dark:text-gray-400 print:text-base">2022–2025</span>
+                                </div>
+                                <p class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3 print:text-base">Drake University</p>
+                                <ul class="list-disc list-outside ml-4 text-sm text-gray-600 dark:text-gray-400 space-y-2 leading-relaxed marker:text-gray-300 print:text-base print:leading-relaxed">
+                                    <li>Led cross-functional teams in organizing technical workshops, demonstrating strong problem-solving skills and the ability to work independently within a complex organization.</li>
+                                </ul>
+                            </div>
+
+                        </section>
+
+                        <section>
+                            <h3 class="text-sm font-bold text-gray-600 dark:text-gray-400 mb-6 border-b border-gray-200 dark:border-gray-700 pb-2">Projects</h3>
+                            
+                            <div class="mb-6">
+                                <div class="flex justify-between items-baseline mb-2">
+                                    <h4 class="text-lg font-bold text-gray-900 dark:text-white print:text-xl">Freelance Branding & Design</h4>
+                                    <span class="text-sm font-mono text-gray-500 dark:text-gray-400 print:text-base">2021–Present</span>
+                                </div>
+                                <p class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3 print:text-base">Various Clients</p>
+                                <ul class="list-disc list-outside ml-4 text-sm text-gray-600 dark:text-gray-400 space-y-2 leading-relaxed marker:text-gray-300 print:text-base print:leading-relaxed">
+                                    <li>Designed customized tour and performance flyers for print and digital distribution for Minneapolis musicians including Dessa and Jeremy Messersmith.</li>
+                                    <li>Provided comprehensive design services for corporate clients including The Forged Group and Pyrkia Health. Deliverables included logo systems, brand guidelines, and promotional assets.</li>                                    </ul>
+                            </div>
+
+                            <div>
+                                <div class="flex justify-between items-baseline mb-2">
+                                    <h4 class="text-lg font-bold text-gray-900 dark:text-white print:text-xl">Data Visualization & Modeling</h4>
+                                    <span class="text-sm font-mono text-gray-500 dark:text-gray-400 print:text-base">Fall 2024</span>
+                                </div>
+                                <p class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3 print:text-base">DMARC</p>
+                                <ul class="list-disc list-outside ml-4 text-sm text-gray-600 dark:text-gray-400 space-y-2 leading-relaxed marker:text-gray-300 print:text-base print:leading-relaxed">
+                                    <li>Applied analytical rigor to identify service gaps, demonstrating the ability to handle data-heavy projects in regulated environments and communicate findings via visual storytelling.</li>
+                                </ul>
+                            </div>
+
+                        </section>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div id="cover-letter-section" class="w-full flex justify-center print:block print:w-full">
+            <div class="print-container w-[8.5in] min-h-[11in] bg-white dark:bg-dark-surface p-12 rounded-3xl shadow-paper border border-gray-100 dark:border-gray-700 transition-colors duration-500 box-border print:w-full print:shadow-none print:border-none print:rounded-none print:p-12">
+                
+                <header class="flex flex-row justify-between items-start mb-8 border-b border-gray-200 dark:border-gray-700 pb-6">
+                    <div class="flex flex-col">
+                        <div class="flex items-center">
+                            <h1 class="text-3xl font-extrabold text-gray-900 dark:text-white tracking-tight leading-none">Oliver T. Williams</h1>
+                            <i data-lucide="anchor" class="hidden print:inline-block text-gray-900 dark:text-white w-5 h-5 ml-3 opacity-90 stroke-[2.5]"></i>
+                        </div>
+                        <p class="text-base text-gray-500 dark:text-gray-400 mt-1">Graphic Designer & Data Analyst</p>
+                    </div>
+
+                    <div class="grid grid-cols-[1fr_auto_1fr] gap-x-3 gap-y-1 text-xs font-medium text-gray-600 dark:text-gray-300 print:text-sm pt-1">
+                        <a href="tel:3179148047" class="justify-self-end hover:text-success transition-colors flex items-center gap-2">
+                            317-914-8047 <i class="fa-solid fa-phone text-[10px] text-gray-400"></i>
+                        </a>
+                        <span class="h-3 w-px bg-gray-300 dark:bg-gray-600 self-center"></span>
+                        <span class="justify-self-start flex items-center gap-2">
+                            Minneapolis, MN <i class="fa-solid fa-location-dot text-[10px] text-gray-400"></i>
+                        </span>
+                        <a href="mailto:oliver_tw@icloud.com" class="justify-self-end hover:text-success transition-colors flex items-center gap-2">
+                            oliver_tw@icloud.com <i class="fa-solid fa-envelope text-[10px] text-gray-400"></i>
+                        </a>
+                        <span class="h-3 w-px bg-gray-300 dark:bg-gray-600 self-center"></span>
+                        <a href="https://olivertwilliams.com" target="_blank" class="justify-self-start hover:text-success transition-colors flex items-center gap-2">
+                            olivertwilliams.com <i class="fa-solid fa-globe text-[10px] text-gray-400"></i>
+                        </a>
+                    </div>
+                </header>
+
+                <section class="space-y-5 text-gray-700 dark:text-gray-300 leading-relaxed text-sm print:text-base print:leading-7">
+                    
+                    <div class="mb-8 text-gray-900 dark:text-white leading-snug">
+                        <p class="font-bold mb-4">January 27, 2026</p>
+                        
+                        <div class="space-y-0.5">
+                            <p class="font-bold">Spot Hiring Team</p>
+                            <p>Spot</p>
+                            <p>Saint Paul, MN 55114</p>
+                        </div>
+                    </div>
+
+                    <p class="font-bold text-gray-900 dark:text-white">Dear Spot Hiring Team,</p>
+
+                    <p>
+                        I am writing to express my enthusiastic interest in the <strong>Graphic Designer</strong> position at <strong>Spot</strong>. As a thoughtful problem solver with experience navigating the intersection of creative design and technical requirements, I am eager to bring my skills in digital and print production to your collaborative agency environment.
+                    </p>
+
+                    <p>
+                        My background combines a Bachelor's in Graphic Design with a Bachelor's in Data Analytics. While I am a designer first, this dual background has trained me to handle regulated industries and complex specifications with ease—ensuring that every deliverable is not only visually compelling but also technically precise.
+                    </p>
+
+                    <ul class="list-disc list-outside ml-6 space-y-2 marker:text-gray-400">
+                        <li>
+                            <strong>Digital & Print Production:</strong> At the City of Shorewood, I managed the end-to-end design of marketing materials and standardized public forms using Acrobat Pro. This required strict adherence to brand guidelines and a keen eye for detail to ensure accessibility and compliance.
+                        </li>
+                        <li>
+                            <strong>Agency-Ready Tools:</strong> I am proficient in the Adobe Creative Suite (InDesign, Illustrator, Photoshop), Figma, and PowerPoint. I pride myself on building clean, organized production files that streamline workflow for the entire team.
+                        </li>
+                        <li>
+                            <strong>Scalable Branding:</strong> As the Logo Designer for the Drake Relays, I developed a visual identity used across hundreds of touchpoints. This experience honed my ability to maintain brand consistency across diverse formats while working within a fast-paced timeline.
+                        </li>
+                    </ul>
+
+                    <p>
+                        I am drawn to <strong>Spot</strong> because of your reputation for delivering innovative marketing strategies for both consumer and business brands. I thrive in environments that value curiosity and collaboration, and I am ready to support your creative and account teams from kickoff through execution.
+                    </p>
+
+                    <p>
+                        Thank you for your time and consideration. I look forward to the possibility of discussing how my dedication to craft and production quality can support the Spot team.
+                    </p>
+
+                    <div class="mt-8">
+                        <p>Sincerely,</p>
+                        
+                        <div class="mt-2 mb-1">
+                            <p class="text-4xl text-gray-800 dark:text-gray-200" style="font-family: 'Great Vibes', cursive; line-height: 1;">Oliver Williams</p>
+                        </div>
+                        
+                        <p class="font-bold text-gray-900 dark:text-white">Oliver T. Williams</p>
+                    </div>
+
+                </section>
+
+            </div>
+        </div>
+
+    </main>
+
+    <footer id="main-footer" class="w-full bg-white dark:bg-dark-surface border-t border-gray-200 dark:border-gray-700 py-8 px-8 print:hidden text-center text-gray-500 text-sm">
+        <p>&copy; 2026 Oliver T. Williams. All rights reserved.</p>
+    </footer>
+
+    <script src="components.js"></script>
+    <script>
+        // Init Lucide Icons
+        lucide.createIcons();
+
+        // Download/Print Functionality
+        function handlePrint(type) {
+            // Remove previous print classes
+            document.body.classList.remove('print-resume', 'print-cover-letter', 'print-all');
+            
+            // Add the specific class for this print job
+            if (type === 'resume') {
+                document.body.classList.add('print-resume');
+            } else if (type === 'cover-letter') {
+                document.body.classList.add('print-cover-letter');
+            } else {
+                document.body.classList.add('print-all');
+            }
+
+            // Trigger print dialog
+            window.print();
+
+            // Cleanup classes after print
+            // Small timeout allows the print dialog to register the style state
+            setTimeout(() => {
+                document.body.classList.remove('print-resume', 'print-cover-letter', 'print-all');
+            }, 1000);
+        }
+    </script>
+</body>
+</html>

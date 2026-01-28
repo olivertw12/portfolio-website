@@ -12,7 +12,7 @@
             document.documentElement.classList.remove('dark');
         }
     </script>
-    
+
     <link rel="icon" href="images/favicon-dark.png" media="(prefers-color-scheme: light)">
     <link rel="icon" href="images/favicon-light.png" media="(prefers-color-scheme: dark)">
     <link rel="icon" href="images/favicon-dark.png">
@@ -24,36 +24,38 @@
     <script src="https://unpkg.com/lucide@latest"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body class="bg-cream dark:bg-dark-bg text-gray-800 dark:text-gray-200 font-sans selection:bg-gray-200 dark:selection:bg-gray-700 flex flex-col min-h-screen transition-colors duration-500">
+
+<body class="preload bg-cream dark:bg-dark-bg text-gray-800 dark:text-gray-200 font-sans selection:bg-gray-200 dark:selection:bg-gray-700 flex flex-col min-h-screen transition-colors duration-500">
 
     <nav id="navbar-placeholder" data-type="project" class="fixed top-4 left-0 right-0 z-50 px-4 md:px-8"></nav>
 
-    <main class="pt-32 pb-20 px-4 md:px-8 max-w-7xl mx-auto flex-grow">
+    <main class="pt-32 pb-20 px-4 md:px-8 max-w-7xl mx-auto flex-grow w-full">
         
         <header class="mb-12">
             <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-xs font-bold uppercase tracking-wider mb-6">
                 Data Pipeline & Modeling
             </div>
-            <h1 class="text-5xl md:text-7xl font-bold text-gray-900 dark:text-white mb-8 tracking-tight">
+            
+            <h1 class="text-5xl md:text-7xl font-bold text-gray-900 dark:text-white mb-8 tracking-tight break-words">
                 DMARC Network Analysis
             </h1>
             
             <div class="grid grid-cols-2 md:grid-cols-4 gap-6 border-y border-gray-200 dark:border-gray-700 py-6">
-                <div>
+                <div class="min-w-0">
                     <span class="text-xs font-bold uppercase text-gray-400 dark:text-gray-500 tracking-wider block mb-1">Organization</span>
-                    <span class="text-gray-900 dark:text-white font-medium">DMARC Food Pantry</span>
+                    <span class="text-gray-900 dark:text-white font-medium block truncate">DMARC Food Pantry</span>
                 </div>
-                <div>
+                <div class="min-w-0">
                     <span class="text-xs font-bold uppercase text-gray-400 dark:text-gray-500 tracking-wider block mb-1">Role</span>
-                    <span class="text-gray-900 dark:text-white font-medium">Predictive Modeling</span>
+                    <span class="text-gray-900 dark:text-white font-medium block truncate">Predictive Modeling</span>
                 </div>
-                <div>
+                <div class="min-w-0">
                     <span class="text-xs font-bold uppercase text-gray-400 dark:text-gray-500 tracking-wider block mb-1">Tech Stack</span>
-                    <span class="text-gray-900 dark:text-white font-medium">R, Tidyverse, GIS</span>
+                    <span class="text-gray-900 dark:text-white font-medium block truncate">R, Tidyverse, GIS</span>
                 </div>
-                <div>
+                <div class="min-w-0">
                     <span class="text-xs font-bold uppercase text-gray-400 dark:text-gray-500 tracking-wider block mb-1">Focus</span>
-                    <span class="text-gray-900 dark:text-white font-medium">Methodology & Arch</span>
+                    <span class="text-gray-900 dark:text-white font-medium block truncate">Methodology & Arch</span>
                 </div>
             </div>
         </header>
@@ -64,7 +66,7 @@
                     <strong class="text-gray-900 dark:text-white">The Challenge:</strong> The DMARC Food Pantry Network generates a massive dataset of transactional visitor logs. However, the data was unstructured and lacked the demographic context needed to make informed decisions about resource allocation and new pantry locations.
                 </p>
                 <p>
-                    <strong class="text-gray-900 dark:text-white">The Solution:</strong> I built a reproducible data pipeline in R that cleaned raw logs, enriched them with ACS Census demographics, and utilized predictive modeling. This analysis provided DMARC with actionable insights into seasonal trends, shifting demographics, and geographic service gaps.
+                    <strong class="text-gray-900 dark:text-white">The Solution:</strong> I built a reproducible data pipeline in R that cleaned raw logs, enriched them with ACS Census data, and utilized predictive modeling. This analysis provided DMARC with actionable insights into seasonal trends, shifting demographics, and geographic service gaps.
                 </p>
             </div>
         </div>
@@ -80,7 +82,7 @@
             </p>
 
             <div class="bg-surface dark:bg-dark-surface rounded-3xl p-6 border border-gray-100 dark:border-gray-700 shadow-soft">
-                <div class="bg-code rounded-xl overflow-hidden shadow-lg border border-gray-700 flex flex-col w-full">
+                <div class="bg-code rounded-xl overflow-hidden shadow-lg border border-gray-700 flex flex-col w-full min-w-0">
                     <div class="flex items-center justify-between px-4 py-2 bg-[#252526] border-b border-gray-700 shrink-0">
                         <span class="text-xs text-gray-400 font-mono">clean_dmarc_data.R</span>
                         <div class="flex gap-1.5">
@@ -128,7 +130,7 @@ data <span class="token-kw">&lt;-</span> data <span class="token-kw">%&gt;%</spa
             <div class="bg-surface dark:bg-dark-surface rounded-3xl p-6 border border-gray-100 dark:border-gray-700 shadow-soft">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                     
-                    <div class="bg-code rounded-xl overflow-hidden shadow-lg border border-gray-700 flex flex-col h-full min-h-[300px]">
+                    <div class="bg-code rounded-xl overflow-hidden shadow-lg border border-gray-700 flex flex-col h-full min-h-[300px] min-w-0">
                         <div class="flex items-center justify-between px-4 py-2 bg-[#252526] border-b border-gray-700 shrink-0">
                             <span class="text-xs text-gray-400 font-mono">zip_map_final.R</span>
                             <div class="flex gap-1.5">
@@ -179,7 +181,7 @@ leaflet_map <span class="token-kw">&lt;-</span> <span class="token-func">leaflet
             <div class="bg-surface dark:bg-dark-surface rounded-3xl p-6 border border-gray-100 dark:border-gray-700 shadow-soft">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                     
-                    <div class="bg-code rounded-xl overflow-hidden shadow-lg border border-gray-700 flex flex-col h-full min-h-[300px]">
+                    <div class="bg-code rounded-xl overflow-hidden shadow-lg border border-gray-700 flex flex-col h-full min-h-[300px] min-w-0">
                         <div class="flex items-center justify-between px-4 py-2 bg-[#252526] border-b border-gray-700 shrink-0">
                             <span class="text-xs text-gray-400 font-mono">predictive_modelling.R</span>
                             <div class="flex gap-1.5">
@@ -228,7 +230,7 @@ future_df <span class="token-kw">&lt;-</span> future_df <span class="token-kw">%
             <div class="bg-surface dark:bg-dark-surface rounded-3xl p-6 border border-gray-100 dark:border-gray-700 shadow-soft">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                     
-                    <div class="bg-code rounded-xl overflow-hidden shadow-lg border border-gray-700 flex flex-col h-full min-h-[300px]">
+                    <div class="bg-code rounded-xl overflow-hidden shadow-lg border border-gray-700 flex flex-col h-full min-h-[300px] min-w-0">
                         <div class="flex items-center justify-between px-4 py-2 bg-[#252526] border-b border-gray-700 shrink-0">
                             <span class="text-xs text-gray-400 font-mono">acs_compatible_demographics.R</span>
                             <div class="flex gap-1.5">
@@ -276,7 +278,7 @@ top_growth <span class="token-kw">&lt;-</span> type_changes <span class="token-k
             <div class="bg-surface dark:bg-dark-surface rounded-3xl p-6 border border-gray-100 dark:border-gray-700 shadow-soft">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                     
-                    <div class="bg-code rounded-xl overflow-hidden shadow-lg border border-gray-700 flex flex-col h-full min-h-[300px]">
+                    <div class="bg-code rounded-xl overflow-hidden shadow-lg border border-gray-700 flex flex-col h-full min-h-[300px] min-w-0">
                         <div class="flex items-center justify-between px-4 py-2 bg-[#252526] border-b border-gray-700 shrink-0">
                             <span class="text-xs text-gray-400 font-mono">acs_zipmap.R</span>
                             <div class="flex gap-1.5">
@@ -323,5 +325,12 @@ iowa_map_data <span class="token-kw">&lt;-</span> iowa_zips <span class="token-k
     <footer id="footer-placeholder" class="w-full bg-surface dark:bg-dark-surface border-t border-gray-200 dark:border-gray-700 py-8 px-4 md:px-8 mt-auto"></footer>
 
     <script src="components.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+             setTimeout(() => {
+                document.body.classList.remove('preload');
+            }, 100);
+        });
+    </script>
 </body>
 </html>

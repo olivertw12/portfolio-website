@@ -90,7 +90,7 @@ function renderComponents() {
         footerPlaceholder.innerHTML = `
             <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-sm">
                 <div class="text-gray-500 dark:text-gray-400 text-center md:text-left">
-                    &copy; 2025 Oliver T. Williams.
+                    &copy; 2026 Oliver T. Williams.
                 </div>
                 
                 <div class="flex flex-wrap justify-center items-center gap-6">
