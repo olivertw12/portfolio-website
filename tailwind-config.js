@@ -1,31 +1,33 @@
+// This file is now statically wired to style.css
+// You never need to edit this file again! Modify style.css instead.
 tailwind.config = {
     darkMode: 'class',
     theme: {
         extend: {
             colors: {
-                cream: '#F0EFEA',
-                surface: '#FFFFFF',
-                'dark-bg': '#18181B',
-                'dark-surface': '#27272A',
-                primary: '#111827',
-                'primary-dark': '#FAFAFA',
-                success: '#3B82F6',
-                accent: '#3B82F6',
-                code: '#1e1e1e',
+                cream: 'var(--color-cream)',
+                surface: 'var(--color-surface)',
+                'dark-bg': 'var(--color-dark-bg)',
+                'dark-surface': 'var(--color-dark-surface)',
+                primary: 'var(--color-primary)',
+                'primary-dark': 'var(--color-primary-dark)',
+                success: 'var(--color-success)',
+                accent: 'var(--color-accent)',
+                code: 'var(--color-code)',
             },
             fontFamily: {
-                sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-                mono: ['"JetBrains Mono"', 'monospace'],
+                sans: 'var(--font-sans)',
+                mono: 'var(--font-mono)',
             },
             borderRadius: {
-                'xl': '1rem',
-                '2xl': '1.5rem',
-                '3xl': '2rem',
+                'xl': 'var(--radius-xl)',
+                '2xl': 'var(--radius-2xl)',
+                '3xl': 'var(--radius-3xl)',
             },
             boxShadow: {
-                'soft': '0 4px 20px -2px rgba(0, 0, 0, 0.05)',
-                'glow': '0 0 15px rgba(59, 130, 246, 0.5)',
-                'paper': '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
+                'soft': 'var(--shadow-soft)',
+                'glow': 'var(--shadow-glow)',
+                'paper': 'var(--shadow-paper)',
             }
         }
     }

@@ -1,29 +1,58 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
 
+:root {
+    /* --- DESIGN TOKENS: EDIT ALL WEBSITE STYLES HERE --- */
+    
+    /* Theme Colors */
+    --color-cream: #F0EFEA;
+    --color-surface: #FFFFFF;
+    --color-dark-bg: #18181B;
+    --color-dark-surface: #27272A;
+    
+    /* Brand Colors */
+    --color-primary: #111827;
+    --color-primary-dark: #FAFAFA;
+    --color-success: #3B82F6;
+    --color-accent: #3B82F6;
+    --color-code: #1e1e1e;
+
+    /* Typography */
+    --font-sans: 'Plus Jakarta Sans', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    /* Border Radius */
+    --radius-xl: 1rem;
+    --radius-2xl: 1.5rem;
+    --radius-3xl: 2rem;
+
+    /* Box Shadows */
+    --shadow-soft: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+    --shadow-glow: 0 0 15px rgba(59, 130, 246, 0.5);
+    --shadow-paper: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+}
+
 /* --- GLOBAL RESETS & BASICS --- */
-/* Fix 1: Set background on HTML to match theme immediately */
 html {
     margin: 0;
     padding: 0;
     overflow-x: hidden;
     width: 100%;
-    background-color: #F0EFEA; /* Match bg-cream */
+    background-color: var(--color-cream); 
 }
 
 html.dark {
-    background-color: #18181B; /* Match bg-dark-bg */
+    background-color: var(--color-dark-bg); 
 }
 
 body { 
     margin: 0;
     padding: 0;
     width: 100%;
-    /* Keep transitions for smooth toggling later */
     transition: background-color 0.5s ease, color 0.5s ease; 
 }
 
-/* Fix 2: Disable transitions while page is loading */
+/* Disable transitions while page is loading */
 .preload * {
     -webkit-transition: none !important;
     -moz-transition: none !important;
@@ -50,8 +79,8 @@ p, h1, h2, h3, h4, h5, h6, li, span, a {
 /* --- CUSTOM SCROLLBAR --- */
 ::-webkit-scrollbar { width: 10px; height: 8px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: #D1D5DB; border-radius: 10px; border: 2px solid #F0EFEA; }
-.dark ::-webkit-scrollbar-thumb { background: #3F3F46; border: 2px solid #18181B; }
+::-webkit-scrollbar-thumb { background: #D1D5DB; border-radius: 10px; border: 2px solid var(--color-cream); }
+.dark ::-webkit-scrollbar-thumb { background: #3F3F46; border: 2px solid var(--color-dark-bg); }
 
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }

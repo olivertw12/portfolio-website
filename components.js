@@ -78,7 +78,7 @@ function renderComponents() {
     if (navPlaceholder) {
         const type = navPlaceholder.getAttribute('data-type') || 'home';
         navPlaceholder.innerHTML = `
-            <div class="max-w-7xl mx-auto bg-surface/80 dark:bg-dark-surface/80 backdrop-blur-md rounded-2xl shadow-soft px-6 py-4 flex justify-between items-center border border-gray-100 dark:border-gray-700 transition-all duration-500">
+            <div class="max-w-7xl mx-auto bg-surface dark:bg-dark-surface rounded-2xl shadow-soft px-6 py-4 flex justify-between items-center border border-gray-100 dark:border-gray-700 transition-all duration-500">
                 ${navConfig[type]}
             </div>
         `;
