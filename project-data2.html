@@ -63,10 +63,10 @@
         <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-20">
             <div class="col-span-12 md:col-span-12 text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
                 <p class="mb-6">
-                    <strong class="text-gray-900 dark:text-white">The Goal:</strong> I previously hosted my portfolio on Canva. While it was easy to set up, I found it incredibly restrictive, I couldn't control the details, the code, or the SEO. I also didn't want to pay monthly subscription fees for a simple portfolio site.
+                    <strong class="text-gray-900 dark:text-white">The Goal:</strong> For the last few years I have made several attempts to create a website/portfolio for myself that I could easily access and update. I had already gone through using both Wordpress and Canva but I was not satisfied with the amount of customization was available to me, and was left paying monthly subscription fees. 
                 </p>
                 <p>
-                    <strong class="text-gray-900 dark:text-white">The Solution:</strong> I decided to build a static site from scratch using standard HTML and Tailwind CSS. It was a good opportunity to get more comfortable with code and set up a proper development workflow. Now, I have full control over the domain and hosting without the overhead of a website builder.
+                    <strong class="text-gray-900 dark:text-white">The Solution:</strong> So, I decided to build a static site from scratch using standard HTML and Tailwind CSS. It was a good opportunity to get more comfortable with code and set up a proper development workflow. It enabled me to have full control over the domain and hosting without the overhead of a website builder.
                 </p>
             </div>
         </div>
@@ -78,7 +78,7 @@
             </div>
             
             <p class="text-gray-600 dark:text-gray-300 mb-8 w-full text-lg">
-                The main driver for this project was cost and flexibility. Website builders are convenient, but they lock you into their ecosystem. By switching to raw HTML, I could create the exact minimalist layout I wanted without fighting against pre-made templates. I used Tailwind CSS to handle the styling because it keeps the CSS file small and easy to manage.
+                The main driver for this project was cost and flexibility. Website builders are convenient, but they lock you into their ecosystem. But by switching to HTML, I could create the exact minimalist layout I wanted! I used Tailwind CSS to handle the styling because it keeps the file small, manageable, and easy to update.
             </p>
 
             <div class="bg-surface dark:bg-dark-surface rounded-3xl p-6 border border-gray-100 dark:border-gray-700 shadow-soft">
@@ -97,8 +97,6 @@
   <span class="token-attr">theme</span>: {
     <span class="token-attr">extend</span>: {
       <span class="token-attr">colors</span>: {
-        <span class="token-comment">// Defining my own simple palette rather than </span>
-        <span class="token-comment">// relying on a builder's preset themes.</span>
         <span class="token-attr">cream</span>: <span class="token-str">'#F0EFEA'</span>,
         <span class="token-attr">surface</span>: <span class="token-str">'#FFFFFF'</span>,
         <span class="token-attr">'dark-bg'</span>: <span class="token-str">'#18181B'</span>,
@@ -118,7 +116,7 @@
             </div>
             
             <p class="text-gray-600 dark:text-gray-300 mb-8 w-full text-lg">
-                I wanted the site to be as easy to update as possible. I set up a continuous deployment pipeline using GitHub and Cloudflare Pages. Now, when I want to add a new project or fix a typo, I just edit the code on my laptop and push the changes to the repository. Cloudflare detects the commit and rebuilds the site automatically in seconds.
+                I wanted the site to be as easy to update as possible. To do this I set up a continuous deployment pipeline using GitHub and Cloudflare Pages. Now, when I want to add a new project or fix a typo, I just edit the code on my laptop and push the changes with my command Terminal to the repository. Cloudflare detects the commit and rebuilds the site automatically in seconds.
             </p>
 
             <div class="bg-surface dark:bg-dark-surface rounded-3xl p-6 border border-gray-100 dark:border-gray-700 shadow-soft">
@@ -133,11 +131,11 @@
                     </div>
                     <div class="p-4 overflow-x-auto flex-grow font-mono text-sm text-gray-300">
 <pre><code><span class="token-comment"># The entire update process takes three commands</span>
-$ git add .
-$ git commit -m "Added new case study"
-$ git push origin main
+git add .
+git commit -m "Added new case study"
+git push origin main
 
-<span class="token-comment"># ... Cloudflare automatically builds and deploys to https://olivertwilliams.com</span>
+<span class="token-comment"># Cloudflare automatically builds and deploys to https://olivertwilliams.com</span>
 </code></pre>
                     </div>
                 </div>
@@ -147,11 +145,11 @@ $ git push origin main
         <section class="mb-24">
             <div class="flex items-baseline gap-3 mb-6">
                 <span class="text-accent font-mono font-bold text-xl">03</span>
-                <h2 class="text-3xl font-bold text-gray-900 dark:text-white">The "One Template" System</h2>
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-white">My Project Update System</h2>
             </div>
             
             <p class="text-gray-600 dark:text-gray-300 mb-8 w-full text-lg">
-                I realized early on that creating a separate HTML file for every new project would be a maintenance nightmare. If I wanted to change the layout, I’d have to edit twenty different files. Instead, I built a single reusable template and a central "database" in JavaScript.
+                Early on, I used a custom html website for each individual project. But quickly I realized this was both wasteful with repetitive code, and was very time consuming. Every time I wanted to change the layout, I’d have to edit twenty different files. So after some research, I managed to build a single reusable template and a central Javascript file to pull information from.
             </p>
 
             <div class="bg-surface dark:bg-dark-surface rounded-3xl p-6 border border-gray-100 dark:border-gray-700 shadow-soft">
@@ -173,11 +171,8 @@ $ git push origin main
         <span class="token-attr">category</span>: <span class="token-str">"Advertising"</span>,
         <span class="token-attr">desc</span>: <span class="token-str">"Unique typeface and poster..."</span>,
         <span class="token-attr">image</span>: <span class="token-str">"images/mainframe2.png"</span>,
-        
-        <span class="token-comment">// This link tells the template which data to load</span>
         <span class="token-attr">link</span>: <span class="token-str">"project.html?id=mainframe"</span>
-    },
-    <span class="token-comment">// ... other projects follow the same structure</span>
+    }
 ];</code></pre>
                         </div>
                     </div>
@@ -185,10 +180,10 @@ $ git push origin main
                     <div class="flex flex-col justify-center text-gray-600 dark:text-gray-300">
                         <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">How It Works</h3>
                         <p class="mb-4">
-                            This array acts as the central nervous system for the portfolio. When you click a project, you aren't going to a unique page, you are going to a master template (<code>project.html</code>) that checks the URL.
+                            This array is the basis for the whole portfolio. When you click a project, it sends you to the master template (<code>project.html</code>).
                         </p>
                         <p>
-                            It sees <code>?id=mainframe</code>, looks up the corresponding object in this array, and dynamically injects the title, image, and description into the DOM. This means I can add a new case study just by adding one block of text to this file, instead of having to write a new HTML page.
+                            It sees <code>?id=mainframe</code>, looks up the corresponding object in this array, and injects the title, image, and description into the objecy model. This lets me just add a new case study by adding one block of text to this file, instead of having to write a new HTML page.
                         </p>
                     </div>
 
