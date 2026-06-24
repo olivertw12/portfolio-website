@@ -6,59 +6,64 @@
    Edit palette here — everything else updates automatically.
    ============================================================ */
 :root {
-    /* --- Page backgrounds --- */
-    --color-cream:        #EDE9E1;
-    --color-surface:      #FAF8F5;
-    --color-dark-bg:      #1C1A17;
-    --color-dark-surface: #2A2622;
+    /* --- Page backgrounds ---
+       Sourced from: plush body fur (cream), fur highlight (surface)  */
+    --color-cream:        #E8E5DE;   /* body fur — neutral gray, barely warm  */
+    --color-surface:      #F2F0EC;   /* fur highlight — soft off-white        */
+    --color-dark-bg:      #181E1C;   /* deep forest — dark mode base          */
+    --color-dark-surface: #212A26;   /* forest mid — dark mode surface        */
 
-    /* --- Brand / accent --- */
-    --color-primary:       #1A1714;
-    --color-primary-dark:  #F5F1EB;
-    --color-accent:        #C4622D;
-    --color-accent-light:  #E8845A;
-    --color-accent-muted:  #F0D4C4;
-    --color-accent-muted-dark: #3D2416;
+    /* --- Brand / accent ---
+       Sourced from: belly celadon + ear-tip forest green             */
+    --color-primary:       #2A3C34;   /* ear-tip forest — dark accent on light */
+    --color-primary-dark:  #E8EDEA;   /* pale sage — light text on dark mode   */
+    --color-accent:        #6B9E8E;   /* belly celadon — teal-sage, has presence */
+    --color-accent-light:  #8BBDAD;   /* lighter sage — dark mode hover/text   */
+    --color-accent-muted:  #D8E8E4;   /* very pale celadon — badge bg light    */
+    --color-accent-muted-dark: #1A2E28; /* deep teal-black — badge bg dark     */
 
-    /* --- Semantic text scale --- */
-    --color-text-primary:  #1C1917;   /* headings, strong */
-    --color-text-body:     #57534E;   /* body copy */
-    --color-text-muted:    #78716C;   /* labels, captions */
-    --color-text-subtle:   #A8A29E;   /* de-emphasised, dark-mode code prose */
+    /* --- Semantic text scale ---
+       Forest → cool mid → taupe → pale gray                          */
+    --color-text-primary:  #252E28;   /* dark forest near-black — headings     */
+    --color-text-body:     #4A5250;   /* cool mid gray, green undertone        */
+    --color-text-muted:    #7A8280;   /* warm cool gray — labels, captions     */
+    --color-text-subtle:   #A8ACAA;   /* pale gray — de-emphasised             */
 
-    --color-text-primary-dark: #F5F4F1;
-    --color-text-body-dark:    #D6D3D1;
-    --color-text-muted-dark:   #A8A29E;
-    --color-text-subtle-dark:  #78716C;
+    --color-text-primary-dark: #E8EDEA;   /* pale sage white                   */
+    --color-text-body-dark:    #C0CAC6;   /* cool light gray                   */
+    --color-text-muted-dark:   #8A9692;   /* mid sage gray                     */
+    --color-text-subtle-dark:  #5A6460;   /* dark sage gray                    */
 
-    /* --- Semantic surface scale --- */
-    --color-wash:      #F0ECE6;   /* light tint cards / code bg */
-    --color-tint:      #E7E2DA;   /* slightly heavier tint / hover states */
-    --color-divider:   #D6D3D1;   /* separator dots, hairlines */
+    /* --- Semantic surface scale ---
+       Belly celadon (washed) → fur shadow — all low-saturation green-gray */
+    --color-wash:      #E0E8E4;   /* pale celadon tint — card / image bg       */
+    --color-tint:      #D4E0DC;   /* slightly stronger celadon — hover states  */
+    --color-divider:   #C4CCCB;   /* cool gray — separators, dots              */
 
-    --color-wash-dark: #292521;   /* dark tint cards */
-    --color-tint-dark: #3A342D;   /* dark hover states */
-    --color-divider-dark: #57534E;
+    --color-wash-dark: #1E2824;   /* deep forest tint                          */
+    --color-tint-dark: #283530;   /* dark teal hover                           */
+    --color-divider-dark: #3A4842;
 
     /* --- Overlays --- */
-    --color-overlay-light: rgba(255,255,255,0.90);
-    --color-overlay-dark:  rgba(0,0,0,0.80);
-    --color-scrim:         rgba(0,0,0,0.95);
+    --color-overlay-light: rgba(242,240,236,0.92);  /* fur white tint  */
+    --color-overlay-dark:  rgba(24,30,28,0.88);
+    --color-scrim:         rgba(10,14,12,0.96);
 
-    /* --- Borders --- */
-    --color-border:       rgba(214,211,209,0.70);  /* stone-200/70 */
-    --color-border-solid: #D6D3D1;                  /* stone-200 */
-    --color-border-light: #E7E2DA;                  /* stone-100 equiv */
-    --color-border-dark:       rgba(87,83,78,0.40); /* stone-700/40 */
-    --color-border-dark-solid: #57534E;              /* stone-700 */
-    --color-border-section:    rgba(41,37,33,0.70); /* dark section divider */
+    /* --- Borders ---
+       Derived from fur shadow + celadon palette                      */
+    --color-border:       rgba(196,204,203,0.65);   /* cool gray/65    */
+    --color-border-solid: #C4CCCB;                   /* cool gray       */
+    --color-border-light: #D8E0DE;                   /* pale teal-gray  */
+    --color-border-dark:       rgba(58,72,66,0.50);  /* forest/50       */
+    --color-border-dark-solid: #3A4842;               /* forest          */
+    --color-border-section:    rgba(37,46,40,0.55);
 
     /* --- Code block chrome --- */
-    --color-code:              #1A1714;
-    --color-code-titlebar:     #252526;
-    --color-code-panel:        #1A1714;
-    --color-code-panel-header: #1C1A17;
-    --color-code-border:       #57534E;
+    --color-code:              #181E1C;
+    --color-code-titlebar:     #1E2824;
+    --color-code-panel:        #181E1C;
+    --color-code-panel-header: #1C2420;
+    --color-code-border:       #3A4842;
 
     /* --- Traffic-light window dots --- */
     --color-chrome-close:    rgba(239,68,68,0.50);   /* red-500/50  */
@@ -94,9 +99,9 @@
     --radius-3xl: 2rem;
 
     /* --- Shadows --- */
-    --shadow-soft:  0 4px 24px -4px rgba(60,30,10,0.08);
-    --shadow-glow:  0 0 20px rgba(196,98,45,0.25);
-    --shadow-paper: 0 1px 4px 0 rgba(60,30,10,0.08), 0 1px 2px 0 rgba(60,30,10,0.04);
+    --shadow-soft:  0 4px 24px -4px rgba(37,46,40,0.10);
+    --shadow-glow:  0 0 20px rgba(107,158,142,0.28);
+    --shadow-paper: 0 1px 4px 0 rgba(37,46,40,0.09), 0 1px 2px 0 rgba(37,46,40,0.05);
 }
 
 
@@ -325,7 +330,7 @@ p, h1, h2, h3, h4, h5, h6, li, span, a { overflow-wrap: break-word; }
 ::-webkit-scrollbar { width: 10px; height: 8px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb {
-    background: var(--color-divider);
+    background: var(--color-tint);
     border-radius: 10px;
     border: 2px solid var(--color-cream);
 }
@@ -343,7 +348,7 @@ p, h1, h2, h3, h4, h5, h6, li, span, a { overflow-wrap: break-word; }
 .glass-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
 .glass-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 12px 32px -4px rgba(60,30,10,0.12);
+    box-shadow: 0 14px 36px -6px rgba(37,46,40,0.14);
 }
 
 
