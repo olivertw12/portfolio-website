@@ -30,11 +30,11 @@
     <nav id="navbar-placeholder" data-type="project" class="fixed top-4 left-0 right-0 z-50 px-4 md:px-8"></nav>
 
     <main class="pt-32 pb-20 px-4 md:px-8 max-w-7xl mx-auto flex-grow">
-        <header class="mb-16">
-            <h1 class="text-primary text-4xl md:text-5xl font-bold mb-4">Project Archive</h1>
-            <p class="text-muted text-lg">A complete collection of commercial works, branding exercises, and original illustrations.</p>
+        <header class="mb-12">
+            <h1 class="text-primary text-4xl md:text-5xl font-bold mb-3">Project Archive</h1>
+            <p class="text-muted font-normal text-lg">A complete collection of commercial works, branding exercises, and original illustrations.</p>
         </header>
-        <div id="project-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+        <div id="project-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
     </main>
 
     <footer id="footer-placeholder" class="w-full bg-surface dark:bg-dark-surface border-t border-themed py-8 px-4 md:px-8 mt-auto"></footer>
@@ -42,31 +42,33 @@
     <script src="components.js"></script>
     <script>
         const projects = [
-            { title: "Mainframe Studios",          category: "Advertising",          desc: "Unique typeface and poster for a non-profit art studio.",             image: "images/mainframe2.png",  link: "project.html?id=mainframe" },
-            { title: "The Forged Group",            category: "Branding",             desc: "Visual identity system for a financial consultation firm.",           image: "images/forged2.png",     link: "project.html?id=forged" },
-            { title: "Drake Relays 2025",           category: "Illustration & Design",desc: "Relays event logo & theme for Drake University.",                    image: "images/relays2.png",     link: "project.html?id=relays" },
-            { title: "Dessa Tour",                  category: "Advertising",          desc: "Poster announcing a new tour for a Minnesota singer-songwriter.",     image: "images/dessa1.png",      link: "project.html?id=dessa" },
-            { title: "Jeremy Messersmith Performance",category:"Advertising",         desc: "Flyers announcing appearances from a Minnesota singer-songwriter.",   image: "images/jeremy1.png",     link: "project.html?id=jeremy" },
-            { title: "Christmas in Excelsior",      category: "Illustration",         desc: "Event map design for a local holiday market.",                       image: "images/xmas2.png",       link: "project.html?id=xmas" },
-            { title: "Pyrkia Health",               category: "Branding",             desc: "Brand identity and logo for a nature-focused health program.",        image: "images/pyrkia2.png",     link: "project.html?id=pyrkia" },
-            { title: "Shorewood City Map",          category: "Illustration",         desc: "Illustrated rug map to help children navigate their community.",      image: "images/citymap2.png",    link: "project.html?id=citymap" },
-            { title: "Shorewood Government",        category: "UI/UX Design",         desc: "Modernized fillable PDF forms for city government.",                  image: "images/cityintern2.png", link: "project.html?id=cityintern" },
-            { title: "Traditional Artwork",         category: "Fine Art",             desc: "Mixed media fine art studies exploring texture and composition.",     image: "images/art1.jpg",        link: "project.html?id=art" },
-            { title: "Save the Data Event",         category: "Advertising",          desc: "3-hour university exercise simulating a cybersecurity crisis.",       image: "images/data1.png",       link: "project.html?id=data" },
-            { title: "Duolingo Ad Campaign",        category: "Advertising",          desc: "Ad campaign concept expanding Duolingo into Rocket League.",          image: "images/duolingo2.png",   link: "project.html?id=duolingo" },
-            { title: "ICYMI Podcast",               category: "Branding",             desc: "Visual identity and poster system for a student news podcast.",       image: "images/icymi2.png",      link: "project.html?id=icymi" },
-            { title: "St. Victoria Church",         category: "Social Media",         desc: "Social media strategy and content creation for a local parish.",      image: "images/church2.png",     link: "project.html?id=church" }
+            { title: "Mainframe Studios",             category: "Advertising",           desc: "Unique typeface and poster for a non-profit art studio.",             image: "images/mainframe2.png",  link: "project.html?id=mainframe" },
+            { title: "The Forged Group",               category: "Branding",              desc: "Visual identity system for a financial consultation firm.",           image: "images/forged2.png",     link: "project.html?id=forged" },
+            { title: "Drake Relays 2025",              category: "Illustration & Design", desc: "Relays event logo & theme for Drake University.",                    image: "images/relays2.png",     link: "project.html?id=relays" },
+            { title: "Dessa Tour",                     category: "Advertising",           desc: "Poster announcing a new tour for a Minnesota singer-songwriter.",     image: "images/dessa1.png",      link: "project.html?id=dessa" },
+            { title: "Jeremy Messersmith Performance", category: "Advertising",           desc: "Flyers announcing appearances from a Minnesota singer-songwriter.",   image: "images/jeremy1.png",     link: "project.html?id=jeremy" },
+            { title: "Christmas in Excelsior",         category: "Illustration",          desc: "Event map design for a local holiday market.",                       image: "images/xmas2.png",       link: "project.html?id=xmas" },
+            { title: "Pyrkia Health",                  category: "Branding",              desc: "Brand identity and logo for a nature-focused health program.",        image: "images/pyrkia2.png",     link: "project.html?id=pyrkia" },
+            { title: "Shorewood City Map",             category: "Illustration",          desc: "Illustrated rug map to help children navigate their community.",      image: "images/citymap2.png",    link: "project.html?id=citymap" },
+            { title: "Shorewood Government",           category: "UI/UX Design",          desc: "Modernized fillable PDF forms for city government.",                  image: "images/cityintern2.png", link: "project.html?id=cityintern" },
+            { title: "Traditional Artwork",            category: "Fine Art",              desc: "Mixed media fine art studies exploring texture and composition.",     image: "images/art1.jpg",        link: "project.html?id=art" },
+            { title: "Save the Data Event",            category: "Advertising",           desc: "3-hour university exercise simulating a cybersecurity crisis.",       image: "images/data1.png",       link: "project.html?id=data" },
+            { title: "Duolingo Ad Campaign",           category: "Advertising",           desc: "Ad campaign concept expanding Duolingo into Rocket League.",          image: "images/duolingo2.png",   link: "project.html?id=duolingo" },
+            { title: "ICYMI Podcast",                  category: "Branding",              desc: "Visual identity and poster system for a student news podcast.",       image: "images/icymi2.png",      link: "project.html?id=icymi" },
+            { title: "St. Victoria Church",            category: "Social Media",          desc: "Social media strategy and content creation for a local parish.",      image: "images/church2.png",     link: "project.html?id=church" }
         ];
 
         document.getElementById('project-grid').innerHTML = projects.map(p => `
-            <div class="glass-card bg-surface dark:bg-dark-surface rounded-3xl p-3 shadow-soft border border-themed group cursor-pointer flex flex-col h-full" onclick="window.location.href='${p.link}'">
-                <div class="relative aspect-[4/3] rounded-2xl overflow-hidden mb-4 shrink-0 bg-wash dark:bg-wash-dark">
+            <div class="glass-card bg-surface dark:bg-dark-surface rounded-3xl p-4 shadow-soft border border-themed group cursor-pointer flex flex-col h-full" onclick="window.location.href='${p.link}'">
+                <div class="relative aspect-[4/3] rounded-xl overflow-hidden mb-3 shrink-0 bg-wash dark:bg-wash-dark">
                     <img src="${p.image}" onerror="this.src='https://placehold.co/600x400?text=No+Image'" alt="${p.title}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
-                    <div class="chip-overlay absolute top-4 right-4 z-20 backdrop-blur px-3 py-1 rounded-full text-xs font-bold border">${p.category}</div>
                 </div>
-                <div class="px-2 pb-2 flex-grow flex flex-col">
-                    <h3 class="text-primary text-lg font-bold mb-1">${p.title}</h3>
-                    <p class="text-muted text-sm line-clamp-3 leading-relaxed">${p.desc}</p>
+                <div class="px-1 pb-1 flex-grow flex flex-col">
+                    <div class="flex items-center justify-between mb-1.5">
+                        <h3 class="text-primary text-base font-bold">${p.title}</h3>
+                        <span class="chip-overlay text-[10px] font-bold px-2.5 py-0.5 rounded-full border shrink-0 ml-2">${p.category}</span>
+                    </div>
+                    <p class="text-muted text-sm font-normal leading-relaxed line-clamp-3">${p.desc}</p>
                 </div>
             </div>
         `).join('');

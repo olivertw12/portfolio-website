@@ -94,14 +94,14 @@
     --font-mono: 'JetBrains Mono', monospace;
 
     /* --- Radii --- */
-    --radius-xl:  1rem;
-    --radius-2xl: 1.5rem;
-    --radius-3xl: 2rem;
+    --radius-xl:  0.625rem;   /* 10px — buttons, chips, small elements */
+    --radius-2xl: 0.875rem;   /* 14px — inner card images, nav         */
+    --radius-3xl: 1.25rem;    /* 20px — cards, panels, large surfaces  */
 
     /* --- Shadows --- */
-    --shadow-soft:  0 4px 24px -4px rgba(37,46,40,0.10);
+    --shadow-soft:  0 4px 28px -4px rgba(37,46,40,0.16);
     --shadow-glow:  0 0 20px rgba(107,158,142,0.28);
-    --shadow-paper: 0 1px 4px 0 rgba(37,46,40,0.09), 0 1px 2px 0 rgba(37,46,40,0.05);
+    --shadow-paper: 0 2px 8px 0 rgba(37,46,40,0.12), 0 1px 2px 0 rgba(37,46,40,0.07);
 }
 
 
@@ -377,3 +377,39 @@ p, h1, h2, h3, h4, h5, h6, li, span, a { overflow-wrap: break-word; }
     .border-themed, .border-base, .border-base-solid { border-color: #e5e7eb !important; }
     a { text-decoration: none; color: black !important; }
 }
+
+/* ============================================================
+   COMPONENT REFINEMENTS
+   ============================================================ */
+
+/* Glass card — stronger lift */
+.glass-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 16px 40px -8px rgba(37,46,40,0.20);
+}
+
+/* Buttons — tighter radius + spacing than cards */
+a.btn-dark, button.btn-dark,
+a[style*="color-primary"], a[style*="var(--color-primary)"] {
+    border-radius: 10px;
+    letter-spacing: 0.015em;
+}
+
+/* Body copy — tighter line-height for better density */
+.text-body { line-height: 1.65; }
+
+/* Section dividers */
+.section-divider {
+    border: none;
+    border-top: 1px solid var(--color-border);
+}
+.dark .section-divider {
+    border-top-color: var(--color-border-dark);
+}
+
+/* Contact section glow — perceptible at the right opacity */
+.contact-glow {
+    background: radial-gradient(ellipse at 60% 40%, var(--color-accent) 0%, transparent 68%);
+    opacity: 0.08;
+}
+.dark .contact-glow { opacity: 0.12; }

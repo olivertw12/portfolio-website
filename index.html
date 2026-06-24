@@ -32,32 +32,33 @@
 
     <nav id="navbar-placeholder" data-type="home" class="fixed top-4 left-0 right-0 z-50 px-4 md:px-8"></nav>
 
-    <!-- Hero -->
+    <!-- ═══ HERO ═══ -->
     <section class="pt-32 pb-8 w-full">
         <div class="w-full transition-colors duration-500 relative overflow-hidden flex flex-col justify-center min-h-[50vh]">
             <div class="w-full max-w-7xl mx-auto px-6 py-12 md:py-20 relative z-10">
 
-                <!-- Watermark anchor -->
                 <div class="absolute left-1/2 -translate-x-1/2 md:left-auto md:translate-x-0 md:right-4 lg:right-12 top-1/2 -translate-y-1/2 pointer-events-none -z-10">
                     <i data-lucide="anchor" class="w-80 h-80 md:w-[480px] md:h-[480px] stroke-1" style="color: var(--color-accent); opacity: 0.10;"></i>
                 </div>
 
-                <!-- Availability badge -->
                 <div class="flex items-center gap-2 mb-6 opacity-80">
                     <div class="w-2 h-2 rounded-full animate-pulse" style="background-color: var(--color-accent);"></div>
                     <span class="text-muted text-xs font-semibold uppercase tracking-widest">Available for work</span>
                 </div>
 
+                <!-- font-medium (500) for the display heading -->
                 <h1 class="text-primary text-4xl md:text-7xl font-medium mb-6 tracking-tight leading-[1.1]">
                     Connecting Design &amp; Data.
                 </h1>
 
-                <p class="text-body text-lg md:text-xl leading-relaxed mb-8 max-w-2xl">
+                <!-- font-normal (400) body, tighter line-height for contrast with heading -->
+                <p class="text-body font-normal text-lg md:text-xl leading-[1.65] mb-8 max-w-2xl">
                     Hi, I'm Oliver Williams! I am a graphic designer and data analyst with expertise in combining design thinking and technical skills to solve complex problems. I specialize in data-driven visualizations and corporate branding using the Adobe Suite, working with clients to craft the best results possible.
                 </p>
 
                 <div class="flex flex-row items-center gap-8">
-                    <a href="resume.html" class="text-white dark:text-primary-dark px-8 py-4 rounded-xl font-semibold hover:opacity-90 transition-opacity flex items-center gap-2 text-sm md:text-base" style="background-color: var(--color-primary);">
+                    <!-- rounded-[10px] tighter than cards, tracking-wide for button feel -->
+                    <a href="resume.html" class="text-white dark:text-primary-dark px-8 py-3.5 rounded-[10px] font-semibold tracking-wide hover:opacity-90 transition-opacity flex items-center gap-2 text-sm md:text-base" style="background-color: var(--color-primary);">
                         View Resume <i class="fa-solid fa-arrow-right -rotate-45"></i>
                     </a>
                     <a href="mailto:oliver_tw@icloud.com" class="text-body hover:text-primary border-b border-divider hover:border-primary pb-0.5 font-medium transition-colors">
@@ -68,9 +69,12 @@
         </div>
     </section>
 
-    <!-- Design Projects -->
-    <section id="design" class="py-12 px-4 md:px-8 max-w-7xl mx-auto border-t border-themed">
-        <div class="flex items-end justify-between mb-8 pt-8">
+    <!-- Section divider -->
+    <div class="max-w-7xl mx-auto w-full px-4 md:px-8"><hr class="section-divider"></div>
+
+    <!-- ═══ DESIGN PROJECTS ═══ -->
+    <section id="design" class="py-12 px-4 md:px-8 max-w-7xl mx-auto">
+        <div class="flex items-end justify-between mb-8 pt-4">
             <div>
                 <span class="text-accent text-sm font-bold tracking-wider uppercase mb-2 block">Part 01</span>
                 <h2 class="text-primary text-3xl md:text-4xl font-bold">Design Projects</h2>
@@ -85,9 +89,12 @@
         </div>
     </section>
 
-    <!-- Data Projects -->
+    <!-- Section divider -->
+    <div class="max-w-7xl mx-auto w-full px-4 md:px-8"><hr class="section-divider"></div>
+
+    <!-- ═══ DATA PROJECTS ═══ -->
     <section id="data" class="py-12 px-4 md:px-8 max-w-7xl mx-auto">
-        <div class="mb-8">
+        <div class="mb-8 pt-4">
             <span class="text-accent text-sm font-bold tracking-wider uppercase mb-2 block">Part 02</span>
             <h2 class="text-primary text-3xl md:text-4xl font-bold">Data Projects</h2>
         </div>
@@ -97,24 +104,24 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 min-h-[500px]">
                 <div class="p-8 md:p-12 flex flex-col justify-center relative z-10 order-2 lg:order-1">
                     <div class="mb-6">
-                        <div class="badge-accent inline-flex items-center gap-2 px-3 py-1 rounded-lg text-xs font-bold uppercase tracking-wider mb-4 border border-transparent">
+                        <div class="badge-accent inline-flex items-center gap-2 px-3 py-1 rounded-[8px] text-xs font-bold uppercase tracking-wider mb-4">
                             <i data-lucide="bar-chart-2" class="w-3 h-3"></i> Capstone Project
                         </div>
                         <h3 class="text-primary text-3xl font-bold mb-4">DMARC Network Analysis</h3>
-                        <p class="text-body text-lg leading-relaxed mb-6">
+                        <p class="text-body font-normal text-lg leading-[1.65] mb-6">
                             Leveraging R and geospatial analysis (leaflet) to uncover service gaps in the DMARC Food Pantry Network. By merging transaction logs with ACS Census data, I mapped visitor density to identify high-need areas and utilized predictive modeling to forecast a 2025 surge in demand within specific demographic groups.
                         </p>
                     </div>
                     <div class="mb-8">
                         <h4 class="text-muted text-xs font-bold uppercase tracking-wider mb-3">Technologies Used</h4>
                         <div class="flex flex-wrap gap-2">
-                            <span class="tech-pill px-3 py-2 rounded-lg text-sm font-medium flex items-center gap-2"><i class="fa-brands fa-r-project"></i> R (Tidyverse)</span>
-                            <span class="tech-pill px-3 py-2 rounded-lg text-sm font-medium flex items-center gap-2"><i class="fa-solid fa-map"></i> Geospatial Mapping</span>
-                            <span class="tech-pill px-3 py-2 rounded-lg text-sm font-medium flex items-center gap-2"><i class="fa-solid fa-chart-line"></i> Predictive Modeling</span>
+                            <span class="tech-pill px-3 py-2 rounded-[8px] text-sm font-medium flex items-center gap-2"><i class="fa-brands fa-r-project"></i> R (Tidyverse)</span>
+                            <span class="tech-pill px-3 py-2 rounded-[8px] text-sm font-medium flex items-center gap-2"><i class="fa-solid fa-map"></i> Geospatial Mapping</span>
+                            <span class="tech-pill px-3 py-2 rounded-[8px] text-sm font-medium flex items-center gap-2"><i class="fa-solid fa-chart-line"></i> Predictive Modeling</span>
                         </div>
                     </div>
                     <div class="mt-auto">
-                        <a href="project-data.html" class="inline-flex items-center gap-2 text-white dark:text-primary-dark px-8 py-3 rounded-xl font-semibold hover:opacity-90 transition-opacity" style="background-color: var(--color-primary);">
+                        <a href="project-data.html" class="inline-flex items-center gap-2 text-white dark:text-primary-dark px-7 py-3 rounded-[10px] font-semibold tracking-wide hover:opacity-90 transition-opacity" style="background-color: var(--color-primary);">
                             View Case Study <i class="fa-solid fa-arrow-right"></i>
                         </a>
                     </div>
@@ -128,7 +135,6 @@
         <!-- Site build card -->
         <div class="bg-surface dark:bg-dark-surface rounded-3xl overflow-hidden shadow-soft border border-themed transition-colors duration-500">
             <div class="grid grid-cols-1 lg:grid-cols-2 min-h-[400px]">
-                <!-- Code preview panel -->
                 <div class="bg-code-panel border-r border-code min-h-[300px] lg:min-h-full order-1 group overflow-hidden flex flex-col">
                     <div class="flex items-center px-4 py-3 border-b border-code bg-code-panel-header">
                         <div class="flex gap-1.5 mr-3">
@@ -158,24 +164,24 @@
                 </div>
                 <div class="p-8 md:p-12 flex flex-col justify-center relative z-10 order-2">
                     <div class="mb-6">
-                        <div class="badge-neutral inline-flex items-center gap-2 px-3 py-1 rounded-lg text-xs font-bold uppercase tracking-wider mb-4 border">
+                        <div class="badge-neutral inline-flex items-center gap-2 px-3 py-1 rounded-[8px] text-xs font-bold uppercase tracking-wider mb-4 border">
                             <i data-lucide="code-2" class="w-3 h-3"></i> Web Development
                         </div>
                         <h3 class="text-primary text-3xl font-bold mb-4">Personal Site Build</h3>
-                        <p class="text-body text-lg leading-relaxed mb-6">
+                        <p class="text-body font-normal text-lg leading-[1.65] mb-6">
                             The story behind how I created this website. I used both HTML5 and Tailwind CSS to build this site's aesthetic and established a CI/CD pipeline via GitHub and Cloudflare for updates on my laptop.
                         </p>
                     </div>
                     <div class="mb-8">
                         <h4 class="text-muted text-xs font-bold uppercase tracking-wider mb-3">Technologies Used</h4>
                         <div class="flex flex-wrap gap-2">
-                            <span class="tech-pill px-3 py-2 rounded-lg text-sm font-medium flex items-center gap-2"><i class="fa-brands fa-html5"></i> HTML5</span>
-                            <span class="tech-pill px-3 py-2 rounded-lg text-sm font-medium flex items-center gap-2"><i class="fa-brands fa-css3-alt"></i> Tailwind</span>
-                            <span class="tech-pill px-3 py-2 rounded-lg text-sm font-medium flex items-center gap-2"><i class="fa-brands fa-git-alt"></i> CI/CD</span>
+                            <span class="tech-pill px-3 py-2 rounded-[8px] text-sm font-medium flex items-center gap-2"><i class="fa-brands fa-html5"></i> HTML5</span>
+                            <span class="tech-pill px-3 py-2 rounded-[8px] text-sm font-medium flex items-center gap-2"><i class="fa-brands fa-css3-alt"></i> Tailwind</span>
+                            <span class="tech-pill px-3 py-2 rounded-[8px] text-sm font-medium flex items-center gap-2"><i class="fa-brands fa-git-alt"></i> CI/CD</span>
                         </div>
                     </div>
                     <div class="mt-auto">
-                        <a href="project-data2.html" class="inline-flex items-center gap-2 text-white dark:text-primary-dark px-8 py-3 rounded-xl font-semibold hover:opacity-90 transition-opacity" style="background-color: var(--color-primary);">
+                        <a href="project-data2.html" class="inline-flex items-center gap-2 text-white dark:text-primary-dark px-7 py-3 rounded-[10px] font-semibold tracking-wide hover:opacity-90 transition-opacity" style="background-color: var(--color-primary);">
                             View Process <i class="fa-solid fa-arrow-right"></i>
                         </a>
                     </div>
@@ -184,14 +190,18 @@
         </div>
     </section>
 
-    <!-- Contact -->
+    <!-- Section divider -->
+    <div class="max-w-7xl mx-auto w-full px-4 md:px-8"><hr class="section-divider"></div>
+
+    <!-- ═══ CONTACT ═══ -->
     <section id="contact" class="w-full px-4 md:px-8 pb-20 pt-10 max-w-7xl mx-auto">
         <div class="w-full bg-surface dark:bg-dark-surface rounded-3xl p-8 md:p-12 shadow-soft border border-themed transition-colors duration-500 text-center relative overflow-hidden">
-            <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(ellipse at 60% 50%, var(--color-accent) 0%, transparent 70%); opacity: 0.03;"></div>
+            <!-- Stronger glow via .contact-glow class (opacity 0.08 in CSS) -->
+            <div class="contact-glow absolute inset-0 pointer-events-none"></div>
             <div class="relative z-10">
                 <h2 class="text-primary text-3xl md:text-5xl font-bold mb-4">Let's work together!</h2>
-                <p class="text-muted text-lg mb-8 max-w-xl mx-auto">Looking for assistance with a project? Please reach out and let me know how I can help.</p>
-                <a href="mailto:oliver_tw@icloud.com" class="inline-flex items-center gap-2 text-white dark:text-primary-dark px-8 py-4 rounded-xl font-bold hover:opacity-90 transition-opacity" style="background-color: var(--color-primary);">
+                <p class="text-muted font-normal text-lg mb-8 max-w-xl mx-auto">Looking for assistance with a project? Please reach out and let me know how I can help.</p>
+                <a href="mailto:oliver_tw@icloud.com" class="inline-flex items-center gap-2 text-white dark:text-primary-dark px-8 py-3.5 rounded-[10px] font-semibold tracking-wide hover:opacity-90 transition-opacity" style="background-color: var(--color-primary);">
                     <i class="fa-solid fa-envelope"></i> Email Me
                 </a>
             </div>
@@ -211,14 +221,16 @@
         function renderDesignProjects() {
             const grid = document.getElementById('design-grid');
             grid.innerHTML = designProjects.map(p => `
-                <div class="glass-card bg-surface dark:bg-dark-surface rounded-3xl p-3 shadow-soft border border-themed group cursor-pointer transition-colors duration-500 flex flex-col h-full" onclick="window.location.href='project.html?id=${p.id}'">
-                    <div class="relative aspect-[4/3] bg-wash dark:bg-wash-dark rounded-2xl overflow-hidden mb-4 shrink-0">
+                <div class="glass-card bg-surface dark:bg-dark-surface rounded-3xl p-4 shadow-soft border border-themed group cursor-pointer transition-colors duration-500 flex flex-col h-full" onclick="window.location.href='project.html?id=${p.id}'">
+                    <div class="relative aspect-[4/3] bg-wash dark:bg-wash-dark rounded-xl overflow-hidden mb-3 shrink-0">
                         <img src="${p.image}" onerror="this.src='https://placehold.co/600x400?text=No+Image'" alt="${p.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                        <div class="chip-overlay absolute top-4 right-4 backdrop-blur px-3 py-1 rounded-full text-xs font-bold border">${p.category}</div>
                     </div>
-                    <div class="px-2 pb-2 flex-grow">
-                        <h3 class="text-primary text-lg font-bold mb-1">${p.title}</h3>
-                        <p class="text-muted text-sm line-clamp-2">${p.desc}</p>
+                    <div class="px-1 pb-1 flex-grow">
+                        <div class="flex items-center justify-between mb-1.5">
+                            <h3 class="text-primary text-base font-bold">${p.title}</h3>
+                            <span class="chip-overlay text-[10px] font-bold px-2.5 py-0.5 rounded-full border shrink-0 ml-2">${p.category}</span>
+                        </div>
+                        <p class="text-muted text-sm font-normal leading-relaxed line-clamp-2">${p.desc}</p>
                     </div>
                 </div>
             `).join('');

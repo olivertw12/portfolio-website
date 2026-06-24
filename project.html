@@ -65,7 +65,7 @@
         </header>
 
         <figure class="mb-20">
-            <div class="w-full aspect-video bg-wash dark:bg-wash-dark rounded-3xl overflow-hidden shadow-soft mb-4 border border-themed group cursor-pointer relative" onclick="openLightbox(0)">
+            <div class="w-full aspect-video bg-wash dark:bg-wash-dark rounded-3xl overflow-hidden shadow-soft mb-3 border border-themed group cursor-pointer relative" onclick="openLightbox(0)">
                 <img id="p-hero" src="" alt="Hero Image" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
                 <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100 duration-300">
                     <div class="bg-white/20 backdrop-blur-md p-3 rounded-full">
@@ -73,24 +73,24 @@
                     </div>
                 </div>
             </div>
-            <figcaption id="p-hero-cap" class="text-muted text-sm text-center italic px-4"></figcaption>
+            <figcaption id="p-hero-cap" class="text-muted font-normal text-sm text-center italic px-4"></figcaption>
         </figure>
 
         <div class="flex flex-col md:grid md:grid-cols-12 gap-y-10 md:gap-x-12 mb-24">
             <div class="w-full md:col-span-4"><div class="flex items-baseline gap-3"><span class="text-accent font-mono font-bold text-xl">01</span><h2 class="text-primary text-2xl font-bold">Background</h2></div></div>
-            <div class="w-full md:col-span-8"><p id="p-background" class="text-body text-base md:text-lg leading-relaxed break-words"></p></div>
+            <div class="w-full md:col-span-8"><p id="p-background" class="text-body font-normal text-base md:text-lg leading-[1.65] break-words"></p></div>
 
             <div class="w-full md:col-span-4"><div class="flex items-baseline gap-3"><span class="text-accent font-mono font-bold text-xl">02</span><h2 class="text-primary text-2xl font-bold">The Challenge</h2></div></div>
-            <div class="w-full md:col-span-8"><p id="p-challenge" class="text-body text-base md:text-lg leading-relaxed break-words"></p></div>
+            <div class="w-full md:col-span-8"><p id="p-challenge" class="text-body font-normal text-base md:text-lg leading-[1.65] break-words"></p></div>
 
             <div class="w-full md:col-span-4"><div class="flex items-baseline gap-3"><span class="text-accent font-mono font-bold text-xl">03</span><h2 class="text-primary text-2xl font-bold">The Solution</h2></div></div>
-            <div class="w-full md:col-span-8"><p id="p-solution" class="text-body text-base md:text-lg leading-relaxed break-words"></p></div>
+            <div class="w-full md:col-span-8"><p id="p-solution" class="text-body font-normal text-base md:text-lg leading-[1.65] break-words"></p></div>
 
             <div class="w-full md:col-span-4"><div class="flex items-baseline gap-3"><span class="text-accent font-mono font-bold text-xl">04</span><h2 class="text-primary text-2xl font-bold">The Result</h2></div></div>
-            <div class="w-full md:col-span-8"><p id="p-result" class="text-body text-base md:text-lg leading-relaxed break-words"></p></div>
+            <div class="w-full md:col-span-8"><p id="p-result" class="text-body font-normal text-base md:text-lg leading-[1.65] break-words"></p></div>
         </div>
 
-        <div id="p-gallery" class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20"></div>
+        <div id="p-gallery" class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-20"></div>
 
         <div class="border-t border-themed pt-12 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
             <span class="text-muted text-sm font-medium">Next Project</span>
@@ -110,19 +110,22 @@
                 </svg>
             </div>
             <h1 class="text-primary text-3xl font-bold mb-4">Case Study In Progress</h1>
-            <p class="text-muted max-w-md mb-8">I am currently documenting the process for this project.</p>
-            <a href="archive.html" class="inline-flex items-center gap-2 px-6 py-3 text-white dark:text-primary-dark rounded-full font-medium hover:opacity-80 transition-opacity" style="background-color: var(--color-primary);">Back to Portfolio</a>
+            <p class="text-muted font-normal max-w-md mb-8">I am currently documenting the process for this project.</p>
+            <a href="archive.html" class="inline-flex items-center gap-2 px-6 py-3 text-white dark:text-primary-dark rounded-[10px] font-semibold tracking-wide hover:opacity-80 transition-opacity" style="background-color: var(--color-primary);">Back to Portfolio</a>
         </section>
     </div>
 
     <!-- Contact -->
     <section id="contact" class="px-4 md:px-8 pb-20">
-        <div class="max-w-7xl mx-auto bg-surface dark:bg-dark-surface rounded-3xl p-8 md:p-12 shadow-soft border border-themed transition-colors duration-500 text-center">
-            <h2 class="text-primary text-3xl md:text-5xl font-bold mb-4">Let's work together!</h2>
-            <p class="text-muted text-lg mb-8 max-w-xl mx-auto">Looking for assistance with a project? Please reach out and let me know how I can help.</p>
-            <a href="mailto:oliver_tw@icloud.com" class="inline-flex items-center gap-2 text-white dark:text-primary-dark px-8 py-4 rounded-xl font-bold hover:opacity-90 transition-opacity" style="background-color: var(--color-primary);">
-                <i class="fa-solid fa-envelope"></i> Email Me
-            </a>
+        <div class="max-w-7xl mx-auto bg-surface dark:bg-dark-surface rounded-3xl p-8 md:p-12 shadow-soft border border-themed transition-colors duration-500 text-center relative overflow-hidden">
+            <div class="contact-glow absolute inset-0 pointer-events-none"></div>
+            <div class="relative z-10">
+                <h2 class="text-primary text-3xl md:text-5xl font-bold mb-4">Let's work together!</h2>
+                <p class="text-muted font-normal text-lg mb-8 max-w-xl mx-auto">Looking for assistance with a project? Please reach out and let me know how I can help.</p>
+                <a href="mailto:oliver_tw@icloud.com" class="inline-flex items-center gap-2 text-white dark:text-primary-dark px-8 py-3.5 rounded-[10px] font-semibold tracking-wide hover:opacity-90 transition-opacity" style="background-color: var(--color-primary);">
+                    <i class="fa-solid fa-envelope"></i> Email Me
+                </a>
+            </div>
         </div>
     </section>
 
@@ -142,10 +145,10 @@
             "duolingo": { category:"Advertising Campaign", title:"Duolingo x Rocket League", client:"Young Ones Competition", role:"Illustration", year:"2024", deliverables:"Campaign Deck, Concept Video, Vector Illustration", hero:"images/duolingo2.png", heroCaption:"Concept art for the Duolingo x Rocket League crossover event.", background:"This project was a submission for the One Club for Creativity's 'Young Ones' competition. The national brief challenged students to develop innovative marketing strategies to help global brands, such as Duolingo, achieve specific growth goals.", challenge:"Duolingo sought to penetrate a new demographic. We identified the gaming community as a prime target due to its reliance on cross-cultural communication. We selected Rocket League as the specific vehicle, leveraging its massive international player base.", solution:"We pitched an immersive in-game crossover event. I spearheaded the visual development, utilizing Adobe Illustrator to merge official assets from the Duolingo brand kit with the Rocket League aesthetic.", result:"Delivered a comprehensive campaign deck and video pitch that successfully merged two distinct brand identities, resulting in a professional-grade presentation suitable for a major tech client.", gallery:[{src:"images/duolingo3.png",caption:"In-game car decal concept."},{src:"images/duolingo4.png",caption:"Initial illustration sketch."}] },
             "art": { category:"Fine Art", title:"Traditional Artwork", client:"Personal", role:"Artist", year:"2021-2024", deliverables:"Mixed Media Studies", hero:"images/art1.jpg", heroCaption:"Cloth Vignette - Drawing cloth from sight using charcoal paints reductively. [18 x 25 in.]. Featured at the Drake University Anderson Gallery 52nd Annual Juried Student Exhibition in March 2023.", background:"While my professional work focuses on digital design and analytics, I maintain a dedicated practice in traditional fine art. This collection represents a compilation of studies created between 2021 and 2024.", challenge:"The challenge in traditional media is the lack of an 'undo' button. Working with charcoal and ink requires commitment to every stroke and a deep understanding of physical materials.", solution:"I primarily work with a variety of charcoals and pastels. My studies focus on recreating form in high-contrast lighting scenarios, relying on value and texture to communicate volume and emotion.", result:"This ongoing practice keeps my fundamental artistic skills sharp. The discipline required for traditional drawing directly translates to my digital work, improving my eye for composition and balance.", gallery:[{src:"images/art2.jpg",caption:"Marble - Drawn from sight using oil pastels. [18 x 25 in.]"},{src:"images/art4.jpg",caption:"Untitled - 30 minute photo study w/ charcoal. [8.5 x 11 in.]"},{src:"images/art6.jpg",caption:"Untitled - 30 minute photo study w/ oil pastel. [11 x 8.5 in.]"},{src:"images/art3.jpg",caption:"C.M.Y.K. - Psychological space w/ mixed media. [12 x 18 in.]"},{src:"images/art5.jpg",caption:"Dissonance - Oil pastel. [18 x 25 in.]"},{src:"images/art7.png",caption:"25 Fruits - Color & abstraction w/ mixed media. [4 x 4 in.]"}] },
             "cityintern": { category:"Editorial & UI Design", title:"Shorewood Internship", client:"City of Shorewood", role:"Graphic Design Intern", year:"2024", deliverables:"Fillable Forms, PDFs", hero:"images/cityintern2.png", heroCaption:"A selection of standardized, fillable PDF forms created for the city government.", background:"The City of Shorewood, Minnesota, manages a wide variety of administrative processes that require documentation, from permits to internal HR forms. I joined the team as a Graphic Design Intern to assist in modernizing their communication materials.", challenge:"Many of the city's existing documents were outdated, visually inconsistent, and difficult to use. The challenge was to audit these legacy documents and transform them into a cohesive system that aligned with the Shorewood Branding Kit while drastically improving usability.", solution:"I utilized Adobe Acrobat and InDesign to redesign and engineer a suite of fillable PDFs. I strictly applied the Shorewood Branding Kit and focused on user experience by adding interactive form fields, dropdown menus, and clear instructional hierarchy.", result:"The project resulted in a library of modernized, user-friendly documents that streamlined administrative workflows. The shift to fillable PDFs reduced paper waste and data entry errors.", gallery:[] },
-            "xmas": { category:"Map Design & Illustration", title:"Christmas in Excelsior", client:"International Lions Club", role:"Map Illustration", year:"2024", deliverables:"Event Map, Pamphlet", hero:"images/xmas2.png", heroCaption:"Overview of the event map designed for the first-ever Christmas Market in Excelsior.", background:"The International Lions Club organized the first-ever Christmas Market in Excelsior, a major community initiative aimed at bringing residents and visitors together for the holiday season, anticipating an estimated attendance of 50,000 people.", challenge:"With such a significant influx of visitors to a new event layout, clarity and navigation were critical safety and logistical concerns. Attendees needed to be able to intuitively find specific vendor zones, food areas, restrooms, and event features.", solution:"I volunteered to design a comprehensive area map that prioritized readability and functional navigation. The design clearly highlighted efficient walking routes, distinct vendor zones, and key landmarks, optimized for print.", result:"The map became a central piece of the visitor experience, distributed in printed pamphlets to the estimated audience of 50,000, successfully directing foot traffic and reducing bottlenecks.", gallery:[] },
+            "xmas": { category:"Map Design & Illustration", title:"Christmas in Excelsior", client:"International Lions Club", role:"Map Illustration", year:"2024", deliverables:"Event Map, Pamphlet", hero:"images/xmas2.png", heroCaption:"Overview of the event map designed for the first-ever Christmas Market in Excelsior.", background:"The International Lions Club organized the first-ever Christmas Market in Excelsior, a major community initiative aimed at bringing residents and visitors together for the holiday season, anticipating an estimated attendance of 50,000 people.", challenge:"With such a significant influx of visitors to a new event layout, clarity and navigation were critical safety and logistical concerns. Attendees needed to intuitively find specific vendor zones, food areas, restrooms, and event features.", solution:"I volunteered to design a comprehensive area map that prioritized readability and functional navigation. The design clearly highlighted efficient walking routes, distinct vendor zones, and key landmarks, optimized for print.", result:"The map became a central piece of the visitor experience, distributed in printed pamphlets to the estimated audience of 50,000, successfully directing foot traffic and reducing bottlenecks.", gallery:[] },
             "citymap": { category:"Illustration & Product Design", title:"City of Shorewood Map", client:"Community Prototype", role:"Illustrator", year:"2024", deliverables:"Rug Design, Map", hero:"images/citymap2.png", heroCaption:"A custom illustrated rug designed to help children visualize their community.", background:"This project began as a university initiative to design a functional prototype that would benefit a local community. The goal was to create an educational tool that fostered a sense of place and belonging for younger residents.", challenge:"Learning city layouts and navigation can be abstract and difficult for children when relying on traditional 2D maps or digital screens. The challenge was to translate complex geographic data into a format that was intuitive, playful, and physically interactive.", solution:"I developed a custom illustrated rug that functions as a large-scale play mat with a stylized yet accurate map of Shorewood. Key landmarks were illustrated with distinct icons, and roads were designed wide enough for toy cars.", result:"The final prototype effectively depicts Shorewood, Minnesota, along with its real city landmarks and surrounding townships, bridging the gap between a toy and an educational resource.", gallery:[{src:"images/citymap3.png",caption:"View of the rug at eye-level."},{src:"images/citymap4.png",caption:"2nd view of the rug at eye-level."}] },
             "data": { category:"Event Branding & Print Design", title:"Save the Data: Ransomware Event", client:"DATA Club & Tech Association of Iowa", role:"President & Lead Designer", year:"2025", deliverables:"Event Flyers, Social Media Assets, Digital Signage", hero:"images/data1.png", heroCaption:"Promotional flyers designed for the 'Save the Data' cybersecurity event.", background:"I partnered with the Tech Association of Iowa as President of the DATA Club to organize a tabletop ransomware exercise demonstrating business responses to cybersecurity crises for students and industry professionals.", challenge:"The workshop needed a visual identity to attract students and professionals to a three-hour morning session, requiring a clear theme to distinguish it from standard academic lectures.", solution:"I created a retro-computing visual style using pixelated icons and distressed typography, producing two colorways: 'System Blue' for light mode and 'Critical Pink' for dark mode, displayed side-by-side in science halls.", result:"The campaign distinguished the event from other campus activities and drew attendance from students and tech professionals.", gallery:[{src:"images/data2.png",caption:"Light mode variant."},{src:"images/data3.png",caption:"Dark mode variant."}] },
-            "icymi": { category:"Brand Identity & Print", title:"ICYMI Podcast", client:"Student Media", role:"Co-Host & Designer", year:"2022", deliverables:"Podcast Cover, Weekly Posters", hero:"images/icymi2.png", heroCaption:"The official cover art for the ICYMI (In Case You Missed It) podcast.", background:"ICYMI was a weekly news podcast dedicated to covering stories around Drake University and the greater Des Moines area. As both a co-host and the lead designer, I aimed to keep the student body informed through an accessible audio format.", challenge:"Podcasts are an audio medium, making visual discoverability a significant hurdle on a physical campus. We needed a strong visual identity that could translate from a digital thumbnail on Spotify to physical posters on crowded bulletin boards.", solution:"I designed a bold, distinct podcast cover that served as the anchor for our visual brand, then developed a templated poster system for our weekly episode rollouts to quickly generate fresh promotional assets.", result:"The visual campaign successfully established ICYMI's presence across Drake University. The consistent poster distribution helped drive listenership and built a recognizable brand on campus.", gallery:[{src:"images/icymi3.jpg",caption:"'Generic' poster displayed on campus whiteboard."},{src:"images/icymi6.png",caption:"Example of the variable flyer, posted onto Instagram."}] }
+            "icymi": { category:"Brand Identity & Print", title:"ICYMI Podcast", client:"Student Media", role:"Co-Host & Designer", year:"2022", deliverables:"Podcast Cover, Weekly Posters", hero:"images/icymi2.png", heroCaption:"The official cover art for the ICYMI (In Case You Missed It) podcast.", background:"ICYMI was a weekly news podcast dedicated to covering stories around Drake University and the greater Des Moines area. As both a co-host and the lead designer, I aimed to keep the student body informed through an accessible audio format.", challenge:"Podcasts are an audio medium, making visual discoverability a significant hurdle on a physical campus. We needed a strong visual identity that could translate from a digital thumbnail on Spotify to physical posters on crowded bulletin boards.", solution:"I designed a bold, distinct podcast cover that served as the anchor for our visual brand, then developed a templated poster system for weekly episode rollouts to quickly generate fresh promotional assets.", result:"The visual campaign successfully established ICYMI's presence across Drake University. The consistent poster distribution helped drive listenership and built a recognizable brand on campus.", gallery:[{src:"images/icymi3.jpg",caption:"'Generic' poster displayed on campus whiteboard."},{src:"images/icymi6.png",caption:"Example of the variable flyer, posted onto Instagram."}] }
         };
 
         const params = new URLSearchParams(window.location.search);
@@ -193,7 +196,7 @@
 
         if (data) {
             ['category','title','client','role','year','deliverables'].forEach(k => document.getElementById('p-'+k).innerText = data[k]);
-            document.getElementById('p-hero-cap').innerText  = data.heroCaption;
+            document.getElementById('p-hero-cap').innerText   = data.heroCaption;
             document.getElementById('p-background').innerText = data.background;
             document.getElementById('p-challenge').innerText  = data.challenge;
             document.getElementById('p-solution').innerText   = data.solution;
@@ -210,14 +213,14 @@
 
             const galleryEl = document.getElementById('p-gallery');
             const isLarge = data.gallery.length > 3;
-            galleryEl.className = isLarge ? 'grid grid-cols-1 md:grid-cols-3 gap-8 mb-20' : 'grid grid-cols-1 md:grid-cols-2 gap-8 mb-20';
+            galleryEl.className = isLarge ? 'grid grid-cols-1 md:grid-cols-3 gap-6 mb-20' : 'grid grid-cols-1 md:grid-cols-2 gap-6 mb-20';
 
             galleryEl.innerHTML = data.gallery.map((img, i) => {
                 const span   = (!isLarge && (i+1) % 3 === 0) ? 'md:col-span-2' : '';
                 const aspect = (!isLarge && (i+1) % 3 === 0) ? 'aspect-video' : 'aspect-[4/3]';
                 return `
                 <figure class="${span} group cursor-pointer" onclick="openLightbox(${i+1})">
-                    <div class="bg-wash dark:bg-wash-dark rounded-3xl overflow-hidden ${aspect} border border-themed shadow-soft mb-3 relative">
+                    <div class="bg-wash dark:bg-wash-dark rounded-2xl overflow-hidden ${aspect} border border-themed shadow-soft mb-3 relative">
                         <img src="${img.src}" alt="${img.caption}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
                         <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100 duration-300">
                             <div class="bg-white/20 backdrop-blur-md p-3 rounded-full">
@@ -225,7 +228,7 @@
                             </div>
                         </div>
                     </div>
-                    <figcaption class="text-muted text-sm px-1">${img.caption}</figcaption>
+                    <figcaption class="text-muted font-normal text-sm px-1">${img.caption}</figcaption>
                 </figure>`;
             }).join('');
 
