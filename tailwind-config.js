@@ -13,6 +13,9 @@ tailwind.config = {
                 'primary-dark': 'var(--color-primary-dark)',
                 success: 'var(--color-success)',
                 accent: 'var(--color-accent)',
+                'accent-light': 'var(--color-accent-light)',
+                'accent-muted': 'var(--color-accent-muted)',
+                muted: 'var(--color-muted)',
                 code: 'var(--color-code)',
             },
             fontFamily: {

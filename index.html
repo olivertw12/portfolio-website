@@ -7,283 +7,222 @@
     <script>
         if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             document.documentElement.classList.add('dark');
-        } else {
-            document.documentElement.classList.remove('dark');
-        }
+        } else { document.documentElement.classList.remove('dark'); }
     </script>
-    
     <link rel="icon" href="images/favicon-dark.png" media="(prefers-color-scheme: light)">
     <link rel="icon" href="images/favicon-light.png" media="(prefers-color-scheme: dark)">
     <link rel="icon" href="images/favicon-dark.png">
-
-    <meta name="description" content="Portfolio of Oliver T. Williams. Bridging the gap between visual strategy and data intelligence. View my work in branding, advertising, and predictive modeling.">
+    <meta name="description" content="Portfolio of Oliver T. Williams. Bridging the gap between visual strategy and data intelligence.">
     <meta property="og:title" content="Oliver T. Williams | Design & Data">
     <meta property="og:description" content="Portfolio of Oliver T. Williams. Bridging the gap between visual strategy and data intelligence.">
     <meta property="og:image" content="https://olivertwilliams.com/images/og-image.png">
     <meta property="og:url" content="https://olivertwilliams.com">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
-
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="tailwind-config.js"></script>
     <link rel="stylesheet" href="style.css">
-    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body class="bg-cream dark:bg-dark-bg text-gray-800 dark:text-gray-200 font-sans selection:bg-gray-200 dark:selection:bg-gray-700 flex flex-col min-h-screen">
+<body class="bg-cream dark:bg-dark-bg font-sans flex flex-col min-h-screen">
 
     <nav id="navbar-placeholder" data-type="home" class="fixed top-4 left-0 right-0 z-50 px-4 md:px-8"></nav>
 
+    <!-- Hero -->
     <section class="pt-32 pb-8 w-full">
-        
         <div class="w-full transition-colors duration-500 relative overflow-hidden flex flex-col justify-center min-h-[50vh]">
-            
             <div class="w-full max-w-7xl mx-auto px-6 py-12 md:py-20 relative z-10">
-                
-                <div class="absolute left-1/2 -translate-x-1/2 md:left-auto md:translate-x-0 md:right-4 lg:right-12 top-1/2 -translate-y-1/2 flex items-center justify-center pointer-events-none -z-10">
-                    <i data-lucide="anchor" class="w-80 h-80 md:w-[480px] md:h-[480px] text-blue-400/30 dark:text-blue-900/20 stroke-1 opacity-100"></i>
+
+                <!-- Watermark anchor -->
+                <div class="absolute left-1/2 -translate-x-1/2 md:left-auto md:translate-x-0 md:right-4 lg:right-12 top-1/2 -translate-y-1/2 pointer-events-none -z-10">
+                    <i data-lucide="anchor" class="w-80 h-80 md:w-[480px] md:h-[480px] stroke-1" style="color: var(--color-accent); opacity: 0.10;"></i>
                 </div>
 
+                <!-- Availability badge -->
                 <div class="flex items-center gap-2 mb-6 opacity-80">
-                    <div class="w-2 h-2 rounded-full bg-success animate-pulse"></div>
-                    <span class="text-xs font-semibold uppercase tracking-widest text-gray-500 dark:text-gray-400">Available for work</span>
+                    <div class="w-2 h-2 rounded-full animate-pulse" style="background-color: var(--color-accent);"></div>
+                    <span class="text-muted text-xs font-semibold uppercase tracking-widest">Available for work</span>
                 </div>
 
-                <h1 class="text-4xl md:text-7xl font-medium text-gray-900 dark:text-white mb-6 tracking-tight leading-[1.1]">
-                    Connecting Design & Data.</span>
+                <h1 class="text-primary text-4xl md:text-7xl font-medium mb-6 tracking-tight leading-[1.1]">
+                    Connecting Design &amp; Data.
                 </h1>
-                
-                <p class="text-gray-600 dark:text-gray-400 text-lg md:text-xl leading-relaxed mb-8 max-w-2xl">
+
+                <p class="text-body text-lg md:text-xl leading-relaxed mb-8 max-w-2xl">
                     Hi, I'm Oliver Williams! I am a graphic designer and data analyst with expertise in combining design thinking and technical skills to solve complex problems. I specialize in data-driven visualizations and corporate branding using the Adobe Suite, working with clients to craft the best results possible.
                 </p>
-                
+
                 <div class="flex flex-row items-center gap-8">
-                    <a href="resume.html" class="bg-primary dark:bg-primary-dark text-white dark:text-gray-900 px-8 py-4 rounded-xl font-semibold hover:opacity-90 transition-opacity flex items-center gap-2 text-sm md:text-base">
-                       View Resume
-                       <i class="fa-solid fa-arrow-right -rotate-45 group-hover:rotate-0 transition-transform"></i>
+                    <a href="resume.html" class="text-white dark:text-primary-dark px-8 py-4 rounded-xl font-semibold hover:opacity-90 transition-opacity flex items-center gap-2 text-sm md:text-base" style="background-color: var(--color-primary);">
+                        View Resume <i class="fa-solid fa-arrow-right -rotate-45"></i>
                     </a>
-                    <a href="mailto:oliver_tw@icloud.com" class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors font-medium border-b border-gray-300 dark:border-gray-700 hover:border-gray-900 dark:hover:border-white pb-0.5">
+                    <a href="mailto:oliver_tw@icloud.com" class="text-body hover:text-primary border-b border-divider hover:border-primary pb-0.5 font-medium transition-colors">
                         Get in Touch
                     </a>
                 </div>
             </div>
-
         </div>
-
     </section>
 
-    <section id="design" class="py-12 px-4 md:px-8 max-w-7xl mx-auto border-t border-gray-200 dark:border-gray-800">
+    <!-- Design Projects -->
+    <section id="design" class="py-12 px-4 md:px-8 max-w-7xl mx-auto border-t border-themed">
         <div class="flex items-end justify-between mb-8 pt-8">
             <div>
                 <span class="text-accent text-sm font-bold tracking-wider uppercase mb-2 block">Part 01</span>
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">Design Projects</h2>
+                <h2 class="text-primary text-3xl md:text-4xl font-bold">Design Projects</h2>
             </div>
-            <a href="archive.html" class="hidden md:flex items-center gap-2 text-sm font-semibold text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors">
+            <a href="archive.html" class="hidden md:flex items-center gap-2 text-sm font-semibold text-muted hover:text-primary transition-colors">
                 Full Archive <i class="fa-solid fa-arrow-right"></i>
             </a>
         </div>
-        
-        <div id="design-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-            </div>
-
+        <div id="design-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8"></div>
         <div class="md:hidden text-center">
-            <a href="archive.html" class="text-sm font-semibold text-gray-500 underline">View all design projects</a>
+            <a href="archive.html" class="text-sm font-semibold text-muted underline">View all design projects</a>
         </div>
     </section>
 
+    <!-- Data Projects -->
     <section id="data" class="py-12 px-4 md:px-8 max-w-7xl mx-auto">
         <div class="mb-8">
-             <span class="text-accent text-sm font-bold tracking-wider uppercase mb-2 block">Part 02</span>
-             <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">Data Projects</h2>
+            <span class="text-accent text-sm font-bold tracking-wider uppercase mb-2 block">Part 02</span>
+            <h2 class="text-primary text-3xl md:text-4xl font-bold">Data Projects</h2>
         </div>
 
-        <div class="bg-white dark:bg-dark-surface rounded-3xl overflow-hidden shadow-soft border border-gray-100 dark:border-gray-700 transition-colors duration-500 mb-8">
+        <!-- DMARC card -->
+        <div class="bg-surface dark:bg-dark-surface rounded-3xl overflow-hidden shadow-soft border border-themed transition-colors duration-500 mb-8">
             <div class="grid grid-cols-1 lg:grid-cols-2 min-h-[500px]">
-                
                 <div class="p-8 md:p-12 flex flex-col justify-center relative z-10 order-2 lg:order-1">
                     <div class="mb-6">
-                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 text-xs font-bold uppercase tracking-wider mb-4 border border-blue-100 dark:border-blue-800">
+                        <div class="badge-accent inline-flex items-center gap-2 px-3 py-1 rounded-lg text-xs font-bold uppercase tracking-wider mb-4 border border-transparent">
                             <i data-lucide="bar-chart-2" class="w-3 h-3"></i> Capstone Project
                         </div>
-                        <h3 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">DMARC Network Analysis</h3>
-                        <p class="text-gray-600 dark:text-gray-400 text-lg leading-relaxed mb-6">
+                        <h3 class="text-primary text-3xl font-bold mb-4">DMARC Network Analysis</h3>
+                        <p class="text-body text-lg leading-relaxed mb-6">
                             Leveraging R and geospatial analysis (leaflet) to uncover service gaps in the DMARC Food Pantry Network. By merging transaction logs with ACS Census data, I mapped visitor density to identify high-need areas and utilized predictive modeling to forecast a 2025 surge in demand within specific demographic groups.
                         </p>
                     </div>
-
                     <div class="mb-8">
-                        <h4 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">Technologies Used</h4>
+                        <h4 class="text-muted text-xs font-bold uppercase tracking-wider mb-3">Technologies Used</h4>
                         <div class="flex flex-wrap gap-2">
-                            <span class="px-3 py-2 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg text-sm font-medium flex items-center gap-2">
-                                <i class="fa-brands fa-r-project text-gray-400"></i> R (Tidyverse)
-                            </span>
-                            <span class="px-3 py-2 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg text-sm font-medium flex items-center gap-2">
-                                <i class="fa-solid fa-map text-gray-400"></i> Geospatial Mapping
-                            </span>
-                            <span class="px-3 py-2 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg text-sm font-medium flex items-center gap-2">
-                                <i class="fa-solid fa-chart-line text-gray-400"></i> Predictive Modeling
-                            </span>
+                            <span class="tech-pill px-3 py-2 rounded-lg text-sm font-medium flex items-center gap-2"><i class="fa-brands fa-r-project"></i> R (Tidyverse)</span>
+                            <span class="tech-pill px-3 py-2 rounded-lg text-sm font-medium flex items-center gap-2"><i class="fa-solid fa-map"></i> Geospatial Mapping</span>
+                            <span class="tech-pill px-3 py-2 rounded-lg text-sm font-medium flex items-center gap-2"><i class="fa-solid fa-chart-line"></i> Predictive Modeling</span>
                         </div>
                     </div>
-
                     <div class="mt-auto">
-                        <a href="project-data.html" class="inline-flex items-center gap-2 bg-gray-900 dark:bg-white text-white dark:text-gray-900 px-8 py-3 rounded-xl font-semibold hover:opacity-90 transition-opacity">
+                        <a href="project-data.html" class="inline-flex items-center gap-2 text-white dark:text-primary-dark px-8 py-3 rounded-xl font-semibold hover:opacity-90 transition-opacity" style="background-color: var(--color-primary);">
                             View Case Study <i class="fa-solid fa-arrow-right"></i>
                         </a>
                     </div>
                 </div>
-
-                <div class="relative bg-gray-100 dark:bg-gray-800 border-l border-gray-100 dark:border-gray-700 min-h-[300px] lg:min-h-full order-1 lg:order-2 group overflow-hidden">
-                    <img 
-                        src="images/dmarc4.png" 
-                        alt="DMARC Zip Code Density Map" 
-                        class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                    >
+                <div class="relative bg-wash dark:bg-wash-dark border-l border-themed min-h-[300px] lg:min-h-full order-1 lg:order-2 group overflow-hidden">
+                    <img src="images/dmarc4.png" alt="DMARC Zip Code Density Map" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
                 </div>
-
             </div>
         </div>
 
-        <div class="bg-white dark:bg-dark-surface rounded-3xl overflow-hidden shadow-soft border border-gray-100 dark:border-gray-700 transition-colors duration-500">
+        <!-- Site build card -->
+        <div class="bg-surface dark:bg-dark-surface rounded-3xl overflow-hidden shadow-soft border border-themed transition-colors duration-500">
             <div class="grid grid-cols-1 lg:grid-cols-2 min-h-[400px]">
-                
-                <div class="relative bg-[#1e1e1e] border-r border-gray-100 dark:border-gray-700 min-h-[300px] lg:min-h-full order-1 group overflow-hidden flex flex-col">
-                    <div class="flex items-center px-4 py-3 border-b border-gray-700 bg-[#252526]">
+                <!-- Code preview panel -->
+                <div class="bg-code-panel border-r border-code min-h-[300px] lg:min-h-full order-1 group overflow-hidden flex flex-col">
+                    <div class="flex items-center px-4 py-3 border-b border-code bg-code-panel-header">
                         <div class="flex gap-1.5 mr-3">
-                            <div class="w-3 h-3 rounded-full bg-red-500/80"></div>
-                            <div class="w-3 h-3 rounded-full bg-yellow-500/80"></div>
-                            <div class="w-3 h-3 rounded-full bg-green-500/80"></div>
+                            <div class="w-3 h-3 rounded-full chrome-close-vivid"></div>
+                            <div class="w-3 h-3 rounded-full chrome-minimize-vivid"></div>
+                            <div class="w-3 h-3 rounded-full chrome-maximize-vivid"></div>
                         </div>
-                        <span class="text-[10px] text-gray-400 font-mono tracking-wide">index.html &mdash; projects</span>
+                        <span class="text-code-label text-[10px] font-mono tracking-wide">index.html &mdash; projects</span>
                     </div>
-                    <div class="p-6 text-gray-300 font-mono text-xs leading-loose select-none opacity-80 group-hover:opacity-100 transition-opacity flex flex-col justify-center h-full">
+                    <div class="p-6 font-mono text-xs leading-loose select-none opacity-80 group-hover:opacity-100 transition-opacity flex flex-col justify-center h-full">
                         <div>
-                        <span class="text-purple-400">const</span> <span class="text-yellow-200">designProjects</span> = [<br>
-                        &nbsp;&nbsp;{<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">id</span>: <span class="text-green-300">"mainframe"</span>,<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">title</span>: <span class="text-green-300">"Mainframe Studios"</span>,<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">cat</span>: <span class="text-green-300">"Advertising"</span>,<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">desc</span>: <span class="text-green-300">"Unique typeface..."</span><br>
-                        &nbsp;&nbsp;},<br>
-                        &nbsp;&nbsp;{<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">id</span>: <span class="text-green-300">"forged"</span>,<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">title</span>: <span class="text-green-300">"The Forged Group"</span>,<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">cat</span>: <span class="text-green-300">"Branding"</span><br>
-                        &nbsp;&nbsp;}<br>
-                        ];
+                            <span class="syn-js-keyword">const</span> <span class="syn-js-var">designProjects</span> = [<br>
+                            &nbsp;&nbsp;{<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="syn-js-key">id</span>: <span class="syn-js-string">"mainframe"</span>,<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="syn-js-key">title</span>: <span class="syn-js-string">"Mainframe Studios"</span>,<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="syn-js-key">cat</span>: <span class="syn-js-string">"Advertising"</span>,<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="syn-js-key">desc</span>: <span class="syn-js-string">"Unique typeface..."</span><br>
+                            &nbsp;&nbsp;},<br>
+                            &nbsp;&nbsp;{<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="syn-js-key">id</span>: <span class="syn-js-string">"forged"</span>,<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="syn-js-key">title</span>: <span class="syn-js-string">"The Forged Group"</span>,<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="syn-js-key">cat</span>: <span class="syn-js-string">"Branding"</span><br>
+                            &nbsp;&nbsp;}<br>
+                            ];
                         </div>
                     </div>
                 </div>
-
                 <div class="p-8 md:p-12 flex flex-col justify-center relative z-10 order-2">
                     <div class="mb-6">
-                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-purple-50 dark:bg-purple-900/20 text-purple-600 dark:text-purple-400 text-xs font-bold uppercase tracking-wider mb-4 border border-purple-100 dark:border-purple-800">
+                        <div class="badge-neutral inline-flex items-center gap-2 px-3 py-1 rounded-lg text-xs font-bold uppercase tracking-wider mb-4 border">
                             <i data-lucide="code-2" class="w-3 h-3"></i> Web Development
                         </div>
-                        <h3 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">Personal Site Build</h3>
-                        <p class="text-gray-600 dark:text-gray-400 text-lg leading-relaxed mb-6">
+                        <h3 class="text-primary text-3xl font-bold mb-4">Personal Site Build</h3>
+                        <p class="text-body text-lg leading-relaxed mb-6">
                             The story behind how I created this website. I used both HTML5 and Tailwind CSS to build this site's aesthetic and established a CI/CD pipeline via GitHub and Cloudflare for updates on my laptop.
                         </p>
                     </div>
-
                     <div class="mb-8">
-                        <h4 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">Technologies Used</h4>
+                        <h4 class="text-muted text-xs font-bold uppercase tracking-wider mb-3">Technologies Used</h4>
                         <div class="flex flex-wrap gap-2">
-                            <span class="px-3 py-2 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg text-sm font-medium flex items-center gap-2">
-                                <i class="fa-brands fa-html5 text-gray-400"></i> HTML5
-                            </span>
-                            <span class="px-3 py-2 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg text-sm font-medium flex items-center gap-2">
-                                <i class="fa-brands fa-css3-alt text-gray-400"></i> Tailwind
-                            </span>
-                             <span class="px-3 py-2 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg text-sm font-medium flex items-center gap-2">
-                                <i class="fa-brands fa-git-alt text-gray-400"></i> CI/CD
-                            </span>
+                            <span class="tech-pill px-3 py-2 rounded-lg text-sm font-medium flex items-center gap-2"><i class="fa-brands fa-html5"></i> HTML5</span>
+                            <span class="tech-pill px-3 py-2 rounded-lg text-sm font-medium flex items-center gap-2"><i class="fa-brands fa-css3-alt"></i> Tailwind</span>
+                            <span class="tech-pill px-3 py-2 rounded-lg text-sm font-medium flex items-center gap-2"><i class="fa-brands fa-git-alt"></i> CI/CD</span>
                         </div>
                     </div>
-
                     <div class="mt-auto">
-                        <a href="project-data2.html" class="inline-flex items-center gap-2 bg-gray-900 dark:bg-white text-white dark:text-gray-900 px-8 py-3 rounded-xl font-semibold hover:opacity-90 transition-opacity">
+                        <a href="project-data2.html" class="inline-flex items-center gap-2 text-white dark:text-primary-dark px-8 py-3 rounded-xl font-semibold hover:opacity-90 transition-opacity" style="background-color: var(--color-primary);">
                             View Process <i class="fa-solid fa-arrow-right"></i>
                         </a>
                     </div>
                 </div>
-
             </div>
         </div>
-
     </section>
 
+    <!-- Contact -->
     <section id="contact" class="w-full px-4 md:px-8 pb-20 pt-10 max-w-7xl mx-auto">
-        <div class="w-full bg-surface dark:bg-dark-surface rounded-3xl p-8 md:p-12 shadow-soft border border-gray-100 dark:border-gray-700 transition-colors duration-500 text-center relative overflow-hidden">
+        <div class="w-full bg-surface dark:bg-dark-surface rounded-3xl p-8 md:p-12 shadow-soft border border-themed transition-colors duration-500 text-center relative overflow-hidden">
+            <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(ellipse at 60% 50%, var(--color-accent) 0%, transparent 70%); opacity: 0.03;"></div>
             <div class="relative z-10">
-                <h2 class="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">Let's work together!</h2>
-                <p class="text-gray-500 dark:text-gray-400 text-lg mb-8 max-w-xl mx-auto">
-                    Looking for assistance with a project? Please reach out and let me know how I can help.
-                </p>
-                <a href="mailto:oliver_tw@icloud.com" class="inline-flex items-center gap-2 bg-primary dark:bg-primary-dark text-white dark:text-gray-900 px-8 py-4 rounded-xl font-bold hover:opacity-90 transition-opacity">
-                    <i class="fa-solid fa-envelope"></i>
-                    Email Me
+                <h2 class="text-primary text-3xl md:text-5xl font-bold mb-4">Let's work together!</h2>
+                <p class="text-muted text-lg mb-8 max-w-xl mx-auto">Looking for assistance with a project? Please reach out and let me know how I can help.</p>
+                <a href="mailto:oliver_tw@icloud.com" class="inline-flex items-center gap-2 text-white dark:text-primary-dark px-8 py-4 rounded-xl font-bold hover:opacity-90 transition-opacity" style="background-color: var(--color-primary);">
+                    <i class="fa-solid fa-envelope"></i> Email Me
                 </a>
             </div>
         </div>
     </section>
 
-    <footer id="footer-placeholder" class="w-full bg-surface dark:bg-dark-surface border-t border-gray-200 dark:border-gray-700 py-8 px-4 md:px-8 mt-auto"></footer>
+    <footer id="footer-placeholder" class="w-full bg-surface dark:bg-dark-surface border-t border-themed py-8 px-4 md:px-8 mt-auto"></footer>
 
     <script src="components.js"></script>
     <script>
         const designProjects = [
-            {
-                id: "mainframe",
-                title: "Mainframe Studios",
-                category: "Advertising",
-                desc: "Unique typeface and poster for a non-profit art studio.",
-                image: "images/mainframe2.png"
-            },
-            {
-                id: "forged",
-                title: "The Forged Group",
-                category: "Branding",
-                desc: "Visual identity system for a financial consultation firm.",
-                image: "images/forged2.png"
-            },
-            {
-                id: "relays",
-                title: "Drake Relays 2025",
-                category: "Event",
-                desc: "Relays event logo & theme for Drake University.",
-                image: "images/relays2.png"
-            }
+            { id: "mainframe", title: "Mainframe Studios",  category: "Advertising", desc: "Unique typeface and poster for a non-profit art studio.",       image: "images/mainframe2.png" },
+            { id: "forged",    title: "The Forged Group",   category: "Branding",    desc: "Visual identity system for a financial consultation firm.",     image: "images/forged2.png" },
+            { id: "relays",    title: "Drake Relays 2025",  category: "Event",       desc: "Relays event logo & theme for Drake University.",               image: "images/relays2.png" }
         ];
 
         function renderDesignProjects() {
             const grid = document.getElementById('design-grid');
-            let html = '';
-
-            designProjects.forEach(project => {
-                html += `
-                <div class="glass-card bg-surface dark:bg-dark-surface rounded-3xl p-3 shadow-soft border border-gray-100 dark:border-gray-700 group cursor-pointer transition-colors duration-500 flex flex-col h-full" onclick="window.location.href='project.html?id=${project.id}'">
-                    <div class="relative aspect-[4/3] bg-gray-100 dark:bg-gray-800 rounded-2xl overflow-hidden mb-4 shrink-0 transition-colors">
-                        <img src="${project.image}" onerror="this.src='https://placehold.co/600x400?text=No+Image'" alt="${project.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                        <div class="absolute top-4 right-4 bg-white/90 dark:bg-black/80 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-gray-900 dark:text-white border border-white/20">
-                            ${project.category}
-                        </div>
+            grid.innerHTML = designProjects.map(p => `
+                <div class="glass-card bg-surface dark:bg-dark-surface rounded-3xl p-3 shadow-soft border border-themed group cursor-pointer transition-colors duration-500 flex flex-col h-full" onclick="window.location.href='project.html?id=${p.id}'">
+                    <div class="relative aspect-[4/3] bg-wash dark:bg-wash-dark rounded-2xl overflow-hidden mb-4 shrink-0">
+                        <img src="${p.image}" onerror="this.src='https://placehold.co/600x400?text=No+Image'" alt="${p.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="chip-overlay absolute top-4 right-4 backdrop-blur px-3 py-1 rounded-full text-xs font-bold border">${p.category}</div>
                     </div>
                     <div class="px-2 pb-2 flex-grow">
-                        <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-1">${project.title}</h3>
-                        <p class="text-sm text-gray-500 dark:text-gray-400 line-clamp-2">${project.desc}</p>
+                        <h3 class="text-primary text-lg font-bold mb-1">${p.title}</h3>
+                        <p class="text-muted text-sm line-clamp-2">${p.desc}</p>
                     </div>
                 </div>
-                `;
-            });
-
-            grid.innerHTML = html;
+            `).join('');
         }
-
         renderDesignProjects();
     </script>
 </body>
