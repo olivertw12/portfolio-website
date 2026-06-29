@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oliver T. Williams | Design & Data</title>
+    <script>
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else { document.documentElement.classList.remove('dark'); }
+    </script>
+    <link rel="icon" href="images/favicon-dark.png" media="(prefers-color-scheme: light)">
+    <link rel="icon" href="images/favicon-light.png" media="(prefers-color-scheme: dark)">
+    <link rel="icon" href="images/favicon-dark.png">
+    <meta name="description" content="Portfolio of Oliver T. Williams. Bridging the gap between visual strategy and data intelligence.">
+    <meta property="og:title" content="Oliver T. Williams | Design & Data">
+    <meta property="og:description" content="Portfolio of Oliver T. Williams. Bridging the gap between visual strategy and data intelligence.">
+    <meta property="og:image" content="https://olivertwilliams.com/images/og-image.png">
+    <meta property="og:url" content="https://olivertwilliams.com">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="tailwind-config.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-cream dark:bg-dark-bg font-sans flex flex-col min-h-screen">
+
+    <nav id="navbar-placeholder" data-type="home" class="fixed top-4 left-0 right-0 z-50 px-4 md:px-8"></nav>
+
+    <!-- ═══ HERO ═══ -->
+    <style>
+        @keyframes hero-float {
+            0%, 100% { transform: translateY(0px); }
+            50%       { transform: translateY(-12px); }
+        }
+        @keyframes hero-spin-a {
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+        @keyframes hero-spin-b {
+            to { transform: translate(-50%, -50%) rotate(-360deg); }
+        }
+        @keyframes hero-spin-c {
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+        @keyframes hero-dot-pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50%       { opacity: 0.4; transform: scale(0.8); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .hero-anchor-float,
+            .hero-ring { animation: none !important; }
+        }
+
+        .hero-anchor-float {
+            animation: hero-float 6s ease-in-out infinite;
+        }
+        .hero-ring {
+            position: absolute;
+            top: 50%; left: 50%;
+            border-radius: 50%;
+            border: 1px solid var(--color-border);
+            pointer-events: none;
+        }
+        .hero-ring-a {
+            width: 340px; height: 340px;
+            margin-top: -170px; margin-left: -170px;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            animation: hero-spin-a 40s linear infinite;
+        }
+        .hero-ring-b {
+            width: 500px; height: 500px;
+            border-color: var(--color-border);
+            opacity: 0.55;
+            transform: translate(-50%, -50%);
+            animation: hero-spin-b 55s linear infinite;
+        }
+        .hero-ring-c {
+            width: 680px; height: 680px;
+            border-color: var(--color-border);
+            opacity: 0.3;
+            transform: translate(-50%, -50%);
+            animation: hero-spin-c 75s linear infinite;
+        }
+        .hero-ring-d {
+            width: 880px; height: 880px;
+            border-color: var(--color-border);
+            opacity: 0.15;
+            transform: translate(-50%, -50%);
+            animation: hero-spin-a 100s linear infinite reverse;
+        }
+        .hero-ring-e {
+            width: 1100px; height: 1100px;
+            border-color: var(--color-border);
+            opacity: 0.08;
+            transform: translate(-50%, -50%);
+        }
+        /* Dashed ring for variety */
+        .hero-ring-b { border-style: dashed; border-color: var(--color-border); }
+        .hero-ring-d { border-style: dashed; }
+        .hero-avail-dot {
+            animation: hero-dot-pulse 2.5s ease-in-out infinite;
+        }
+    </style>
+
+    <section class="pt-24 pb-0 w-full">
+        <div class="w-full transition-colors duration-500 relative flex flex-col items-center justify-center min-h-[88vh] overflow-hidden">
+
+            <!-- Radial rings — centred on anchor -->
+            <div class="hero-ring hero-ring-a"></div>
+            <div class="hero-ring hero-ring-b"></div>
+            <div class="hero-ring hero-ring-c"></div>
+            <div class="hero-ring hero-ring-d"></div>
+            <div class="hero-ring hero-ring-e"></div>
+
+            <!-- Anchor SVG — centred, floating -->
+            <div class="hero-anchor-float relative z-10 mb-10 md:mb-14">
+                <svg width="140" height="140" viewBox="0 0 140 140" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <!-- Outer circle -->
+                    <circle cx="70" cy="70" r="68" stroke="var(--color-border)" stroke-width="1"/>
+                    <!-- Ghost / depth layer -->
+                    <g stroke="var(--color-text-primary)" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" opacity="0.06">
+                        <circle cx="70" cy="38" r="14" fill="none"/>
+                        <line x1="70" y1="52" x2="70" y2="116"/>
+                        <path d="M36 96 Q36 118 70 118 Q104 118 104 96" fill="none"/>
+                        <line x1="22" y1="72" x2="46" y2="72"/>
+                        <line x1="94" y1="72" x2="118" y2="72"/>
+                    </g>
+                    <!-- Main anchor -->
+                    <g stroke="var(--color-text-primary)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="70" cy="38" r="12" fill="none"/>
+                        <line x1="70" y1="50" x2="70" y2="112"/>
+                        <path d="M38 94 Q38 115 70 115 Q102 115 102 94" fill="none"/>
+                        <line x1="24" y1="70" x2="46" y2="70"/>
+                        <line x1="94" y1="70" x2="116" y2="70"/>
+                    </g>
+                    <!-- Accent dot at top -->
+                    <circle cx="70" cy="38" r="6" fill="var(--color-accent)"/>
+                </svg>
+            </div>
+
+            <!-- Text block — centred beneath anchor -->
+            <div class="relative z-10 text-center px-6 max-w-2xl mx-auto">
+
+                <div class="flex items-center justify-center gap-2 mb-5">
+                    <div class="w-1.5 h-1.5 rounded-full hero-avail-dot" style="background-color: var(--color-accent);"></div>
+                    <span class="text-muted text-xs font-semibold uppercase tracking-widest">Available for work</span>
+                </div>
+
+                <h1 class="text-primary text-4xl md:text-6xl font-medium mb-5 tracking-tight leading-[1.1]">
+                    Connecting Design &amp; Data.
+                </h1>
+
+                <p class="text-body font-normal text-base md:text-lg leading-[1.65] mb-8 max-w-xl mx-auto">
+                    Hi, I'm Oliver Williams — a graphic designer and data analyst with expertise in combining design thinking and technical skills to solve complex problems.
+                </p>
+
+                <div class="flex flex-row items-center justify-center gap-8">
+                    <a href="resume.html" class="text-white dark:text-primary-dark px-7 py-3.5 rounded-[10px] font-semibold tracking-wide hover:opacity-90 transition-opacity flex items-center gap-2 text-sm md:text-base" style="background-color: var(--color-primary);">
+                        View Resume <i class="fa-solid fa-arrow-right -rotate-45"></i>
+                    </a>
+                    <a href="mailto:oliver_tw@icloud.com" class="text-body hover:text-primary border-b border-divider hover:border-primary pb-0.5 font-medium transition-colors">
+                        Get in Touch
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Section divider -->
+    <div class="max-w-7xl mx-auto w-full px-4 md:px-8"><hr class="section-divider"></div>
+
+    <!-- ═══ DESIGN PROJECTS ═══ -->
+    <section id="design" class="py-12 px-4 md:px-8 max-w-7xl mx-auto">
+        <div class="flex items-end justify-between mb-8 pt-4">
+            <div>
+                <span class="text-accent text-sm font-bold tracking-wider uppercase mb-2 block">Part 01</span>
+                <h2 class="text-primary text-3xl md:text-4xl font-bold">Design Projects</h2>
+            </div>
+            <a href="archive.html" class="hidden md:flex items-center gap-2 text-sm font-semibold text-muted hover:text-primary transition-colors">
+                Full Archive <i class="fa-solid fa-arrow-right"></i>
+            </a>
+        </div>
+        <div id="design-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8"></div>
+        <div class="md:hidden text-center">
+            <a href="archive.html" class="text-sm font-semibold text-muted underline">View all design projects</a>
+        </div>
+    </section>
+
+    <!-- Section divider -->
+    <div class="max-w-7xl mx-auto w-full px-4 md:px-8"><hr class="section-divider"></div>
+
+    <!-- ═══ DATA PROJECTS ═══ -->
+    <section id="data" class="py-12 px-4 md:px-8 max-w-7xl mx-auto">
+        <div class="mb-8 pt-4">
+            <span class="text-accent text-sm font-bold tracking-wider uppercase mb-2 block">Part 02</span>
+            <h2 class="text-primary text-3xl md:text-4xl font-bold">Data Projects</h2>
+        </div>
+
+        <!-- DMARC card -->
+        <div class="bg-surface dark:bg-dark-surface rounded-3xl overflow-hidden shadow-soft border border-themed transition-colors duration-500 mb-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 min-h-[500px]">
+                <div class="p-8 md:p-12 flex flex-col justify-center relative z-10 order-2 lg:order-1">
+                    <div class="mb-6">
+                        <div class="badge-accent inline-flex items-center gap-2 px-3 py-1 rounded-[8px] text-xs font-bold uppercase tracking-wider mb-4">
+                            <i data-lucide="bar-chart-2" class="w-3 h-3"></i> Capstone Project
+                        </div>
+                        <h3 class="text-primary text-3xl font-bold mb-4">DMARC Network Analysis</h3>
+                        <p class="text-body font-normal text-lg leading-[1.65] mb-6">
+                            Leveraging R and geospatial analysis (leaflet) to uncover service gaps in the DMARC Food Pantry Network. By merging transaction logs with ACS Census data, I mapped visitor density to identify high-need areas and utilized predictive modeling to forecast a 2025 surge in demand within specific demographic groups.
+                        </p>
+                    </div>
+                    <div class="mb-8">
+                        <h4 class="text-muted text-xs font-bold uppercase tracking-wider mb-3">Technologies Used</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="tech-pill px-3 py-2 rounded-[8px] text-sm font-medium flex items-center gap-2"><i class="fa-brands fa-r-project"></i> R (Tidyverse)</span>
+                            <span class="tech-pill px-3 py-2 rounded-[8px] text-sm font-medium flex items-center gap-2"><i class="fa-solid fa-map"></i> Geospatial Mapping</span>
+                            <span class="tech-pill px-3 py-2 rounded-[8px] text-sm font-medium flex items-center gap-2"><i class="fa-solid fa-chart-line"></i> Predictive Modeling</span>
+                        </div>
+                    </div>
+                    <div class="mt-auto">
+                        <a href="project-data.html" class="inline-flex items-center gap-2 text-white dark:text-primary-dark px-7 py-3 rounded-[10px] font-semibold tracking-wide hover:opacity-90 transition-opacity" style="background-color: var(--color-primary);">
+                            View Case Study <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="relative bg-wash dark:bg-wash-dark border-l border-themed min-h-[300px] lg:min-h-full order-1 lg:order-2 group overflow-hidden">
+                    <img src="images/dmarc4.png" alt="DMARC Zip Code Density Map" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                </div>
+            </div>
+        </div>
+
+        <!-- Site build card -->
+        <div class="bg-surface dark:bg-dark-surface rounded-3xl overflow-hidden shadow-soft border border-themed transition-colors duration-500">
+            <div class="grid grid-cols-1 lg:grid-cols-2 min-h-[400px]">
+                <div class="bg-code-panel border-r border-code min-h-[300px] lg:min-h-full order-1 group overflow-hidden flex flex-col">
+                    <div class="flex items-center px-4 py-3 border-b border-code bg-code-panel-header">
+                        <div class="flex gap-1.5 mr-3">
+                            <div class="w-3 h-3 rounded-full chrome-close-vivid"></div>
+                            <div class="w-3 h-3 rounded-full chrome-minimize-vivid"></div>
+                            <div class="w-3 h-3 rounded-full chrome-maximize-vivid"></div>
+                        </div>
+                        <span class="text-code-label text-[10px] font-mono tracking-wide">index.html &mdash; projects</span>
+                    </div>
+                    <div class="p-6 font-mono text-xs leading-loose select-none opacity-80 group-hover:opacity-100 transition-opacity flex flex-col justify-center h-full">
+                        <div>
+                            <span class="syn-js-keyword">const</span> <span class="syn-js-var">designProjects</span> = [<br>
+                            &nbsp;&nbsp;{<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="syn-js-key">id</span>: <span class="syn-js-string">"mainframe"</span>,<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="syn-js-key">title</span>: <span class="syn-js-string">"Mainframe Studios"</span>,<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="syn-js-key">cat</span>: <span class="syn-js-string">"Advertising"</span>,<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="syn-js-key">desc</span>: <span class="syn-js-string">"Unique typeface..."</span><br>
+                            &nbsp;&nbsp;},<br>
+                            &nbsp;&nbsp;{<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="syn-js-key">id</span>: <span class="syn-js-string">"forged"</span>,<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="syn-js-key">title</span>: <span class="syn-js-string">"The Forged Group"</span>,<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="syn-js-key">cat</span>: <span class="syn-js-string">"Branding"</span><br>
+                            &nbsp;&nbsp;}<br>
+                            ];
+                        </div>
+                    </div>
+                </div>
+                <div class="p-8 md:p-12 flex flex-col justify-center relative z-10 order-2">
+                    <div class="mb-6">
+                        <div class="badge-neutral inline-flex items-center gap-2 px-3 py-1 rounded-[8px] text-xs font-bold uppercase tracking-wider mb-4 border">
+                            <i data-lucide="code-2" class="w-3 h-3"></i> Web Development
+                        </div>
+                        <h3 class="text-primary text-3xl font-bold mb-4">Personal Site Build</h3>
+                        <p class="text-body font-normal text-lg leading-[1.65] mb-6">
+                            The story behind how I created this website. I used both HTML5 and Tailwind CSS to build this site's aesthetic and established a CI/CD pipeline via GitHub and Cloudflare for updates on my laptop.
+                        </p>
+                    </div>
+                    <div class="mb-8">
+                        <h4 class="text-muted text-xs font-bold uppercase tracking-wider mb-3">Technologies Used</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="tech-pill px-3 py-2 rounded-[8px] text-sm font-medium flex items-center gap-2"><i class="fa-brands fa-html5"></i> HTML5</span>
+                            <span class="tech-pill px-3 py-2 rounded-[8px] text-sm font-medium flex items-center gap-2"><i class="fa-brands fa-css3-alt"></i> Tailwind</span>
+                            <span class="tech-pill px-3 py-2 rounded-[8px] text-sm font-medium flex items-center gap-2"><i class="fa-brands fa-git-alt"></i> CI/CD</span>
+                        </div>
+                    </div>
+                    <div class="mt-auto">
+                        <a href="project-data2.html" class="inline-flex items-center gap-2 text-white dark:text-primary-dark px-7 py-3 rounded-[10px] font-semibold tracking-wide hover:opacity-90 transition-opacity" style="background-color: var(--color-primary);">
+                            View Process <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section divider -->
+    <div class="max-w-7xl mx-auto w-full px-4 md:px-8"><hr class="section-divider"></div>
+
+    <!-- ═══ CONTACT ═══ -->
+    <section id="contact" class="w-full px-4 md:px-8 pb-20 pt-10 max-w-7xl mx-auto">
+        <div class="w-full bg-surface dark:bg-dark-surface rounded-3xl p-8 md:p-12 shadow-soft border border-themed transition-colors duration-500 text-center relative overflow-hidden">
+            <!-- Stronger glow via .contact-glow class (opacity 0.08 in CSS) -->
+            <div class="contact-glow absolute inset-0 pointer-events-none"></div>
+            <div class="relative z-10">
+                <h2 class="text-primary text-3xl md:text-5xl font-bold mb-4">Let's work together!</h2>
+                <p class="text-muted font-normal text-lg mb-8 max-w-xl mx-auto">Looking for assistance with a project? Please reach out and let me know how I can help.</p>
+                <a href="mailto:oliver_tw@icloud.com" class="inline-flex items-center gap-2 text-white dark:text-primary-dark px-8 py-3.5 rounded-[10px] font-semibold tracking-wide hover:opacity-90 transition-opacity" style="background-color: var(--color-primary);">
+                    <i class="fa-solid fa-envelope"></i> Email Me
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer id="footer-placeholder" class="w-full bg-surface dark:bg-dark-surface border-t border-themed py-8 px-4 md:px-8 mt-auto"></footer>
+
+    <script src="components.js"></script>
+    <script>
+        const designProjects = [
+            { id: "mainframe", title: "Mainframe Studios",  category: "Advertising", desc: "Unique typeface and poster for a non-profit art studio.",       image: "images/mainframe2.png" },
+            { id: "forged",    title: "The Forged Group",   category: "Branding",    desc: "Visual identity system for a financial consultation firm.",     image: "images/forged2.png" },
+            { id: "relays",    title: "Drake Relays 2025",  category: "Event",       desc: "Relays event logo & theme for Drake University.",               image: "images/relays2.png" }
+        ];
+
+        function renderDesignProjects() {
+            const grid = document.getElementById('design-grid');
+            grid.innerHTML = designProjects.map(p => `
+                <div class="glass-card bg-surface dark:bg-dark-surface rounded-3xl p-4 shadow-soft border border-themed group cursor-pointer transition-colors duration-500 flex flex-col h-full" onclick="window.location.href='project.html?id=${p.id}'">
+                    <div class="relative aspect-[4/3] bg-wash dark:bg-wash-dark rounded-xl overflow-hidden mb-3 shrink-0">
+                        <img src="${p.image}" onerror="this.src='https://placehold.co/600x400?text=No+Image'" alt="${p.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="px-1 pb-1 flex-grow">
+                        <div class="flex items-center justify-between mb-1.5">
+                            <h3 class="text-primary text-base font-bold">${p.title}</h3>
+                            <span class="chip-overlay text-[10px] font-bold px-2.5 py-0.5 rounded-full border shrink-0 ml-2">${p.category}</span>
+                        </div>
+                        <p class="text-muted text-sm font-normal leading-relaxed line-clamp-2">${p.desc}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+        renderDesignProjects();
+    </script>
+</body>
+</html>

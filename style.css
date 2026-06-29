@@ -99,9 +99,9 @@
     --radius-3xl: 1.25rem;    /* 20px — cards, panels, large surfaces  */
 
     /* --- Shadows --- */
-    --shadow-soft:  0 4px 28px -4px rgba(37,46,40,0.16);
-    --shadow-glow:  0 0 20px rgba(107,158,142,0.28);
-    --shadow-paper: 0 2px 8px 0 rgba(37,46,40,0.12), 0 1px 2px 0 rgba(37,46,40,0.07);
+    --shadow-soft:  0 1px 3px 0 rgba(0,0,0,0.07), 0 1px 2px -1px rgba(0,0,0,0.05);
+    --shadow-glow:  0 0 0 1px rgba(0,0,0,0.05);
+    --shadow-paper: 0 1px 3px 0 rgba(0,0,0,0.08), 0 1px 2px -1px rgba(0,0,0,0.06);
 }
 
 
@@ -348,7 +348,7 @@ p, h1, h2, h3, h4, h5, h6, li, span, a { overflow-wrap: break-word; }
 .glass-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
 .glass-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 14px 36px -6px rgba(37,46,40,0.14);
+    box-shadow: 0 4px 12px 0 rgba(0,0,0,0.10), 0 1px 3px 0 rgba(0,0,0,0.06);
 }
 
 
@@ -385,7 +385,7 @@ p, h1, h2, h3, h4, h5, h6, li, span, a { overflow-wrap: break-word; }
 /* Glass card — stronger lift */
 .glass-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 16px 40px -8px rgba(37,46,40,0.20);
+    box-shadow: 0 4px 12px 0 rgba(0,0,0,0.10), 0 1px 3px 0 rgba(0,0,0,0.06);
 }
 
 /* Buttons — tighter radius + spacing than cards */

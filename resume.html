@@ -4,173 +4,294 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=1280">
     <title>Resume_Oliver_Williams</title>
+
     <style>
         @media print {
             @page { size: letter portrait; margin: 0.5in; }
             body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
         }
+
+        /* Mode toggle visibility */
+        [data-mode="design"] .data-only  { display: none !important; }
+        [data-mode="data"]   .design-only { display: none !important; }
+
+        /* Mode buttons — live inside the nav-pill in the navbar */
+        .mode-btn {
+            padding: 5px 12px;
+            border-radius: 7px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            color: var(--color-text-muted);
+            border: none;
+            background: transparent;
+            font-family: var(--font-sans);
+            white-space: nowrap;
+        }
+        .mode-btn.active {
+            background: var(--color-surface);
+            color: var(--color-text-primary);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+        .dark .mode-btn.active {
+            background: var(--color-dark-surface);
+            color: var(--color-text-primary-dark);
+        }
+        .mode-btn:not(.active):hover {
+            color: var(--color-text-body);
+        }
     </style>
+
     <script>
         if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             document.documentElement.classList.add('dark');
         } else { document.documentElement.classList.remove('dark'); }
     </script>
+
     <link rel="icon" href="images/favicon-dark.png" media="(prefers-color-scheme: light)">
     <link rel="icon" href="images/favicon-light.png" media="(prefers-color-scheme: dark)">
     <link rel="icon" href="images/favicon-dark.png">
     <meta name="description" content="Resume of Oliver T. Williams.">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="tailwind-config.js"></script>
     <link rel="stylesheet" href="style.css">
     <script src="https://unpkg.com/lucide@latest"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body class="bg-cream dark:bg-dark-bg font-sans flex flex-col transition-colors duration-500">
+<body class="bg-cream dark:bg-dark-bg font-sans flex flex-col transition-colors duration-500" data-mode="design">
 
     <nav id="navbar-placeholder" data-type="resume" class="fixed top-4 left-0 right-0 z-50 px-8 print:hidden"></nav>
 
     <main class="pt-36 pb-12 px-8 flex justify-center mb-12 print:p-0 print:m-0 print:block">
-        <div class="print-container w-[8.5in] min-h-[11in] bg-white dark:bg-dark-surface p-8 rounded-3xl shadow-paper border border-themed transition-colors duration-500 box-border print:min-h-0 print:h-auto print:w-full print:shadow-none print:border-none print:rounded-none print:p-0 print:m-0">
 
-            <header class="flex flex-row justify-between items-center mb-6 print:mb-4">
-                <div>
+        <div class="print-container w-[8.5in] min-h-[11in] bg-white dark:bg-dark-surface p-8 rounded-3xl shadow-paper border border-themed transition-colors duration-500 box-border print:min-h-0 print:h-auto print:w-full print:shadow-none print:border-none print:rounded-none print:p-0 print:m-0 print:break-inside-avoid">
+
+            <!-- ── HEADER ── -->
+            <header class="flex flex-row justify-between items-center mb-1.5 print:mb-8">
+                <div class="flex flex-col">
                     <div class="flex items-center">
                         <h1 class="text-primary text-3xl font-bold tracking-tight leading-none">Oliver T. Williams</h1>
                         <i data-lucide="anchor" class="hidden print:inline-block w-6 h-6 ml-3 opacity-90 stroke-[2.5]" style="color: var(--color-text-primary);"></i>
                     </div>
-                    <p class="text-muted text-lg mt-1">Data Analyst &amp; Graphic Designer</p>
+                    <!-- Title swaps per mode -->
+                    <p class="text-muted text-lg mt-1 design-only">Graphic Designer &amp; Data Analyst</p>
+                    <p class="text-muted text-lg mt-1 data-only">Data Analyst &amp; Graphic Designer</p>
                 </div>
+                <!-- Contact row — 3 cols each side, LinkedIn added -->
                 <div class="grid grid-cols-[1fr_auto_1fr] gap-x-4 gap-y-1 text-sm font-medium text-body print:text-base">
-                    <a href="tel:3179148047"         class="justify-self-end hover:text-accent transition-colors flex items-center gap-2">317-914-8047 <i class="fa-solid fa-phone text-xs text-muted"></i></a>
+                    <a href="tel:3179148047" class="justify-self-end hover:text-accent transition-colors flex items-center gap-2">
+                        317-914-8047 <i class="fa-solid fa-phone text-xs text-muted"></i>
+                    </a>
                     <span class="h-4 w-px bg-divider self-center"></span>
-                    <span class="justify-self-start flex items-center gap-2">Excelsior, MN <i class="fa-solid fa-location-dot text-xs text-muted"></i></span>
+                    <span class="justify-self-start flex items-center gap-2">
+                        Minnetonka, MN <i class="fa-solid fa-location-dot text-xs text-muted"></i>
+                    </span>
 
-                    <a href="mailto:oliver_tw@icloud.com" class="justify-self-end hover:text-accent transition-colors flex items-center gap-2">oliver_tw@icloud.com <i class="fa-solid fa-envelope text-xs text-muted"></i></a>
+                    <a href="mailto:oliver_tw@icloud.com" class="justify-self-end hover:text-accent transition-colors flex items-center gap-2">
+                        oliver_tw@icloud.com <i class="fa-solid fa-envelope text-xs text-muted"></i>
+                    </a>
                     <span class="h-4 w-px bg-divider self-center"></span>
-                    <a href="https://olivertwilliams.com" target="_blank" class="justify-self-start hover:text-accent transition-colors flex items-center gap-2">olivertwilliams.com <i class="fa-solid fa-globe text-xs text-muted"></i></a>
+                    <a href="https://olivertwilliams.com" target="_blank" class="justify-self-start hover:text-accent transition-colors flex items-center gap-2">
+                        olivertwilliams.com <i class="fa-solid fa-globe text-xs text-muted"></i>
+                    </a>
+
+
                 </div>
             </header>
 
+            <!-- ── BODY GRID ── -->
             <div class="grid grid-cols-12 gap-8 print:gap-6">
 
-                <aside class="col-span-3 space-y-6 print:space-y-4">
+                <!-- ── SIDEBAR ── -->
+                <aside class="col-span-3 space-y-4 print:space-y-3">
 
+                    <!-- Profile — swaps per mode -->
                     <section>
-                        <h3 class="text-muted text-sm font-bold mb-3 print:mb-2 border-b border-base-solid pb-2">Profile</h3>
-                        <p class="text-body font-normal text-sm leading-[1.65] print:text-base">
-                            Graphic Designer and Data Analyst with expertise in combining design thinking and technical skills to solve complex problems. Experienced in data visualization, branding, and user-centered design.
+                        <h3 class="text-muted text-sm font-bold mb-2 border-b border-base-solid pb-1.5">Profile</h3>
+                        <p class="text-body font-normal text-sm leading-[1.65] print:text-base design-only">
+                            Designer with a background in data analytics, currently working in AI training and evaluation. I review and benchmark model outputs for design quality, a role that sits squarely at the overlap of my two degrees.
+                        </p>
+                        <p class="text-body font-normal text-sm leading-[1.65] print:text-base data-only">
+                            Data analyst with a background in graphic design, currently working in AI model evaluation. I build reproducible data pipelines and benchmarking systems, drawing on both degrees to assess and improve model outputs.
                         </p>
                     </section>
 
+                    <!-- Skills — split into two groups, order swaps per mode -->
                     <section>
-                        <h3 class="text-muted text-sm font-bold mb-3 print:mb-2 border-b border-base-solid pb-2">Skills &amp; Tools</h3>
-                        <ul class="text-body text-sm space-y-1 list-disc list-inside marker-muted print:text-base print:leading-relaxed">
-                            <li>R (Tidyverse)</li>
-                            <li>Python (Pandas)</li>
-                            <li>Microsoft Excel</li>
-                            <li>Adobe Illustrator</li>
-                            <li>Adobe InDesign</li>
-                            <li>Adobe Photoshop</li>
-                            <li>Acrobat Pro</li>
-                            <li>HTML / CSS</li>
-                            <li>Design Thinking</li>
-                            <li>Client Management</li>
-                        </ul>
+                        <h3 class="text-muted text-sm font-bold mb-2 border-b border-base-solid pb-1.5">Skills &amp; Tools</h3>
+
+                        <!-- Design-focus order: design tools first -->
+                        <div class="design-only">
+                            <p class="text-muted text-xs font-semibold uppercase tracking-wide mb-1">Design</p>
+                            <ul class="text-body font-normal text-sm space-y-0.5 list-disc list-inside marker-muted mb-3 print:text-base">
+                                <li>Adobe Illustrator</li>
+                                <li>Adobe InDesign</li>
+                                <li>Adobe Photoshop</li>
+                                <li>Acrobat Pro</li>
+                                <li>Blender</li>
+                            </ul>
+                            <p class="text-muted text-xs font-semibold uppercase tracking-wide mb-1">Data &amp; Technical</p>
+                            <ul class="text-body font-normal text-sm space-y-0.5 list-disc list-inside marker-muted print:text-base">
+                                <li>R</li>
+                                <li>Python</li>
+                                <li>Microsoft Excel</li>
+                                <li>HTML / CSS</li>
+                            </ul>
+                        </div>
+
+                        <!-- Data-focus order: data tools first -->
+                        <div class="data-only">
+                            <p class="text-muted text-xs font-semibold uppercase tracking-wide mb-1">Data &amp; Technical</p>
+                            <ul class="text-body font-normal text-sm space-y-0.5 list-disc list-inside marker-muted mb-3 print:text-base">
+                                <li>R</li>
+                                <li>Python</li>
+                                <li>Microsoft Excel</li>
+                                <li>HTML / CSS</li>
+                            </ul>
+                            <p class="text-muted text-xs font-semibold uppercase tracking-wide mb-1">Design</p>
+                            <ul class="text-body font-normal text-sm space-y-0.5 list-disc list-inside marker-muted print:text-base">
+                                <li>Adobe Illustrator</li>
+                                <li>Adobe InDesign</li>
+                                <li>Adobe Photoshop</li>
+                                <li>Acrobat Pro</li>
+                                <li>Blender</li>
+                            </ul>
+                        </div>
                     </section>
 
+                    <!-- Education -->
                     <section>
-                        <h3 class="text-muted text-sm font-bold mb-3 print:mb-2 border-b border-base-solid pb-2">Education</h3>
-                        <div class="mb-4 print:mb-3">
-                            <h4 class="text-primary font-bold print:text-lg">BA Graphic Design</h4>
-                            <p class="text-body text-sm mt-1 print:text-base">Drake University</p>
-                            <p class="text-muted text-xs mt-1 print:text-sm whitespace-nowrap">May 2025</p>
+                        <h3 class="text-muted text-sm font-bold mb-2 border-b border-base-solid pb-1.5">Education</h3>
+                        <!-- Design focus: BA first -->
+                        <div class="design-only">
+                            <div class="mb-3 print:mb-2">
+                                <h4 class="text-primary font-bold print:text-lg">BA Graphic Design</h4>
+                                <p class="text-body font-normal text-sm mt-0.5 print:text-base">Drake University</p>
+                                <p class="text-muted text-xs mt-0.5 print:text-sm whitespace-nowrap">May 2025</p>
+                            </div>
+                            <div>
+                                <h4 class="text-primary font-bold print:text-lg">BS Data Analytics</h4>
+                                <p class="text-body font-normal text-sm mt-0.5 print:text-base">Drake University</p>
+                                <p class="text-muted text-xs mt-0.5 print:text-sm whitespace-nowrap">May 2025</p>
+                            </div>
                         </div>
-                        <div>
-                            <h4 class="text-primary font-bold print:text-lg">BS Data Analytics</h4>
-                            <p class="text-body text-sm mt-1 print:text-base">Drake University</p>
-                            <p class="text-muted text-xs mt-1 print:text-sm whitespace-nowrap">May 2025</p>
+                        <!-- Data focus: BS first -->
+                        <div class="data-only">
+                            <div class="mb-3 print:mb-2">
+                                <h4 class="text-primary font-bold print:text-lg">BS Data Analytics</h4>
+                                <p class="text-body font-normal text-sm mt-0.5 print:text-base">Drake University</p>
+                                <p class="text-muted text-xs mt-0.5 print:text-sm whitespace-nowrap">May 2025</p>
+                            </div>
+                            <div>
+                                <h4 class="text-primary font-bold print:text-lg">BA Graphic Design</h4>
+                                <p class="text-body font-normal text-sm mt-0.5 print:text-base">Drake University</p>
+                                <p class="text-muted text-xs mt-0.5 print:text-sm whitespace-nowrap">May 2025</p>
+                            </div>
                         </div>
                     </section>
 
                 </aside>
 
-                <div class="col-span-9 space-y-6 print:space-y-4">
+                <!-- ── MAIN COLUMN ── -->
+                <div class="col-span-9 space-y-4 print:space-y-3">
 
+                    <!-- Work Experience -->
                     <section>
-                        <h3 class="text-muted text-sm font-bold mb-4 print:mb-3 border-b border-base-solid pb-2">Work Experience</h3>
+                        <h3 class="text-muted text-sm font-bold mb-3 print:mb-2 border-b border-base-solid pb-1.5">Work Experience</h3>
 
-                        <div class="mb-4 print:mb-3">
-                            <div class="flex justify-between items-baseline mb-1">
-                                <h4 class="text-primary text-lg font-bold print:text-xl">AI Training Specialist</h4>
+                        <!-- AI Evaluation — consolidated, bullets swap per mode -->
+                        <div class="mb-3 print:mb-2">
+                            <div class="flex justify-between items-baseline mb-0.5">
+                                <!-- Job title swaps per mode -->
+                                <h4 class="text-primary text-lg font-bold print:text-xl design-only">2D Design Specialist</h4>
+                                <h4 class="text-primary text-lg font-bold print:text-xl data-only">AI Model Evaluation Specialist</h4>
                                 <span class="text-muted text-xs font-mono print:text-sm whitespace-nowrap shrink-0 ml-4">May 2026 &ndash; Present</span>
                             </div>
-                            <p class="text-body text-sm font-semibold mb-2 print:text-base">DataAnnotation (Contract Role)</p>
-                            <ul class="list-disc list-outside ml-4 text-body text-sm space-y-1 leading-relaxed marker-muted print:text-base print:leading-relaxed">
-                                <li>Applied design principles to evaluate composition, lighting, and aesthetic quality of AI-generated images, recognizing inconsistencies and visual artifacts.</li>
-                                <li>Critically reviewed and graded AI-generated text for factual accuracy, natural phrasing, and logical flow across a wide variety of topics.</li>
-                                <li>Provided detailed, written rationales for model grading, contributing to datasets used to refine unreleased models.</li>
+                            <!-- Company swaps per mode -->
+                            <p class="text-body font-semibold text-sm mb-1 print:mb-0.5 print:text-base design-only">Handshake AI &amp; DataAnnotation</p>
+                            <p class="text-body font-semibold text-sm mb-1 print:mb-0.5 print:text-base data-only">Handshake AI &amp; DataAnnotation</p>
+                            <!-- Design-focus bullets: lead with design authoring work -->
+                            <ul class="list-disc list-outside ml-4 text-body font-normal text-sm space-y-0.5 leading-[1.65] marker-muted print:text-base print:leading-relaxed design-only">
+                                <li>Authored complex graphic design project briefs to stress-test AI model capabilities across 2D software including GIMP, Inkscape, and Krita.</li>
+                                <li>Evaluated composition, lighting, and aesthetic quality of AI-generated images, identifying inconsistencies and visual artifacts.</li>
+                                <li>Developed structured evaluation rubrics and scoring datasets to train machine learning models on professional design standards.</li>
+                            </ul>
+                            <!-- Data-focus bullets: lead with rubric/pipeline/evaluation systems -->
+                            <ul class="list-disc list-outside ml-4 text-body font-normal text-sm space-y-0.5 leading-[1.65] marker-muted print:text-base print:leading-relaxed data-only">
+                                <li>Developed structured, binary evaluation rubrics and scoring datasets that directly train machine learning models to assess design outputs.</li>
+                                <li>Translated design workflows into deterministic verification processes used by automated systems to grade outputs and optimize model weights.</li>
+                                <li>Reviewed and graded AI-generated text and images for accuracy, quality, and logical flow, providing detailed written rationales for each decision.</li>
                             </ul>
                         </div>
 
-                        <div class="mb-4 print:mb-3">
-                            <div class="flex justify-between items-baseline mb-1">
+                        <!-- Thomson Reuters -->
+                        <div class="mb-3 print:mb-2">
+                            <div class="flex justify-between items-baseline mb-0.5">
                                 <h4 class="text-primary text-lg font-bold print:text-xl">Tax Verification Associate</h4>
                                 <span class="text-muted text-xs font-mono print:text-sm whitespace-nowrap shrink-0 ml-4">Feb 2026 &ndash; Apr 2026</span>
                             </div>
-                            <p class="text-body text-sm font-semibold mb-2 print:text-base">Thomson Reuters (Contract Role)</p>
-                            <ul class="list-disc list-outside ml-4 text-body text-sm space-y-1 leading-relaxed marker-muted print:text-base print:leading-relaxed">
-                                <li>Reviewed and categorized sensitive tax data using Excel and internal software, maintaining strict confidentiality.</li>
-                                <li>Consistently exceeded daily volume targets of 1800+ analyzed pages during peak tax season in a fast-paced environment.</li>
+                            <p class="text-body font-semibold text-sm mb-1 print:mb-0.5 print:text-base">Thomson Reuters</p>
+                            <ul class="list-disc list-outside ml-4 text-body font-normal text-sm space-y-0.5 leading-[1.65] marker-muted print:text-base print:leading-relaxed">
+                                <li>Reviewed and categorized sensitive tax data using Excel and internal software, consistently exceeding high-volume daily targets during peak tax season.</li>
                             </ul>
                         </div>
 
-                        <div class="mb-4 print:mb-3">
-                            <div class="flex justify-between items-baseline mb-1">
+                        <!-- City of Shorewood -->
+                        <div class="mb-3 print:mb-2">
+                            <div class="flex justify-between items-baseline mb-0.5">
                                 <h4 class="text-primary text-lg font-bold print:text-xl">Graphic Design Intern &amp; Park Staff</h4>
                                 <span class="text-muted text-xs font-mono print:text-sm whitespace-nowrap shrink-0 ml-4">May 2023 &ndash; Feb 2025</span>
                             </div>
-                            <p class="text-body text-sm font-semibold mb-2 print:text-base">City of Shorewood</p>
-                            <ul class="list-disc list-outside ml-4 text-body text-sm space-y-1 leading-relaxed marker-muted print:text-base print:leading-relaxed">
+                            <p class="text-body font-semibold text-sm mb-1 print:mb-0.5 print:text-base">City of Shorewood</p>
+                            <ul class="list-disc list-outside ml-4 text-body font-normal text-sm space-y-0.5 leading-[1.65] marker-muted print:text-base print:leading-relaxed">
                                 <li>Designed print and digital materials for city events, including brochures, flyers, and social media graphics, ensuring adherence to municipal branding guidelines.</li>
                                 <li>Standardized all public forms by converting them into accessible, fillable PDFs using Adobe Acrobat Pro, improving office efficiency.</li>
                             </ul>
                         </div>
 
+                        <!-- Drake Relays — expanded to two bullets -->
                         <div>
-                            <div class="flex justify-between items-baseline mb-1">
+                            <div class="flex justify-between items-baseline mb-0.5">
                                 <h4 class="text-primary text-lg font-bold print:text-xl">Drake Relays Logo Designer</h4>
                                 <span class="text-muted text-xs font-mono print:text-sm whitespace-nowrap shrink-0 ml-4">Dec 2024 &ndash; May 2025</span>
                             </div>
-                            <p class="text-body text-sm font-semibold mb-2 print:text-base">Drake University</p>
-                            <ul class="list-disc list-outside ml-4 text-body text-sm space-y-1 leading-relaxed marker-muted print:text-base print:leading-relaxed">
-                                <li>Selected from 11 finalists to design the official logo and visual theme for the 2025 Drake Relays ("Racing Through Time"), creating a brand identity used on merchandise, signage, and digital platforms.</li>
+                            <p class="text-body font-semibold text-sm mb-1 print:mb-0.5 print:text-base">Drake University</p>
+                            <ul class="list-disc list-outside ml-4 text-body font-normal text-sm space-y-0.5 leading-[1.65] marker-muted print:text-base print:leading-relaxed">
+                                <li>Selected from 11 finalists to design the official logo and visual theme for the 2025 Drake Relays ("Racing Through Time").</li>
+                                <li>Brand identity deployed across merchandise, campus signage, and digital platforms for an event drawing thousands of attendees.</li>
                             </ul>
                         </div>
                     </section>
 
+                    <!-- Projects -->
                     <section>
-                        <h3 class="text-muted text-sm font-bold mb-4 print:mb-3 border-b border-base-solid pb-2">Projects</h3>
+                        <h3 class="text-muted text-sm font-bold mb-3 print:mb-2 border-b border-base-solid pb-1.5">Projects</h3>
 
-                        <div class="mb-4 print:mb-3">
-                            <div class="flex justify-between items-baseline mb-1">
+                        <!-- Freelance — named clients restored -->
+                        <div class="mb-3 print:mb-2">
+                            <div class="flex justify-between items-baseline mb-0.5">
                                 <h4 class="text-primary text-lg font-bold print:text-xl">Freelance Branding &amp; Design</h4>
                                 <span class="text-muted text-xs font-mono print:text-sm whitespace-nowrap shrink-0 ml-4">Aug 2021 &ndash; Present</span>
                             </div>
-                            <p class="text-body text-sm font-semibold mb-2 print:text-base">Various Clients</p>
-                            <ul class="list-disc list-outside ml-4 text-body text-sm space-y-1 leading-relaxed marker-muted print:text-base print:leading-relaxed">
-                                <li>Designed customized tour and performance flyers in print and digital for Minneapolis musicians Dessa and Jeremy Messersmith.</li>
-                                <li>Provided comprehensive design services for clients including The Forged Group and Pyrkia Health. Deliverables included logo systems, brand guidelines, and promotional assets.</li>
+                            <p class="text-body font-semibold text-sm mb-1 print:mb-0.5 print:text-base">Various Clients</p>
+                            <ul class="list-disc list-outside ml-4 text-body font-normal text-sm space-y-0.5 leading-[1.65] marker-muted print:text-base print:leading-relaxed">
+                                <li>Designed tour and performance flyers for Minneapolis musicians Dessa and Jeremy Messersmith, delivered in print and digital formats.</li>
+                                <li>Provided logo systems, brand guidelines, and promotional assets for clients including The Forged Group and Pyrkia Health.</li>
                             </ul>
                         </div>
 
+                        <!-- DMARC — expanded to two bullets -->
                         <div>
-                            <div class="flex justify-between items-baseline mb-1">
+                            <div class="flex justify-between items-baseline mb-0.5">
                                 <h4 class="text-primary text-lg font-bold print:text-xl">Data Visualization &amp; Modeling</h4>
                                 <span class="text-muted text-xs font-mono print:text-sm whitespace-nowrap shrink-0 ml-4">Aug 2025 &ndash; Dec 2025</span>
                             </div>
-                            <p class="text-body text-sm font-semibold mb-2 print:text-base">DMARC Food Pantries</p>
-                            <ul class="list-disc list-outside ml-4 text-body text-sm space-y-1 leading-relaxed marker-muted print:text-base print:leading-relaxed">
-                                <li>Developed a reproducible data pipeline in R to clean and analyze large-scale visitor logs. Created leaflet visualizations to identify service gaps and predictive models to forecast pantry demand.</li>
+                            <p class="text-body font-semibold text-sm mb-1 print:mb-0.5 print:text-base">DMARC Food Pantry Network</p>
+                            <ul class="list-disc list-outside ml-4 text-body font-normal text-sm space-y-0.5 leading-[1.65] marker-muted print:text-base print:leading-relaxed">
+                                <li>Built a reproducible R pipeline to clean and analyze visitor logs from 90+ pantry locations, enriched with ACS Census demographic data.</li>
+                                <li>Created Leaflet geospatial maps to identify service gaps and developed a Poisson regression model to forecast future pantry demand by region.</li>
                             </ul>
                         </div>
                     </section>
@@ -181,7 +302,22 @@
     </main>
 
     <footer id="footer-placeholder" class="w-full bg-surface dark:bg-dark-surface border-t border-themed py-8 px-8 print:hidden"></footer>
+
     <script src="components.js"></script>
-    <script>lucide.createIcons();</script>
+    <script>
+        lucide.createIcons();
+
+        function setMode(mode) {
+            document.body.setAttribute('data-mode', mode);
+            // Buttons live in the navbar, injected by components.js
+            const btnDesign = document.getElementById('btn-design');
+            const btnData   = document.getElementById('btn-data');
+            if (btnDesign) btnDesign.classList.toggle('active', mode === 'design');
+            if (btnData)   btnData.classList.toggle('active', mode === 'data');
+            document.title = mode === 'design'
+                ? 'Resume_Oliver_Williams_Design'
+                : 'Resume_Oliver_Williams_Data';
+        }
+    </script>
 </body>
 </html>

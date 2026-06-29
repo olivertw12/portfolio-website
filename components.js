@@ -57,6 +57,10 @@ const navConfig = {
             </div>
             <span class="text-primary font-bold text-sm">Back to Portfolio</span>
         </div>
+        <div class="nav-pill flex items-center gap-0.5 p-1 rounded-xl border" id="nav-mode-toggle">
+            <button id="btn-design" onclick="setMode('design')" class="mode-btn active">Design Focus</button>
+            <button id="btn-data"   onclick="setMode('data')"   class="mode-btn">Data Focus</button>
+        </div>
         <div class="flex items-center gap-4">
             <button onclick="window.print()" class="text-muted hover:text-accent flex items-center gap-2 text-sm font-medium transition-colors">
                 <i class="fa-solid fa-print"></i> Print / Save PDF
