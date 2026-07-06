@@ -227,24 +227,24 @@
 /* --- Nav pill background --- */
 .nav-pill {
     background-color: var(--color-cream);
-    border-color: var(--color-border);
+    border-color: transparent;
 }
 .dark .nav-pill {
     background-color: var(--color-dark-bg);
-    border-color: var(--color-border-dark);
+    border-color: transparent;
 }
 .nav-pill-item {
     color: var(--color-text-body);
 }
 .nav-pill-item:hover {
-    background-color: var(--color-surface);
+    background-color: var(--color-wash);
     color: var(--color-text-primary);
 }
 .dark .nav-pill-item {
     color: var(--color-text-body-dark);
 }
 .dark .nav-pill-item:hover {
-    background-color: var(--color-dark-surface);
+    background-color: var(--color-wash-dark);
     color: var(--color-text-primary-dark);
 }
 
@@ -252,18 +252,20 @@
 .theme-toggle {
     background-color: var(--color-cream);
     color: var(--color-text-body);
-    border-color: var(--color-border);
+    border-color: transparent;
 }
 .theme-toggle:hover {
-    background-color: var(--color-tint);
+    background-color: var(--color-wash);
+    color: var(--color-text-primary);
 }
 .dark .theme-toggle {
     background-color: var(--color-dark-bg);
     color: var(--color-text-body-dark);
-    border-color: var(--color-border-dark);
+    border-color: transparent;
 }
 .dark .theme-toggle:hover {
     background-color: var(--color-wash-dark);
+    color: var(--color-text-primary-dark);
 }
 
 /* --- Nav anchor icon bg --- */

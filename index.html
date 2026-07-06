@@ -33,39 +33,35 @@
     <nav id="navbar-placeholder" data-type="home" class="fixed top-4 left-0 right-0 z-50 px-4 md:px-8"></nav>
 
     <!-- ═══ HERO ═══ -->
-    <section class="pt-32 pb-8 w-full">
-        <div class="w-full transition-colors duration-500 relative overflow-hidden flex flex-col justify-center min-h-[50vh]">
-            <div class="w-full max-w-7xl mx-auto px-6 py-12 md:py-20 relative z-10">
+    <section class="pt-28 pb-16 w-full">
+        <div class="w-full max-w-3xl mx-auto px-6 flex flex-col items-center justify-center text-center min-h-[60vh]">
 
-                <div class="absolute left-1/2 -translate-x-1/2 md:left-auto md:translate-x-0 md:right-4 lg:right-12 top-1/2 -translate-y-1/2 pointer-events-none -z-10">
-                    <i data-lucide="anchor" class="w-80 h-80 md:w-[480px] md:h-[480px] stroke-1" style="color: var(--color-accent); opacity: 0.10;"></i>
-                </div>
-
-                <div class="flex items-center gap-2 mb-6 opacity-80">
-                    <div class="w-2 h-2 rounded-full animate-pulse" style="background-color: var(--color-accent);"></div>
-                    <span class="text-muted text-xs font-semibold uppercase tracking-widest">Available for work</span>
-                </div>
-
-                <!-- font-medium (500) for the display heading -->
-                <h1 class="text-primary text-4xl md:text-7xl font-medium mb-6 tracking-tight leading-[1.1]">
-                    Connecting Design &amp; Data.
-                </h1>
-
-                <!-- font-normal (400) body, tighter line-height for contrast with heading -->
-                <p class="text-body font-normal text-lg md:text-xl leading-[1.65] mb-8 max-w-2xl">
-                    Hi, I'm Oliver Williams! I am a graphic designer and data analyst with expertise in combining design thinking and technical skills to solve complex problems. I specialize in data-driven visualizations and corporate branding using the Adobe Suite, working with clients to craft the best results possible.
-                </p>
-
-                <div class="flex flex-row items-center gap-8">
-                    <!-- rounded-[10px] tighter than cards, tracking-wide for button feel -->
-                    <a href="resume.html" class="text-white dark:text-primary-dark px-8 py-3.5 rounded-[10px] font-semibold tracking-wide hover:opacity-90 transition-opacity flex items-center gap-2 text-sm md:text-base" style="background-color: var(--color-primary);">
-                        View Resume <i class="fa-solid fa-arrow-right -rotate-45"></i>
-                    </a>
-                    <a href="mailto:oliver_tw@icloud.com" class="text-body hover:text-primary border-b border-divider hover:border-primary pb-0.5 font-medium transition-colors">
-                        Get in Touch
-                    </a>
-                </div>
+            <!-- Anchor with soft disc behind it -->
+            <div class="relative flex items-center justify-center mb-9" style="width: 116px; height: 116px;">
+                <div class="absolute inset-0 rounded-full" style="background-color: var(--color-accent-muted); border: 1px solid var(--color-border);"></div>
+                <i data-lucide="anchor" class="relative z-10 w-12 h-12" style="color: var(--color-primary); stroke-width: 1.6;"></i>
             </div>
+
+            <!-- Headline -->
+            <h1 class="text-primary text-4xl md:text-5xl font-medium mb-5 tracking-tight leading-[1.1]">
+                Connecting Design &amp; Data.
+            </h1>
+
+            <!-- Body -->
+            <p class="text-body font-normal text-base md:text-lg leading-[1.6] mb-8 max-w-lg mx-auto">
+                Hi, I'm Oliver Williams, a graphic designer and data analyst combining design thinking and technical skills to solve complex problems.
+            </p>
+
+            <!-- Actions -->
+            <div class="flex flex-row items-center justify-center gap-4">
+                <a href="resume.html" class="text-white dark:text-primary-dark px-7 py-3.5 rounded-[10px] font-semibold tracking-wide hover:opacity-90 transition-opacity flex items-center gap-2 text-sm md:text-base" style="background-color: var(--color-primary);">
+                    View Resume <i class="fa-solid fa-arrow-right -rotate-45"></i>
+                </a>
+                <a href="mailto:oliver_tw@icloud.com" class="text-white dark:text-primary-dark px-7 py-3.5 rounded-[10px] font-semibold tracking-wide hover:opacity-90 transition-opacity flex items-center gap-2 text-sm md:text-base" style="background-color: var(--color-primary);">
+                    Get in Touch
+                </a>
+            </div>
+
         </div>
     </section>
 
@@ -104,7 +100,7 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 min-h-[500px]">
                 <div class="p-8 md:p-12 flex flex-col justify-center relative z-10 order-2 lg:order-1">
                     <div class="mb-6">
-                        <div class="badge-accent inline-flex items-center gap-2 px-3 py-1 rounded-[8px] text-xs font-bold uppercase tracking-wider mb-4">
+                        <div class="tech-pill inline-flex items-center gap-2 px-3 py-1 rounded-[8px] text-xs font-bold uppercase tracking-wider mb-4">
                             <i data-lucide="bar-chart-2" class="w-3 h-3"></i> Capstone Project
                         </div>
                         <h3 class="text-primary text-3xl font-bold mb-4">DMARC Network Analysis</h3>
@@ -164,7 +160,7 @@
                 </div>
                 <div class="p-8 md:p-12 flex flex-col justify-center relative z-10 order-2">
                     <div class="mb-6">
-                        <div class="badge-neutral inline-flex items-center gap-2 px-3 py-1 rounded-[8px] text-xs font-bold uppercase tracking-wider mb-4 border">
+                        <div class="tech-pill inline-flex items-center gap-2 px-3 py-1 rounded-[8px] text-xs font-bold uppercase tracking-wider mb-4">
                             <i data-lucide="code-2" class="w-3 h-3"></i> Web Development
                         </div>
                         <h3 class="text-primary text-3xl font-bold mb-4">Personal Site Build</h3>
@@ -228,7 +224,7 @@
                     <div class="px-1 pb-1 flex-grow">
                         <div class="flex items-center justify-between mb-1.5">
                             <h3 class="text-primary text-base font-bold">${p.title}</h3>
-                            <span class="chip-overlay text-[10px] font-bold px-2.5 py-0.5 rounded-full border shrink-0 ml-2">${p.category}</span>
+                            <span class="tech-pill text-[10px] font-bold px-2.5 py-0.5 rounded-full shrink-0 ml-2">${p.category}</span>
                         </div>
                         <p class="text-muted text-sm font-normal leading-relaxed line-clamp-2">${p.desc}</p>
                     </div>
