@@ -37,7 +37,7 @@ const projectData = {
     group: "product",
     layout: "technical",
     category: "Product · Design & Build",
-    title: "BrushFactory",
+    title: "Brushfactory",
     card: {
       chip: "Live Product",
       blurb: "A converter for brush files between Photoshop, Procreate, Clip Studio Paint and Krita, and the test harness I built to check that a brush still behaves the same after it moves. Live now, with a published report on what carries over per format.",
@@ -56,10 +56,10 @@ const projectData = {
         type: "image",
         fit: "contain",
         src: "images/brushfactory-home.jpg",
-        alt: "The BrushFactory home page: the four supported formats, and a table showing which brush settings carry over exactly between Photoshop, Procreate, Clip Studio and Krita"
+        alt: "The Brushfactory home page: the four supported formats, and a table showing which brush settings carry over exactly between Photoshop, Procreate, Clip Studio and Krita"
       },
       heading: "Your brushes, wherever you draw.",
-      body: "Brushes do not move between drawing apps. Every app stores them in its own undocumented binary format, and most converters get around that by flattening the brush into a stamp, which loses the pressure settings and the grain. BrushFactory writes real settings for the target app instead, and the site carries a table showing which settings come across exactly and which ones get matched as closely as the target app allows.",
+      body: "Brushes do not move between drawing apps. Every app stores them in its own undocumented binary format, and most converters get around that by flattening the brush into a stamp, which loses the pressure settings and the grain. Brushfactory writes real settings for the target app instead, and the site carries a table showing which settings come across exactly and which ones get matched as closely as the target app allows.",
       actions: [
         { href: "https://brushfactory.co", label: "Visit brushfactory.co", style: "primary", external: true, icon: "fa-arrow-right", iconTurn: true },
         { project: "brushfactory", label: "How I built it", style: "secondary" }
@@ -67,7 +67,7 @@ const projectData = {
     },
     lede: [
       { label: "The Problem", text: "If you switch drawing apps, your brushes do not come with you. Every app stores them in its own binary format, none of which are documented, and the settings do not line up one to one. Most converters get around this by flattening the brush tip into a stamp. That throws away the pressure settings and the grain, which are the parts that matter most." },
-      { label: "What It Is",  text: "BrushFactory reads a brush into a universal format and then writes real settings for the target app instead of faking them. It handles Photoshop, Procreate, Clip Studio Paint and Krita in any direction. It is live now, with three free conversions a month and a paid tier for unlimited use and batch conversion." }
+      { label: "What It Is",  text: "Brushfactory reads a brush into a universal format and then writes real settings for the target app instead of faking them. It handles Photoshop, Procreate, Clip Studio Paint and Krita in any direction. It is live now, with three free conversions a month and a paid tier for unlimited use and batch conversion." }
     ],
     sections: [
       {
@@ -685,7 +685,6 @@ for (const id of Object.keys(projectData)) {
     solution: "We pitched an immersive in-game crossover event. I spearheaded the visual development, utilizing Adobe Illustrator to merge official assets from the Duolingo brand kit with the Rocket League aesthetic.",
     result: "Delivered a comprehensive campaign deck and video pitch that successfully merged two distinct brand identities, resulting in a professional-grade presentation suitable for a major tech client.",
     gallery: [
-      { src: "images/duolingo3.png", caption: "In-game car decal concept." },
       { src: "images/duolingo4.png", caption: "Initial illustration sketch." }
     ]
   },

@@ -10,7 +10,9 @@
  *   1. Every [data-cards] container in ../*.html gets its cards inlined.
  *   2. ../project.html is used as a template to write one real page per
  *      project into ../projects/<id>.html — those are the canonical URLs.
- *   3. ../sitemap.xml and the redirects for the old /project.html?id=<id>
+ *   3. every link to a local stylesheet or script gets ?v=<content hash>,
+ *      so a browser or edge cache can't serve a stale one after a deploy.
+ *   4. ../sitemap.xml and the redirects for the old /project.html?id=<id>
  *      URLs are regenerated so they can't drift from projects.js.
  *
  * Rerun after changing projects.js, render.js or project.html. If you forget,
@@ -21,6 +23,7 @@
 const fs   = require('fs');
 const path = require('path');
 const vm   = require('vm');
+const crypto = require('crypto');
 
 const ROOT     = path.join(__dirname, '..');
 const OUT_DIR  = path.join(ROOT, 'projects');
@@ -108,7 +111,82 @@ function buildProjectPage(template, id) {
   return html;
 }
 
-/* --- 3. sitemap + redirects ---------------------------------------- */
+/* --- image integrity ------------------------------------------------
+   Every image the site references has to exist on disk, spelled exactly.
+   Windows is case-insensitive and Cloudflare is not, so `icymi6.PNG` on a
+   laptop happily serves a request for `icymi6.png` locally and 404s in
+   production. This check runs at build time and fails the build, because
+   the alternative is finding out from the live site. */
+
+function checkImages() {
+  const dir = path.join(ROOT, 'images');
+  const onDisk = new Set(fs.existsSync(dir) ? fs.readdirSync(dir).map(f => 'images/' + f) : []);
+  const byLower = new Map([...onDisk].map(f => [f.toLowerCase(), f]));
+
+  const refs = new Set();
+  const scan = f => {
+    const src = fs.readFileSync(f, 'utf8');
+    for (const m of src.matchAll(/["'](\/?images\/[A-Za-z0-9._-]+\.(?:png|jpe?g|webp|svg|gif))["']/gi)) {
+      refs.add(m[1].replace(/^\//, ''));
+    }
+  };
+  scan(path.join(ROOT, 'projects.js'));
+  for (const f of fs.readdirSync(ROOT)) if (f.endsWith('.html')) scan(path.join(ROOT, f));
+
+  const problems = [];
+  for (const r of [...refs].sort()) {
+    if (onDisk.has(r)) continue;
+    const alt = byLower.get(r.toLowerCase());
+    problems.push(alt ? `  ${r} — on disk as ${alt} (case mismatch: fine on Windows, 404 on the server)`
+                      : `  ${r} — no such file`);
+  }
+  // A working copy without the image binaries (a docs-only checkout, say)
+  // would report every reference as missing, which is noise rather than a
+  // finding. Only a handful of bad references means something is actually
+  // wrong, and that is what fails the build.
+  if (problems.length > refs.size / 2) {
+    console.log(`images: skipped — ${problems.length}/${refs.size} missing, so images/ is a partial copy, not a broken reference`);
+    return;
+  }
+  if (problems.length) {
+    console.error('Broken image references:\n' + problems.join('\n'));
+    process.exit(1);
+  }
+  console.log(`images: ${refs.size} references, all present`);
+}
+
+
+/* --- 3. cache busting -----------------------------------------------
+   Every page links the same handful of local files at fixed URLs. When one
+   changes, a browser or an edge cache that already has the old copy has no
+   reason to ask for a new one — which is exactly how a nav item that was
+   deleted from components.js kept showing up on the live site after a deploy.
+   Stamping a content hash onto each link makes the URL change whenever the
+   file does, so a stale copy can never be served for the new HTML. */
+
+const VERSIONED = ['/assets/tailwind.css', '/style.css', '/components.js',
+                   '/projects.js', '/render.js', '/lightbox.js'];
+
+function assetVersions() {
+  const v = {};
+  for (const url of VERSIONED) {
+    const file = path.join(ROOT, url.replace(/^\//, ''));
+    if (!fs.existsSync(file)) continue;
+    v[url] = crypto.createHash('sha1').update(fs.readFileSync(file)).digest('hex').slice(0, 8);
+  }
+  return v;
+}
+
+function stampVersions(html, versions) {
+  for (const [url, hash] of Object.entries(versions)) {
+    const re = new RegExp('(["\'])' + url.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '(?:\\?v=[a-f0-9]+)?\\1', 'g');
+    html = html.replace(re, '$1' + url + '?v=' + hash + '$1');
+  }
+  return html;
+}
+
+
+/* --- 4. sitemap + redirects ---------------------------------------- */
 
 function buildSitemap(ids) {
   const priority = { brushfactory: '0.9', dmarc: '0.8', 'task-briefs': '0.7' };
@@ -145,6 +223,8 @@ function buildRedirects(ids) {
 
 /* --- run ------------------------------------------------------------ */
 
+checkImages();
+
 const ids = Object.keys(projectData);
 
 let pages = 0;
@@ -160,13 +240,33 @@ console.log(`card grids inlined in ${pages} page(s)`);
 
 const template = fs.readFileSync(path.join(ROOT, 'project.html'), 'utf8');
 fs.mkdirSync(OUT_DIR, { recursive: true });
+// Only remove pages whose project no longer exists; the rest are overwritten
+// in place. Deleting and rewriting all of them every build was pointless churn,
+// and it fails outright on a filesystem that allows writes but not unlinks.
+const keep = new Set(ids.map(id => id + '.html'));
 for (const f of fs.readdirSync(OUT_DIR)) {
-  if (f.endsWith('.html')) fs.unlinkSync(path.join(OUT_DIR, f));
+  if (f.endsWith('.html') && !keep.has(f)) {
+    fs.unlinkSync(path.join(OUT_DIR, f));
+    console.log(`removed stale page projects/${f}`);
+  }
 }
 for (const id of ids) {
   fs.writeFileSync(path.join(OUT_DIR, id + '.html'), buildProjectPage(template, id));
 }
 console.log(`projects/ — ${ids.length} page(s) written`);
+
+const versions = assetVersions();
+let stamped = 0;
+for (const dir of [ROOT, OUT_DIR]) {
+  for (const f of fs.readdirSync(dir)) {
+    if (!f.endsWith('.html')) continue;
+    const file = path.join(dir, f);
+    const src  = fs.readFileSync(file, 'utf8');
+    const out  = stampVersions(src, versions);
+    if (out !== src) { fs.writeFileSync(file, out); stamped++; }
+  }
+}
+console.log(`asset versions stamped in ${stamped} page(s)`);
 
 fs.writeFileSync(path.join(ROOT, 'sitemap.xml'), buildSitemap(ids));
 fs.writeFileSync(path.join(ROOT, '_redirects'),  buildRedirects(ids));

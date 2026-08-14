@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Case-study template — see tailwind-build/prerender.js. -->
-    <title>BrushFactory | Oliver T. Williams</title>
+    <title>Brushfactory | Oliver T. Williams</title>
     <meta name="description" content="A converter for brush files between Photoshop, Procreate, Clip Studio Paint and Krita, and the test harness I built to check that a brush still behaves the same after it moves. Live now, with a published report on what carries over per format.">
-    <meta property="og:title" content="BrushFactory | Oliver T. Williams">
+    <meta property="og:title" content="Brushfactory | Oliver T. Williams">
     <meta property="og:description" content="A converter for brush files between Photoshop, Procreate, Clip Studio Paint and Krita, and the test harness I built to check that a brush still behaves the same after it moves. Live now, with a published report on what carries over per format.">
     <meta property="og:image" content="https://olivertwilliams.com/images/brushfactory-home.jpg">
     <meta property="og:url" content="https://olivertwilliams.com/projects/brushfactory.html">
@@ -26,8 +26,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/assets/tailwind.css">
-    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/assets/tailwind.css?v=5743cf79">
+    <link rel="stylesheet" href="/style.css?v=2a8607c4">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body class="preload bg-page font-sans flex flex-col min-h-screen transition-colors duration-500">
@@ -60,9 +60,9 @@
 
     <main id="main-content" tabindex="-1" class="pt-32 pb-20 px-4 md:px-8 max-w-7xl mx-auto flex-grow w-full">
 
-        <header id="p-header" class="mb-12"><span class="text-accent text-sm font-bold tracking-wider uppercase mb-4 block">Product · Design &amp; Build</span><h1 class="text-ink text-4xl md:text-5xl lg:text-6xl font-bold mb-8 tracking-tight break-words max-w-4xl">BrushFactory</h1><div class="grid grid-cols-2 md:grid-cols-4 gap-6 border-y border-themed py-6"><div class="min-w-0"><span class="text-muted text-xs font-bold uppercase tracking-wider block mb-1">Type</span><span class="text-ink font-medium block">Live product</span></div><div class="min-w-0"><span class="text-muted text-xs font-bold uppercase tracking-wider block mb-1">Role</span><span class="text-ink font-medium block">Design &amp; build</span></div><div class="min-w-0"><span class="text-muted text-xs font-bold uppercase tracking-wider block mb-1">Stack</span><span class="text-ink font-medium block">Python, SQLite, Stripe</span></div><div class="min-w-0"><span class="text-muted text-xs font-bold uppercase tracking-wider block mb-1">Status</span><span class="text-ink font-medium block">In development</span></div></div></header>
+        <header id="p-header" class="mb-12"><span class="text-accent text-sm font-bold tracking-wider uppercase mb-4 block">Product · Design &amp; Build</span><h1 class="text-ink text-4xl md:text-5xl lg:text-6xl font-bold mb-8 tracking-tight break-words max-w-4xl">Brushfactory</h1><div class="grid grid-cols-2 md:grid-cols-4 gap-6 border-y border-themed py-6"><div class="min-w-0"><span class="text-muted text-xs font-bold uppercase tracking-wider block mb-1">Type</span><span class="text-ink font-medium block">Live product</span></div><div class="min-w-0"><span class="text-muted text-xs font-bold uppercase tracking-wider block mb-1">Role</span><span class="text-ink font-medium block">Design &amp; build</span></div><div class="min-w-0"><span class="text-muted text-xs font-bold uppercase tracking-wider block mb-1">Stack</span><span class="text-ink font-medium block">Python, SQLite, Stripe</span></div><div class="min-w-0"><span class="text-muted text-xs font-bold uppercase tracking-wider block mb-1">Status</span><span class="text-ink font-medium block">In development</span></div></div></header>
 
-        <div id="p-body"><div class="text-lg text-body font-normal mb-20 max-w-4xl"><p class="mb-6 last:mb-0"><strong class="text-ink font-semibold">The Problem:</strong> If you switch drawing apps, your brushes do not come with you. Every app stores them in its own binary format, none of which are documented, and the settings do not line up one to one. Most converters get around this by flattening the brush tip into a stamp. That throws away the pressure settings and the grain, which are the parts that matter most.</p><p class="mb-6 last:mb-0"><strong class="text-ink font-semibold">What It Is:</strong> BrushFactory reads a brush into a universal format and then writes real settings for the target app instead of faking them. It handles Photoshop, Procreate, Clip Studio Paint and Krita in any direction. It is live now, with three free conversions a month and a paid tier for unlimited use and batch conversion.</p></div><div><section class="mb-24"><div class="flex items-baseline gap-3 mb-6"><span class="text-accent font-mono font-bold text-xl">01</span><h2 class="text-ink text-2xl md:text-3xl font-bold">Four formats, none of them documented</h2></div><p class="text-body font-normal mb-8 text-lg max-w-4xl">Each app stores brushes differently and none of them publish a spec. Working out what each field does meant writing a file, opening it in the real app, and seeing what changed. I did that a lot. I also put the engine behind a small CLI so I could run conversions without going through the site, which made the testing much faster. MyPaint and Affinity are listed as upcoming on the site, but they are not wired up yet.</p><div class="bg-surface rounded-3xl p-5 border border-themed shadow-soft"><div class="bg-code rounded-2xl overflow-hidden border-code border flex flex-col w-full min-w-0"><div class="flex items-center justify-between px-4 py-2.5 bg-code-titlebar border-b border-code shrink-0"><span class="text-code-label text-xs font-mono">Terminal</span><div class="flex gap-1.5"><div class="w-3 h-3 rounded-full chrome-close"></div><div class="w-3 h-3 rounded-full chrome-minimize"></div><div class="w-3 h-3 rounded-full chrome-maximize"></div></div></div><div class="p-4 overflow-x-auto flex-grow font-mono text-sm text-code"><pre><code>python main.py inspect  some.brushset
+        <div id="p-body"><div class="text-lg text-body font-normal mb-20 max-w-4xl"><p class="mb-6 last:mb-0"><strong class="text-ink font-semibold">The Problem:</strong> If you switch drawing apps, your brushes do not come with you. Every app stores them in its own binary format, none of which are documented, and the settings do not line up one to one. Most converters get around this by flattening the brush tip into a stamp. That throws away the pressure settings and the grain, which are the parts that matter most.</p><p class="mb-6 last:mb-0"><strong class="text-ink font-semibold">What It Is:</strong> Brushfactory reads a brush into a universal format and then writes real settings for the target app instead of faking them. It handles Photoshop, Procreate, Clip Studio Paint and Krita in any direction. It is live now, with three free conversions a month and a paid tier for unlimited use and batch conversion.</p></div><div><section class="mb-24"><div class="flex items-baseline gap-3 mb-6"><span class="text-accent font-mono font-bold text-xl">01</span><h2 class="text-ink text-2xl md:text-3xl font-bold">Four formats, none of them documented</h2></div><p class="text-body font-normal mb-8 text-lg max-w-4xl">Each app stores brushes differently and none of them publish a spec. Working out what each field does meant writing a file, opening it in the real app, and seeing what changed. I did that a lot. I also put the engine behind a small CLI so I could run conversions without going through the site, which made the testing much faster. MyPaint and Affinity are listed as upcoming on the site, but they are not wired up yet.</p><div class="bg-surface rounded-3xl p-5 border border-themed shadow-soft"><div class="bg-code rounded-2xl overflow-hidden border-code border flex flex-col w-full min-w-0"><div class="flex items-center justify-between px-4 py-2.5 bg-code-titlebar border-b border-code shrink-0"><span class="text-code-label text-xs font-mono">Terminal</span><div class="flex gap-1.5"><div class="w-3 h-3 rounded-full chrome-close"></div><div class="w-3 h-3 rounded-full chrome-minimize"></div><div class="w-3 h-3 rounded-full chrome-maximize"></div></div></div><div class="p-4 overflow-x-auto flex-grow font-mono text-sm text-code"><pre><code>python main.py inspect  some.brushset
 python main.py convert  some.abr --to kpp -o out/
 python main.py batch    packs/ --to sut -o bundle.zip</code></pre></div></div></div></section><section class="mb-24"><div class="flex items-baseline gap-3 mb-6"><span class="text-accent font-mono font-bold text-xl">02</span><h2 class="text-ink text-2xl md:text-3xl font-bold">The hard part is feel, not settings</h2></div><p class="text-body font-normal mb-8 text-lg max-w-4xl">Copying the numbers across is the easy half. Two brushes can have the same size, spacing and opacity and still feel nothing alike, because each app interprets those numbers differently and because the grain and the pressure response carry most of the character. I was checking this by eye at first, but I could not stay consistent across four formats and a few hundred conversions, so I started measuring it instead.</p></section><section class="mb-24"><div class="flex items-baseline gap-3 mb-6"><span class="text-accent font-mono font-bold text-xl">03</span><h2 class="text-ink text-2xl md:text-3xl font-bold">Measuring drift instead of eyeballing it</h2></div><p class="text-body font-normal mb-8 text-lg max-w-4xl">I built a harness that takes a brush, converts it to every other format, reads each one back through the real codecs, and compares them to the source. It reports size, spacing, opacity, grain and dynamics for each format and flags anything that moved more than 2%. It also renders a sheet with the tip, the grain and a test stroke for every format, all drawn by the same renderer, so anything I can see in it is real mapping drift and not one app's brush engine looking different from another's.</p><div class="bg-surface rounded-3xl p-5 border border-themed shadow-soft"><div class="bg-code rounded-2xl overflow-hidden border-code border flex flex-col w-full min-w-0"><div class="flex items-center justify-between px-4 py-2.5 bg-code-titlebar border-b border-code shrink-0"><span class="text-code-label text-xs font-mono">test_brushes/converted/&lt;brush&gt;/</span><div class="flex gap-1.5"><div class="w-3 h-3 rounded-full chrome-close"></div><div class="w-3 h-3 rounded-full chrome-minimize"></div><div class="w-3 h-3 rounded-full chrome-maximize"></div></div></div><div class="p-4 overflow-x-auto flex-grow font-mono text-sm text-code"><pre><code>cohesion_sheet.png     tip, grain and a test stroke per format
 cohesion_report.txt    size / spacing / opacity / grain / dynamics
@@ -76,25 +76,22 @@ cohesion_report.txt    size / spacing / opacity / grain / dynamics
     
 
     <!-- ── CONTACT ── -->
-    <section id="contact" class="px-4 md:px-8 pb-24">
-        <div class="max-w-7xl mx-auto">
-            <hr class="section-divider mb-16">
-            <div class="max-w-2xl">
-                <h2 class="text-ink text-3xl md:text-4xl font-bold mb-4">Let's work together!</h2>
-                <p class="text-body font-normal text-lg mb-8">Looking for assistance with a project? Please reach out and let me know how I can help.</p>
-                <a href="mailto:oliver_tw@icloud.com" class="btn-primary inline-flex items-center gap-2 px-8 py-3.5">
-                    <i class="fa-solid fa-envelope"></i> Email Me
-                </a>
-            </div>
+    <section id="contact" class="px-4 md:px-8 pb-20">
+        <div class="max-w-7xl mx-auto bg-surface rounded-3xl p-8 md:p-12 shadow-soft border border-themed transition-colors duration-500 text-center">
+            <h2 class="text-ink text-3xl md:text-4xl font-bold mb-4">Let's work together!</h2>
+            <p class="text-muted font-normal text-lg mb-8 max-w-xl mx-auto">Looking for assistance with a project? Please reach out and let me know how I can help.</p>
+            <a href="mailto:oliver_tw@icloud.com" class="btn-primary inline-flex items-center gap-2 px-8 py-3.5">
+                <i class="fa-solid fa-envelope"></i> Email Me
+            </a>
         </div>
     </section>
 
     <footer id="footer-placeholder" class="w-full bg-surface border-t border-themed py-8 px-4 md:px-8 mt-auto"></footer>
 
-    <script src="/components.js"></script>
-    <script src="/projects.js"></script>
-    <script src="/render.js"></script>
-    <script src="/lightbox.js"></script>
+    <script src="/components.js?v=8503ab58"></script>
+    <script src="/projects.js?v=bc7cd95d"></script>
+    <script src="/render.js?v=b047ce16"></script>
+    <script src="/lightbox.js?v=c9f1ff7f"></script>
     
 </body>
 </html>

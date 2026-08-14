@@ -20,7 +20,10 @@ Both outputs are committed to the repo on purpose, so Cloudflare deploys with no
 
 1. every `<div data-cards="...">` gets its cards inlined
 2. `project.html` is used as a template to write one real page per project into `../projects/`
-3. `sitemap.xml` and the `/project.html?id=…` redirects in `_redirects` are regenerated from `projects.js`, so they can't drift
+3. every link to a local stylesheet or script gets `?v=<content hash>` appended
+4. `sitemap.xml` and the `/project.html?id=…` redirects in `_redirects` are regenerated from `projects.js`, so they can't drift
+
+That third step exists because of a real failure: a nav item deleted from `components.js` kept appearing on the live site after the deploy, because the browser and the edge already had the old file at the same URL and had no reason to re-fetch it. The hash changes whenever the file does, so the URL changes with it and a stale copy can never be served against new HTML.
 
 ## When you need to rebuild
 

@@ -22,7 +22,7 @@ It also removed the `html .text-primary` hack. Those five selectors existed to o
 
 **Buttons are a class.** `.btn-primary`, matching the `.btn-secondary` that already existed. The five primary buttons on the homepage were each an inline `style="background-color: var(--color-primary)"` plus a twenty-class utility string, copied. There is now one inline `style` attribute left in the whole site, and it's a `<style>` block on the resume for the mode toggle.
 
-**Small things.** The first-paint transition freeze lifts on the second animation frame rather than after a hard-coded 100ms. The stale comments are gone — `tailwind.config.cjs` no longer claims to mirror a file that was deleted, and `projects.js` no longer documents group values (`evaluation`) that don't exist. The homepage JSON-LD said `jobTitle: "AI Model Evaluation Specialist"` and listed rubric design, which described the version of the site from before the BrushFactory repositioning; it and the meta description now match the page.
+**Small things.** The first-paint transition freeze lifts on the second animation frame rather than after a hard-coded 100ms. The stale comments are gone — `tailwind.config.cjs` no longer claims to mirror a file that was deleted, and `projects.js` no longer documents group values (`evaluation`) that don't exist. The homepage JSON-LD said `jobTitle: "AI Model Evaluation Specialist"` and listed rubric design, which described the version of the site from before the Brushfactory repositioning; it and the meta description now match the page.
 
 ### Three things that changed on purpose
 
@@ -32,6 +32,12 @@ It also removed the `html .text-primary` hack. Those five selectors existed to o
 
 **The resume and cover letter are readable on a phone.** Both set `viewport width=1280`, which gave mobile visitors a pinch-to-zoom PDF. They're `device-width` now, and the paper stacks to one column below `lg`. `print:` variants force the two-column layout back for printing, so the PDF is unchanged.
 
+
+## Third pass — visual check and cache busting
+
+The Notes removal shipped with two faults I should have caught by looking at the page instead of the diff. The contact section lost its card along with the gradient behind it and ended up as bare left-aligned text against the footer; the card is back, without the gradient. And a nav item removed from `components.js` kept appearing live, because that file is served at a fixed URL and the old copy was still cached. `prerender.js` now stamps `?v=<content hash>` onto every local stylesheet and script, so that class of problem cannot recur.
+
+Also this pass: the product is spelled **Brushfactory**, not BrushFactory, everywhere. The hero paragraph is Oliver's own text. Homepage metadata and the JSON-LD `jobTitle` follow it, leading with the AI evaluation work.
 
 ## Deploying
 
@@ -122,11 +128,11 @@ The active nav item measured **1.01:1 against the pill behind it**. The label wa
 
 Also, the inactive "Design Focus / Data Focus" button on the resume had no dark-mode color at all, so it kept the light-mode grey on the dark nav pill — 2.22:1. It has a dark variant now.
 
-## Part 01 — BrushFactory
+## Part 01 — Brushfactory
 
 Part 01 is now the product you're actually building, not the AI evaluation work.
 
-The old section was called "AI Evaluation" and opened with "The evaluation work I do for clients is confidential," which reads as a practice you run rather than contract work you do for two companies. The two pieces under it were also written *for the portfolio* — the rubric promised scored runs that don't exist yet. BrushFactory is shipped, public, and hard in a way that's easy to demonstrate, so it's a straight upgrade in evidence as well as a more honest frame.
+The old section was called "AI Evaluation" and opened with "The evaluation work I do for clients is confidential," which reads as a practice you run rather than contract work you do for two companies. The two pieces under it were also written *for the portfolio* — the rubric promised scored runs that don't exist yet. Brushfactory is shipped, public, and hard in a way that's easy to demonstrate, so it's a straight upgrade in evidence as well as a more honest frame.
 
 **On the homepage:** a product-first section — the converter screenshot, the "Your brushes, wherever you draw" line, the four formats, and two buttons: out to brushfactory.co, and through to a case study.
 

@@ -71,7 +71,7 @@ function closeNavMenu() {
 }
 
 const HOME_LINKS = [
-    ['/#product', 'BrushFactory'],
+    ['/#product', 'Brushfactory'],
     ['/#data',    'Data'],
     ['/#design',  'Design'],
     ['/#contact', 'Contact']
