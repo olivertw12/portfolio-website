@@ -293,6 +293,34 @@ button:focus-visible {
 .nav-icon-color { color: var(--color-accent); }
 
 
+/* --- Resume download menu --- */
+.download-option {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 0.6rem 0.75rem;
+    border: none;
+    border-radius: var(--radius-xl);
+    background: transparent;
+    cursor: pointer;
+    font-family: var(--font-sans);
+}
+.download-option:hover { background-color: var(--color-wash); }
+.download-option-title {
+    display: block;
+    color: var(--color-text-primary);
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+.download-option-note {
+    display: block;
+    color: var(--color-text-muted);
+    font-size: 0.75rem;
+    line-height: 1.4;
+    margin-top: 0.125rem;
+}
+
+
 /* ============================================================
    HERO
    ============================================================ */
@@ -393,6 +421,9 @@ button:focus-visible {
         box-shadow: none !important; border: none !important;
         color: black !important;
     }
+    /* Tighter than the 1.65 used on screen. Print has no scrolling to spend,
+       and the resume has to land on one page. */
+    p, li { line-height: 1.45; }
     * { color: black !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     .border-themed, .border-solid-themed { border-color: #e5e7eb !important; }
     a { text-decoration: none; color: black !important; }

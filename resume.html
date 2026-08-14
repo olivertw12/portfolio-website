@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" class="scroll-smooth" data-format="styled">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +8,6 @@
 
     <style>
         @media print {
-            @page { size: letter portrait; margin: 0.5in; }
             body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
         }
 
@@ -38,6 +37,54 @@
             box-shadow: var(--shadow-soft);
         }
         .mode-btn:not(.active):hover { color: var(--color-text-body); }
+
+        /* ATS layout.
+           Résumé parsers read a PDF as a stream of text. Multi-column layouts
+           interleave the columns in that stream, icon glyphs come through as
+           stray characters, and rules and separators become noise. This mode
+           collapses the sheet to a single column and strips anything that is
+           not text, while keeping the same content and the same section
+           headings the parser keys on. Screen layout is untouched. */
+        @media print {
+            /* Single column. A parser reads the PDF as one stream of text, so a
+               two-column sheet interleaves the two columns into nonsense. */
+            [data-format="ats"] .print-container > .grid { display: block; }
+            [data-format="ats"] aside,
+            [data-format="ats"] .print-container > .grid > div { width: 100%; }
+            [data-format="ats"] header { display: block; }
+            [data-format="ats"] header > div:last-child { display: block; margin-top: 0.5rem; }
+            [data-format="ats"] header a,
+            [data-format="ats"] header span { justify-self: start; }
+
+            /* Icon glyphs arrive in that stream as stray characters, and rules and
+               separators as noise. Text only. */
+            [data-format="ats"] i,
+            [data-format="ats"] svg,
+            [data-format="ats"] .bg-divider { display: none !important; }
+            [data-format="ats"] * { border-color: transparent !important; }
+            [data-format="ats"] h3 { border-bottom: 1px solid #000 !important; }
+
+            /* This version is allowed two pages, so nothing here is fighting for
+               space. Everything below buys legibility with room. */
+            html[data-format="ats"] { font-size: 13px !important; }
+            [data-format="ats"] .print-container { padding: 0 !important; }
+            [data-format="ats"] p,
+            [data-format="ats"] li { line-height: 1.55; }
+            [data-format="ats"] li + li { margin-top: 0.25rem; }
+            [data-format="ats"] h3 { margin-top: 1.6rem; padding-bottom: 0.3rem; }
+            [data-format="ats"] aside > section:first-child h3,
+            [data-format="ats"] .print-container > .grid > div > section:first-child h3 { margin-top: 0; }
+            [data-format="ats"] section > div { margin-bottom: 1.1rem; }
+            [data-format="ats"] h4 { margin-bottom: 0.1rem; }
+
+            /* Break control. Keep each job whole, never strand a section heading at
+               the foot of a page, and never leave a single line behind. */
+            [data-format="ats"] section > div { break-inside: avoid; }
+            [data-format="ats"] h3,
+            [data-format="ats"] h4 { break-after: avoid; }
+            [data-format="ats"] p,
+            [data-format="ats"] li { orphans: 2; widows: 2; }
+        }
     </style>
 
     <script>
@@ -55,8 +102,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/assets/tailwind.css?v=5743cf79">
-    <link rel="stylesheet" href="/style.css?v=2a8607c4">
+    <link rel="stylesheet" href="/assets/tailwind.css?v=957e26df">
+    <link rel="stylesheet" href="/style.css?v=b5288848">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body class="preload bg-page font-sans flex flex-col transition-colors duration-500" data-mode="design">
@@ -71,7 +118,7 @@
              phone gets a readable stacked resume rather than a pinch-zoom PDF.
              The print: variants force the paper layout back regardless of the
              viewport the browser reports while printing. -->
-        <div class="print-container w-full lg:w-page lg:min-h-page bg-surface p-6 md:p-8 rounded-3xl shadow-paper border border-themed transition-colors duration-500 box-border print:min-h-0 print:h-auto print:w-full print:shadow-none print:border-none print:rounded-none print:p-0 print:m-0 print:break-inside-avoid">
+        <div class="print-container w-full lg:w-page lg:min-h-page bg-surface p-6 md:p-8 rounded-3xl shadow-paper border border-themed transition-colors duration-500 box-border print:min-h-0 print:h-auto print:w-full print:shadow-none print:border-none print:rounded-none print:p-0 print:m-0">
 
             <!-- ── HEADER ── -->
             <header class="flex flex-col md:flex-row md:justify-between md:items-center gap-4 md:gap-0 mb-4 print:flex-row print:justify-between print:items-center print:mb-8">
@@ -105,15 +152,15 @@
             </header>
 
             <!-- ── BODY GRID ── -->
-            <div class="grid grid-cols-1 lg:grid-cols-12 print:grid-cols-12 gap-8 print:gap-6">
+            <div class="grid grid-cols-1 lg:grid-cols-12 print:grid-cols-12 gap-8 print:gap-4">
 
                 <!-- ── SIDEBAR ── -->
-                <aside class="lg:col-span-3 print:col-span-3 space-y-4 print:space-y-3">
+                <aside class="lg:col-span-3 print:col-span-3 space-y-4 print:space-y-2">
 
                     <section>
                         <h3 class="text-muted text-sm font-bold mb-2 border-b border-solid-themed pb-1.5">Profile</h3>
                         <p class="text-body font-normal text-sm print:text-base design-only">
-                            Designer with a background in data analytics, currently working in AI training and evaluation. I review and benchmark model outputs for design quality, a role that sits squarely at the overlap of my two degrees.
+                            Designer with a background in data analytics, currently working in AI training and evaluation. I use my dual experience to review and benchmark model outputs for design quality.
                         </p>
                         <p class="text-body font-normal text-sm print:text-base data-only">
                             Data analyst with a background in graphic design, currently working in AI model evaluation. I build reproducible data pipelines and benchmarking systems, drawing on both degrees to assess and improve model outputs.
@@ -163,7 +210,7 @@
                     <section>
                         <h3 class="text-muted text-sm font-bold mb-2 border-b border-solid-themed pb-1.5">Education</h3>
                         <div class="design-only">
-                            <div class="mb-3 print:mb-2">
+                            <div class="mb-3 print:mb-1.5">
                                 <h4 class="text-ink font-bold print:text-lg">BA Graphic Design</h4>
                                 <p class="text-body font-normal text-sm mt-0.5 print:text-base">Drake University</p>
                                 <p class="text-muted text-xs mt-0.5 print:text-sm whitespace-nowrap">May 2025</p>
@@ -175,7 +222,7 @@
                             </div>
                         </div>
                         <div class="data-only">
-                            <div class="mb-3 print:mb-2">
+                            <div class="mb-3 print:mb-1.5">
                                 <h4 class="text-ink font-bold print:text-lg">BS Data Analytics</h4>
                                 <p class="text-body font-normal text-sm mt-0.5 print:text-base">Drake University</p>
                                 <p class="text-muted text-xs mt-0.5 print:text-sm whitespace-nowrap">May 2025</p>
@@ -191,47 +238,63 @@
                 </aside>
 
                 <!-- ── MAIN COLUMN ── -->
-                <div class="lg:col-span-9 print:col-span-9 space-y-4 print:space-y-3">
+                <div class="lg:col-span-9 print:col-span-9 space-y-4 print:space-y-2">
 
                     <section>
-                        <h3 class="text-muted text-sm font-bold mb-3 print:mb-2 border-b border-solid-themed pb-1.5">Work Experience</h3>
+                        <h3 class="text-muted text-sm font-bold mb-3 print:mb-1.5 border-b border-solid-themed pb-1.5">Work Experience</h3>
 
-                        <div class="mb-3 print:mb-2">
-                            <div class="flex justify-between items-baseline mb-0.5">
-                                <h4 class="text-ink text-lg font-bold print:text-xl design-only">2D Design Specialist</h4>
-                                <h4 class="text-ink text-lg font-bold print:text-xl data-only">AI Model Evaluation Specialist</h4>
-                                <span class="text-muted text-xs font-mono print:text-sm whitespace-nowrap shrink-0 ml-4">May 2026 &ndash; Present</span>
+                        <!-- Mercor: title, employer and both bullet sets below are Mercor's
+                             own approved wording. The client and the client's tooling and
+                             project names are confidential and must not appear here, on the
+                             site, or on LinkedIn. -->
+                        <div class="mb-3 print:mb-1.5">
+                            <div class="flex justify-between items-baseline">
+                                <h4 class="text-ink text-lg font-bold print:text-xl leading-tight">Generalist Expert [Contract]</h4>
+                                <span class="text-muted text-xs font-mono print:text-sm whitespace-nowrap shrink-0 ml-4">Jul 2026 &ndash; Present</span>
                             </div>
-                            <p class="text-body font-semibold text-sm mb-1 print:mb-0.5 print:text-base">Handshake AI &amp; DataAnnotation</p>
+                            <p class="text-body font-medium text-sm mb-1 print:mb-0.5 print:text-sm">Mercor</p>
                             <ul class="list-disc list-outside ml-4 text-body font-normal text-sm space-y-0.5 marker-muted print:text-base design-only">
-                                <li>Authored complex graphic design project briefs to stress-test AI model capabilities across 2D software including GIMP, Inkscape, and Krita.</li>
-                                <li>Evaluated composition, lighting, and aesthetic quality of AI-generated images, identifying inconsistencies and visual artifacts.</li>
-                                <li>Developed structured evaluation rubrics and scoring datasets to train machine learning models on professional design standards.</li>
+                                <li>Conducted qualitative and visual evaluations of AI model outputs regarding UI/UX, visual hierarchy, and layout consistency.</li>
+                                <li>Evaluated visual/multimodal model responses against established design standards and functional criteria.</li>
+                                <li>Formulated detailed design tasks and provided structured feedback to refine model performance on design-centric requests.</li>
                             </ul>
                             <ul class="list-disc list-outside ml-4 text-body font-normal text-sm space-y-0.5 marker-muted print:text-base data-only">
-                                <li>Developed structured, binary evaluation rubrics and scoring datasets that directly train machine learning models to assess design outputs.</li>
-                                <li>Translated design workflows into deterministic verification processes used by automated systems to grade outputs and optimize model weights.</li>
-                                <li>Reviewed and graded AI-generated text and images for accuracy, quality, and logical flow, providing detailed written rationales for each decision.</li>
+                                <li>Evaluated, annotated, and curated complex datasets to support AI model training and fine-tuning.</li>
+                                <li>Maintained high data quality and throughput standards in structured evaluation and QA workflows.</li>
+                                <li>Formulated edge-case tasks and benchmarked model outputs against strict accuracy guidelines.</li>
                             </ul>
                         </div>
 
-                        <div class="mb-3 print:mb-2">
-                            <div class="flex justify-between items-baseline mb-0.5">
-                                <h4 class="text-ink text-lg font-bold print:text-xl">Tax Verification Associate</h4>
+                        <div class="mb-3 print:mb-1.5">
+                            <div class="flex justify-between items-baseline">
+                                <h4 class="text-ink text-lg font-bold print:text-xl leading-tight">AI Trainer</h4>
+                                <span class="text-muted text-xs font-mono print:text-sm whitespace-nowrap shrink-0 ml-4">Apr 2026 &ndash; Present</span>
+                            </div>
+                            <p class="text-body font-medium text-sm mb-1 print:mb-0.5 print:text-sm">Handshake AI &amp; DataAnnotation</p>
+                            <ul class="list-disc list-outside ml-4 text-body font-normal text-sm space-y-0.5 marker-muted print:text-base">
+                                <li>Authored complex graphic design project briefs to stress-test AI model capabilities across 2D software including GIMP, Inkscape, and Krita.</li>
+                                <li>Reviewed and graded AI-generated text and images for accuracy, quality, and logical flow, providing detailed written rationales for each decision.</li>
+                                <li>Developed structured evaluation rubrics and scoring datasets to train machine learning models on professional design standards.</li>
+                            </ul>
+                        </div>
+
+                        <div class="mb-3 print:mb-1.5">
+                            <div class="flex justify-between items-baseline">
+                                <h4 class="text-ink text-lg font-bold print:text-xl leading-tight">Tax Verification Associate</h4>
                                 <span class="text-muted text-xs font-mono print:text-sm whitespace-nowrap shrink-0 ml-4">Feb 2026 &ndash; Apr 2026</span>
                             </div>
-                            <p class="text-body font-semibold text-sm mb-1 print:mb-0.5 print:text-base">Thomson Reuters</p>
+                            <p class="text-body font-medium text-sm mb-1 print:mb-0.5 print:text-sm">Thomson Reuters</p>
                             <ul class="list-disc list-outside ml-4 text-body font-normal text-sm space-y-0.5 marker-muted print:text-base">
                                 <li>Reviewed and categorized sensitive tax data using Excel and internal software, consistently exceeding high-volume daily targets during peak tax season.</li>
                             </ul>
                         </div>
 
-                        <div class="mb-3 print:mb-2">
-                            <div class="flex justify-between items-baseline mb-0.5">
-                                <h4 class="text-ink text-lg font-bold print:text-xl">Graphic Design Intern &amp; Park Staff</h4>
+                        <div class="mb-3 print:mb-1.5">
+                            <div class="flex justify-between items-baseline">
+                                <h4 class="text-ink text-lg font-bold print:text-xl leading-tight">Graphic Design Intern &amp; Park Staff</h4>
                                 <span class="text-muted text-xs font-mono print:text-sm whitespace-nowrap shrink-0 ml-4">May 2023 &ndash; Feb 2025</span>
                             </div>
-                            <p class="text-body font-semibold text-sm mb-1 print:mb-0.5 print:text-base">City of Shorewood</p>
+                            <p class="text-body font-medium text-sm mb-1 print:mb-0.5 print:text-sm">City of Shorewood</p>
                             <ul class="list-disc list-outside ml-4 text-body font-normal text-sm space-y-0.5 marker-muted print:text-base">
                                 <li>Designed print and digital materials for city events, including brochures, flyers, and social media graphics, ensuring adherence to municipal branding guidelines.</li>
                                 <li>Standardized all public forms by converting them into accessible, fillable PDFs using Adobe Acrobat Pro, improving office efficiency.</li>
@@ -239,11 +302,11 @@
                         </div>
 
                         <div>
-                            <div class="flex justify-between items-baseline mb-0.5">
-                                <h4 class="text-ink text-lg font-bold print:text-xl">Drake Relays Logo Designer</h4>
+                            <div class="flex justify-between items-baseline">
+                                <h4 class="text-ink text-lg font-bold print:text-xl leading-tight">Drake Relays Logo Designer</h4>
                                 <span class="text-muted text-xs font-mono print:text-sm whitespace-nowrap shrink-0 ml-4">Dec 2024 &ndash; May 2025</span>
                             </div>
-                            <p class="text-body font-semibold text-sm mb-1 print:mb-0.5 print:text-base">Drake University</p>
+                            <p class="text-body font-medium text-sm mb-1 print:mb-0.5 print:text-sm">Drake University</p>
                             <ul class="list-disc list-outside ml-4 text-body font-normal text-sm space-y-0.5 marker-muted print:text-base">
                                 <li>Selected from 11 finalists to design the official logo and visual theme for the 2025 Drake Relays ("Racing Through Time").</li>
                                 <li>Brand identity deployed across merchandise, campus signage, and digital platforms for an event drawing thousands of attendees.</li>
@@ -252,14 +315,14 @@
                     </section>
 
                     <section>
-                        <h3 class="text-muted text-sm font-bold mb-3 print:mb-2 border-b border-solid-themed pb-1.5">Projects</h3>
+                        <h3 class="text-muted text-sm font-bold mb-3 print:mb-1.5 border-b border-solid-themed pb-1.5">Projects</h3>
 
-                        <div class="mb-3 print:mb-2">
-                            <div class="flex justify-between items-baseline mb-0.5">
-                                <h4 class="text-ink text-lg font-bold print:text-xl">Freelance Branding &amp; Design</h4>
+                        <div class="mb-3 print:mb-1.5">
+                            <div class="flex justify-between items-baseline">
+                                <h4 class="text-ink text-lg font-bold print:text-xl leading-tight">Freelance Branding &amp; Design</h4>
                                 <span class="text-muted text-xs font-mono print:text-sm whitespace-nowrap shrink-0 ml-4">Aug 2021 &ndash; Present</span>
                             </div>
-                            <p class="text-body font-semibold text-sm mb-1 print:mb-0.5 print:text-base">Various Clients</p>
+                            <p class="text-body font-medium text-sm mb-1 print:mb-0.5 print:text-sm">Various Clients</p>
                             <ul class="list-disc list-outside ml-4 text-body font-normal text-sm space-y-0.5 marker-muted print:text-base">
                                 <li>Designed tour and performance flyers for Minneapolis musicians Dessa and Jeremy Messersmith, delivered in print and digital formats.</li>
                                 <li>Provided logo systems, brand guidelines, and promotional assets for clients including The Forged Group and Pyrkia Health.</li>
@@ -267,11 +330,11 @@
                         </div>
 
                         <div>
-                            <div class="flex justify-between items-baseline mb-0.5">
-                                <h4 class="text-ink text-lg font-bold print:text-xl">Data Visualization &amp; Modeling</h4>
+                            <div class="flex justify-between items-baseline">
+                                <h4 class="text-ink text-lg font-bold print:text-xl leading-tight">Data Visualization &amp; Modeling</h4>
                                 <span class="text-muted text-xs font-mono print:text-sm whitespace-nowrap shrink-0 ml-4">Aug 2025 &ndash; Dec 2025</span>
                             </div>
-                            <p class="text-body font-semibold text-sm mb-1 print:mb-0.5 print:text-base">DMARC Food Pantry Network</p>
+                            <p class="text-body font-medium text-sm mb-1 print:mb-0.5 print:text-sm">DMARC Food Pantry Network</p>
                             <ul class="list-disc list-outside ml-4 text-body font-normal text-sm space-y-0.5 marker-muted print:text-base">
                                 <li>Built a reproducible R pipeline to clean and analyze visitor logs from 90+ pantry locations, enriched with ACS Census demographic data.</li>
                                 <li>Created Leaflet geospatial maps to identify service gaps and developed a Poisson regression model to forecast future pantry demand by region.</li>
@@ -286,8 +349,66 @@
 
     <footer id="footer-placeholder" class="w-full bg-surface border-t border-themed py-8 px-4 md:px-8 print:hidden"></footer>
 
-    <script src="/components.js?v=8503ab58"></script>
+    <script src="/components.js?v=ba406726"></script>
     <script>
+        /* Page margins have to come from @page to apply to every page, and @page
+           cannot be scoped by a selector, so the rule is swapped out before
+           printing. The styled sheet keeps margin 0 and pads its own container,
+           because it is one page and the padding draws the sheet edge on screen. */
+        function setPageMargin(format) {
+            let el = document.getElementById('page-rule');
+            if (!el) {
+                el = document.createElement('style');
+                el.id = 'page-rule';
+                document.head.appendChild(el);
+            }
+            el.textContent = format === 'ats'
+                ? '@page { size: letter portrait; margin: 0.75in; }'
+                : '@page { size: letter portrait; margin: 0; }';
+        }
+        setPageMargin('styled');
+
+        /* --- download menu --- */
+        function toggleDownloadMenu(force) {
+            const menu = document.getElementById('download-menu');
+            const btn  = document.getElementById('download-button');
+            if (!menu) return;
+            const open = force !== undefined ? force : menu.classList.contains('hidden');
+            menu.classList.toggle('hidden', !open);
+            if (btn) btn.setAttribute('aria-expanded', String(open));
+        }
+
+        /* Both options print the same document. 'ats' swaps in the single-column
+           print rules above; 'styled' is the layout you see on screen. The title
+           becomes the suggested filename in the browser's save dialog, so it names
+           which one you got. */
+        function downloadResume(format) {
+            toggleDownloadMenu(false);
+            const mode = document.body.getAttribute('data-mode');
+            const previousTitle = document.title;
+            document.documentElement.setAttribute('data-format', format);
+            setPageMargin(format);
+            document.title = format === 'ats'
+                ? 'Resume_Oliver_Williams_ATS'
+                : 'Resume_Oliver_Williams_' + (mode === 'data' ? 'Data' : 'Design');
+            window.addEventListener('afterprint', () => {
+                document.documentElement.setAttribute('data-format', 'styled');
+                setPageMargin('styled');
+                document.title = previousTitle;
+            }, { once: true });
+            window.print();
+        }
+
+        document.addEventListener('click', e => {
+            const menu = document.getElementById('download-menu');
+            if (!menu || menu.classList.contains('hidden')) return;
+            if (e.target.closest('#download-menu, #download-button')) return;
+            toggleDownloadMenu(false);
+        });
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') toggleDownloadMenu(false);
+        });
+
         function setMode(mode) {
             document.body.setAttribute('data-mode', mode);
             const btnDesign = document.getElementById('btn-design');

@@ -107,9 +107,22 @@ const navConfig = {
             <button id="btn-data"   onclick="setMode('data')"   class="mode-btn">Data Focus</button>
         </div>
         <div class="flex items-center gap-4">
-            <button onclick="window.print()" class="text-muted hover:text-accent flex items-center gap-2 text-sm font-medium transition-colors">
-                <i class="fa-solid fa-print"></i> Print / Save PDF
-            </button>
+            <div class="relative">
+                <button id="download-button" onclick="toggleDownloadMenu()" aria-haspopup="true" aria-expanded="false" aria-controls="download-menu"
+                        class="text-muted hover:text-accent flex items-center gap-2 text-sm font-medium transition-colors">
+                    <i class="fa-solid fa-download"></i> Download <i class="fa-solid fa-chevron-down text-2xs"></i>
+                </button>
+                <div id="download-menu" role="menu" class="hidden absolute right-0 top-full mt-3 w-72 max-w-none bg-surface border border-themed rounded-2xl shadow-soft p-2 z-nav">
+                    <button role="menuitem" onclick="downloadResume('styled')" class="download-option">
+                        <span class="download-option-title">Styled PDF</span>
+                        <span class="download-option-note">The layout on screen. For a person reading it.</span>
+                    </button>
+                    <button role="menuitem" onclick="downloadResume('ats')" class="download-option">
+                        <span class="download-option-title">ATS-friendly PDF</span>
+                        <span class="download-option-note">One column, no icons or rules. For résumé parsers.</span>
+                    </button>
+                </div>
+            </div>
             ${themeButton()}
         </div>
     `,
