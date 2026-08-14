@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Not Found | Oliver T. Williams</title>
+    <meta name="robots" content="noindex">
+    <script>
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else { document.documentElement.classList.remove('dark'); }
+    </script>
+    <meta name="theme-color" content="#EFEFEF" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#121212" media="(prefers-color-scheme: dark)">
+    <link rel="icon" href="/images/favicon-dark.png" media="(prefers-color-scheme: light)">
+    <link rel="icon" href="/images/favicon-light.png" media="(prefers-color-scheme: dark)">
+    <link rel="icon" href="/images/favicon-dark.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/tailwind.css">
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="preload bg-page font-sans flex flex-col min-h-screen transition-colors duration-500">
+
+    <a href="#main" class="skip-link">Skip to content</a>
+
+    <nav id="navbar-placeholder" data-type="minimal" class="fixed top-4 left-0 right-0 z-nav px-4 md:px-8"></nav>
+
+    <main id="main" tabindex="-1" class="flex-grow flex flex-col items-center justify-center text-center px-6 py-32">
+        <span class="text-accent font-mono font-bold text-sm tracking-widest uppercase mb-4">404</span>
+        <h1 class="text-ink text-4xl md:text-5xl font-bold mb-4 tracking-tight">Page Not Found</h1>
+        <p class="text-muted text-lg max-w-md mb-10">
+            This page doesn't exist, or it moved when I reorganized the site. The links below should get you back.
+        </p>
+        <div class="flex flex-wrap items-center justify-center gap-4">
+            <a href="/" class="btn-primary inline-flex items-center gap-2 px-7 py-3.5">
+                Back to Home <i class="fa-solid fa-arrow-right"></i>
+            </a>
+            <a href="/archive.html" class="text-body hover:text-ink border-b border-divider pb-0.5 font-medium transition-colors">
+                Browse the archive
+            </a>
+        </div>
+    </main>
+
+    <footer id="footer-placeholder" class="w-full bg-surface border-t border-themed py-8 px-4 md:px-8 mt-auto"></footer>
+
+    <script src="/components.js"></script>
+</body>
+</html>

@@ -2,94 +2,107 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=1280">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cover Letter | Oliver T. Williams</title>
+
+    <!-- Kept out of search results. This is a dated letter addressed
+         to one employer, so it shouldn't turn up in a search or a link
+         preview. robots.txt also disallows the path, and nothing on the
+         site links here. If the letter is no longer needed, deleting the
+         file is safer than relying on the meta tag. -->
+    <meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
+    <meta name="googlebot" content="noindex, nofollow">
+    <meta property="og:title" content="">
+    <meta property="og:description" content="">
+
     <script>
         if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             document.documentElement.classList.add('dark');
         } else { document.documentElement.classList.remove('dark'); }
     </script>
+    <meta name="theme-color" content="#EFEFEF" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#121212" media="(prefers-color-scheme: dark)">
+    <link rel="icon" href="/images/favicon-dark.png" media="(prefers-color-scheme: light)">
+    <link rel="icon" href="/images/favicon-light.png" media="(prefers-color-scheme: dark)">
+    <link rel="icon" href="/images/favicon-dark.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
-    <link rel="icon" href="images/favicon-dark.png" media="(prefers-color-scheme: light)">
-    <link rel="icon" href="images/favicon-light.png" media="(prefers-color-scheme: dark)">
-    <link rel="icon" href="images/favicon-dark.png">
-    <meta name="description" content="Cover Letter of Oliver T. Williams.">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="tailwind-config.js"></script>
-    <link rel="stylesheet" href="style.css">
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="/assets/tailwind.css">
+    <link rel="stylesheet" href="/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body class="bg-cream dark:bg-dark-bg font-sans flex flex-col transition-colors duration-500">
+<body class="preload bg-page font-sans flex flex-col transition-colors duration-500">
 
-    <nav id="navbar-placeholder" data-type="resume" class="fixed top-4 left-0 right-0 z-50 px-8 print:hidden"></nav>
+    <a href="#main" class="skip-link">Skip to content</a>
 
-    <main class="pt-36 pb-12 px-8 flex justify-center mb-12 print:p-0 print:m-0">
-        <div class="print-container w-[8.5in] min-h-[11in] bg-white dark:bg-dark-surface p-12 rounded-3xl shadow-paper border border-themed transition-colors duration-500 box-border print:w-full print:shadow-none print:border-none print:rounded-none print:p-12">
+    <nav id="navbar-placeholder" data-type="minimal" class="fixed top-4 left-0 right-0 z-nav px-4 md:px-8 print:hidden"></nav>
 
-            <header class="flex flex-row justify-between items-start mb-8 border-b border-base-solid pb-6">
+    <main id="main" tabindex="-1" class="pt-36 pb-12 px-4 md:px-8 flex justify-center mb-12 print:p-0 print:m-0">
+        <div class="print-container w-full lg:w-page lg:min-h-page bg-surface p-6 md:p-12 rounded-3xl shadow-paper border border-themed transition-colors duration-500 box-border print:w-full print:shadow-none print:border-none print:rounded-none print:p-12">
+
+            <header class="flex flex-row justify-between items-start mb-8 border-b border-solid-themed pb-6">
                 <div>
                     <div class="flex items-center">
-                        <h1 class="text-primary text-3xl font-extrabold tracking-tight leading-none">Oliver T. Williams</h1>
-                        <i data-lucide="anchor" class="hidden print:inline-block w-5 h-5 ml-3 opacity-90 stroke-[2.5]" style="color: var(--color-text-primary);"></i>
+                        <h1 class="text-ink text-3xl font-extrabold tracking-tight leading-none">Oliver T. Williams</h1>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="text-ink hidden print:inline-block w-5 h-5 ml-3 opacity-90"><path d="M12 6v16"/><path d="m19 13 2-1a9 9 0 0 1-18 0l2 1"/><path d="M9 11h6"/><circle cx="12" cy="4" r="2"/></svg>
                     </div>
                     <p class="text-muted text-base mt-1">Data Analyst &amp; Graphic Designer</p>
                 </div>
-                <div class="grid grid-cols-[1fr_auto_1fr] gap-x-3 gap-y-1 text-xs font-medium text-body print:text-sm pt-1">
-                    <a href="tel:3179148047" class="justify-self-end hover:text-accent transition-colors flex items-center gap-2">317-914-8047 <i class="fa-solid fa-phone text-[10px] text-muted"></i></a>
-                    <span class="h-3 w-px bg-divider self-center"></span>
-                    <span class="justify-self-start flex items-center gap-2">Minnetonka, MN <i class="fa-solid fa-location-dot text-[10px] text-muted"></i></span>
+                <div class="grid grid-cols-1 md:grid-cols-resume-contact print:grid-cols-resume-contact gap-x-3 gap-y-1 text-xs font-medium text-body print:text-sm pt-1">
+                    <a href="tel:3179148047" class="md:justify-self-end hover:text-accent transition-colors flex items-center gap-2">317-914-8047 <i class="fa-solid fa-phone text-3xs text-muted"></i></a>
+                    <span class="h-3 w-px bg-divider self-center hidden md:block print:block"></span>
+                    <span class="md:justify-self-start flex items-center gap-2">Minnetonka, MN <i class="fa-solid fa-location-dot text-3xs text-muted"></i></span>
 
-                    <a href="mailto:oliver_tw@icloud.com" class="justify-self-end hover:text-accent transition-colors flex items-center gap-2">oliver_tw@icloud.com <i class="fa-solid fa-envelope text-[10px] text-muted"></i></a>
-                    <span class="h-3 w-px bg-divider self-center"></span>
-                    <a href="https://olivertwilliams.com" target="_blank" class="justify-self-start hover:text-accent transition-colors flex items-center gap-2">olivertwilliams.com <i class="fa-solid fa-globe text-[10px] text-muted"></i></a>
+                    <a href="mailto:oliver_tw@icloud.com" class="md:justify-self-end hover:text-accent transition-colors flex items-center gap-2">oliver_tw@icloud.com <i class="fa-solid fa-envelope text-3xs text-muted"></i></a>
+                    <span class="h-3 w-px bg-divider self-center hidden md:block print:block"></span>
+                    <a href="https://olivertwilliams.com" target="_blank" rel="noopener" class="md:justify-self-start hover:text-accent transition-colors flex items-center gap-2">olivertwilliams.com <i class="fa-solid fa-globe text-3xs text-muted"></i></a>
                 </div>
             </header>
 
-            <section class="space-y-5 text-body font-normal leading-[1.65] text-sm print:text-base print:leading-7">
+            <section class="space-y-5 text-body font-normal text-sm print:text-base print:leading-7">
 
-                <div class="mb-8 text-primary leading-snug">
-                    <p class="font-bold mb-4">July 1, 2026</p>
+                <div class="mb-8 text-ink leading-snug">
+                    <p class="font-bold mb-4">July 8, 2026</p>
                     <div class="space-y-0.5">
-                        <p class="font-bold">A. E. Carlson Construction, Inc.</p>
+                        <p class="font-bold">Handshake</p>
+                        <p>San Francisco, CA</p>
                     </div>
                 </div>
 
-                <p class="font-bold text-primary">To the Hiring Team,</p>
+                <p class="font-bold text-ink">To the Handshake Hiring Team,</p>
 
                 <p>
-                    I am writing to apply for the Data Analyst position. I hold a BS in Data Analytics from Drake University and have hands-on experience building data pipelines, dashboards, and visualizations that support real decision-making, which lines up well with what you're looking for.
+                    I am writing to apply for the Support Specialist (Contract) role. I currently work as a contractor with Handshake AI as a 2D Design Specialist, so I already know the mission, the pace of the company, and what it takes to do detailed, high-volume work well within your systems. I would be glad to bring that same reliability to the Support team.
                 </p>
 
                 <p>
-                    My most relevant project was a data pipeline I built for the DMARC Food Pantry Network. I collected and cleaned large-scale visitor logs in R, enriched them with Census data, and built geospatial visualizations that made service gaps immediately clear to stakeholders. I also developed a predictive model to forecast demand trends, which is the same kind of pattern identification and forward-looking analysis your posting describes. That project required pulling from multiple messy data sources and turning them into something a non-technical audience could act on, which I understand is central to this role.
+                    My current work has me reviewing and grading outputs against structured rubrics every day, which means I am used to high ticket-style volume, careful attention to detail, and holding a consistent quality bar without direct supervision. Before that, I worked as a Tax Verification Associate at Thomson Reuters, handling sensitive data and consistently exceeding daily volume targets during a high-pressure season, which is close to the pace this role describes.
                 </p>
 
                 <p>
-                    I also have a background in graphic design, which has turned out to be a real asset in data work. I am comfortable building clear dashboards and reports, and I don't just hand off a chart. I can explain what it means and why it matters to the people who need to make a decision from it. I work well with cross-functional teams and am used to translating technical findings into plain language.
+                    I also hold a BS in Data Analytics from Drake University, along with a background in graphic design. In practice, this means I am comfortable digging into technical tools and troubleshooting with limited information, but I can also explain what I find in plain language to someone who is not technical, which I understand matters for both your student and employer users.
                 </p>
 
                 <p>
-                    I am comfortable working remotely and part-time, and I am available to start as soon as needed. My full resume and a case study of the DMARC project are available at olivertwilliams.com.
+                    I am based in Minnesota, available full time, and comfortable with a Monday through Friday schedule. I would welcome the chance to talk more about the role.
                 </p>
 
-                <p>Thank you for your consideration. I look forward to hearing from you.</p>
+                <p>Thank you for your consideration.</p>
 
                 <div class="mt-8">
                     <p>Sincerely,</p>
                     <div class="mt-2 mb-1">
-                        <p class="text-4xl text-primary" style="font-family: 'Great Vibes', cursive; line-height: 1;">Oliver Williams</p>
+                        <p class="signature text-4xl text-ink">Oliver Williams</p>
                     </div>
-                    <p class="font-bold text-primary">Oliver T. Williams</p>
+                    <p class="font-bold text-ink">Oliver T. Williams</p>
                 </div>
             </section>
         </div>
     </main>
 
-    <footer id="footer-placeholder" class="w-full bg-surface dark:bg-dark-surface border-t border-themed py-8 px-8 print:hidden"></footer>
-    <script src="components.js"></script>
-    <script>lucide.createIcons();</script>
+    <footer id="footer-placeholder" class="w-full bg-surface border-t border-themed py-8 px-4 md:px-8 print:hidden"></footer>
+    <script src="/components.js"></script>
 </body>
 </html>

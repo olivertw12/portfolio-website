@@ -1,0 +1,14 @@
+{
+  "name": "portfolio-build",
+  "private": true,
+  "description": "Builds the site stylesheet and prerenders the generated markup.",
+  "scripts": {
+    "build": "npm run build:css && npm run build:html",
+    "build:css": "tailwindcss -c tailwind.config.cjs -i input.css -o ../assets/tailwind.css --minify",
+    "build:html": "node prerender.js",
+    "watch:css": "tailwindcss -c tailwind.config.cjs -i input.css -o ../assets/tailwind.css --watch"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.0"
+  }
+}

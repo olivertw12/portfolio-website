@@ -3,44 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project View | Oliver T. Williams</title>
+    <!-- Case-study template — see tailwind-build/prerender.js. -->
+    <!--SLOT:META-->
+    <title>Case Study | Oliver T. Williams</title>
+    <meta name="robots" content="noindex">
+    <meta name="description" content="Case study by Oliver T. Williams.">
+    <meta property="og:title" content="Case Study | Oliver T. Williams">
+    <meta property="og:description" content="In-depth look at the process, method, and results.">
+    <meta property="og:image" content="https://olivertwilliams.com/images/og-image.png">
+    <meta property="og:type" content="article">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://olivertwilliams.com/">
+    <!--/SLOT-->
     <script>
         if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             document.documentElement.classList.add('dark');
         } else { document.documentElement.classList.remove('dark'); }
     </script>
-    <link rel="icon" href="images/favicon-dark.png" media="(prefers-color-scheme: light)">
-    <link rel="icon" href="images/favicon-light.png" media="(prefers-color-scheme: dark)">
-    <link rel="icon" href="images/favicon-dark.png">
-    <meta name="description" content="Detailed case study of a project by Oliver T. Williams.">
-    <meta property="og:title" content="Project Case Study | Oliver T. Williams">
-    <meta property="og:description" content="In-depth look at the design process and results.">
-    <meta property="og:image" content="https://olivertwilliams.com/images/og-image.png">
-    <meta property="og:url" content="https://olivertwilliams.com/project.html">
-    <meta property="og:type" content="website">
-    <meta name="twitter:card" content="summary_large_image">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="tailwind-config.js"></script>
-    <link rel="stylesheet" href="style.css">
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <meta name="theme-color" content="#EFEFEF" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#121212" media="(prefers-color-scheme: dark)">
+    <link rel="icon" href="/images/favicon-dark.png" media="(prefers-color-scheme: light)">
+    <link rel="icon" href="/images/favicon-light.png" media="(prefers-color-scheme: dark)">
+    <link rel="icon" href="/images/favicon-dark.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/tailwind.css">
+    <link rel="stylesheet" href="/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body class="bg-cream dark:bg-dark-bg font-sans flex flex-col min-h-screen transition-colors duration-500">
+<body class="preload bg-page font-sans flex flex-col min-h-screen transition-colors duration-500">
 
-    <!-- Lightbox -->
-    <div id="lightbox" class="bg-scrim fixed inset-0 z-[100] hidden flex flex-col items-center justify-center opacity-0 transition-opacity duration-300 backdrop-blur-sm">
-        <button onclick="closeLightbox()" class="lightbox-close-idle absolute top-6 right-6 p-2 transition-colors z-[110] bg-white/10 rounded-full hover:bg-white/20">
-            <i data-lucide="x" class="w-6 h-6"></i>
+    <a href="#main-content" class="skip-link">Skip to content</a>
+
+    <!-- ═══ LIGHTBOX ═══ -->
+    <div id="lightbox" class="bg-scrim fixed inset-0 z-lightbox hidden flex-col items-center justify-center opacity-0 transition-opacity duration-300 backdrop-blur-sm">
+        <button onclick="closeLightbox()" aria-label="Close" class="lightbox-close-idle absolute top-6 right-6 p-2 transition-colors z-lightbox-ui bg-white/10 rounded-full hover:bg-white/20">
+            <i class="fa-solid fa-xmark text-2xl"></i>
         </button>
-        <button onclick="changeLbImage(event,-1)" class="lightbox-btn-idle absolute left-2 md:left-8 z-[110] transition-colors p-4 hover:bg-white/10 rounded-full group">
-            <i data-lucide="chevron-left" class="w-8 h-8 md:w-12 md:h-12 group-hover:-translate-x-1 transition-transform"></i>
+        <button onclick="changeLbImage(event,-1)" aria-label="Previous image" class="lightbox-btn-idle absolute left-2 md:left-8 z-lightbox-ui transition-colors p-4 hover:bg-white/10 rounded-full group">
+            <i class="fa-solid fa-chevron-left text-3xl md:text-5xl group-hover:-translate-x-1 transition-transform"></i>
         </button>
-        <button onclick="changeLbImage(event,1)" class="lightbox-btn-idle absolute right-2 md:right-8 z-[110] transition-colors p-4 hover:bg-white/10 rounded-full group">
-            <i data-lucide="chevron-right" class="w-8 h-8 md:w-12 md:h-12 group-hover:translate-x-1 transition-transform"></i>
+        <button onclick="changeLbImage(event,1)" aria-label="Next image" class="lightbox-btn-idle absolute right-2 md:right-8 z-lightbox-ui transition-colors p-4 hover:bg-white/10 rounded-full group">
+            <i class="fa-solid fa-chevron-right text-3xl md:text-5xl group-hover:translate-x-1 transition-transform"></i>
         </button>
         <div class="w-full h-full flex items-center justify-center p-4" onclick="closeLightboxOnBg(event)">
             <div class="relative max-w-full max-h-full inline-block group">
-                <img id="lb-image" src="" alt="Full view" class="max-w-full max-h-[85vh] object-contain shadow-2xl rounded-sm transition-transform duration-300">
+                <img id="lb-image" src="" alt="Full view" class="max-w-full max-h-lightbox object-contain shadow-2xl rounded-sm transition-transform duration-300">
                 <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/90 via-black/60 to-transparent rounded-b-sm transition-opacity duration-300 group-hover:opacity-0">
                     <p id="lb-caption" class="text-white text-sm md:text-base font-medium italic tracking-wide text-center drop-shadow-md"></p>
                     <p id="lb-counter" class="text-white/50 text-xs mt-1 uppercase tracking-widest text-center"></p>
@@ -49,194 +58,81 @@
         </div>
     </div>
 
-    <nav id="navbar-placeholder" data-type="project" class="fixed top-4 left-0 right-0 z-50 px-4 md:px-8"></nav>
+    <nav id="navbar-placeholder" data-type="project" class="fixed top-4 left-0 right-0 z-nav px-4 md:px-8"></nav>
 
-    <main id="main-content" class="pt-32 pb-20 px-4 md:px-8 max-w-7xl mx-auto flex-grow opacity-0 transition-opacity duration-500 w-full">
+    <main id="main-content" tabindex="-1" class="pt-32 pb-20 px-4 md:px-8 max-w-7xl mx-auto flex-grow w-full opacity-0 js-fade">
 
-        <header class="mb-12">
-            <div id="p-category" class="tech-pill inline-flex flex-wrap items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-6"></div>
-            <h1 id="p-title" class="text-primary text-4xl md:text-5xl lg:text-7xl font-bold mb-8 tracking-tight break-words"></h1>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 border-y border-themed py-6">
-                <div class="min-w-0"><span class="text-muted text-xs font-bold uppercase tracking-wider block mb-1">Client</span>      <span id="p-client"      class="text-primary font-medium block"></span></div>
-                <div class="min-w-0"><span class="text-muted text-xs font-bold uppercase tracking-wider block mb-1">Role</span>        <span id="p-role"        class="text-primary font-medium block"></span></div>
-                <div class="min-w-0"><span class="text-muted text-xs font-bold uppercase tracking-wider block mb-1">Year</span>        <span id="p-year"        class="text-primary font-medium block"></span></div>
-                <div class="min-w-0"><span class="text-muted text-xs font-bold uppercase tracking-wider block mb-1">Deliverables</span><span id="p-deliverables" class="text-primary font-medium block"></span></div>
-            </div>
-        </header>
+        <header id="p-header" class="mb-12"><!--SLOT:HEADER--><!--/SLOT--></header>
 
-        <figure class="mb-20">
-            <div class="w-full aspect-video bg-wash dark:bg-wash-dark rounded-3xl overflow-hidden shadow-soft mb-3 border border-themed group cursor-pointer relative" onclick="openLightbox(0)">
-                <img id="p-hero" src="" alt="Hero Image" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100 duration-300">
-                    <div class="bg-white/20 backdrop-blur-md p-3 rounded-full">
-                        <i data-lucide="maximize-2" class="text-white w-6 h-6"></i>
-                    </div>
-                </div>
-            </div>
-            <figcaption id="p-hero-cap" class="text-muted font-normal text-sm text-center italic px-4"></figcaption>
-        </figure>
+        <div id="p-body"><!--SLOT:BODY--><!--/SLOT--></div>
 
-        <div class="flex flex-col md:grid md:grid-cols-12 gap-y-10 md:gap-x-12 mb-24">
-            <div class="w-full md:col-span-4"><div class="flex items-baseline gap-3"><span class="text-accent font-mono font-bold text-xl">01</span><h2 class="text-primary text-2xl font-bold">Background</h2></div></div>
-            <div class="w-full md:col-span-8"><p id="p-background" class="text-body font-normal text-base md:text-lg leading-[1.65] break-words"></p></div>
-
-            <div class="w-full md:col-span-4"><div class="flex items-baseline gap-3"><span class="text-accent font-mono font-bold text-xl">02</span><h2 class="text-primary text-2xl font-bold">The Challenge</h2></div></div>
-            <div class="w-full md:col-span-8"><p id="p-challenge" class="text-body font-normal text-base md:text-lg leading-[1.65] break-words"></p></div>
-
-            <div class="w-full md:col-span-4"><div class="flex items-baseline gap-3"><span class="text-accent font-mono font-bold text-xl">03</span><h2 class="text-primary text-2xl font-bold">The Solution</h2></div></div>
-            <div class="w-full md:col-span-8"><p id="p-solution" class="text-body font-normal text-base md:text-lg leading-[1.65] break-words"></p></div>
-
-            <div class="w-full md:col-span-4"><div class="flex items-baseline gap-3"><span class="text-accent font-mono font-bold text-xl">04</span><h2 class="text-primary text-2xl font-bold">The Result</h2></div></div>
-            <div class="w-full md:col-span-8"><p id="p-result" class="text-body font-normal text-base md:text-lg leading-[1.65] break-words"></p></div>
-        </div>
-
-        <div id="p-gallery" class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-20"></div>
-
-        <div class="border-t border-themed pt-12 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-            <span class="text-muted text-sm font-medium">Next Project</span>
-            <a id="p-next-link" href="#" class="group text-primary hover:text-accent flex items-center gap-4 text-xl md:text-3xl font-bold transition-colors w-full md:w-auto">
-                <span id="p-next-title" class="break-words">Next Project Name</span>
-                <i data-lucide="arrow-right" class="w-6 h-6 md:w-8 md:h-8 group-hover:translate-x-2 transition-transform shrink-0"></i>
-            </a>
-        </div>
+        <div id="p-next" class="border-t border-themed pt-12 flex flex-col md:flex-row justify-between items-start md:items-center gap-4"><!--SLOT:NEXT--><!--/SLOT--></div>
     </main>
 
-    <!-- Error screen -->
-    <div id="error-screen" class="hidden fixed inset-0 flex flex-col items-center justify-center bg-cream dark:bg-dark-bg z-40">
+    <!--SLOT:NOTFOUND-->
+    <!-- Only reachable through /project.html?id=unknown. -->
+    <div id="error-screen" class="hidden fixed inset-0 flex-col items-center justify-center bg-page z-40">
         <section class="flex flex-col items-center justify-center text-center px-4">
-            <div class="mb-6 p-4 bg-wash dark:bg-wash-dark rounded-full shadow-soft">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-12 h-12 text-muted">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m3.75 9v6m3-3H9m1.5-12H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
-                </svg>
+            <div class="mb-6 p-4 bg-wash rounded-full shadow-soft">
+                <i class="fa-solid fa-file-circle-question text-5xl text-muted"></i>
             </div>
-            <h1 class="text-primary text-3xl font-bold mb-4">Case Study In Progress</h1>
+            <h1 class="text-ink text-3xl font-bold mb-4">Case Study In Progress</h1>
             <p class="text-muted font-normal max-w-md mb-8">I am currently documenting the process for this project.</p>
-            <a href="archive.html" class="inline-flex items-center gap-2 px-6 py-3 text-white dark:text-primary-dark rounded-[10px] font-semibold tracking-wide hover:opacity-80 transition-opacity" style="background-color: var(--color-primary);">Back to Portfolio</a>
+            <a href="/archive.html" class="btn-primary inline-flex items-center gap-2 px-6 py-3">Back to the archive</a>
         </section>
     </div>
+    <!--/SLOT-->
 
-    <!-- Contact -->
+    <!-- ── CONTACT ── -->
     <section id="contact" class="px-4 md:px-8 pb-20">
-        <div class="max-w-7xl mx-auto bg-surface dark:bg-dark-surface rounded-3xl p-8 md:p-12 shadow-soft border border-themed transition-colors duration-500 text-center relative overflow-hidden">
+        <div class="max-w-7xl mx-auto bg-surface rounded-3xl p-8 md:p-12 shadow-soft border border-themed transition-colors duration-500 text-center relative overflow-hidden">
             <div class="contact-glow absolute inset-0 pointer-events-none"></div>
             <div class="relative z-10">
-                <h2 class="text-primary text-3xl md:text-5xl font-bold mb-4">Let's work together!</h2>
+                <h2 class="text-ink text-3xl md:text-4xl font-bold mb-4">Let's work together!</h2>
                 <p class="text-muted font-normal text-lg mb-8 max-w-xl mx-auto">Looking for assistance with a project? Please reach out and let me know how I can help.</p>
-                <a href="mailto:oliver_tw@icloud.com" class="inline-flex items-center gap-2 text-white dark:text-primary-dark px-8 py-3.5 rounded-[10px] font-semibold tracking-wide hover:opacity-90 transition-opacity" style="background-color: var(--color-primary);">
+                <a href="mailto:oliver_tw@icloud.com" class="btn-primary inline-flex items-center gap-2 px-8 py-3.5">
                     <i class="fa-solid fa-envelope"></i> Email Me
                 </a>
             </div>
         </div>
     </section>
 
-    <footer id="footer-placeholder" class="w-full bg-surface dark:bg-dark-surface border-t border-themed py-8 px-4 md:px-8 mt-auto"></footer>
+    <footer id="footer-placeholder" class="w-full bg-surface border-t border-themed py-8 px-4 md:px-8 mt-auto"></footer>
 
-    <script src="components.js"></script>
+    <script src="/components.js"></script>
+    <script src="/projects.js"></script>
+    <script src="/render.js"></script>
+    <script src="/lightbox.js"></script>
+    <!--SLOT:BOOT-->
     <script>
-        lucide.createIcons();
+    (function () {
+        'use strict';
+        var id = new URLSearchParams(window.location.search).get('id');
+        var d  = projectData[id];
 
-        const projectData = {
-            "mainframe": { category:"Advertising & Typography", title:"Mainframe Studios First Friday", client:"Mainframe Studios", role:"Visual Design", year:"2023", deliverables:"Poster, Typeface", hero:"images/mainframe2.png", heroCaption:"The final poster design displayed in the Anderson Gallery.", background:"Mainframe Studios is one of the largest non-profit art studios in the nation, providing permanent, affordable workspaces for hundreds of artists in Des Moines, Iowa. They are known for their vibrant creative community and their visually iconic building.", challenge:"The studio needed a unique poster design to advertise their First Friday event. A monthly opportunity for local people to tour the facility and view art. The primary challenge was to capture the essence of their most recognizable asset, the colorful, geometric-painted exterior, without simply resorting to photography.", solution:"To solve this, the design process began with an in-depth analysis of the studio's exterior, deconstructing its geometric patterns and bold color palette. These core shapes and angles were then abstracted and systematized to build the letterforms of a new custom display typeface.", result:"The resulting poster provided Mainframe Studios with a powerful and original piece of visual communication that was a true extension of its physical identity. The design was highly successful and received significant external recognition, winning an award at the 52nd Annual Juried Student Exhibition.", gallery:[{src:"images/mainframe3.png",caption:"View of Mainframe Studios in Des Moines."},{src:"images/mainframe4.png",caption:"Conceptual merchandise with the custom typography."},{src:"images/mainframe5.png",caption:"Mockup of the poster in a studio environment."}] },
-            "forged": { category:"Brand Identity", title:"The Forged Group", client:"Forged Consulting", role:"Brand Strategy", year:"2024", deliverables:"Identity System, Print", hero:"images/forged2.png", heroCaption:"Business cards showcasing the primary brand identity.", background:"The Forged Group is a financial consultation firm based in North Carolina, specializing in business consulting and human resources optimization. As a firm dealing with high-level corporate strategy and financial health, they required a brand image that conveyed strength, stability, and professional reliability to their diverse clientele.", challenge:"The primary challenge was to create a brand identity that was flexible enough to house multiple distinct sub-brands, specifically 'Forged Human Resources', 'Forged Financial Services' and 'Forged Operational Excellence', without fracturing the overall brand image. The system needed to feel unified and monolithic while allowing each division to have its own clear designation on business cards, stationery, and digital assets.", solution:"We developed a visual system anchored by a stylized 'Anvil' icon, a symbol of craftsmanship, durability, and creation. This icon serves as the unifying element across all collateral. A clean, typographic hierarchy was established to differentiate the sub-brands, ensuring that while the parent identity remains dominant, the specific service area is immediately clear to the client.", result:"The final deliverable was a comprehensive brand identity suite, including logo variations for each sub-brand, a stationery package (business cards, letterheads, notebooks), and merchandise assets like mugs and pens. The result is a cohesive, professional visual language that projects authority and trust, perfectly aligning with the firm's financial consultation services.", gallery:[{src:"images/forged3.png",caption:"Branded notebooks featuring the unified Anvil icon."},{src:"images/forged4.png",caption:"Merchandise application demonstrating the logo's versatility."},{src:"images/forged5.png",caption:"The visual system applied in a business environment."}] },
-            "relays": { category:"Event Branding", title:"Drake Relays 2025", client:"Drake University", role:"Visual Design", year:"2025", deliverables:"Logo, Merch, Signage", hero:"images/relays2.png", heroCaption:"Primary visual logo featured on a keychain.", background:"The Drake Relays is a premier athletic event held annually at Drake University. It is a long-standing tradition that attracts athletes from around the world. Each year, a student is selected through a competitive process to design the official logo and visual theme for the relays, ensuring the event maintains a fresh and student-centric identity.", challenge:"The mandated theme for the 2025 Relays was \"Racing Through Time.\" The challenge was to interpret this broad concept into a cohesive visual brand that felt energetic and athletic while honoring the history of the event. The design needed to be versatile enough to work on large-scale campus banners, small merchandise items, and digital media without losing legibility or impact.", solution:"I developed a logo and visual system anchored in a retro-futurist aesthetic and used a neon-inspired color palette to evoke the speed and energy of the event. A key component of the design was the integration of the Des Moines city skyline, grounding the \"Racing Through Time\" concept in the specific location of the city.", result:"The final design was implemented successfully across the entire event ecosystem. The logo was placed prominently around the Drake University campus, creating an immersive atmosphere for attendees. Additionally, the design was adapted into a wide range of popular merchandise, solidifying the 2025 Relays' visual identity.", gallery:[{src:"images/relays3.png",caption:"Merchandise application on steel cups, handed out at events."},{src:"images/relays4.png",caption:"Raffle prize given at reveal event."},{src:"images/relays5.png",caption:"Banner displayed on Drake campus grounds."}] },
-            "dessa": { category:"Social Media Design", title:"Dessa 2026 East Coast Tour", client:"Becky Hoffmann Mgmt", role:"Graphic Design", year:"2026", deliverables:"Social Assets (4:5, 9:16)", hero:"images/dessa1.png", heroCaption:"Teaser preview of tour.", background:"Dessa was preparing to announce a March 2026 tour run with stops in Boston, Philadelphia, Brooklyn, and D.C. Management needed a suite of digital assets optimized for Instagram feeds and stories to support the announcement.", challenge:"The visual direction needed to pivot mid-project. While the initial concept used moody photography, the client felt it was too somber for the tour's energy. The goal shifted to matching the specific pink-hued aesthetic of a recent EP cover.", solution:"I manually recreated the specific pink color grade to align with the EP's branding. To complement the new visual tone, I introduced a fresh font pairing that balanced the atmosphere with clear legibility.", result:"The final designs were approved by the team and successfully rolled out for the tour announcement in mid-January 2026.", gallery:[{src:"images/dessa2.png",caption:"Original Concept: Darker, moody photographic direction."},{src:"images/dessa3.png",caption:"After Feedback: Revised with pink treatment and updated typography."}] },
-            "jeremy": { category:"Event Promotion", title:"Songwriting Workshop & Performance", client:"Becky Hoffmann Mgmt", role:"Art Direction & Design", year:"2026", deliverables:"Digital Posters (1:1, 4:5)", hero:"images/jeremy1.png", heroCaption:"Final promotional poster for PILLLAR songwriting workshop.", background:"Jeremy Messersmith was hosting two related events in February 2026: a free songwriting workshop and a songwriter circle performance. The project required two distinct digital flyers that felt cohesive as a series but clearly differentiated the nature of each event.", challenge:"The challenge was to develop a design that would feel inviting and organic, reflecting the intimate nature of the events and capturing the specific whimsy associated with Jeremy's brand.", solution:"I conceptualized a 'scrapbook' aesthetic to mirror the hands-on, constructive nature of a songwriting workshop. To distinguish the events, I used unique colorways for the workshop versus the show. As a nod to Jeremy's hit song 'Everybody Gets a Kitten,' I also integrated cats into the collage.", result:"The final posters were praised for capturing his aesthetic and effectively communicating the distinct vibe of the events. The flyers were used successfully across social media channels and ticketing platforms.", gallery:[{src:"images/jeremy2.png",caption:"Original draft of planned layout."},{src:"images/jeremy3.png",caption:"Alternate colorway and layout for the performance flyer."}] },
-            "pyrkia": { category:"Brand Identity", title:"Pyrkia Health", client:"Pyrkia Health Services", role:"Logo Design", year:"2024", deliverables:"Logo, Brand Assets", hero:"images/pyrkia2.png", heroCaption:"Primary brand visual emphasizing balance and nature.", background:"Pyrkia Health Services is a nature-focused health program dedicated to holistic wellness. Their mission is to integrate physical health with the restorative power of the natural world, fostering a sense of unity between the individual and their environment.", challenge:"The health and wellness sector is crowded with generic imagery. The client needed a logo that was distinct yet immediately recognizable as a symbol of care and unity. The challenge was to create a mark that felt organic and human-centered without relying on clichéd health tropes.", solution:"I developed the client's vision by focusing on an abstract figure that symbolizes the human element within the natural world. To reinforce the concepts of completeness and self-emphasis, I integrated this figure with a prominent abstract circle representing the cycle of health and unity.", result:"The final design is a clean, modern logo that successfully bridges the gap between professional healthcare and organic wellness. The abstract circle and figure create a memorable icon that anchors the brand's visual identity.", gallery:[{src:"images/pyrkia3.png",caption:"Digital application on the Pyrkia webpage."},{src:"images/pyrkia4.png",caption:"Icon shown in yoga environment."}] },
-            "duolingo": { category:"Advertising Campaign", title:"Duolingo x Rocket League", client:"Young Ones Competition", role:"Illustration", year:"2024", deliverables:"Campaign Deck, Concept Video, Vector Illustration", hero:"images/duolingo2.png", heroCaption:"Concept art for the Duolingo x Rocket League crossover event.", background:"This project was a submission for the One Club for Creativity's 'Young Ones' competition. The national brief challenged students to develop innovative marketing strategies to help global brands, such as Duolingo, achieve specific growth goals.", challenge:"Duolingo sought to penetrate a new demographic. We identified the gaming community as a prime target due to its reliance on cross-cultural communication. We selected Rocket League as the specific vehicle, leveraging its massive international player base.", solution:"We pitched an immersive in-game crossover event. I spearheaded the visual development, utilizing Adobe Illustrator to merge official assets from the Duolingo brand kit with the Rocket League aesthetic.", result:"Delivered a comprehensive campaign deck and video pitch that successfully merged two distinct brand identities, resulting in a professional-grade presentation suitable for a major tech client.", gallery:[{src:"images/duolingo3.png",caption:"In-game car decal concept."},{src:"images/duolingo4.png",caption:"Initial illustration sketch."}] },
-            "art": { category:"Fine Art", title:"Traditional Artwork", client:"Personal", role:"Artist", year:"2021-2024", deliverables:"Mixed Media Studies", hero:"images/art1.jpg", heroCaption:"Cloth Vignette - Drawing cloth from sight using charcoal paints reductively. [18 x 25 in.]. Featured at the Drake University Anderson Gallery 52nd Annual Juried Student Exhibition in March 2023.", background:"While my professional work focuses on digital design and analytics, I maintain a dedicated practice in traditional fine art. This collection represents a compilation of studies created between 2021 and 2024.", challenge:"The challenge in traditional media is the lack of an 'undo' button. Working with charcoal and ink requires commitment to every stroke and a deep understanding of physical materials.", solution:"I primarily work with a variety of charcoals and pastels. My studies focus on recreating form in high-contrast lighting scenarios, relying on value and texture to communicate volume and emotion.", result:"This ongoing practice keeps my fundamental artistic skills sharp. The discipline required for traditional drawing directly translates to my digital work, improving my eye for composition and balance.", gallery:[{src:"images/art2.jpg",caption:"Marble - Drawn from sight using oil pastels. [18 x 25 in.]"},{src:"images/art4.jpg",caption:"Untitled - 30 minute photo study w/ charcoal. [8.5 x 11 in.]"},{src:"images/art6.jpg",caption:"Untitled - 30 minute photo study w/ oil pastel. [11 x 8.5 in.]"},{src:"images/art3.jpg",caption:"C.M.Y.K. - Psychological space w/ mixed media. [12 x 18 in.]"},{src:"images/art5.jpg",caption:"Dissonance - Oil pastel. [18 x 25 in.]"},{src:"images/art7.png",caption:"25 Fruits - Color & abstraction w/ mixed media. [4 x 4 in.]"}] },
-            "cityintern": { category:"Editorial & UI Design", title:"Shorewood Internship", client:"City of Shorewood", role:"Graphic Design Intern", year:"2024", deliverables:"Fillable Forms, PDFs", hero:"images/cityintern2.png", heroCaption:"A selection of standardized, fillable PDF forms created for the city government.", background:"The City of Shorewood, Minnesota, manages a wide variety of administrative processes that require documentation, from permits to internal HR forms. I joined the team as a Graphic Design Intern to assist in modernizing their communication materials.", challenge:"Many of the city's existing documents were outdated, visually inconsistent, and difficult to use. The challenge was to audit these legacy documents and transform them into a cohesive system that aligned with the Shorewood Branding Kit while drastically improving usability.", solution:"I utilized Adobe Acrobat and InDesign to redesign and engineer a suite of fillable PDFs. I strictly applied the Shorewood Branding Kit and focused on user experience by adding interactive form fields, dropdown menus, and clear instructional hierarchy.", result:"The project resulted in a library of modernized, user-friendly documents that streamlined administrative workflows. The shift to fillable PDFs reduced paper waste and data entry errors.", gallery:[] },
-            "xmas": { category:"Map Design & Illustration", title:"Christmas in Excelsior", client:"International Lions Club", role:"Map Illustration", year:"2024", deliverables:"Event Map, Pamphlet", hero:"images/xmas2.png", heroCaption:"Overview of the event map designed for the first-ever Christmas Market in Excelsior.", background:"The International Lions Club organized the first-ever Christmas Market in Excelsior, a major community initiative aimed at bringing residents and visitors together for the holiday season, anticipating an estimated attendance of 50,000 people.", challenge:"With such a significant influx of visitors to a new event layout, clarity and navigation were critical safety and logistical concerns. Attendees needed to intuitively find specific vendor zones, food areas, restrooms, and event features.", solution:"I volunteered to design a comprehensive area map that prioritized readability and functional navigation. The design clearly highlighted efficient walking routes, distinct vendor zones, and key landmarks, optimized for print.", result:"The map became a central piece of the visitor experience, distributed in printed pamphlets to the estimated audience of 50,000, successfully directing foot traffic and reducing bottlenecks.", gallery:[] },
-            "citymap": { category:"Illustration & Product Design", title:"City of Shorewood Map", client:"Community Prototype", role:"Illustrator", year:"2024", deliverables:"Rug Design, Map", hero:"images/citymap2.png", heroCaption:"A custom illustrated rug designed to help children visualize their community.", background:"This project began as a university initiative to design a functional prototype that would benefit a local community. The goal was to create an educational tool that fostered a sense of place and belonging for younger residents.", challenge:"Learning city layouts and navigation can be abstract and difficult for children when relying on traditional 2D maps or digital screens. The challenge was to translate complex geographic data into a format that was intuitive, playful, and physically interactive.", solution:"I developed a custom illustrated rug that functions as a large-scale play mat with a stylized yet accurate map of Shorewood. Key landmarks were illustrated with distinct icons, and roads were designed wide enough for toy cars.", result:"The final prototype effectively depicts Shorewood, Minnesota, along with its real city landmarks and surrounding townships, bridging the gap between a toy and an educational resource.", gallery:[{src:"images/citymap3.png",caption:"View of the rug at eye-level."},{src:"images/citymap4.png",caption:"2nd view of the rug at eye-level."}] },
-            "data": { category:"Event Branding & Print Design", title:"Save the Data: Ransomware Event", client:"DATA Club & Tech Association of Iowa", role:"President & Lead Designer", year:"2025", deliverables:"Event Flyers, Social Media Assets, Digital Signage", hero:"images/data1.png", heroCaption:"Promotional flyers designed for the 'Save the Data' cybersecurity event.", background:"I partnered with the Tech Association of Iowa as President of the DATA Club to organize a tabletop ransomware exercise demonstrating business responses to cybersecurity crises for students and industry professionals.", challenge:"The workshop needed a visual identity to attract students and professionals to a three-hour morning session, requiring a clear theme to distinguish it from standard academic lectures.", solution:"I created a retro-computing visual style using pixelated icons and distressed typography, producing two colorways: 'System Blue' for light mode and 'Critical Pink' for dark mode, displayed side-by-side in science halls.", result:"The campaign distinguished the event from other campus activities and drew attendance from students and tech professionals.", gallery:[{src:"images/data2.png",caption:"Light mode variant."},{src:"images/data3.png",caption:"Dark mode variant."}] },
-            "icymi": { category:"Brand Identity & Print", title:"ICYMI Podcast", client:"Student Media", role:"Co-Host & Designer", year:"2022", deliverables:"Podcast Cover, Weekly Posters", hero:"images/icymi2.png", heroCaption:"The official cover art for the ICYMI (In Case You Missed It) podcast.", background:"ICYMI was a weekly news podcast dedicated to covering stories around Drake University and the greater Des Moines area. As both a co-host and the lead designer, I aimed to keep the student body informed through an accessible audio format.", challenge:"Podcasts are an audio medium, making visual discoverability a significant hurdle on a physical campus. We needed a strong visual identity that could translate from a digital thumbnail on Spotify to physical posters on crowded bulletin boards.", solution:"I designed a bold, distinct podcast cover that served as the anchor for our visual brand, then developed a templated poster system for weekly episode rollouts to quickly generate fresh promotional assets.", result:"The visual campaign successfully established ICYMI's presence across Drake University. The consistent poster distribution helped drive listenership and built a recognizable brand on campus.", gallery:[{src:"images/icymi3.jpg",caption:"'Generic' poster displayed on campus whiteboard."},{src:"images/icymi6.png",caption:"Example of the variable flyer, posted onto Instagram."}] }
-        };
-
-        const params = new URLSearchParams(window.location.search);
-        const projectId = params.get('id');
-        const data = projectData[projectId];
-        let lbImages = [], currentLbIndex = 0;
-
-        function openLightbox(index) {
-            currentLbIndex = index; updateLightbox();
-            document.getElementById('lightbox').classList.remove('hidden');
-            setTimeout(() => document.getElementById('lightbox').classList.remove('opacity-0'), 10);
-            document.body.style.overflow = 'hidden';
+        if (!d) {
+            document.getElementById('main-content').style.display = 'none';
+            var err = document.getElementById('error-screen');
+            err.classList.remove('hidden');
+            err.classList.add('flex');
+            return;
         }
-        function closeLightbox() {
-            document.getElementById('lightbox').classList.add('opacity-0');
-            setTimeout(() => document.getElementById('lightbox').classList.add('hidden'), 300);
-            document.body.style.overflow = 'auto';
-        }
-        function closeLightboxOnBg(e) {
-            if (e.target.id === 'lb-image' || e.target.closest('button')) return;
-            closeLightbox();
-        }
-        function changeLbImage(event, direction) {
-            event.stopPropagation();
-            currentLbIndex = (currentLbIndex + direction + lbImages.length) % lbImages.length;
-            updateLightbox();
-        }
-        function updateLightbox() {
-            const imgData = lbImages[currentLbIndex];
-            const imgEl = document.getElementById('lb-image');
-            imgEl.style.opacity = '0';
-            setTimeout(() => {
-                imgEl.src = imgData.src;
-                document.getElementById('lb-caption').innerText = imgData.caption || '';
-                document.getElementById('lb-counter').innerText = `${currentLbIndex + 1} / ${lbImages.length}`;
-                imgEl.style.opacity = '1';
-            }, 150);
-        }
-        document.addEventListener('keydown', e => {
-            if (document.getElementById('lightbox').classList.contains('hidden')) return;
-            if (e.key === 'Escape') closeLightbox();
-            if (e.key === 'ArrowLeft') changeLbImage(e, -1);
-            if (e.key === 'ArrowRight') changeLbImage(e, 1);
-        });
 
-        if (data) {
-            ['category','title','client','role','year','deliverables'].forEach(k => document.getElementById('p-'+k).innerText = data[k]);
-            document.getElementById('p-hero-cap').innerText   = data.heroCaption;
-            document.getElementById('p-background').innerText = data.background;
-            document.getElementById('p-challenge').innerText  = data.challenge;
-            document.getElementById('p-solution').innerText   = data.solution;
-            document.getElementById('p-result').innerText     = data.result;
-            document.getElementById('p-hero').src = data.hero;
+        document.title = d.title + ' | Oliver T. Williams';
+        var desc = (d.card && d.card.blurb) || '';
+        document.querySelector('meta[name="description"]').setAttribute('content', desc);
+        document.querySelector('meta[property="og:title"]').setAttribute('content', d.title + ' | Oliver T. Williams');
+        document.querySelector('meta[property="og:description"]').setAttribute('content', desc);
+        document.querySelector('link[rel="canonical"]').setAttribute('href', 'https://olivertwilliams.com' + projectHref(id));
 
-            lbImages.push({ src: data.hero, caption: data.heroCaption });
-            data.gallery.forEach(img => lbImages.push(img));
+        document.getElementById('p-header').innerHTML = projectHeader(d);
+        document.getElementById('p-body').innerHTML   = projectLayout(d);
+        document.getElementById('p-next').innerHTML   = nextProjectHTML(id);
 
-            const keys = Object.keys(projectData);
-            const nextKey = keys[(keys.indexOf(projectId) + 1) % keys.length];
-            document.getElementById('p-next-title').innerText = projectData[nextKey].title;
-            document.getElementById('p-next-link').href = `project.html?id=${nextKey}`;
-
-            const galleryEl = document.getElementById('p-gallery');
-            const isLarge = data.gallery.length > 3;
-            galleryEl.className = isLarge ? 'grid grid-cols-1 md:grid-cols-3 gap-6 mb-20' : 'grid grid-cols-1 md:grid-cols-2 gap-6 mb-20';
-
-            galleryEl.innerHTML = data.gallery.map((img, i) => {
-                const span   = (!isLarge && (i+1) % 3 === 0) ? 'md:col-span-2' : '';
-                const aspect = (!isLarge && (i+1) % 3 === 0) ? 'aspect-video' : 'aspect-[4/3]';
-                return `
-                <figure class="${span} group cursor-pointer" onclick="openLightbox(${i+1})">
-                    <div class="bg-wash dark:bg-wash-dark rounded-2xl overflow-hidden ${aspect} border border-themed shadow-soft mb-3 relative">
-                        <img src="${img.src}" alt="${img.caption}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100 duration-300">
-                            <div class="bg-white/20 backdrop-blur-md p-3 rounded-full">
-                                <i data-lucide="maximize-2" class="text-white w-6 h-6"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <figcaption class="text-muted font-normal text-sm px-1">${img.caption}</figcaption>
-                </figure>`;
-            }).join('');
-
-            lucide.createIcons();
-            document.getElementById('main-content').classList.remove('opacity-0');
-        } else {
-            document.getElementById('error-screen').classList.remove('hidden');
-        }
+        if (d.layout !== 'technical') initLightbox(galleryImages(d));
+        document.getElementById('main-content').classList.remove('opacity-0');
+    })();
     </script>
+    <!--/SLOT-->
 </body>
 </html>

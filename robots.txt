@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# Dated correspondence, not meant to be indexed.
+Disallow: /cover-letter.html
+
+Sitemap: https://olivertwilliams.com/sitemap.xml

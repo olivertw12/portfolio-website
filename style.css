@@ -1,301 +1,128 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
-@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
-
 /* ============================================================
-   DESIGN TOKENS
-   Edit palette here — everything else updates automatically.
+   DESIGN TOKENS — "Ink"
+   ------------------------------------------------------------
+   Achromatic greys with celadon reserved as an accent.
+
+   Every token that differs between light and dark is redefined in
+   the .dark block below and nowhere else. That is the whole theming
+   system: there are no `.dark .something` rules further down this
+   file, and no `dark:` variants in the markup. If a colour needs a
+   dark value, it gets one here.
+
+   tailwind-build/tailwind.config.cjs maps Tailwind colour names onto
+   these variables, so a name used there has to exist here. Rerun the
+   build after changing either file (see tailwind-build/README.md).
    ============================================================ */
+
 :root {
-    /* --- Page backgrounds ---
-       Sourced from: plush body fur (cream), fur highlight (surface)  */
-    --color-cream:        #E8E5DE;   /* body fur — neutral gray, barely warm  */
-    --color-surface:      #F2F0EC;   /* fur highlight — soft off-white        */
-    --color-dark-bg:      #181E1C;   /* deep forest — dark mode base          */
-    --color-dark-surface: #212A26;   /* forest mid — dark mode surface        */
+    /* --- Surfaces --- */
+    --color-page:    #EFEFEF;   /* page base                                  */
+    --color-surface: #FAFAFA;   /* cards, nav, panels                         */
+    --color-wash:    #E5E5E5;   /* image wells, pill backgrounds              */
+    --color-tint:    #D9D9D9;   /* hover states                               */
 
-    /* --- Brand / accent ---
-       Sourced from: belly celadon + ear-tip forest green             */
-    --color-primary:       #2A3C34;   /* ear-tip forest — dark accent on light */
-    --color-primary-dark:  #E8EDEA;   /* pale sage — light text on dark mode   */
-    --color-accent:        #6B9E8E;   /* belly celadon — teal-sage, has presence */
-    --color-accent-light:  #8BBDAD;   /* lighter sage — dark mode hover/text   */
-    --color-accent-muted:  #D8E8E4;   /* very pale celadon — badge bg light    */
-    --color-accent-muted-dark: #1A2E28; /* deep teal-black — badge bg dark     */
+    /* --- Text --- */
+    --color-text-primary: #111111;   /* headings          — 16.4:1 on page    */
+    --color-text-body:    #2E2E2E;   /* body copy         — 11.8:1            */
+    --color-text-muted:   #4D4D4D;   /* labels, captions  —  7.4:1            */
+    --color-text-subtle:  #666666;   /* de-emphasised     —  5.1:1            */
 
-    /* --- Semantic text scale ---
-       Forest → cool mid → taupe → pale gray                          */
-    --color-text-primary:  #252E28;   /* dark forest near-black — headings     */
-    --color-text-body:     #4A5250;   /* cool mid gray, green undertone        */
-    --color-text-muted:    #7A8280;   /* warm cool gray — labels, captions     */
-    --color-text-subtle:   #A8ACAA;   /* pale gray — de-emphasised             */
+    /* --- Accent ---
+       Two values on purpose: --color-accent is decorative (rules, glows,
+       focus rings, icon marks) and --color-accent-text is the darker one
+       that clears AA as small text. */
+    --color-accent:       #35705E;
+    --color-accent-text:  #2C5C4D;   /* 6.7:1 on page                         */
+    --color-accent-muted: #DFE9E5;   /* accent surface, e.g. the nav badge    */
 
-    --color-text-primary-dark: #E8EDEA;   /* pale sage white                   */
-    --color-text-body-dark:    #C0CAC6;   /* cool light gray                   */
-    --color-text-muted-dark:   #8A9692;   /* mid sage gray                     */
-    --color-text-subtle-dark:  #5A6460;   /* dark sage gray                    */
+    /* --- Primary action --- */
+    --color-primary:    #1A1A1A;
+    --color-primary-fg: #FFFFFF;
 
-    /* --- Semantic surface scale ---
-       Belly celadon (washed) → fur shadow — all low-saturation green-gray */
-    --color-wash:      #E0E8E4;   /* pale celadon tint — card / image bg       */
-    --color-tint:      #D4E0DC;   /* slightly stronger celadon — hover states  */
-    --color-divider:   #C4CCCB;   /* cool gray — separators, dots              */
-
-    --color-wash-dark: #1E2824;   /* deep forest tint                          */
-    --color-tint-dark: #283530;   /* dark teal hover                           */
-    --color-divider-dark: #3A4842;
+    /* --- Lines --- */
+    --color-divider:      #C1C1C1;
+    --color-border:       rgba(193,193,193,0.65);
+    --color-border-solid: #C1C1C1;
 
     /* --- Overlays --- */
-    --color-overlay-light: rgba(242,240,236,0.92);  /* fur white tint  */
-    --color-overlay-dark:  rgba(24,30,28,0.88);
-    --color-scrim:         rgba(10,14,12,0.96);
+    --color-overlay: rgba(250,250,250,0.92);
+    --color-scrim:   rgba(8,8,8,0.96);
 
-    /* --- Borders ---
-       Derived from fur shadow + celadon palette                      */
-    --color-border:       rgba(196,204,203,0.65);   /* cool gray/65    */
-    --color-border-solid: #C4CCCB;                   /* cool gray       */
-    --color-border-light: #D8E0DE;                   /* pale teal-gray  */
-    --color-border-dark:       rgba(58,72,66,0.50);  /* forest/50       */
-    --color-border-dark-solid: #3A4842;               /* forest          */
-    --color-border-section:    rgba(37,46,40,0.55);
+    /* --- Code block chrome ---
+       Dark in both themes, so none of this is repeated in .dark. */
+    --color-code:              #151515;
+    --color-code-titlebar:     #1E1E1E;
+    --color-code-panel:        #151515;
+    --color-code-panel-header: #1A1A1A;
+    --color-code-border:       #333333;
+    --color-code-text:         #D0D0D0;   /* 12.0:1 on the panel */
+    --color-code-label:        #A0A0A0;
 
-    /* --- Code block chrome --- */
-    --color-code:              #181E1C;
-    --color-code-titlebar:     #1E2824;
-    --color-code-panel:        #181E1C;
-    --color-code-panel-header: #1C2420;
-    --color-code-border:       #3A4842;
-
-    /* --- Traffic-light window dots --- */
-    --color-chrome-close:    rgba(239,68,68,0.50);   /* red-500/50  */
-    --color-chrome-minimize: rgba(234,179,8,0.50);   /* yellow-500/50 */
-    --color-chrome-maximize: rgba(34,197,94,0.50);   /* green-500/50 */
+    --color-chrome-close:    rgba(239,68,68,0.50);
+    --color-chrome-minimize: rgba(234,179,8,0.50);
+    --color-chrome-maximize: rgba(34,197,94,0.50);
 
     --color-chrome-close-vivid:    rgba(239,68,68,0.80);
     --color-chrome-minimize-vivid: rgba(234,179,8,0.80);
     --color-chrome-maximize-vivid: rgba(34,197,94,0.80);
 
-    /* --- Syntax highlighting (intentional semantic colors, not palette) --- */
+    /* --- Syntax highlighting (semantic colours, dark panel in both modes) --- */
     --color-syn-func:    #61afef;
     --color-syn-string:  #98c379;
     --color-syn-keyword: #c678dd;
     --color-syn-number:  #d19a66;
-    --color-syn-comment: #7f848e;
+    --color-syn-comment: #8b9299;
     --color-syn-tag:     #e06c75;
     --color-syn-attr:    #d19a66;
-
-    /* --- Code preview (index hero panel) --- */
-    --color-syn-js-keyword: #c678dd;
-    --color-syn-js-var:     #e5c07b;
-    --color-syn-js-key:     #61afef;
-    --color-syn-js-string:  #98c379;
 
     /* --- Typography --- */
     --font-sans: 'Plus Jakarta Sans', sans-serif;
     --font-mono: 'JetBrains Mono', monospace;
 
     /* --- Radii --- */
-    --radius-xl:  0.625rem;   /* 10px — buttons, chips, small elements */
-    --radius-2xl: 0.875rem;   /* 14px — inner card images, nav         */
+    --radius-xs:  0.5rem;     /*  8px — chips, pills                   */
+    --radius-xl:  0.625rem;   /* 10px — buttons, small elements        */
+    --radius-2xl: 0.875rem;   /* 14px — nav, inner card images         */
     --radius-3xl: 1.25rem;    /* 20px — cards, panels, large surfaces  */
 
     /* --- Shadows --- */
     --shadow-soft:  0 1px 3px 0 rgba(0,0,0,0.07), 0 1px 2px -1px rgba(0,0,0,0.05);
     --shadow-glow:  0 0 0 1px rgba(0,0,0,0.05);
     --shadow-paper: 0 1px 3px 0 rgba(0,0,0,0.08), 0 1px 2px -1px rgba(0,0,0,0.06);
+    --shadow-lift:  0 4px 12px 0 rgba(0,0,0,0.10), 0 1px 3px 0 rgba(0,0,0,0.06);
+
+    /* --- Misc --- */
+    --glow-opacity: 0.08;   /* the celadon wash behind the contact panel */
 }
 
+.dark {
+    --color-page:    #121212;
+    --color-surface: #1C1C1C;
+    --color-wash:    #181818;
+    --color-tint:    #242424;
 
-/* ============================================================
-   SEMANTIC UTILITY CLASSES
-   Use these in HTML — never use raw Tailwind color classes.
-   ============================================================ */
+    --color-text-primary: #F5F5F5;
+    --color-text-body:    #D2D2D2;
+    --color-text-muted:   #A0A0A0;
+    --color-text-subtle:  #808080;
 
-/* --- Text --- */
-.text-primary  { color: var(--color-text-primary); }
-.text-body     { color: var(--color-text-body); }
-.text-muted    { color: var(--color-text-muted); }
-.text-subtle   { color: var(--color-text-subtle); }
-.text-accent   { color: var(--color-accent); }
+    --color-accent:       #7BB6A2;
+    --color-accent-text:  #7BB6A2;   /* 8.1:1 on the dark page */
+    --color-accent-muted: #16211E;
 
-.dark .text-primary { color: var(--color-text-primary-dark); }
-.dark .text-body    { color: var(--color-text-body-dark); }
-.dark .text-muted   { color: var(--color-text-muted-dark); }
-.dark .text-subtle  { color: var(--color-text-subtle-dark); }
-.dark .text-accent  { color: var(--color-accent-light); }
+    /* Inverted, because a #1A1A1A button on a #121212 page measured
+       1.02:1 — the label was readable but the button had no edge. */
+    --color-primary:    #F5F5F5;
+    --color-primary-fg: #121212;
 
-/* --- Backgrounds --- */
-.bg-wash  { background-color: var(--color-wash); }
-.bg-tint  { background-color: var(--color-tint); }
-.bg-scrim { background-color: var(--color-scrim); }
+    --color-divider:      #333333;
+    --color-border:       rgba(51,51,51,0.55);
+    --color-border-solid: #333333;
 
-.dark .bg-wash { background-color: var(--color-wash-dark); }
-.dark .bg-tint { background-color: var(--color-tint-dark); }
+    --color-overlay: rgba(18,18,18,0.88);
 
-.bg-overlay-light { background-color: var(--color-overlay-light); }
-.bg-overlay-dark  { background-color: var(--color-overlay-dark); }
-
-/* --- Borders --- */
-.border-base       { border-color: var(--color-border); }
-.border-base-solid { border-color: var(--color-border-solid); }
-.border-section    { border-color: var(--color-border-section); }
-
-.dark .border-base       { border-color: var(--color-border-dark); }
-.dark .border-base-solid { border-color: var(--color-border-dark-solid); }
-
-/* Combined light/dark border (single class, handles both modes) */
-.border-themed {
-    border-color: var(--color-border);
+    --glow-opacity: 0.12;
 }
-.dark .border-themed {
-    border-color: var(--color-border-dark);
-}
-
-/* --- Divider dot (·  separators in footer/resume) --- */
-.bg-divider { background-color: var(--color-divider); }
-.dark .bg-divider { background-color: var(--color-divider-dark); }
-
-/* --- Badge / pill --- */
-.badge-accent {
-    background-color: var(--color-accent-muted);
-    color: var(--color-accent);
-}
-.dark .badge-accent {
-    background-color: var(--color-accent-muted-dark);
-    color: var(--color-accent-light);
-}
-
-.badge-neutral {
-    background-color: var(--color-wash);
-    color: var(--color-text-body);
-    border-color: var(--color-border-solid);
-}
-.dark .badge-neutral {
-    background-color: var(--color-wash-dark);
-    color: var(--color-text-body-dark);
-    border-color: var(--color-border-dark-solid);
-}
-
-/* --- Tech pill (skills tags) --- */
-.tech-pill {
-    background-color: var(--color-wash);
-    color: var(--color-text-body);
-}
-.dark .tech-pill {
-    background-color: var(--color-wash-dark);
-    color: var(--color-text-body-dark);
-}
-.tech-pill i { color: var(--color-text-muted); }
-.dark .tech-pill i { color: var(--color-text-muted-dark); }
-
-/* --- Project card category chip (over image) --- */
-.chip-overlay {
-    background-color: var(--color-overlay-light);
-    color: var(--color-text-primary);
-    border-color: rgba(255,255,255,0.20);
-}
-.dark .chip-overlay {
-    background-color: var(--color-overlay-dark);
-    color: var(--color-text-primary-dark);
-    border-color: rgba(255,255,255,0.10);
-}
-
-/* --- Code block chrome --- */
-.bg-code-titlebar     { background-color: var(--color-code-titlebar); }
-.bg-code-panel        { background-color: var(--color-code-panel); }
-.bg-code-panel-header { background-color: var(--color-code-panel-header); }
-.border-code          { border-color: var(--color-code-border); }
-.text-code-label      { color: var(--color-text-muted-dark); } /* always dark-mode label */
-
-/* Traffic-light window dots */
-.chrome-close    { background-color: var(--color-chrome-close); }
-.chrome-minimize { background-color: var(--color-chrome-minimize); }
-.chrome-maximize { background-color: var(--color-chrome-maximize); }
-.chrome-close-vivid    { background-color: var(--color-chrome-close-vivid); }
-.chrome-minimize-vivid { background-color: var(--color-chrome-minimize-vivid); }
-.chrome-maximize-vivid { background-color: var(--color-chrome-maximize-vivid); }
-
-/* --- Lightbox overlay --- */
-.lightbox-btn-idle  { color: rgba(255,255,255,0.50); }
-.lightbox-btn-idle:hover { color: white; }
-.lightbox-close-idle { color: rgba(255,255,255,0.70); }
-.lightbox-close-idle:hover { color: white; }
-
-/* --- Marker (list bullets) --- */
-.marker-muted ::marker { color: var(--color-text-muted); }
-.dark .marker-muted ::marker { color: var(--color-text-muted-dark); }
-
-/* --- Nav pill background --- */
-.nav-pill {
-    background-color: var(--color-cream);
-    border-color: transparent;
-}
-.dark .nav-pill {
-    background-color: var(--color-dark-bg);
-    border-color: transparent;
-}
-.nav-pill-item {
-    color: var(--color-text-body);
-}
-.nav-pill-item:hover {
-    background-color: var(--color-wash);
-    color: var(--color-text-primary);
-}
-.dark .nav-pill-item {
-    color: var(--color-text-body-dark);
-}
-.dark .nav-pill-item:hover {
-    background-color: var(--color-wash-dark);
-    color: var(--color-text-primary-dark);
-}
-
-/* --- Theme toggle button --- */
-.theme-toggle {
-    background-color: var(--color-cream);
-    color: var(--color-text-body);
-    border-color: transparent;
-}
-.theme-toggle:hover {
-    background-color: var(--color-wash);
-    color: var(--color-text-primary);
-}
-.dark .theme-toggle {
-    background-color: var(--color-dark-bg);
-    color: var(--color-text-body-dark);
-    border-color: transparent;
-}
-.dark .theme-toggle:hover {
-    background-color: var(--color-wash-dark);
-    color: var(--color-text-primary-dark);
-}
-
-/* --- Nav anchor icon bg --- */
-.nav-icon-bg {
-    background-color: var(--color-accent-muted);
-}
-.dark .nav-icon-bg {
-    background-color: var(--color-accent-muted-dark);
-}
-.nav-icon-color { color: var(--color-accent); }
-.dark .nav-icon-color { color: var(--color-accent-light); }
-
-/* --- Code preview panel (index hero) — intentional syntax colors --- */
-.syn-js-keyword { color: var(--color-syn-js-keyword); }
-.syn-js-var     { color: var(--color-syn-js-var); }
-.syn-js-key     { color: var(--color-syn-js-key); }
-.syn-js-string  { color: var(--color-syn-js-string); }
-
-
-/* ============================================================
-   LEGACY SYNTAX HIGHLIGHTING (for R/JS code blocks)
-   These are intentional semantic colors, not palette.
-   ============================================================ */
-.token-func    { color: var(--color-syn-func); }
-.token-str     { color: var(--color-syn-string); }
-.token-kw      { color: var(--color-syn-keyword); }
-.token-num     { color: var(--color-syn-number); }
-.token-comment { color: var(--color-syn-comment); font-style: italic; }
-.token-tag     { color: var(--color-syn-tag); }
-.token-attr    { color: var(--color-syn-attr); }
 
 
 /* ============================================================
@@ -304,26 +131,68 @@
 html {
     margin: 0; padding: 0;
     overflow-x: hidden; width: 100%;
-    background-color: var(--color-cream);
+    background-color: var(--color-page);
 }
-html.dark { background-color: var(--color-dark-bg); }
 
 body {
     margin: 0; padding: 0; width: 100%;
+    color: var(--color-text-body);
     transition: background-color 0.5s ease, color 0.5s ease;
 }
 
+/* Base line height for running text. Tailwind's leading-* utilities are a
+   single class (0,1,0) and these are element selectors (0,0,1), so any
+   explicit leading in the markup still wins. */
+p, li, figcaption { line-height: 1.65; }
+
+/* Stops the transition flash on first paint. Every page's <body> carries
+   .preload; components.js removes it after the first frame. */
 .preload * {
-    -webkit-transition: none !important;
-    -moz-transition: none !important;
-    -ms-transition: none !important;
-    -o-transition: none !important;
     transition: none !important;
+    animation: none !important;
 }
 
 div, section, main, header, footer { max-width: 100%; box-sizing: border-box; }
 img, video { max-width: 100%; height: auto; display: block; }
 p, h1, h2, h3, h4, h5, h6, li, span, a { overflow-wrap: break-word; }
+
+/* Keeps a single short word from being left alone on the last line of a
+   paragraph or heading. Ignored where unsupported, so nothing to fall back to. */
+p, li, figcaption { text-wrap: pretty; }
+h1, h2, h3, h4    { text-wrap: balance; }
+
+/* Lets a keyboard user jump past the fixed nav instead of tabbing through
+   it on every page. Parked off-canvas until focused. */
+.skip-link {
+    position: absolute;
+    left: 1rem;
+    top: -3rem;
+    z-index: 100;
+    padding: 0.6rem 1rem;
+    border-radius: var(--radius-xl);
+    background-color: var(--color-primary);
+    color: var(--color-primary-fg);
+    font-weight: 600;
+    font-size: 0.875rem;
+    transition: top 0.15s ease;
+}
+.skip-link:focus { top: 1rem; }
+
+/* Links take their colour from whatever they sit in unless a utility says
+   otherwise. This is an element selector on purpose: at (0,0,1) it loses to
+   every `text-*` class, so a link that asks for a colour still gets it. The
+   old `.card-link { color: inherit }` was a class, tied on specificity with
+   the utilities, and quietly turned a couple of links black. */
+a { color: inherit; text-decoration: none; }
+
+/* Cards are links, so they need a visible keyboard focus state. The default
+   browser outline gets clipped oddly by the rounded corners. */
+a:focus-visible,
+button:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+    border-radius: 6px;
+}
 
 
 /* ============================================================
@@ -334,23 +203,324 @@ p, h1, h2, h3, h4, h5, h6, li, span, a { overflow-wrap: break-word; }
 ::-webkit-scrollbar-thumb {
     background: var(--color-tint);
     border-radius: 10px;
-    border: 2px solid var(--color-cream);
-}
-.dark ::-webkit-scrollbar-thumb {
-    background: var(--color-divider-dark);
-    border: 2px solid var(--color-dark-bg);
+    border: 2px solid var(--color-page);
 }
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
 
 /* ============================================================
-   COMPONENTS
+   SURFACES AND LINES
+   Semantic classes for the few things Tailwind's colour utilities
+   don't cover cleanly.
+   ============================================================ */
+.border-themed { border-color: var(--color-border); }
+.border-solid-themed { border-color: var(--color-border-solid); }
+.bg-scrim   { background-color: var(--color-scrim); }
+.bg-overlay { background-color: var(--color-overlay); }
+
+.section-divider {
+    border: none;
+    border-top: 1px solid var(--color-border);
+}
+
+
+/* ============================================================
+   BADGES AND PILLS
+   ============================================================ */
+.badge-accent {
+    background-color: var(--color-accent-muted);
+    color: var(--color-accent-text);
+}
+
+.tech-pill {
+    background-color: var(--color-wash);
+    color: var(--color-text-body);
+}
+.tech-pill i { color: var(--color-text-muted); }
+
+.chip-overlay {
+    background-color: var(--color-overlay);
+    color: var(--color-text-primary);
+    border-color: var(--color-border);
+}
+
+/* Small "it's live" dot on the product badge. */
+.live-dot {
+    width: 0.4rem; height: 0.4rem; border-radius: 9999px;
+    background-color: currentColor; display: inline-block;
+    animation: dot-pulse 2.5s ease-in-out infinite;
+}
+@keyframes dot-pulse {
+    0%, 100% { opacity: 1;   transform: scale(1); }
+    50%      { opacity: 0.4; transform: scale(0.8); }
+}
+
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+.btn-primary {
+    background-color: var(--color-primary);
+    color: var(--color-primary-fg);
+    border-radius: var(--radius-xl);
+    font-weight: 600;
+    letter-spacing: 0.015em;
+    transition: opacity 0.2s ease;
+}
+.btn-primary:hover { opacity: 0.9; }
+
+/* Secondary action. The hero had two solid buttons competing for the same
+   attention; this gives the pair a clear first and second. */
+.btn-secondary {
+    background-color: transparent;
+    color: var(--color-text-primary);
+    border: 1px solid var(--color-border-solid);
+    border-radius: var(--radius-xl);
+    font-weight: 600;
+    letter-spacing: 0.015em;
+    transition: background-color 0.2s ease;
+}
+.btn-secondary:hover { background-color: var(--color-wash); }
+
+
+/* ============================================================
+   NAV
+   ============================================================ */
+.nav-pill {
+    background-color: var(--color-page);
+    border-color: transparent;
+}
+.nav-pill-item { color: var(--color-text-body); }
+.nav-pill-item:hover {
+    background-color: var(--color-wash);
+    color: var(--color-text-primary);
+}
+
+/* Marks which section the reader is currently in. This used to tint the chip
+   with --color-accent-muted, which measured 1.01:1 against the pill behind it:
+   the label was readable but the highlight itself conveyed nothing. WCAG 1.4.11
+   wants 3:1 between a state indicator and its surroundings.
+   The doubled class is deliberate — .nav-pill-item:hover is a two-part
+   selector, so a single-class rule here would lose to it and the highlight
+   would vanish the moment you hovered the active item. */
+.nav-pill-item.nav-pill-item-active,
+.nav-pill-item.nav-pill-item-active:hover {
+    background-color: var(--color-accent-text);
+    color: var(--color-page);
+    font-weight: 600;
+}
+
+.theme-toggle {
+    background-color: var(--color-page);
+    color: var(--color-text-body);
+    border-color: transparent;
+}
+.theme-toggle:hover {
+    background-color: var(--color-wash);
+    color: var(--color-text-primary);
+}
+
+.nav-icon-bg    { background-color: var(--color-accent-muted); }
+.nav-icon-color { color: var(--color-accent); }
+
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero-disc-wrap { width: 116px; height: 116px; }
+.hero-disc      { background-color: var(--color-accent-muted); }
+.hero-disc-icon { color: var(--color-primary); }
+
+
+/* ============================================================
+   CARDS
    ============================================================ */
 .glass-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
 .glass-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 4px 12px 0 rgba(0,0,0,0.10), 0 1px 3px 0 rgba(0,0,0,0.06);
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lift);
+}
+
+/* The written pieces don't have a thumbnail, so these cards lean on type. */
+.artifact-card {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-3xl);
+    padding: 2rem;
+    box-shadow: var(--shadow-soft);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.artifact-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--color-accent);
+    box-shadow: var(--shadow-lift);
+}
+@media (min-width: 768px) {
+    .artifact-card { padding: 2.5rem; }
+}
+.artifact-rule {
+    display: inline-block;
+    width: 1.75rem;
+    height: 1px;
+    background-color: var(--color-accent);
+}
+
+
+/* ============================================================
+   CASE-STUDY PROSE BLOCKS
+   ============================================================ */
+.rubric-block {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-3xl);
+    padding: 1.75rem;
+    max-width: 64rem;
+}
+
+.rubric-list { list-style: none; margin: 0; padding: 0; }
+.rubric-list li {
+    position: relative;
+    padding-left: 1.25rem;
+    color: var(--color-text-body);
+}
+.rubric-list li + li { margin-top: 0.75rem; }
+.rubric-list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.75em;
+    width: 0.5rem;
+    height: 1px;
+    background-color: currentColor;
+    opacity: 0.4;
+}
+
+.rubric-block ol { list-style: none; margin: 0; padding: 0; }
+
+.criterion {
+    display: grid;
+    grid-template-columns: 3rem 1fr;
+    gap: 0.75rem;
+    align-items: start;
+}
+.criterion + .criterion { margin-top: 0.75rem; }
+.criterion-id {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--color-accent-text);
+    padding-top: 0.25rem;
+    letter-spacing: 0.02em;
+}
+.criterion-text { color: var(--color-text-body); }
+.criterion-key {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.5rem; height: 1.5rem;
+    border-radius: 0.375rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    background-color: var(--color-accent-muted);
+    color: var(--color-accent-text);
+}
+.criterion-gate {
+    display: inline-block;
+    font-size: 0.625rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.1rem 0.4rem;
+    border-radius: 0.25rem;
+    background-color: var(--color-wash);
+    color: var(--color-text-primary);
+    border: 1px solid var(--color-border-solid);
+    vertical-align: 0.08em;
+}
+
+.data-table { border-collapse: collapse; }
+.data-table th {
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    padding: 0 1.25rem 0.75rem 0;
+    border-bottom: 1px solid var(--color-border-solid);
+    white-space: nowrap;
+}
+.data-table td {
+    padding: 0.75rem 1.25rem 0.75rem 0;
+    color: var(--color-text-body);
+    border-bottom: 1px solid var(--color-border);
+    font-size: 0.9375rem;
+}
+.data-table tr:last-child td { border-bottom: none; }
+
+.callout {
+    max-width: 64rem;
+    border-left: 2px solid var(--color-accent);
+    padding: 0.25rem 0 0.25rem 1.25rem;
+    color: var(--color-text-muted);
+    font-size: 0.9375rem;
+    line-height: 1.7;
+}
+
+.contact-glow {
+    background: radial-gradient(ellipse at 60% 40%, var(--color-accent) 0%, transparent 68%);
+    opacity: var(--glow-opacity);
+}
+
+
+/* ============================================================
+   CODE PANELS
+   Dark in both themes, so nothing here is theme-aware.
+   ============================================================ */
+.bg-code-titlebar     { background-color: var(--color-code-titlebar); }
+.bg-code-panel        { background-color: var(--color-code-panel); }
+.bg-code-panel-header { background-color: var(--color-code-panel-header); }
+.border-code          { border-color: var(--color-code-border); }
+.text-code            { color: var(--color-code-text); }
+.text-code-label      { color: var(--color-code-label); }
+
+.chrome-close    { background-color: var(--color-chrome-close); }
+.chrome-minimize { background-color: var(--color-chrome-minimize); }
+.chrome-maximize { background-color: var(--color-chrome-maximize); }
+.chrome-close-vivid    { background-color: var(--color-chrome-close-vivid); }
+.chrome-minimize-vivid { background-color: var(--color-chrome-minimize-vivid); }
+.chrome-maximize-vivid { background-color: var(--color-chrome-maximize-vivid); }
+
+.token-func    { color: var(--color-syn-func); }
+.token-str     { color: var(--color-syn-string); }
+.token-kw      { color: var(--color-syn-keyword); }
+.token-num     { color: var(--color-syn-number); }
+.token-comment { color: var(--color-syn-comment); font-style: italic; }
+.token-tag     { color: var(--color-syn-tag); }
+.token-attr    { color: var(--color-syn-attr); }
+
+
+/* The signature on the cover letter. Its own font, loaded only on that page. */
+.signature { font-family: 'Great Vibes', cursive; line-height: 1; }
+
+
+/* ============================================================
+   LIGHTBOX
+   ============================================================ */
+.lightbox-btn-idle  { color: rgba(255,255,255,0.50); }
+.lightbox-btn-idle:hover { color: #fff; }
+.lightbox-close-idle { color: rgba(255,255,255,0.70); }
+.lightbox-close-idle:hover { color: #fff; }
+
+.marker-muted ::marker { color: var(--color-text-muted); }
+
+
+/* ============================================================
+   MOTION
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+    .live-dot { animation: none; }
+    .glass-card:hover, .artifact-card:hover { transform: none; }
 }
 
 
@@ -376,42 +546,6 @@ p, h1, h2, h3, h4, h5, h6, li, span, a { overflow-wrap: break-word; }
         color: black !important;
     }
     * { color: black !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-    .border-themed, .border-base, .border-base-solid { border-color: #e5e7eb !important; }
+    .border-themed, .border-solid-themed { border-color: #e5e7eb !important; }
     a { text-decoration: none; color: black !important; }
 }
-
-/* ============================================================
-   COMPONENT REFINEMENTS
-   ============================================================ */
-
-/* Glass card — stronger lift */
-.glass-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 4px 12px 0 rgba(0,0,0,0.10), 0 1px 3px 0 rgba(0,0,0,0.06);
-}
-
-/* Buttons — tighter radius + spacing than cards */
-a.btn-dark, button.btn-dark,
-a[style*="color-primary"], a[style*="var(--color-primary)"] {
-    border-radius: 10px;
-    letter-spacing: 0.015em;
-}
-
-/* Body copy — tighter line-height for better density */
-.text-body { line-height: 1.65; }
-
-/* Section dividers */
-.section-divider {
-    border: none;
-    border-top: 1px solid var(--color-border);
-}
-.dark .section-divider {
-    border-top-color: var(--color-border-dark);
-}
-
-/* Contact section glow — perceptible at the right opacity */
-.contact-glow {
-    background: radial-gradient(ellipse at 60% 40%, var(--color-accent) 0%, transparent 68%);
-    opacity: 0.08;
-}
-.dark .contact-glow { opacity: 0.12; }
