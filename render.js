@@ -106,29 +106,10 @@ function projectCard(id, level) {
       '<div class="px-1 pb-1 flex-grow">' +
         '<div class="flex items-start justify-between gap-2 mb-1.5">' +
           '<' + h + ' class="text-ink text-base font-bold">' + esc(p.card.title || p.title) + '</' + h + '>' +
-          '<span class="tech-pill text-3xs font-bold px-2.5 py-0.5 rounded-full shrink-0 whitespace-nowrap">' + esc(p.card.chip) + '</span>' +
+          '<span class="tech-pill text-2xs font-bold px-2.5 py-0.5 rounded-full shrink-0 whitespace-nowrap">' + esc(p.card.chip) + '</span>' +
         '</div>' +
         '<p class="text-muted text-sm font-normal line-clamp-3">' + esc(p.card.blurb) + '</p>' +
       '</div>' +
-    '</a>';
-}
-
-/* Text-led card, for written pieces that have no thumbnail. */
-function artifactCard(id, level) {
-  var h = 'h' + (level || 3);
-  var p = projectData[id];
-  if (!p) return '';
-  return '' +
-    '<a href="' + projectHref(id) + '" class="artifact-card group flex flex-col h-full">' +
-      '<div class="flex items-center gap-2 mb-5">' +
-        '<span class="artifact-rule"></span>' +
-        '<span class="text-accent text-2xs font-bold uppercase tracking-widest">' + esc(p.card.chip) + '</span>' +
-      '</div>' +
-      '<' + h + ' class="text-ink text-2xl md:text-3xl font-bold leading-snug tracking-tight mb-4">' + esc(p.title) + '</' + h + '>' +
-      '<p class="text-body text-base mb-8">' + esc(p.card.blurb) + '</p>' +
-      '<span class="mt-auto inline-flex items-center gap-2 text-sm font-semibold text-ink">' +
-        'Read it ' + icon('fa-arrow-right', 'group-hover:translate-x-1 transition-transform') +
-      '</span>' +
     '</a>';
 }
 
@@ -144,9 +125,7 @@ function archiveCard(id) { return projectCard(id, 2); }
        height:    'card-lg' | 'card-xl', // min height of the block on lg+
        media:  { type:'image', src, alt, fit:'cover'|'contain' }
              | { type:'code',  file, src },
-       badge:  { style:'accent'|'tech', label, icon?, dot? },
        heading, body,
-       pills:  { label, items:[{ label, icon? , mono? }] },
        actions:[{ label, style:'primary'|'secondary',
                   href? | project?, external?, icon?, iconTurn? }]
      }
@@ -162,7 +141,7 @@ function featureMedia(f) {
       '<div class="bg-code-panel border-b lg:border-b-0 ' + edge + ' border-code min-h-card lg:min-h-full group overflow-hidden flex flex-col">' +
         '<div class="flex items-center px-4 py-3 border-b border-code bg-code-panel-header">' +
           '<div class="mr-3">' + windowDots(true) + '</div>' +
-          '<span class="text-code-label text-3xs font-mono tracking-wide">' + esc(m.file) + '</span>' +
+          '<span class="text-code-label text-2xs font-mono tracking-wide">' + esc(m.file) + '</span>' +
         '</div>' +
         '<div class="text-code p-6 font-mono text-xs leading-loose select-none opacity-80 group-hover:opacity-100 transition-opacity flex flex-col justify-center h-full overflow-x-auto">' +
           '<pre class="m-0"><code>' + highlight(m.src) + '</code></pre>' +
@@ -181,21 +160,6 @@ function featureMedia(f) {
     '<div class="relative bg-wash border-b lg:border-b-0 ' + edge + ' border-themed min-h-card lg:min-h-full group overflow-hidden">' +
       '<img src="' + esc(asset(m.src)) + '" alt="' + esc(m.alt) + '" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">' +
     '</div>';
-}
-
-function featureBadge(b) {
-  if (!b) return '';
-  var cls  = b.style === 'accent' ? 'badge-accent' : 'tech-pill';
-  var mark = b.dot ? '<span class="live-dot"></span>' : (b.icon ? icon(b.icon, 'text-3xs') : '');
-  return '<div class="' + cls + ' inline-flex items-center gap-2 px-3 py-1 rounded-xs text-xs font-bold uppercase tracking-wider mb-4">' +
-           mark + ' ' + esc(b.label) +
-         '</div>';
-}
-
-function featurePill(p) {
-  var inner = p.icon ? icon(p.icon) + ' ' + esc(p.label) : esc(p.label);
-  if (p.mono) inner += ' <span class="font-mono text-xs">' + esc(p.mono) + '</span>';
-  return '<span class="tech-pill px-3 py-2 rounded-xs text-sm font-medium inline-flex items-center gap-2">' + inner + '</span>';
 }
 
 function featureAction(a) {
@@ -220,14 +184,9 @@ function featureCard(id) {
         featureMedia(f) +
         '<div class="p-8 md:p-12 flex flex-col justify-center relative z-10' + textOrder + '">' +
           '<div class="mb-6">' +
-            featureBadge(f.badge) +
             '<h3 class="text-ink text-3xl font-bold mb-4">' + esc(f.heading) + '</h3>' +
             '<p class="text-body text-lg mb-6">' + esc(f.body) + '</p>' +
           '</div>' +
-          (f.pills ? '<div class="mb-8">' +
-            '<h4 class="text-muted text-xs font-bold uppercase tracking-wider mb-3">' + esc(f.pills.label) + '</h4>' +
-            '<div class="flex flex-wrap gap-2">' + f.pills.items.map(featurePill).join('') + '</div>' +
-          '</div>' : '') +
           '<div class="mt-auto flex flex-wrap items-center gap-4">' +
             (f.actions || []).map(featureAction).join('') +
           '</div>' +
@@ -241,7 +200,9 @@ function featureCard(id) {
 
 function projectHeader(d) {
   return '' +
-    '<div class="tech-pill inline-flex flex-wrap items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-6">' + esc(d.category) + '</div>' +
+    /* Plain eyebrow rather than a pill, matching the PART 01/02/03 labels
+       on the homepage. */
+    '<span class="text-accent text-sm font-bold tracking-wider uppercase mb-4 block">' + esc(d.category) + '</span>' +
     '<h1 class="text-ink text-4xl md:text-5xl lg:text-6xl font-bold mb-8 tracking-tight break-words max-w-4xl">' + esc(d.title) + '</h1>' +
     '<div class="grid grid-cols-2 md:grid-cols-4 gap-6 border-y border-themed py-6">' +
       (d.meta || []).map(function (m) {
@@ -304,39 +265,6 @@ function technicalLayout(d) {
     }
     if (s.body) {
       html += '<p class="text-body font-normal mb-8 text-lg max-w-4xl">' + esc(s.body) + '</p>';
-    }
-    if (s.list) {
-      html += '<div class="rubric-block mb-8">' +
-                (s.list.title ? '<h3 class="text-muted text-xs font-bold uppercase tracking-widest mb-4">' + esc(s.list.title) + '</h3>' : '') +
-                '<ul class="rubric-list">' + s.list.items.map(function (i) { return '<li>' + esc(i) + '</li>'; }).join('') + '</ul>' +
-              '</div>';
-    }
-    if (s.table) {
-      html += '<div class="rubric-block mb-8 overflow-x-auto"><table class="data-table w-full text-left">' +
-                '<thead><tr>' + s.table.head.map(function (h) { return '<th>' + esc(h) + '</th>'; }).join('') + '</tr></thead>' +
-                '<tbody>' + s.table.rows.map(function (r) {
-                  return '<tr>' + r.map(function (c) { return '<td>' + esc(c) + '</td>'; }).join('') + '</tr>';
-                }).join('') + '</tbody>' +
-              '</table></div>';
-    }
-    if (s.criteria) {
-      html += '<div class="space-y-6 mb-8">' + s.criteria.map(function (group) {
-        return '<div class="rubric-block">' +
-          '<h3 class="text-ink font-bold mb-4 flex items-center gap-3">' +
-            '<span class="criterion-key">' + esc(group.key) + '</span>' + esc(group.name) +
-          '</h3>' +
-          '<ol class="space-y-3">' + group.items.map(function (text, i) {
-            var gating = /^GATING · /.test(text);
-            var body   = text.replace(/^GATING · /, '');
-            return '<li class="criterion">' +
-                     '<span class="criterion-id">' + esc(group.key + (i + 1)) + '</span>' +
-                     '<span class="criterion-text">' +
-                       (gating ? '<span class="criterion-gate">Gating</span> ' : '') + esc(body) +
-                     '</span>' +
-                   '</li>';
-          }).join('') + '</ol>' +
-        '</div>';
-      }).join('') + '</div>';
     }
 
     if (s.code && s.image) {
@@ -455,10 +383,9 @@ function nextProjectHTML(id) {
    the page works whether or not the build ran. */
 
 var CARD_RENDERERS = {
-  feature:  featureCard,
-  project:  projectCard,
-  artifact: artifactCard,
-  archive:  archiveCard
+  feature: featureCard,
+  project: projectCard,
+  archive: archiveCard
 };
 
 function cardsHTML(spec) {

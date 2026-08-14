@@ -12,9 +12,9 @@ The complaint was that the site reads as vibe coded. Going through it, that came
 
 **The site is prerendered.** `render.js` has no DOM dependency so that `tailwind-build/prerender.js` can run it under Node at build time. It inlines the card grids into `index.html` and `archive.html`, and writes one real page per project into `projects/`. Those static pages are the canonical URLs now — `/projects/dmarc.html` rather than `/project.html?id=dmarc`. A crawler or a no-JS visitor gets the full case study in the HTML; before, it got an empty template. `project.html` is still there as the template and still answers the old `?id=` URLs, but it's `noindex` and canonicals to the static page, and `_redirects` sends every old URL to its new one. `sitemap.xml` and those redirects are generated from `projects.js`, so they can't drift out of sync.
 
-**Theming is one block instead of a hundred rules.** Every colour that differs between light and dark is now defined twice at the top of `style.css` — once in `:root`, once in `.dark` — and nowhere else. There are no `.dark .something` rules left in the file and no `dark:` variants left in the markup. That deleted about sixty rules.
+**Theming is one block instead of a hundred rules.** Every color that differs between light and dark is now defined twice at the top of `style.css` — once in `:root`, once in `.dark` — and nowhere else. There are no `.dark .something` rules left in the file and no `dark:` variants left in the markup. That deleted about sixty rules.
 
-It also removed the `html .text-primary` hack. Those five selectors existed to out-specify Tailwind's own `.text-primary`, which existed because a colour called `primary` in the config generates one. The text colours are called `ink`, `body`, `muted`, `subtle` now, so the collision can't happen and the extra specificity isn't needed. `!important` is down to the two places that warrant it: the first-paint transition freeze and the print stylesheet.
+It also removed the `html .text-primary` hack. Those five selectors existed to out-specify Tailwind's own `.text-primary`, which existed because a color called `primary` in the config generates one. The text colors are called `ink`, `body`, `muted`, `subtle` now, so the collision can't happen and the extra specificity isn't needed. `!important` is down to the two places that warrant it: the first-paint transition freeze and the print stylesheet.
 
 **There's a scale.** There were 83 arbitrary values in the markup — `leading-[1.65]` twenty-five times, `rounded-[8px]` thirteen, `rounded-[10px]` eleven, `rounded-[12px]` once, next to the `rounded-xl`/`2xl` tokens that already existed. Four different line heights on running text. All of it is now named in `tailwind.config.cjs`: four line heights, four radii, two small type sizes, named z-index layers and panel heights. The markup has zero arbitrary values, and it's worth keeping it that way — if a number isn't in the config it isn't part of the system.
 
@@ -28,7 +28,7 @@ It also removed the `html .text-primary` hack. Those five selectors existed to o
 
 **Primary buttons in dark mode.** `--color-primary` was `#1A1A1A` in both themes, which put a near-black button on a `#121212` page — 1.02:1. The label was readable and the button had no visible edge at all. It's inverted in dark mode now: light fill, dark label.
 
-**Links stopped inheriting.** `.card-link { color: inherit }` was a class, tied on specificity with the `text-*` utilities, and the "Next" link at the foot of each case study came out black. There's a single `a { color: inherit }` element rule instead, which loses to every utility, so a link that asks for a colour gets it.
+**Links stopped inheriting.** `.card-link { color: inherit }` was a class, tied on specificity with the `text-*` utilities, and the "Next" link at the foot of each case study came out black. There's a single `a { color: inherit }` element rule instead, which loses to every utility, so a link that asks for a color gets it.
 
 **The resume and cover letter are readable on a phone.** Both set `viewport width=1280`, which gave mobile visitors a pinch-to-zoom PDF. They're `device-width` now, and the paper stacks to one column below `lg`. `print:` variants force the two-column layout back for printing, so the PDF is unchanged.
 
@@ -108,19 +108,19 @@ Worth knowing when swapping one for the other: Font Awesome sizes by font-size (
 
 **The polish pass.** The hero had two solid dark buttons competing to be the primary action; "Get in Touch" is now an outline button. "Full Archive" was bottom-aligned against the Part 03 intro paragraph, which stranded it low and away from its heading — it now sits on the heading's baseline. The phone number is out of the footer, which appeared on every page; the resume still carries it. And the nav marks which section you're currently reading, on both the desktop pill and the mobile menu.
 
-**New palette: Ink.** Achromatic greys with the celadon kept as an accent. Backgrounds are `#EFEFEF` / `#FAFAFA` in light and `#121212` / `#1C1C1C` in dark, with no colour cast; text runs `#111111` for headings, `#2E2E2E` for body, `#4D4D4D` for labels. All of it lives in the `:root` block at the top of `style.css` — nothing else in the site needed to change, since every colour reads from those variables.
+**New palette: Ink.** Achromatic greys with the celadon kept as an accent. Backgrounds are `#EFEFEF` / `#FAFAFA` in light and `#121212` / `#1C1C1C` in dark, with no color cast; text runs `#111111` for headings, `#2E2E2E` for body, `#4D4D4D` for labels. All of it lives in the `:root` block at the top of `style.css` — nothing else in the site needed to change, since every color reads from those variables.
 
 Measured on the rendered pages rather than on the swatches: 62 distinct text/background pairings in light and 54 in dark, across seven pages, with the pages scrolled so interactive states are live. Nothing below WCAG AA; the lowest is 5.47 against a 4.5 floor, and 54 of 62 clear AAA.
 
 **Three contrast bugs fixed along the way**, all found by auditing the rendered DOM rather than the token list:
 
-The homepage code preview was **black text on a near-black panel, 1.24:1** — the punctuation and braces were effectively invisible and had been since the original site. That div never had a colour set, so it inherited the browser default. There's a `--color-code-text` token now, deliberately not theme-aware, because those panels are dark in both modes.
+The homepage code preview was **black text on a near-black panel, 1.24:1** — the punctuation and braces were effectively invisible and had been since the original site. That div never had a color set, so it inherited the browser default. There's a `--color-code-text` token now, deliberately not theme-aware, because those panels are dark in both modes.
 
 The case-study code panels were at **3.89:1**. Those used `.text-subtle`, which I'd darkened in an earlier pass to fix light-mode legibility — which improved it on light backgrounds and broke it on the always-dark code panels. Same fix.
 
 The active nav item measured **1.01:1 against the pill behind it**. The label was readable but the highlight conveyed nothing, which is a WCAG 1.4.11 failure — a state indicator needs 3:1 against its surroundings. It's a solid accent fill now: 6.65:1 in light, 8.08:1 in dark. The selector is doubled (`.nav-pill-item.nav-pill-item-active`) on purpose, because `.nav-pill-item:hover` is a two-part selector and would otherwise win, making the highlight disappear the moment you hovered it.
 
-Also, the inactive "Design Focus / Data Focus" button on the resume had no dark-mode colour at all, so it kept the light-mode grey on the dark nav pill — 2.22:1. It has a dark variant now.
+Also, the inactive "Design Focus / Data Focus" button on the resume had no dark-mode color at all, so it kept the light-mode grey on the dark nav pill — 2.22:1. It has a dark variant now.
 
 ## Part 01 — BrushFactory
 
@@ -134,7 +134,7 @@ The old section was called "AI Evaluation" and opened with "The evaluation work 
 
 The screenshot is `images/brushfactory-converter.png`, rendered from your own `brushfactory-app.html` at 2x. Drop it into `images/` with the rest.
 
-**The rubric page is retired.** The task-brief notes survive as a small "Notes" section before Contact, framed explicitly as generalised from contract work — which is true and doesn't imply a business.
+**The rubric page is retired.** The task-brief notes survive as a small "Notes" section before Contact, framed explicitly as generalized from contract work — which is true and doesn't imply a business.
 
 Your hero line still says you work in AI training and evaluation. That's accurate and stays; it was the section header that implied the practice, not the mention.
 

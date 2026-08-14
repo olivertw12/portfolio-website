@@ -1,6 +1,6 @@
 /* The only Tailwind config in the repo.
  *
- * Colour names map onto the CSS variables in ../style.css, so any name used
+ * Color names map onto the CSS variables in ../style.css, so any name used
  * here has to exist there. Everything else in `extend` is the site's scale:
  * radii, line heights, small type sizes, z-index layers, panel heights. They
  * live here so no page ever needs an arbitrary [value] in a class — if a
@@ -19,13 +19,12 @@ module.exports = {
          `dark:` variants.
 
          Note the text names are deliberately not `primary` — Tailwind would
-         then generate a `.text-primary` that fights the button colour, which
+         then generate a `.text-primary` that fights the button color, which
          is what the old `html .text-primary` override existed to patch. */
       colors: {
         page:    'var(--color-page)',
         surface: 'var(--color-surface)',
         wash:    'var(--color-wash)',
-        tint:    'var(--color-tint)',
         divider: 'var(--color-divider)',
         code:    'var(--color-code)',
 
@@ -36,20 +35,13 @@ module.exports = {
 
         // small text needs the darker value; decorative uses reach for
         // var(--color-accent) directly in style.css
-        accent:         'var(--color-accent-text)',
-        'accent-muted': 'var(--color-accent-muted)',
-
-        action:    'var(--color-primary)',
-        'action-fg': 'var(--color-primary-fg)'
+        accent:  'var(--color-accent-text)'
       },
 
       fontFamily: { sans: 'var(--font-sans)', mono: 'var(--font-mono)' },
 
-      /* Two steps below Tailwind's text-xs, for chips and eyebrow labels. */
-      fontSize: {
-        '3xs': ['0.625rem',  { lineHeight: '1rem' }],   // 10px
-        '2xs': ['0.6875rem', { lineHeight: '1rem' }]    // 11px
-      },
+      /* One step below Tailwind's text-xs, for the card category chips. */
+      fontSize: { '2xs': ['0.625rem', { lineHeight: '1rem' }] },   // 10px
 
       /* Four line heights, and only four. tight/snug are for display type,
          normal for UI, relaxed for anything you actually read. */
@@ -67,7 +59,7 @@ module.exports = {
         '3xl': 'var(--radius-3xl)'   // 20px — cards, panels
       },
 
-      boxShadow: { 'soft': 'var(--shadow-soft)', 'glow': 'var(--shadow-glow)', 'paper': 'var(--shadow-paper)' },
+      boxShadow: { 'soft': 'var(--shadow-soft)', 'paper': 'var(--shadow-paper)' },
 
       aspectRatio: { photo: '4 / 3' },
 

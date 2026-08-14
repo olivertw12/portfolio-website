@@ -37,7 +37,7 @@ function updateThemeIcons() {
 }
 
 const themeButton = (extra) => `
-    <button onclick="toggleTheme()" aria-label="Toggle colour theme" class="theme-toggle p-2.5 rounded-xl border transition-colors${extra ? ' ' + extra : ''}">
+    <button onclick="toggleTheme()" aria-label="Toggle color theme" class="theme-toggle p-2.5 rounded-xl border transition-colors${extra ? ' ' + extra : ''}">
         <i class="fa-solid fa-sun text-sm"></i>
         <i class="fa-solid fa-moon text-sm"></i>
     </button>`;
@@ -74,7 +74,6 @@ const HOME_LINKS = [
     ['/#product', 'BrushFactory'],
     ['/#data',    'Data'],
     ['/#design',  'Design'],
-    ['/#notes',   'Notes'],
     ['/#contact', 'Contact']
 ];
 
@@ -159,7 +158,7 @@ function renderComponents() {
 }
 
 /* --- ACTIVE SECTION ---
-   The homepage is long enough that five static nav links don't tell you
+   The homepage is long enough that four static nav links don't tell you
    where you are. This marks the one you're currently reading. */
 function trackActiveSection() {
     const links = document.querySelectorAll('.nav-pill-item[href*="#"]');

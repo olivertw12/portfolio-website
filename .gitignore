@@ -1,3 +1,6 @@
 
 # scratch: files staged for deletion, never committed
 _to_delete/
+
+# working notes, not part of the deployed site
+claude_*.md

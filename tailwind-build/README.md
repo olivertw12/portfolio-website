@@ -48,14 +48,14 @@ One set: **Font Awesome**, loaded from a pinned CDN URL (`6.4.0`). The site prev
 
 The one exception is the anchor mark, which is lucide's `anchor` path inlined directly. It's in `components.js` as `anchorMark()` for the nav, and written out by hand on the resume and cover letter, where it only appears in print. Font Awesome's anchor is a different drawing, so this keeps the logo exactly as it was without keeping a whole library for it.
 
-## Colours and scale
+## Colors and scale
 
-The palette lives in `../style.css` as CSS variables, in two blocks: `:root` for light and `.dark` for the values that change. That's the entire theming system — there are no `.dark .something` rules anywhere else and no `dark:` variants in the markup. `tailwind.config.cjs` points Tailwind's colour names at those variables, so `text-muted` and `bg-surface` are correct in both themes.
+The palette lives in `../style.css` as CSS variables, in two blocks: `:root` for light and `.dark` for the values that change. That's the entire theming system — there are no `.dark .something` rules anywhere else and no `dark:` variants in the markup. `tailwind.config.cjs` points Tailwind's color names at those variables, so `text-muted` and `bg-surface` are correct in both themes.
 
-The text colours are named `ink`, `body`, `muted`, `subtle` rather than `primary`. If one were called `primary`, Tailwind would generate a `.text-primary` that collides with the button colour — which is exactly what the old `html .text-primary` override in `style.css` existed to patch.
+The text colors are named `ink`, `body`, `muted`, `subtle` rather than `primary`. If one were called `primary`, Tailwind would generate a `.text-primary` that collides with the button color — which is exactly what the old `html .text-primary` override in `style.css` existed to patch.
 
-Adding a *new* colour name to the config needs a rebuild, and the variable has to exist in `style.css` or the utility fails quietly.
+Adding a *new* color name to the config needs a rebuild, and the variable has to exist in `style.css` or the utility fails quietly.
 
-`extend` also carries the rest of the scale: four line heights, four radii, two small type sizes, the z-index layers and the named panel heights. They live there so no page needs an arbitrary `[value]` in a class. If a number isn't in that file, it isn't part of the system — there are currently zero arbitrary values in the markup, and it's worth keeping it that way.
+`extend` also carries the rest of the scale: four line heights, four radii, one extra small type size, the z-index layers and the named panel heights. They live there so no page needs an arbitrary `[value]` in a class. If a number isn't in that file, it isn't part of the system — there are currently zero arbitrary values in the markup, and it's worth keeping it that way.
 
 Note that `accent` points at `--color-accent-text` (`#2C5C4D` light, `#7BB6A2` dark), a darker celadon in light mode than `--color-accent` (`#35705E`). That's deliberate: the lighter one is fine behind an icon or a rule but too light to read as small text. Decorative uses reach for `var(--color-accent)` directly in `style.css`.

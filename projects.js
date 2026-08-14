@@ -6,7 +6,7 @@
    means adding one object here and nothing else.
 
    Every entry has:
-     group    'product' | 'notes' | 'data' | 'design'
+     group    'product' | 'data' | 'design'
               (also sets the next-project order at the foot of a case study)
      layout   'technical' | 'case'                (picks the template)
      category short line above the page title
@@ -19,8 +19,8 @@
      hero, heroCaption, background, challenge, solution, result, gallery[]
 
    A 'technical' entry has: lede[], sections[], links[]
-     A section can include any of: heading, body, list, criteria, table,
-     code {file, src}, image {src, alt, caption}, note
+     A section can include any of: heading, body, note,
+     code {file, src}, image {src, alt, caption}
 
    An entry may also carry a `feature` block, which is the large
    two-column card the homepage builds for it. See render.js →
@@ -30,7 +30,7 @@
 const projectData = {
 
   /* ══════════════════════════════════════════════════════════
-     PART 01 — PRODUCT  (+ the one written note)
+     PART 01 — PRODUCT
      ══════════════════════════════════════════════════════════ */
 
   "brushfactory": {
@@ -40,7 +40,7 @@ const projectData = {
     title: "BrushFactory",
     card: {
       chip: "Live Product",
-      blurb: "A converter for digital brush files between Photoshop, Procreate, Clip Studio Paint and Krita, plus the test harness I built to check that a brush still feels the same after it moves.",
+      blurb: "A converter for brush files between Photoshop, Procreate, Clip Studio Paint and Krita, and the test harness I built to check that a brush still behaves the same after it moves.",
       image: "images/brushfactory-converter.png"
     },
     meta: [
@@ -58,31 +58,21 @@ const projectData = {
         src: "images/brushfactory-converter.png",
         alt: "The BrushFactory converter: a drop area for brush files, and a panel listing .sut, .brush, .abr and .kpp with their support levels"
       },
-      badge: { style: "accent", dot: true, label: "Live — early access" },
-      heading: "Your brushes, wherever you draw.",
-      body: "Brushes don't move between drawing apps. Every app keeps them in its own undocumented binary format, and most converters get around that by flattening the brush into a stamp, which loses the pressure behaviour and the grain. BrushFactory writes native settings for the target app instead, and tells you what it had to adjust.",
-      pills: {
-        label: "Converts Between",
-        items: [
-          { label: "Photoshop",  mono: ".abr" },
-          { label: "Procreate",  mono: ".brush" },
-          { label: "Clip Studio", mono: ".sut" },
-          { label: "Krita",      mono: ".kpp" }
-        ]
-      },
+      heading: "Converting brushes between four drawing apps",
+      body: "Brushes do not move between drawing apps. Every app stores them in its own undocumented binary format, and most converters get around that by flattening the brush into a stamp, which loses the pressure settings and the grain. BrushFactory writes real settings for the target app instead, and tells you what it had to change.",
       actions: [
         { href: "https://brushfactory.co", label: "Visit brushfactory.co", style: "primary", external: true, icon: "fa-arrow-right", iconTurn: true },
         { project: "brushfactory", label: "How I built it", style: "secondary" }
       ]
     },
     lede: [
-      { label: "The Problem", text: "If you switch drawing apps, your brushes don't come with you. Every app keeps them in its own binary format, none of which are documented, and the settings don't line up one to one. Most converters get around this by flattening the brush tip into a stamp, which throws away the pressure behaviour and the grain \u2014 the parts that actually make a brush feel like something." },
-      { label: "What It Is",  text: "BrushFactory reads a brush into a universal representation and then writes native settings for the target app rather than faking them. Photoshop, Procreate, Clip Studio Paint and Krita, in any direction. The result screen tells you what carried over and what had to be adjusted." }
+      { label: "The Problem", text: "If you switch drawing apps, your brushes do not come with you. Every app stores them in its own binary format, none of which are documented, and the settings do not line up one to one. Most converters get around this by flattening the brush tip into a stamp. That throws away the pressure settings and the grain, which are the parts that matter most." },
+      { label: "What It Is",  text: "BrushFactory reads a brush into a universal format and then writes real settings for the target app instead of faking them. It handles Photoshop, Procreate, Clip Studio Paint and Krita in any direction. When it finishes, the result screen lists what carried over and what it had to change." }
     ],
     sections: [
       {
         heading: "Four formats, none of them documented",
-        body: "Each app stores brushes differently, and none of them publish a spec. Working out what each field does meant a lot of writing a file, opening it in the real app, and seeing what changed. The engine sits behind a small CLI as well as the site, which is what made the testing loop bearable.",
+        body: "Each app stores brushes differently and none of them publish a spec. Working out what each field does meant writing a file, opening it in the real app, and seeing what changed. I did that a lot. I also put the engine behind a small CLI so I could run conversions without going through the site, which made the testing much faster.",
         code: {
           file: "Terminal",
           src: `python main.py inspect  some.brushset
@@ -92,11 +82,11 @@ python main.py batch    packs/ --to sut -o bundle.zip`
       },
       {
         heading: "The hard part is feel, not settings",
-        body: "Copying numbers across is the easy half. Two brushes can have matching size, spacing and opacity and still feel nothing alike, because the apps interpret those numbers differently and because grain and pressure response carry most of the character. That is a judgement problem, and judgement is hard to keep consistent across four formats and a few hundred conversions \u2014 so I stopped trusting my eye and started measuring it."
+        body: "Copying the numbers across is the easy half. Two brushes can have the same size, spacing and opacity and still feel nothing alike, because each app interprets those numbers differently and because the grain and the pressure response carry most of the character. I was checking this by eye at first, but I could not stay consistent across four formats and a few hundred conversions, so I started measuring it instead."
       },
       {
         heading: "Measuring drift instead of eyeballing it",
-        body: "There is a harness that takes a brush, converts it to every other format, reads each one back through the real codecs, and compares them against the source. It reports size, spacing, opacity, grain and dynamics per format and flags anything that has moved more than 2%. It also renders a sheet showing the tip, the grain and a test stroke for every format, all drawn by the same renderer, so any difference you can see is genuine mapping drift rather than one app's brush engine looking different from another's.",
+        body: "I built a harness that takes a brush, converts it to every other format, reads each one back through the real codecs, and compares them to the source. It reports size, spacing, opacity, grain and dynamics for each format and flags anything that moved more than 2%. It also renders a sheet with the tip, the grain and a test stroke for every format, all drawn by the same renderer, so anything I can see in it is real mapping drift and not one app's brush engine looking different from another's.",
         code: {
           file: "test_brushes/converted/<brush>/",
           src: `cohesion_sheet.png     tip, grain and a test stroke per format
@@ -108,124 +98,18 @@ cohesion_report.txt    size / spacing / opacity / grain / dynamics
       },
       {
         heading: "Saying plainly what doesn't work",
-        body: "Every format gets a support tier on the site \u2014 full, solid, or early \u2014 and there is a per-file preflight that reads the brush you actually dropped in and tells you what would be adjusted for each target before you convert anything. There is also a known-limitations table listing the gaps I haven't closed. It costs some conversions, since people can see the rough edges before they commit. It seems better than letting someone find out after they've imported fifty brushes.",
-        note: "The support tiers, the preflight and the limitations table are three views of the same information, so a fix has to land in three places. There are cross-references in each file to stop them drifting apart."
+        body: "Every format has a support tier on the site, either full, solid or early. There is also a preflight that reads the file you actually dropped in and tells you what would change for each target before you convert anything, and a table listing the gaps I have not closed yet. This probably costs me some conversions, since people can see the rough edges up front. I would rather do that than have someone find out after importing fifty brushes.",
+        note: "The support tiers, the preflight and the limitations table are three views of the same information, so a fix has to land in three places. I put cross-references in each file to keep them from drifting apart."
       },
       {
         heading: "The rest of it",
-        body: "Accounts with a monthly quota, one free conversion without an account, Stripe for the paid tier, email verification, per-IP rate limiting, and 75 tests that run before anything ships. Deployed to a DigitalOcean droplet. None of that is the interesting part, but a converter that loses your file or double-charges you isn't a product, so it had to exist."
+        body: "Accounts with a monthly quota, one free conversion without an account, Stripe for the paid tier, email verification, per-IP rate limiting, and 75 tests that run before anything ships. It is deployed on a DigitalOcean droplet. None of this is the interesting part of the project, but it all had to work before I was willing to put the site up."
       }
     ],
     links: [
       { label: "brushfactory.co", href: "https://brushfactory.co", icon: "link" }
     ]
   },
-
-  "task-briefs": {
-    group: "notes",
-    layout: "technical",
-    category: "AI Evaluation & Process",
-    title: "Notes on Writing Task Briefs for Model Testing",
-    card: {
-      chip: "Process Notes",
-      blurb: "Some notes on how I write project briefs for testing models, and why I try to make them harder than they need to be. Includes a before-and-after of the same brief.",
-      image: null
-    },
-    meta: [
-      { label: "Type",   value: "Process notes" },
-      { label: "Role",   value: "Author" },
-      { label: "Domain", value: "Generative design tasks" },
-      { label: "Scope",  value: "General, no client work" }
-    ],
-    lede: [
-      { label: "Why I Wrote This", text: "A lot of evaluation work is writing. The score a model ends up with depends on the brief that produced the output, and for a while I was writing briefs the way I would write one for a client, trying to get a good result out of it. That turns out to be backwards when the point is testing. These are the rules I've settled on, though I still don't manage all of them every time." },
-      { label: "A Note on Scope",  text: "Everything here is general. None of it describes a particular client's task set, rubric, or model, and the examples are made up." }
-    ],
-    sections: [
-      {
-        heading: "Start with the failure you're looking for",
-        body: "Before writing the brief I try to write down what I think will break. Not \"test the typography,\" which is a topic rather than a guess, but something closer to: I think this model can handle a one-word logotype, but will struggle when the name has a letter pair that needs optical correction, and I expect a capital A next to a capital V to go wrong. Then the brief has a job to do. If the output comes back clean, that is still worth knowing. The times I've skipped this step and just written \"make a logo,\" I've ended up with an output I didn't really know what to do with."
-      },
-      {
-        heading: "Change one thing at a time",
-        body: "If a brief has an unusual company name, an unusual color restriction, and an unusual aspect ratio, and the output comes back bad, I can't tell which one caused it. So I try to keep everything at a boring default except the one thing I'm testing. It makes the briefs fairly dull to read, but it's the part that makes the result mean anything."
-      },
-      {
-        heading: "Write the grading criteria first",
-        body: "Criteria written after seeing the output tend to bend around it. A failure I hadn't thought of quietly becomes a criterion, and one the model passed quietly disappears. Writing them first also catches a different problem: if I can't say ahead of time what a pass looks like, the brief usually isn't ready yet."
-      },
-      {
-        heading: "Leave one thing vague on purpose",
-        body: "Real client briefs are underspecified all over the place, and how a model handles a gap is worth knowing about. So I leave one requirement genuinely ambiguous and note in my own file that it was deliberate. Then I look at what happened in the gap. Did it pick a reasonable default and stay consistent with it, pick something arbitrary, drop the requirement, or point out that it was unclear? One gap is useful. I tried three once and it just turned into a bad brief."
-      },
-      {
-        heading: "Say how it will be looked at",
-        body: "\"It should work small\" isn't something I can grade. \"It will be graded at 24px tall on white\" is. A fair amount of what looks like disagreement between two graders turns out to be two people looking at the same file under different conditions. So I put the viewing condition in the brief, and then the same condition in the rubric."
-      },
-      {
-        heading: "An example",
-        body: "The same task written twice. The first is roughly how I used to write them, when the goal was a good output. The second is closer to where I've landed.",
-        code: {
-          file: "brief-weak.md",
-          src: `# Brief
-
-Design a modern, professional logo for a financial
-consulting firm called Northbank Partners.
-
-It should feel trustworthy and established. Use a
-clean color palette. Make sure it works at
-different sizes and looks good on their website.`
-        }
-      },
-      {
-        heading: "",
-        body: "",
-        code: {
-          file: "brief-strong.md",
-          src: `# Brief
-
-## Task
-A logo lockup for a financial consulting firm.
-Company name: Northbank Partners
-Output: single raster image, 2048 x 2048, transparent background.
-
-## Fixed constraints
-- Wordmark plus symbol. Symbol may sit above or left of the wordmark.
-- Two colors maximum, not counting pure black and pure white.
-- No tagline.
-- Do not use: upward arrows, bar charts, globes, handshakes,
-  columns, shields.
-
-## What I'm testing
-The wordmark has the pair "kb" (Northbank) and the pair
-"rt" (Partners), two joins that need optical correction
-rather than metric spacing.
-What I expect: even by metrics, uneven optically at both joins.
-
-## Deliberate gap
-The brief doesn't say whether the symbol should be abstract
-or representational. Graded separately: did the output
-commit to one and stay consistent?
-
-## Grading condition
-Rendered on white at 24px tall, 1x, no zoom.
-
-## Criteria, written before generating
-Rubric v1.0, categories A, B and E.
-Gating: B1, B2, E1.`
-        }
-      },
-      {
-        heading: "Things I try not to do",
-        body: "I try not to rewrite a brief after seeing an output and then treat the second run as the real one. The first run is data, and the rewrite is a different test that gets its own record. I try not to grade my own brief against criteria I came up with while grading. And I try not to say a model is bad at something on the strength of one generation, since a single output is an anecdote, and being able to run it again is most of the reason for writing the brief carefully in the first place."
-      }
-    ],
-    links: []
-  },
-
-  /* ══════════════════════════════════════════════════════════
-     PART 02 — DATA
-     ══════════════════════════════════════════════════════════ */
 
   "dmarc": {
     group: "data",
@@ -245,24 +129,15 @@ Gating: B1, B2, E1.`
     ],
     feature: {
       mediaSide: "right",
-      height: "card-xl",
+      height: "card-lg",
       media: {
         type: "image",
         fit: "cover",
         src: "images/dmarc4.png",
         alt: "A map of the Des Moines metro shaded by pantry visitor density per zip code"
       },
-      badge: { style: "tech", icon: "fa-chart-column", label: "R Pipeline" },
       heading: "DMARC Network Analysis",
       body: "Leveraging R and geospatial analysis (leaflet) to uncover service gaps in the DMARC Food Pantry Network. By merging transaction logs with ACS Census data, I mapped visitor density to identify high-need areas and utilized predictive modeling to forecast a 2025 surge in demand within specific demographic groups.",
-      pills: {
-        label: "Technologies Used",
-        items: [
-          { icon: "fa-brands fa-r-project", label: "R (Tidyverse)" },
-          { icon: "fa-solid fa-map",        label: "Geospatial Mapping" },
-          { icon: "fa-solid fa-chart-line", label: "Predictive Modeling" }
-        ]
-      },
       actions: [
         { project: "dmarc", label: "View Case Study", style: "primary", icon: "fa-arrow-right" }
       ]
@@ -397,7 +272,7 @@ iowa_map_data <- iowa_zips %>%
     title: "Personal Site Build",
     card: {
       chip: "Static Site",
-      blurb: "The story behind how I created this website. HTML and Tailwind for the layout, one template that pulls from a single data file, and a CI/CD pipeline through GitHub and Cloudflare.",
+      blurb: "The story behind how I created this website. HTML and Tailwind CSS for the layout, and a CI/CD pipeline via GitHub and Cloudflare for updates on my laptop.",
       image: null
     },
     meta: [
@@ -424,17 +299,8 @@ iowa_map_data <- iowa_zips %>%
   }
 };`
       },
-      badge: { style: "tech", icon: "fa-code", label: "Web Development" },
       heading: "Personal Site Build",
-      body: "The story behind how I created this website. I used both HTML5 and Tailwind CSS to build this site's aesthetic and established a CI/CD pipeline via GitHub and Cloudflare for updates on my laptop. Every case study on the site, including this one, is rendered from the data file shown on the left.",
-      pills: {
-        label: "Technologies Used",
-        items: [
-          { icon: "fa-brands fa-html5",   label: "HTML5" },
-          { icon: "fa-brands fa-css3-alt", label: "Tailwind" },
-          { icon: "fa-brands fa-git-alt",  label: "CI/CD" }
-        ]
-      },
+      body: "The story behind how I created this website. I used both HTML5 and Tailwind CSS to build this site's aesthetic and established a CI/CD pipeline via GitHub and Cloudflare for updates on my laptop. Every case study on the site, including this one, comes out of the data file shown on the left.",
       actions: [
         { project: "site-build", label: "View Process", style: "primary", icon: "fa-arrow-right" }
       ]
@@ -468,7 +334,7 @@ iowa_map_data <- iowa_zips %>%
       },
       {
         heading: "Getting Off the CDN",
-        body: "For a while I loaded Tailwind from their CDN script, which is the fastest way to get started but compiles the stylesheet in the visitor's browser on every page load. Their own docs say not to ship it that way, and they're right: it's an extra round trip and a third party the site can't render without. Now the stylesheet is built once ahead of time and committed, so the browser just downloads about 22KB of finished CSS. The tradeoff is that adding a new Tailwind class means remembering to rebuild.",
+        body: "For a while I loaded Tailwind straight from their CDN script. That is the fastest way to get started, but it compiles the stylesheet in the visitor's browser on every page load, and their own docs say not to ship it that way. So I moved the build onto my laptop. The browser now downloads about 22KB of finished CSS and nothing else. The one catch is that adding a new Tailwind class means I have to remember to rebuild before I push.",
         code: {
           file: "Terminal",
           src: `cd tailwind-build
@@ -520,7 +386,7 @@ git push origin main
       },
       {
         heading: "How the Template Picks a Project",
-        body: "The renderers take a project object and return a string of HTML. Which one runs depends on a layout field: design projects get the case study format with the image gallery, and the data and product pages get a version with code panels and figures next to them. Keeping those functions free of anything browser-specific turned out to matter more than I expected, because it means the build can run the same code under Node and write the finished page out to a file. So there is one template and one set of renderers, but what actually gets deployed is a real HTML page per project rather than an empty shell that fills itself in. The cards are plain links too, which I probably should have done from the start.",
+        body: "Each project is an object, and a set of functions turn it into HTML. Which function runs depends on a layout field, so design projects get the case study format with the image gallery, and the data and product pages get a version with code panels and figures next to them. I kept those functions free of anything browser-specific, which turned out to matter more than I expected. It means the build can run the same code on my laptop and write each finished page out to its own file. So I still only maintain one template, but what gets deployed is a real HTML page per project instead of an empty one that fills itself in.",
         code: {
           file: "prerender.js",
           src: `// the same renderers the browser would use,
@@ -856,7 +722,6 @@ for (const id of Object.keys(projectData)) {
 
 const featured = {
   product:    ["brushfactory"],
-  notes:      ["task-briefs"],
   data:       ["dmarc", "site-build"],
   design:     ["mainframe", "forged", "relays"]
 };
