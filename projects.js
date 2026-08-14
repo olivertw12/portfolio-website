@@ -40,14 +40,14 @@ const projectData = {
     title: "BrushFactory",
     card: {
       chip: "Live Product",
-      blurb: "A converter for brush files between Photoshop, Procreate, Clip Studio Paint and Krita, and the test harness I built to check that a brush still behaves the same after it moves.",
-      image: "images/brushfactory-converter.png"
+      blurb: "A converter for brush files between Photoshop, Procreate, Clip Studio Paint and Krita, and the test harness I built to check that a brush still behaves the same after it moves. Live now, with a published report on what carries over per format.",
+      image: "images/brushfactory-home.jpg"
     },
     meta: [
       { label: "Type",  value: "Live product" },
       { label: "Role",  value: "Design & build" },
       { label: "Stack", value: "Python, SQLite, Stripe" },
-      { label: "Status", value: "Early access" }
+      { label: "Status", value: "In development" }
     ],
     feature: {
       mediaSide: "left",
@@ -55,11 +55,11 @@ const projectData = {
       media: {
         type: "image",
         fit: "contain",
-        src: "images/brushfactory-converter.png",
-        alt: "The BrushFactory converter: a drop area for brush files, and a panel listing .sut, .brush, .abr and .kpp with their support levels"
+        src: "images/brushfactory-home.jpg",
+        alt: "The BrushFactory home page: the four supported formats, and a table showing which brush settings carry over exactly between Photoshop, Procreate, Clip Studio and Krita"
       },
-      heading: "Converting brushes between four drawing apps",
-      body: "Brushes do not move between drawing apps. Every app stores them in its own undocumented binary format, and most converters get around that by flattening the brush into a stamp, which loses the pressure settings and the grain. BrushFactory writes real settings for the target app instead, and tells you what it had to change.",
+      heading: "Your brushes, wherever you draw.",
+      body: "Brushes do not move between drawing apps. Every app stores them in its own undocumented binary format, and most converters get around that by flattening the brush into a stamp, which loses the pressure settings and the grain. BrushFactory writes real settings for the target app instead, and the site carries a table showing which settings come across exactly and which ones get matched as closely as the target app allows.",
       actions: [
         { href: "https://brushfactory.co", label: "Visit brushfactory.co", style: "primary", external: true, icon: "fa-arrow-right", iconTurn: true },
         { project: "brushfactory", label: "How I built it", style: "secondary" }
@@ -67,12 +67,12 @@ const projectData = {
     },
     lede: [
       { label: "The Problem", text: "If you switch drawing apps, your brushes do not come with you. Every app stores them in its own binary format, none of which are documented, and the settings do not line up one to one. Most converters get around this by flattening the brush tip into a stamp. That throws away the pressure settings and the grain, which are the parts that matter most." },
-      { label: "What It Is",  text: "BrushFactory reads a brush into a universal format and then writes real settings for the target app instead of faking them. It handles Photoshop, Procreate, Clip Studio Paint and Krita in any direction. When it finishes, the result screen lists what carried over and what it had to change." }
+      { label: "What It Is",  text: "BrushFactory reads a brush into a universal format and then writes real settings for the target app instead of faking them. It handles Photoshop, Procreate, Clip Studio Paint and Krita in any direction. It is live now, with three free conversions a month and a paid tier for unlimited use and batch conversion." }
     ],
     sections: [
       {
         heading: "Four formats, none of them documented",
-        body: "Each app stores brushes differently and none of them publish a spec. Working out what each field does meant writing a file, opening it in the real app, and seeing what changed. I did that a lot. I also put the engine behind a small CLI so I could run conversions without going through the site, which made the testing much faster.",
+        body: "Each app stores brushes differently and none of them publish a spec. Working out what each field does meant writing a file, opening it in the real app, and seeing what changed. I did that a lot. I also put the engine behind a small CLI so I could run conversions without going through the site, which made the testing much faster. MyPaint and Affinity are listed as upcoming on the site, but they are not wired up yet.",
         code: {
           file: "Terminal",
           src: `python main.py inspect  some.brushset
@@ -98,16 +98,17 @@ cohesion_report.txt    size / spacing / opacity / grain / dynamics
       },
       {
         heading: "Saying plainly what doesn't work",
-        body: "Every format has a support tier on the site, either full, solid or early. There is also a preflight that reads the file you actually dropped in and tells you what would change for each target before you convert anything, and a table listing the gaps I have not closed yet. This probably costs me some conversions, since people can see the rough edges up front. I would rather do that than have someone find out after importing fifty brushes.",
-        note: "The support tiers, the preflight and the limitations table are three views of the same information, so a fix has to land in three places. I put cross-references in each file to keep them from drifting apart."
+        body: "The home page carries a table of what carries over, marked either as exact or as matched as closely as the app allows, and behind it there is a longer fidelity report with the support status of each format and the limits written out. Wet media between Procreate and Clip Studio is approximated, tilt and speed dynamics only partly map onto Krita, and Clip Studio resamples textures over 1024 pixels. This probably costs me some conversions, since people can see the rough edges up front. I would rather do that than have someone find out after importing fifty brushes.",
+        note: "The table on the home page, the fidelity report behind it and the support status shown in the converter are three views of the same information, so a fix has to land in three places. I put cross-references in each file to keep them from drifting apart."
       },
       {
         heading: "The rest of it",
-        body: "Accounts with a monthly quota, one free conversion without an account, Stripe for the paid tier, email verification, per-IP rate limiting, and 75 tests that run before anything ships. It is deployed on a DigitalOcean droplet. None of this is the interesting part of the project, but it all had to work before I was willing to put the site up."
+        body: "Accounts with a monthly quota, three free conversions a month before anyone has to pay, Stripe for the paid tier at $7.99 a month, email verification, per-IP rate limiting, and 75 tests that run before anything ships. Uploads are deleted from the server as soon as the conversion finishes. It is deployed on a DigitalOcean droplet. None of this is the interesting part of the project, but it all had to work before I was willing to put the site up."
       }
     ],
     links: [
-      { label: "brushfactory.co", href: "https://brushfactory.co", icon: "link" }
+      { label: "brushfactory.co", href: "https://brushfactory.co", icon: "link" },
+      { label: "Fidelity report", href: "https://brushfactory.co/fidelity", icon: "link" }
     ]
   },
 

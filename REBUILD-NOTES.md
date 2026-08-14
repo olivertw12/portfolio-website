@@ -140,9 +140,7 @@ Your hero line still says you work in AI training and evaluation. That's accurat
 
 ### Two things worth knowing
 
-`brushfactory.co` is running an older build than the one in your folder. `/fidelity` and `/credits` both 404, and the live site still shows Pro as "paused during testing" while `app.js` v12 sets `BILLING_PAUSED=false`. The R1–R4 bundle described in your `HANDOFF.md` hasn't been deployed.
-
-That matters here because the case study describes the support tiers, the per-file preflight and the known-limitations table — all real in your repo, none of them public yet. The screenshot is from the pending build too. Either deploy before publishing this, or soften those two sections until you do.
+`brushfactory.co` has since caught up. `/fidelity` and `/credits` are both live, Pro is selling at $7.99 a month rather than paused, and the support table and limitations are public. The case study was updated from the live site on 14 Aug 2026 and its claims are now true. The card image is a screenshot of the current home page rather than a local render.
 
 ## On checking it
 
