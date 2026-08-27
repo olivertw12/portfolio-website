@@ -25,9 +25,22 @@ function anchorMark(cls, strokeWidth) {
 /* --- THEME --- */
 function toggleTheme() {
     const html = document.documentElement;
+
+    /* Suppress every transition while the class is swapped, so the whole
+       page changes theme in a single paint. Without this the switch runs at
+       four different speeds and the page spends half a second half-light.
+       The class is dropped on the next frame, with a timer as a fallback
+       for tabs where rAF is throttled. */
+    html.classList.add('theme-switching');
+
     const dark = html.classList.toggle('dark');
     localStorage.setItem('theme', dark ? 'dark' : 'light');
     updateThemeIcons();
+
+    void html.offsetHeight;   /* apply the new colors before transitions return */
+    const restore = () => html.classList.remove('theme-switching');
+    requestAnimationFrame(restore);
+    setTimeout(restore, 120);
 }
 
 function updateThemeIcons() {
@@ -71,20 +84,18 @@ function closeNavMenu() {
 }
 
 const HOME_LINKS = [
-    ['/#product', 'Brushfactory'],
-    ['/#data',    'Data'],
-    ['/#design',  'Design'],
-    ['/#contact', 'Contact']
+    ['/#product', 'brushfactory'],
+    ['/#data',    'data'],
+    ['/#design',  'design'],
+    ['/#contact', 'contact']
 ];
 
 /* --- NAV VARIANTS --- */
 const navConfig = {
     home: `
         <a href="/" class="flex items-center gap-3 group">
-            <div class="nav-icon-bg p-2 rounded-xl transition-colors">
-                ${anchorMark('nav-icon-color w-5 h-5')}
-            </div>
-            <span class="text-ink font-bold text-sm tracking-tight">Oliver T. Williams</span>
+            <span class="w-2.5 h-2.5 rounded-full bg-accent" aria-hidden="true"></span>
+            <span class="text-ink font-display font-bold text-base lowercase tracking-tight">oliver t. williams</span>
         </a>
         <div class="flex items-center gap-2 md:gap-6">
             <div class="hidden md:flex items-center gap-1 nav-pill p-1 rounded-2xl border">
@@ -97,11 +108,11 @@ const navConfig = {
         </div>
     `,
     project: `
-        ${backLink('Back to Home')}
+        ${backLink('back to home')}
         ${themeButton('shrink-0')}
     `,
     resume: `
-        ${backLink('Back to Portfolio')}
+        ${backLink('back to portfolio')}
         <div class="nav-pill flex items-center gap-0.5 p-1 rounded-xl border" id="nav-mode-toggle">
             <button id="btn-design" onclick="setMode('design')" class="mode-btn active">Design Focus</button>
             <button id="btn-data"   onclick="setMode('data')"   class="mode-btn">Data Focus</button>
@@ -127,7 +138,7 @@ const navConfig = {
         </div>
     `,
     minimal: `
-        ${backLink('Back to Portfolio')}
+        ${backLink('back to portfolio')}
         ${themeButton()}
     `
 };
@@ -170,9 +181,17 @@ function renderComponents() {
     updateThemeIcons();
 }
 
-/* --- ACTIVE SECTION ---
-   The homepage is long enough that four static nav links don't tell you
-   where you are. This marks the one you're currently reading. */
+/* The nav highlight.
+   Driven only by what was clicked, never by scroll position. A scroll-spy
+   was the obvious thing here and it was the wrong thing: clicking a link
+   starts a smooth scroll AND opens an accordion panel, so for the better
+   part of a second the page is moving and every section between here and
+   the destination crosses the detection line in turn. The highlight
+   faithfully reported each one, which reads as a glitch. Pinning and
+   debouncing made it less frequent without making it correct.
+
+   So the highlight now answers a simpler question — "which link did you
+   press?" — which is the thing it can always answer accurately. */
 function trackActiveSection() {
     const links = document.querySelectorAll('.nav-pill-item[href*="#"]');
     if (!links.length) return;
@@ -183,12 +202,6 @@ function trackActiveSection() {
         if (id) (byId[id] = byId[id] || []).push(a);
     });
 
-    const sections = Object.keys(byId)
-        .map(id => document.getElementById(id))
-        .filter(Boolean)
-        .sort((a, b) => a.getBoundingClientRect().top - b.getBoundingClientRect().top);
-    if (!sections.length) return;
-
     let current = null;
     const setActive = id => {
         if (id === current) return;
@@ -197,43 +210,29 @@ function trackActiveSection() {
         (byId[id] || []).forEach(a => a.classList.add('nav-pill-item-active'));
     };
 
-    // Read against a line just below the fixed nav. The section you're
-    // reading is the last one whose top has crossed that line.
-    const LINE = 120;
-
-    function pick() {
-        // At the bottom of the page the last section wins outright, otherwise
-        // a short final section can never cross the line.
-        if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) {
-            setActive(sections[sections.length - 1].id);
-            return;
+    const fromHash = () => {
+        const id = location.hash.slice(1);
+        if (byId[id]) setActive(id);
+        else {
+            current = null;
+            links.forEach(a => a.classList.remove('nav-pill-item-active'));
         }
-        let chosen = null;
-        for (const s of sections) {
-            if (s.getBoundingClientRect().top <= LINE) chosen = s;
-        }
-        // Above the first section, highlight nothing rather than guessing.
-        if (chosen) setActive(chosen.id);
-        else { current = null; links.forEach(a => a.classList.remove('nav-pill-item-active')); }
-    }
-
-    // rAF-throttled so a fast scroll doesn't queue up layout reads
-    let queued = false;
-    const onScroll = () => {
-        if (queued) return;
-        queued = true;
-        requestAnimationFrame(() => { queued = false; pick(); });
     };
 
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll, { passive: true });
-    pick();
+    window.addEventListener('hashchange', fromHash);
+    fromHash();
 }
+
 
 document.addEventListener('DOMContentLoaded', () => {
     renderComponents();
     trackActiveSection();
     // Two frames: one to paint the injected nav, one to drop the transition
     // freeze. Previously a 100ms timer, which was a guess at the same thing.
-    requestAnimationFrame(() => requestAnimationFrame(() => document.body.classList.remove('preload')));
+    /* rAF is throttled in background tabs, so a page opened in one could
+       keep .preload — and its transitions — forever. The timer guarantees
+       the class comes off either way. */
+    const unpreload = () => document.body.classList.remove('preload');
+    requestAnimationFrame(() => requestAnimationFrame(unpreload));
+    setTimeout(unpreload, 300);
 });

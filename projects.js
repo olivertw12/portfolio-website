@@ -485,6 +485,32 @@ for (const id of Object.keys(projectData)) {
     ]
   },
 
+  /* PLACEHOLDER CONTENT — every string below is a draft written to get the
+     page standing up. Facts, dates and claims here are invented; replace
+     them before this goes live. */
+  "brushfactory-identity": {
+    group: "design", layout: "case",
+    category: "Brand Identity",
+    title: "Brushfactory Identity",
+    card: { title: "Brushfactory Identity", chip: "Branding", blurb: "PLACEHOLDER — Logo, wordmark and the visual system behind the Brushfactory product.", image: "images/bfid1.png" },
+    meta: [
+      { label: "Client", value: "Self-initiated" },
+      { label: "Role", value: "Brand Design" },
+      { label: "Year", value: "[YEAR]" },
+      { label: "Deliverables", value: "Logo, wordmark, palette" }
+    ],
+    hero: "images/bfid1.png",
+    heroCaption: "PLACEHOLDER — The primary lockup on the product's dark surface.",
+    background: "PLACEHOLDER — Brushfactory needed an identity of its own before launch. Describe here what the product is, who it is for, and what the brand had to do that the interface could not.",
+    challenge: "PLACEHOLDER — Describe the actual constraint. Something like: the mark had to read at favicon size, survive on both a dark app chrome and a light marketing page, and say \"tool for artists\" without leaning on a paintbrush cliche.",
+    solution: "PLACEHOLDER — Describe what you drew and why. The nib and the loop of ink, the decision to set the wordmark in a soft serif, how the orange was chosen and where it is allowed to appear.",
+    result: "PLACEHOLDER — Describe where the identity ended up: the site, the app chrome, the favicon and social cards, and anything you would change now.",
+    gallery: [
+      { src: "images/bfid2.png", caption: "PLACEHOLDER — The mark on its own, at two sizes." },
+      { src: "images/bfid3.png", caption: "PLACEHOLDER — The core palette." }
+    ]
+  },
+
   "dessa": {
     group: "design", layout: "case",
     category: "Social Media Design",
@@ -727,6 +753,7 @@ const featured = {
 };
 
 const archiveOrder = [
+  "brushfactory-identity",
   "mainframe", "forged", "relays", "dessa", "jeremy", "xmas", "pyrkia",
   "citymap", "cityintern", "art", "data", "duolingo", "icymi"
 ];

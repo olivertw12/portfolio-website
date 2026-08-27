@@ -93,22 +93,25 @@
         } else { document.documentElement.classList.remove('dark'); }
     </script>
 
-    <meta name="theme-color" content="#EFEFEF" media="(prefers-color-scheme: light)">
-    <meta name="theme-color" content="#121212" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#EEF1F3" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#10151A" media="(prefers-color-scheme: dark)">
     <link rel="icon" href="/images/favicon-dark.png" media="(prefers-color-scheme: light)">
     <link rel="icon" href="/images/favicon-light.png" media="(prefers-color-scheme: dark)">
     <link rel="icon" href="/images/favicon-dark.png">
     <link rel="canonical" href="https://olivertwilliams.com/resume.html">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/assets/tailwind.css?v=957e26df">
-    <link rel="stylesheet" href="/style.css?v=b5288848">
+    <link href="https://fonts.googleapis.com/css2?family=Gabarito:wght@600;700;800&family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/tailwind.css?v=138e544e">
+    <link rel="stylesheet" href="/style.css?v=3a657f6e">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body class="preload bg-page font-sans flex flex-col transition-colors duration-500" data-mode="design">
 
     <a href="#main" class="skip-link">Skip to content</a>
+
+
+    <div class="site-wash" aria-hidden="true"><div class="wash-orb a"></div><div class="wash-orb b"></div></div>
 
     <nav id="navbar-placeholder" data-type="resume" class="fixed top-4 left-0 right-0 z-nav px-4 md:px-8 print:hidden"></nav>
 
@@ -316,8 +319,28 @@
 
                     <section>
                         <h3 class="text-muted text-sm font-bold mb-3 print:mb-1.5 border-b border-solid-themed pb-1.5">Projects</h3>
+                        <!-- Projects is budgeted for two entries. Brushfactory shows in both modes;
+                             the sheet only fits one more, so Freelance is design-only and DMARC is
+                             data-only. Adding a third entry to either mode pushes the styled sheet
+                             onto a second page. -->
 
                         <div class="mb-3 print:mb-1.5">
+                            <div class="flex justify-between items-baseline">
+                                <h4 class="text-ink text-lg font-bold print:text-xl leading-tight">Brushfactory</h4>
+                                <span class="text-muted text-xs font-mono print:text-sm whitespace-nowrap shrink-0 ml-4">Aug 2026 &ndash; Present</span>
+                            </div>
+                            <p class="text-body font-medium text-sm mb-1 print:mb-0.5 print:text-sm">Brushfactory.co</p>
+                            <ul class="list-disc list-outside ml-4 text-body font-normal text-sm space-y-0.5 marker-muted print:text-base design-only">
+                                <li>Designed and shipped a live conversion tool that translates brushes between Photoshop, Procreate, Clip Studio Paint, and Krita while preserving pressure response and grain.</li>
+                                <li>Executed the complete brand identity and UI/UX from the ground up: color system, typography, custom wordmark, logo, and responsive front end.</li>
+                            </ul>
+                            <ul class="list-disc list-outside ml-4 text-body font-normal text-sm space-y-0.5 marker-muted print:text-base data-only">
+                                <li>Built a bidirectional converter mapping brush settings across four proprietary, undocumented formats (Photoshop, Procreate, Clip Studio Paint, Krita).</li>
+                                <li>Engineered a test harness that round-trips each brush through every format, measuring drift in size, spacing, opacity, grain, and dynamics to flag deviations over 2%.</li>
+                            </ul>
+                        </div>
+
+                        <div class="mb-3 print:mb-1.5 design-only">
                             <div class="flex justify-between items-baseline">
                                 <h4 class="text-ink text-lg font-bold print:text-xl leading-tight">Freelance Branding &amp; Design</h4>
                                 <span class="text-muted text-xs font-mono print:text-sm whitespace-nowrap shrink-0 ml-4">Aug 2021 &ndash; Present</span>
@@ -329,7 +352,7 @@
                             </ul>
                         </div>
 
-                        <div>
+                        <div class="data-only">
                             <div class="flex justify-between items-baseline">
                                 <h4 class="text-ink text-lg font-bold print:text-xl leading-tight">Data Visualization &amp; Modeling</h4>
                                 <span class="text-muted text-xs font-mono print:text-sm whitespace-nowrap shrink-0 ml-4">Aug 2025 &ndash; Dec 2025</span>
@@ -349,7 +372,7 @@
 
     <footer id="footer-placeholder" class="w-full bg-surface border-t border-themed py-8 px-4 md:px-8 print:hidden"></footer>
 
-    <script src="/components.js?v=ba406726"></script>
+    <script src="/components.js?v=87e9f382"></script>
     <script>
         /* Page margins have to come from @page to apply to every page, and @page
            cannot be scoped by a selector, so the rule is swapped out before

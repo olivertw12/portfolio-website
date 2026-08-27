@@ -9,8 +9,8 @@
             document.documentElement.classList.add('dark');
         } else { document.documentElement.classList.remove('dark'); }
     </script>
-    <meta name="theme-color" content="#EFEFEF" media="(prefers-color-scheme: light)">
-    <meta name="theme-color" content="#121212" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#EEF1F3" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#10151A" media="(prefers-color-scheme: dark)">
     <link rel="icon" href="/images/favicon-dark.png" media="(prefers-color-scheme: light)">
     <link rel="icon" href="/images/favicon-light.png" media="(prefers-color-scheme: dark)">
     <link rel="icon" href="/images/favicon-dark.png">
@@ -24,9 +24,9 @@
     <link rel="canonical" href="https://olivertwilliams.com/">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/assets/tailwind.css?v=957e26df">
-    <link rel="stylesheet" href="/style.css?v=b5288848">
+    <link href="https://fonts.googleapis.com/css2?family=Gabarito:wght@600;700;800&family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/tailwind.css?v=138e544e">
+    <link rel="stylesheet" href="/style.css?v=3a657f6e">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script type="application/ld+json">
     {
@@ -52,122 +52,274 @@
 
     <a href="#main" class="skip-link">Skip to content</a>
 
+    <div class="site-wash" aria-hidden="true"><div class="wash-orb a"></div><div class="wash-orb b"></div></div>
+
     <nav id="navbar-placeholder" data-type="home" class="fixed top-4 left-0 right-0 z-nav px-4 md:px-8"></nav>
 
-    <main id="main" tabindex="-1">
+    <main id="main" tabindex="-1" class="relative">
 
-    <!-- ═══ HERO ═══ -->
-    <section class="pt-28 pb-16 w-full">
-        <div class="w-full max-w-3xl mx-auto px-6 flex flex-col items-center justify-center text-center min-h-hero">
+    <!-- ======= HERO ======= -->
+    <section class="pt-36 md:pt-44 pb-16 md:pb-24 w-full px-6 text-center">
+        <h1 class="hero-name text-ink text-6xl md:text-8xl lg:text-9xl mb-7">oliver t.<br>williams</h1>
+        <p class="text-muted text-base md:text-lg mb-9">Design, data &amp; AI evaluation.</p>
+        <div class="flex flex-row items-center justify-center gap-3">
+            <a href="mailto:oliver_tw@icloud.com" class="btn-primary rounded-full px-7 py-3.5 text-sm md:text-base font-semibold">get in touch</a>
+            <a href="/resume.html" class="btn-secondary rounded-full px-7 py-3.5 text-sm md:text-base font-semibold">resume</a>
+        </div>
+    </section>
 
-            <!-- Anchor with soft disc behind it -->
-            <div class="hero-disc-wrap relative flex items-center justify-center mb-9">
-                <div class="hero-disc absolute inset-0 rounded-full border border-themed"></div>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="hero-disc-icon relative z-10 w-12 h-12">
-                    <path d="M12 6v16"/><path d="m19 13 2-1a9 9 0 0 1-18 0l2 1"/><path d="M9 11h6"/><circle cx="12" cy="4" r="2"/>
-                </svg>
+    <!-- ======= WORK ROWS ======= -->
+    <section class="w-full max-w-5xl mx-auto px-6 md:px-8">
+
+        <details id="product" class="work-row scroll-mt-28" name="work">
+            <summary class="work-row-summary">
+                <span class="text-accent text-xs font-medium">01</span>
+                <h2 class="work-title text-ink font-display lowercase text-3xl md:text-4xl font-extrabold tracking-tight">brushfactory</h2>
+                <p class="text-muted text-sm hidden sm:block">A brush converter for artists &mdash; live now.</p>
+                <div class="ml-auto flex items-center gap-5">
+                    <div class="thumb-stack">
+                        <img src="/images/thumbs/t-bf-home.jpg" alt="The Brushfactory home page">
+                        <img src="/images/thumbs/t-bf-og.jpg" alt="The four supported brush formats">
+                        <img src="/images/thumbs/t-bf-brush.jpg" alt="A converted brush stroke">
+                        <img src="/images/thumbs/t-bf-charcoal.jpg" alt="A charcoal brush preview">
+                    </div>
+                    <svg class="work-chevron w-5 h-5 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+                </div>
+            </summary>
+            <div class="work-row-panel">
+                <div class="work-row-inner">
+                    <div class="work-row-body">
+                        <p class="text-body text-base md:text-lg max-w-3xl">Every drawing app stores brushes in its own undocumented format. Most converters flatten a brush into a stamp; Brushfactory writes real settings for the target app instead.</p>
+                        <div class="mt-8">
+                            <p class="work-projects-label">Projects</p>
+                        <a href="/projects/brushfactory.html" class="work-highlight group">
+                            <img class="wh-thumb" src="/images/thumbs/p-bf-build.jpg" alt="The Brushfactory converter interface" loading="lazy">
+                            <span class="wh-text">
+                                <span class="wh-title text-ink text-base md:text-lg">Brushfactory</span>
+                                <span class="text-muted text-sm">How I built the converter, and what carries over</span>
+                            </span>
+                            <span class="wh-arrow ml-auto text-accent text-lg" aria-hidden="true">&#8594;</span>
+                        </a>
+                        <a href="/projects/brushfactory-identity.html" class="work-highlight group">
+                            <img class="wh-thumb" src="/images/thumbs/p-bflogo.jpg" alt="The Brushfactory logo lockup" loading="lazy">
+                            <span class="wh-text">
+                                <span class="wh-title text-ink text-base md:text-lg">Brushfactory Identity</span>
+                                <span class="text-muted text-sm">Logo, wordmark and the product's visual system</span>
+                            </span>
+                            <span class="wh-arrow ml-auto text-accent text-lg" aria-hidden="true">&#8594;</span>
+                        </a>
+                        </div>
+                                </div>
+                </div>
             </div>
+        </details>
 
-            <!-- Headline -->
-            <h1 class="text-ink text-4xl md:text-5xl font-medium mb-5 tracking-tight leading-tight">
-                Design, Data &amp; AI Evaluation.
-            </h1>
-
-            <!-- Body -->
-            <p class="text-body font-normal text-base md:text-lg mb-8 max-w-xl mx-auto">
-                Hi, I'm Oliver Williams! I am a graphic designer and data analyst. Currently working full time as a remote AI evaluator. Also developing a new tool for artists at <a href="https://brushfactory.co" target="_blank" rel="noopener" class="text-accent font-medium underline underline-offset-2">Brushfactory.co</a>, please check it out!
-            </p>
-
-            <!-- Actions -->
-            <div class="flex flex-row items-center justify-center gap-4">
-                <a href="/resume.html" class="btn-primary px-7 py-3.5 flex items-center gap-2 text-sm md:text-base">
-                    View Resume <i class="fa-solid fa-arrow-right -rotate-45"></i>
-                </a>
-                <a href="mailto:oliver_tw@icloud.com" class="btn-secondary px-7 py-3.5 flex items-center gap-2 text-sm md:text-base">
-                    Get in Touch
-                </a>
+        <details id="data" class="work-row scroll-mt-28" name="work">
+            <summary class="work-row-summary">
+                <span class="text-accent text-xs font-medium">02</span>
+                <h2 class="work-title text-ink font-display lowercase text-3xl md:text-4xl font-extrabold tracking-tight">data</h2>
+                <p class="text-muted text-sm hidden sm:block">Geospatial analysis &amp; pipelines.</p>
+                <div class="ml-auto flex items-center gap-5">
+                    <div class="thumb-stack">
+                        <img src="/images/thumbs/t-dmarc-map.jpg" alt="Pantry visitor density map of the Des Moines metro">
+                        <img src="/images/thumbs/t-dmarc1.jpg" alt="DMARC analysis chart">
+                        <img src="/images/thumbs/t-dmarc2.jpg" alt="DMARC demographic breakdown">
+                        <img src="/images/thumbs/t-dmarc3.jpg" alt="DMARC demand forecast">
+                    </div>
+                    <svg class="work-chevron w-5 h-5 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+                </div>
+            </summary>
+            <div class="work-row-panel">
+                <div class="work-row-inner">
+                    <div class="work-row-body">
+                        <p class="text-body text-base md:text-lg max-w-3xl">Projects where most of the work was in the pipeline &mdash; cleaning the data, writing down the steps, and being able to explain why I made the choices I did.</p>
+                        <div class="mt-8">
+                            <p class="work-projects-label">Case studies</p>
+                            <a href="/projects/dmarc.html" class="work-highlight group">
+                                <img class="wh-thumb" src="/images/thumbs/p-dmarc.jpg" alt="Pantry visitor density mapped across the Des Moines metro" loading="lazy">
+                                <span class="wh-text">
+                                    <span class="wh-title text-ink text-base md:text-lg">DMARC Network Analysis</span>
+                                    <span class="text-muted text-sm">Service gaps across 90+ pantries, mapped in R</span>
+                                </span>
+                                <span class="wh-arrow ml-auto text-accent text-lg" aria-hidden="true">&#8594;</span>
+                            </a>
+                            <a href="/projects/site-build.html" class="work-highlight group">
+                                <img class="wh-thumb" src="/images/thumbs/p-sitebuild.jpg" alt="The projects.js data file behind this site" loading="lazy">
+                                <span class="wh-text">
+                                    <span class="wh-title text-ink text-base md:text-lg">Personal Site Build</span>
+                                    <span class="text-muted text-sm">The data and render split behind this site</span>
+                                </span>
+                                <span class="wh-arrow ml-auto text-accent text-lg" aria-hidden="true">&#8594;</span>
+                            </a>
+                        </div>
+                                </div>
+                </div>
             </div>
+        </details>
 
-        </div>
-    </section>
-
-    <div class="max-w-7xl mx-auto w-full px-4 md:px-8"><hr class="section-divider"></div>
-
-    <!-- ═══ PART 01 — BRUSHFACTORY ═══ -->
-    <section id="product" class="py-12 px-4 md:px-8 max-w-7xl mx-auto w-full scroll-mt-28">
-        <div class="mb-8 pt-4">
-            <span class="text-accent text-sm font-bold tracking-wider uppercase mb-2 block">Part 01</span>
-            <h2 class="text-ink text-3xl md:text-4xl font-bold mb-4">Brushfactory</h2>
-            <p class="text-body text-base md:text-lg max-w-3xl">
-                This is the project I am working on right now. It converts brush files between the four apps most people draw in, and it is live for anyone to try.
-            </p>
-        </div>
-        <div id="product-grid" data-cards="feature:product" class="space-y-8"><div class="bg-surface rounded-3xl overflow-hidden shadow-soft border border-themed"><div class="grid grid-cols-1 lg:grid-cols-2 lg:min-h-card-lg"><div class="bg-wash border-b lg:border-b-0 lg:border-r border-themed flex items-center justify-center p-6 md:p-8 group overflow-hidden"><img src="/images/brushfactory-home.jpg" alt="The Brushfactory home page: the four supported formats, and a table showing which brush settings carry over exactly between Photoshop, Procreate, Clip Studio and Krita" class="w-full h-auto rounded-xl border border-themed shadow-soft transition-transform duration-700 group-hover:scale-102"></div><div class="p-8 md:p-12 flex flex-col justify-center relative z-10"><div class="mb-6"><h3 class="text-ink text-3xl font-bold mb-4">Your brushes, wherever you draw.</h3><p class="text-body text-lg mb-6">Brushes do not move between drawing apps. Every app stores them in its own undocumented binary format, and most converters get around that by flattening the brush into a stamp, which loses the pressure settings and the grain. Brushfactory writes real settings for the target app instead, and the site carries a table showing which settings come across exactly and which ones get matched as closely as the target app allows.</p></div><div class="mt-auto flex flex-wrap items-center gap-4"><a href="https://brushfactory.co" class="btn-primary inline-flex items-center gap-2 px-7 py-3" target="_blank" rel="noopener">Visit brushfactory.co <i class="fa-solid fa-arrow-right -rotate-45"></i></a><a href="/projects/brushfactory.html" class="btn-secondary inline-flex items-center gap-2 px-7 py-3">How I built it</a></div></div></div></div></div><!--/cards-->
-    </section>
-
-    <div class="max-w-7xl mx-auto w-full px-4 md:px-8"><hr class="section-divider"></div>
-
-    <!-- ═══ PART 02 — DATA ═══ -->
-    <section id="data" class="py-12 px-4 md:px-8 max-w-7xl mx-auto w-full scroll-mt-28">
-        <div class="mb-8 pt-4">
-            <span class="text-accent text-sm font-bold tracking-wider uppercase mb-2 block">Part 02</span>
-            <h2 class="text-ink text-3xl md:text-4xl font-bold mb-4">Data Projects</h2>
-            <p class="text-body text-base md:text-lg max-w-3xl">
-                These are projects where most of the work was in the pipeline. Cleaning the data, writing down the steps, and being able to explain why I made the choices I did.
-            </p>
-        </div>
-        <div id="data-grid" data-cards="feature:data" class="space-y-8"><div class="bg-surface rounded-3xl overflow-hidden shadow-soft border border-themed"><div class="grid grid-cols-1 lg:grid-cols-2 lg:min-h-card-lg"><div class="relative bg-wash border-b lg:border-b-0 lg:border-l lg:order-2 border-themed min-h-card lg:min-h-full group overflow-hidden"><img src="/images/dmarc4.png" alt="A map of the Des Moines metro shaded by pantry visitor density per zip code" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"></div><div class="p-8 md:p-12 flex flex-col justify-center relative z-10 lg:order-1"><div class="mb-6"><h3 class="text-ink text-3xl font-bold mb-4">DMARC Network Analysis</h3><p class="text-body text-lg mb-6">Leveraging R and geospatial analysis (leaflet) to uncover service gaps in the DMARC Food Pantry Network. By merging transaction logs with ACS Census data, I mapped visitor density to identify high-need areas and utilized predictive modeling to forecast a 2025 surge in demand within specific demographic groups.</p></div><div class="mt-auto flex flex-wrap items-center gap-4"><a href="/projects/dmarc.html" class="btn-primary inline-flex items-center gap-2 px-7 py-3">View Case Study <i class="fa-solid fa-arrow-right"></i></a></div></div></div></div><div class="bg-surface rounded-3xl overflow-hidden shadow-soft border border-themed"><div class="grid grid-cols-1 lg:grid-cols-2 lg:min-h-card-lg"><div class="bg-code-panel border-b lg:border-b-0 lg:border-r border-code min-h-card lg:min-h-full group overflow-hidden flex flex-col"><div class="flex items-center px-4 py-3 border-b border-code bg-code-panel-header"><div class="mr-3"><div class="flex gap-1.5"><div class="w-3 h-3 rounded-full chrome-close-vivid"></div><div class="w-3 h-3 rounded-full chrome-minimize-vivid"></div><div class="w-3 h-3 rounded-full chrome-maximize-vivid"></div></div></div><span class="text-code-label text-2xs font-mono tracking-wide">projects.js — project data</span></div><div class="text-code p-6 font-mono text-xs leading-loose select-none opacity-80 group-hover:opacity-100 transition-opacity flex flex-col justify-center h-full overflow-x-auto"><pre class="m-0"><code><span class="token-kw">const</span> projectData = {
-  <span class="token-str">&quot;mainframe&quot;</span>: {
-    group:  <span class="token-str">&quot;design&quot;</span>,
-    layout: <span class="token-str">&quot;case&quot;</span>,
-    title:  <span class="token-str">&quot;Mainframe Studios&quot;</span>
-  },
-  <span class="token-str">&quot;dmarc&quot;</span>: {
-    group:  <span class="token-str">&quot;data&quot;</span>,
-    layout: <span class="token-str">&quot;technical&quot;</span>
-  }
-};</code></pre></div></div><div class="p-8 md:p-12 flex flex-col justify-center relative z-10"><div class="mb-6"><h3 class="text-ink text-3xl font-bold mb-4">Personal Site Build</h3><p class="text-body text-lg mb-6">The story behind how I created this website. I used both HTML5 and Tailwind CSS to build this site's aesthetic and established a CI/CD pipeline via GitHub and Cloudflare for updates on my laptop. Every case study on the site, including this one, comes out of the data file shown on the left.</p></div><div class="mt-auto flex flex-wrap items-center gap-4"><a href="/projects/site-build.html" class="btn-primary inline-flex items-center gap-2 px-7 py-3">View Process <i class="fa-solid fa-arrow-right"></i></a></div></div></div></div></div><!--/cards-->
-    </section>
-
-    <div class="max-w-7xl mx-auto w-full px-4 md:px-8"><hr class="section-divider"></div>
-
-    <!-- ═══ PART 03 — DESIGN ═══ -->
-    <section id="design" class="py-12 px-4 md:px-8 max-w-7xl mx-auto w-full scroll-mt-28">
-        <div class="mb-8 pt-4">
-            <span class="text-accent text-sm font-bold tracking-wider uppercase mb-2 block">Part 03</span>
-            <div class="flex items-baseline justify-between gap-6">
-                <h2 class="text-ink text-3xl md:text-4xl font-bold">Design Projects</h2>
-                <a href="/archive.html" class="hidden md:inline-flex shrink-0 items-center gap-2 text-sm font-semibold text-muted hover:text-ink transition-colors">
-                    Full Archive <i class="fa-solid fa-arrow-right"></i>
-                </a>
+        <details id="design" class="work-row scroll-mt-28" name="work">
+            <summary class="work-row-summary">
+                <span class="text-accent text-xs font-medium">03</span>
+                <h2 class="work-title text-ink font-display lowercase text-3xl md:text-4xl font-extrabold tracking-tight">design</h2>
+                <p class="text-muted text-sm hidden sm:block">Posters, type &amp; brand.</p>
+                <div class="ml-auto flex items-center gap-5">
+                    <div class="thumb-stack">
+                        <img src="/images/thumbs/t-forged.jpg" alt="The Forged Group business cards">
+                        <img src="/images/thumbs/t-mainframe.jpg" alt="Mainframe Studios poster">
+                        <img src="/images/thumbs/t-dessa.jpg" alt="Dessa tour poster">
+                        <img src="/images/thumbs/t-jeremy.jpg" alt="Jeremy Messersmith flyer">
+                        <img src="/images/thumbs/t-citymap.jpg" alt="Shorewood city rug map">
+                    </div>
+                    <svg class="work-chevron w-5 h-5 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+                </div>
+            </summary>
+            <div class="work-row-panel">
+                <div class="work-row-inner">
+                    <div class="work-row-body">
+                        <p class="text-body text-base md:text-lg max-w-3xl">Brand identity, posters, event work and illustration &mdash; most of it made for real clients and printed.</p>
+                        <div class="mt-8">
+                            <p class="work-projects-label">A few highlights</p>
+                            <a href="/projects/mainframe.html" class="work-highlight group">
+                                <img class="wh-thumb" src="/images/thumbs/p-mainframe.jpg" alt="Mainframe Studios First Friday poster" loading="lazy">
+                                <span class="wh-text">
+                                    <span class="wh-title text-ink text-base md:text-lg">Mainframe Studios First Friday</span>
+                                    <span class="text-muted text-sm">A typeface and poster for a non-profit art studio</span>
+                                </span>
+                                <span class="wh-arrow ml-auto text-accent text-lg" aria-hidden="true">&#8594;</span>
+                            </a>
+                            <a href="/projects/forged.html" class="work-highlight group">
+                                <img class="wh-thumb" src="/images/thumbs/p-forged.jpg" alt="The Forged Group business cards" loading="lazy">
+                                <span class="wh-text">
+                                    <span class="wh-title text-ink text-base md:text-lg">The Forged Group</span>
+                                    <span class="text-muted text-sm">Identity system for a consultation firm</span>
+                                </span>
+                                <span class="wh-arrow ml-auto text-accent text-lg" aria-hidden="true">&#8594;</span>
+                            </a>
+                            <a href="/projects/dessa.html" class="work-highlight group">
+                                <img class="wh-thumb" src="/images/thumbs/p-dessa.jpg" alt="Dessa 2026 East Coast Tour poster" loading="lazy">
+                                <span class="wh-text">
+                                    <span class="wh-title text-ink text-base md:text-lg">Dessa 2026 East Coast Tour</span>
+                                    <span class="text-muted text-sm">Tour poster for a Minnesota singer-songwriter</span>
+                                </span>
+                                <span class="wh-arrow ml-auto text-accent text-lg" aria-hidden="true">&#8594;</span>
+                            </a>
+                        </div>
+                        <div class="mt-7 flex flex-wrap items-center gap-3">
+                            <a href="/archive.html" class="btn-primary rounded-full inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold">See all 14 design projects</a>
+                        </div>
+                                </div>
+                </div>
             </div>
-            <p class="text-body text-base md:text-lg max-w-3xl mt-4">
-                Branding, event identity, and illustration work from the last few years. A lot of the vocabulary I use when reviewing other people's designs comes from here.
-            </p>
-        </div>
-        <div id="design-grid" data-cards="project:design" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8"><a href="/projects/mainframe.html" class="glass-card bg-surface rounded-3xl p-4 shadow-soft border border-themed group flex flex-col h-full"><div class="relative aspect-photo bg-wash rounded-2xl overflow-hidden mb-3 shrink-0"><img src="/images/mainframe2.png" alt="" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"></div><div class="px-1 pb-1 flex-grow"><div class="flex items-start justify-between gap-2 mb-1.5"><h3 class="text-ink text-base font-bold">Mainframe Studios</h3><span class="tech-pill text-2xs font-bold px-2.5 py-0.5 rounded-full shrink-0 whitespace-nowrap">Advertising</span></div><p class="text-muted text-sm font-normal line-clamp-3">Unique typeface and poster for a non-profit art studio.</p></div></a><a href="/projects/forged.html" class="glass-card bg-surface rounded-3xl p-4 shadow-soft border border-themed group flex flex-col h-full"><div class="relative aspect-photo bg-wash rounded-2xl overflow-hidden mb-3 shrink-0"><img src="/images/forged2.png" alt="" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"></div><div class="px-1 pb-1 flex-grow"><div class="flex items-start justify-between gap-2 mb-1.5"><h3 class="text-ink text-base font-bold">The Forged Group</h3><span class="tech-pill text-2xs font-bold px-2.5 py-0.5 rounded-full shrink-0 whitespace-nowrap">Branding</span></div><p class="text-muted text-sm font-normal line-clamp-3">Visual identity system for a financial consultation firm.</p></div></a><a href="/projects/relays.html" class="glass-card bg-surface rounded-3xl p-4 shadow-soft border border-themed group flex flex-col h-full"><div class="relative aspect-photo bg-wash rounded-2xl overflow-hidden mb-3 shrink-0"><img src="/images/relays2.png" alt="" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"></div><div class="px-1 pb-1 flex-grow"><div class="flex items-start justify-between gap-2 mb-1.5"><h3 class="text-ink text-base font-bold">Drake Relays 2025</h3><span class="tech-pill text-2xs font-bold px-2.5 py-0.5 rounded-full shrink-0 whitespace-nowrap">Event</span></div><p class="text-muted text-sm font-normal line-clamp-3">Relays event logo &amp; theme for Drake University.</p></div></a></div><!--/cards-->
-        <div class="md:hidden text-center">
-            <a href="/archive.html" class="text-sm font-semibold text-muted underline">View all design projects</a>
-        </div>
+        </details>
+
     </section>
 
-    <!-- ═══ CONTACT ═══ -->
-    <section id="contact" class="w-full px-4 md:px-8 pb-20 pt-10 max-w-7xl mx-auto scroll-mt-28">
-        <div class="w-full bg-surface rounded-3xl p-8 md:p-12 shadow-soft border border-themed transition-colors duration-500 text-center">
-            <h2 class="text-ink text-3xl md:text-4xl font-bold mb-4">Let's work together!</h2>
-            <p class="text-muted font-normal text-lg mb-8 max-w-xl mx-auto">Looking for assistance with a project? Please reach out and let me know how I can help.</p>
-            <a href="mailto:oliver_tw@icloud.com" class="btn-primary inline-flex items-center gap-2 px-8 py-3.5">
-                <i class="fa-solid fa-envelope"></i> Email Me
-            </a>
-        </div>
+    <!-- ======= CONTACT ======= -->
+    <section id="contact" class="w-full px-6 md:px-8 pb-20 pt-16 max-w-5xl mx-auto scroll-mt-28 text-center">
+        <h2 class="text-ink font-display lowercase text-3xl md:text-4xl font-extrabold mb-4">let&#39;s work together!</h2>
+        <p class="text-muted font-normal text-base md:text-lg mb-8 max-w-xl mx-auto">Looking for assistance with a project? Please reach out and let me know how I can help.</p>
+        <a href="mailto:oliver_tw@icloud.com" class="btn-primary rounded-full inline-flex items-center gap-2 px-8 py-3.5 font-semibold">
+            <i class="fa-solid fa-envelope"></i> oliver_tw@icloud.com
+        </a>
     </section>
 
     </main>
 
     <footer id="footer-placeholder" class="w-full bg-surface border-t border-themed py-8 px-4 md:px-8 mt-auto"></footer>
 
-    <script src="/components.js?v=ba406726"></script>
-    <script src="/projects.js?v=bc7cd95d"></script>
+    <script src="/components.js?v=87e9f382"></script>
+    <script src="/projects.js?v=61c25ebf"></script>
     <script src="/render.js?v=b047ce16"></script>
+    <script>
+    /* The accordion, animated.
+       <details> on its own snaps open, and it drops its content the moment
+       it closes, so a closing animation has nothing left to run on. This
+       holds the element open for the length of the close, and animates the
+       panel with a 0fr -> 1fr grid row, which needs no height measuring and
+       copes with content of any length. With JavaScript off the rows still
+       open and close natively, just instantly. */
+    (function () {
+        var rows = [].slice.call(document.querySelectorAll('details.work-row'));
+        if (!rows.length) return;
+        var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        function panelOf(row) { return row.querySelector('.work-row-panel'); }
+
+        function collapse(row) {
+            var panel = panelOf(row);
+            row.classList.remove('is-open');
+            if (reduce) { panel.style.height = ''; row.open = false; return; }
+
+            /* From `auto` back to a number, so there is something to animate. */
+            panel.style.height = row.querySelector('.work-row-inner').offsetHeight + 'px';
+            void panel.offsetHeight;
+            panel.style.height = '0px';
+
+            var done = function (e) {
+                if (e && e.propertyName !== 'height') return;
+                panel.removeEventListener('transitionend', done);
+                if (!row.classList.contains('is-open')) {
+                    row.open = false;
+                    panel.style.height = '';
+                }
+            };
+            panel.addEventListener('transitionend', done);
+            setTimeout(done, 900);
+        }
+
+        function expand(row) {
+            rows.forEach(function (r) {
+                if (r !== row && r.classList.contains('is-open')) collapse(r);
+            });
+            var panel = panelOf(row);
+            row.open = true;              /* content must exist before it can be measured */
+            row.classList.add('is-open');
+            if (reduce) { panel.style.height = 'auto'; return; }
+
+            /* Measure the inner element, which nothing has constrained. Reading
+               the panel's own scroll height here returns 0: it was hidden until
+               the line above and its layout has not settled yet. */
+            var inner = row.querySelector('.work-row-inner');
+            panel.style.height = '0px';
+            void panel.offsetHeight;      /* a frame at zero, so the transition has a start */
+            panel.style.height = inner.offsetHeight + 'px';
+
+            var settle = function (e) {
+                if (e && e.propertyName !== 'height') return;
+                panel.removeEventListener('transitionend', settle);
+                /* Hand back to auto so the row reflows on resize or font swap. */
+                if (row.classList.contains('is-open')) panel.style.height = 'auto';
+            };
+            panel.addEventListener('transitionend', settle);
+            setTimeout(settle, 900);
+        }
+
+        rows.forEach(function (row) {
+            /* Exclusivity is handled here so a sibling's close is animated too;
+               the name attribute would slam it shut in a single frame. */
+            row.removeAttribute('name');
+            if (row.open) row.classList.add('is-open');
+            row.querySelector('summary').addEventListener('click', function (e) {
+                e.preventDefault();
+                if (row.classList.contains('is-open')) collapse(row); else expand(row);
+            });
+        });
+
+        /* A link to /#data should arrive with that section already open. */
+        function fromHash(animate) {
+            var el = location.hash && document.querySelector(location.hash);
+            if (!el || !el.classList || !el.classList.contains('work-row')) return;
+            if (animate) { expand(el); return; }
+            rows.forEach(function (r) {
+                if (r !== el) { r.classList.remove('is-open'); r.open = false; }
+            });
+            el.open = true;
+            el.classList.add('is-open');
+            panelOf(el).style.height = 'auto';
+        }
+        fromHash(false);
+        window.addEventListener('hashchange', function () { fromHash(true); });
+    })();
+    </script>
 </body>
 </html>

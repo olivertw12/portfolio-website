@@ -255,6 +255,22 @@ for (const id of ids) {
 }
 console.log(`projects/ — ${ids.length} page(s) written`);
 
+/* --- keep the design-project count in the copy honest -------------------
+   The homepage says "See all N design projects". Hand-typing N means it goes
+   stale the moment a project is added — it already did once. Derive it from
+   the same data everything else comes from. */
+const designCount = api.archiveOrder.length;
+let counted = 0;
+for (const f of fs.readdirSync(ROOT)) {
+  if (!f.endsWith('.html')) continue;
+  const file = path.join(ROOT, f);
+  const src  = fs.readFileSync(file, 'utf8');
+  const out  = src.replace(/See all \d+ design projects/g,
+                           `See all ${designCount} design projects`);
+  if (out !== src) { fs.writeFileSync(file, out); counted++; }
+}
+if (counted) console.log(`design-project count synced to ${designCount}`);
+
 const versions = assetVersions();
 let stamped = 0;
 for (const dir of [ROOT, OUT_DIR]) {

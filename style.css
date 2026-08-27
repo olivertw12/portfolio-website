@@ -1,7 +1,7 @@
 /* ============================================================
-   DESIGN TOKENS — "Ink"
+   DESIGN TOKENS — "Slate"
    ------------------------------------------------------------
-   Achromatic greys with celadon reserved as an accent.
+   Cool neutrals with a calm slate blue reserved as an accent.
 
    Every token that differs between light and dark is redefined in
    the .dark block below and nowhere else. That is the whole theming
@@ -16,36 +16,36 @@
 
 :root {
     /* --- Surfaces --- */
-    --color-page:    #EFEFEF;   /* page base                                  */
-    --color-surface: #FAFAFA;   /* cards, nav, panels                         */
-    --color-wash:    #E5E5E5;   /* image wells, pill backgrounds              */
-    --color-tint:    #D9D9D9;   /* hover states                               */
+    --color-page:    #EEF1F3;   /* page base                                  */
+    --color-surface: #FBFCFD;   /* cards, nav, panels                         */
+    --color-wash:    #E3E8EC;   /* image wells, pill backgrounds              */
+    --color-tint:    #D7DEE4;   /* hover states                               */
 
     /* --- Text --- */
-    --color-text-primary: #111111;   /* headings          — 16.4:1 on page    */
-    --color-text-body:    #2E2E2E;   /* body copy         — 11.8:1            */
-    --color-text-muted:   #4D4D4D;   /* labels, captions  —  7.4:1            */
-    --color-text-subtle:  #666666;   /* de-emphasised     —  5.1:1            */
+    --color-text-primary: #16222C;   /* headings          — 16.4:1 on page    */
+    --color-text-body:    #2E3A44;   /* body copy         — 11.8:1            */
+    --color-text-muted:   #46586A;   /* labels, captions  —  7.4:1            */
+    --color-text-subtle:  #5F7183;   /* de-emphasised     —  5.1:1            */
 
     /* --- Accent ---
        Two values on purpose: --color-accent is decorative (rules, glows,
        focus rings, icon marks) and --color-accent-text is the darker one
        that clears AA as small text. */
-    --color-accent:       #35705E;
-    --color-accent-text:  #2C5C4D;   /* 6.7:1 on page                         */
-    --color-accent-muted: #DFE9E5;   /* accent surface, e.g. the nav badge    */
+    --color-accent:       #3E6684;
+    --color-accent-text:  #33546C;   /* 6.7:1 on page                         */
+    --color-accent-muted: #DCE5EC;   /* accent surface, e.g. the nav badge    */
 
     /* --- Primary action --- */
-    --color-primary:    #1A1A1A;
+    --color-primary:    #3E6684;
     --color-primary-fg: #FFFFFF;
 
     /* --- Lines --- */
-    --color-divider:      #C1C1C1;
-    --color-border:       rgba(193,193,193,0.65);
-    --color-border-solid: #C1C1C1;
+    --color-divider:      #C3CDD5;
+    --color-border:       rgba(195,205,213,0.65);
+    --color-border-solid: #C3CDD5;
 
     /* --- Overlays --- */
-    --color-overlay: rgba(250,250,250,0.92);  /* nav pill / chip scrims */
+    --color-overlay: rgba(251,252,253,0.92);  /* nav pill / chip scrims */
     --color-scrim:   rgba(8,8,8,0.96);
 
     /* --- Code block chrome ---
@@ -74,6 +74,7 @@
     --color-syn-comment: #8b9299;
     /* --- Typography --- */
     --font-sans: 'Plus Jakarta Sans', sans-serif;
+    --font-display: 'Gabarito', 'Plus Jakarta Sans', sans-serif;  /* the name + all display text; swap here to try another */
     --font-mono: 'JetBrains Mono', monospace;
 
     /* --- Radii --- */
@@ -82,6 +83,13 @@
     --radius-2xl: 0.875rem;   /* 14px — nav, inner card images         */
     --radius-3xl: 1.25rem;    /* 20px — cards, panels, large surfaces  */
 
+    /* --- Wash (the soft drifting tint behind page tops) --- */
+    --wash-1: rgba(62,102,132,0.13);
+    --wash-2: rgba(62,102,132,0.08);
+    --wash-caustic: rgba(62,102,132,0.14);
+    --wash-shaft:   rgba(62,102,132,0.055);
+    --wash-deep:    rgba(24,46,66,0.10);
+
     /* --- Shadows --- */
     --shadow-soft:  0 1px 3px 0 rgba(0,0,0,0.07), 0 1px 2px -1px rgba(0,0,0,0.05);    --shadow-paper: 0 1px 3px 0 rgba(0,0,0,0.08), 0 1px 2px -1px rgba(0,0,0,0.06);
     --shadow-lift:  0 4px 12px 0 rgba(0,0,0,0.10), 0 1px 3px 0 rgba(0,0,0,0.06);
@@ -89,30 +97,36 @@
 }
 
 .dark {
-    --color-page:    #121212;
-    --color-surface: #1C1C1C;
-    --color-wash:    #181818;
-    --color-tint:    #242424;
+    --color-page:    #10151A;
+    --color-surface: #171E24;
+    --color-wash:    #131920;
+    --color-tint:    #212B34;
 
-    --color-text-primary: #F5F5F5;
-    --color-text-body:    #D2D2D2;
-    --color-text-muted:   #A0A0A0;
-    --color-text-subtle:  #808080;
+    --color-text-primary: #F2F5F7;
+    --color-text-body:    #CFD8DE;
+    --color-text-muted:   #9DAEBB;
+    --color-text-subtle:  #7E909E;
 
-    --color-accent:       #7BB6A2;
-    --color-accent-text:  #7BB6A2;   /* 8.1:1 on the dark page */
-    --color-accent-muted: #16211E;
+    --color-accent:       #7FA8C7;
+    --color-accent-text:  #8FB4D0;   /* 8.1:1 on the dark page */
+    --color-accent-muted: #16202A;
 
     /* Inverted, because a #1A1A1A button on a #121212 page measured
        1.02:1 — the label was readable but the button had no edge. */
-    --color-primary:    #F5F5F5;
-    --color-primary-fg: #121212;
+    --color-primary:    #F2F5F7;
+    --color-primary-fg: #10151A;
 
-    --color-divider:      #333333;
-    --color-border:       rgba(51,51,51,0.55);
-    --color-border-solid: #333333;
+    --color-divider:      #2A3540;
+    --color-border:       rgba(42,53,64,0.55);
+    --color-border-solid: #2A3540;
 
-    --color-overlay: rgba(18,18,18,0.88);
+    --color-overlay: rgba(16,21,26,0.88);
+
+    --wash-1: rgba(127,168,199,0.10);
+    --wash-2: rgba(127,168,199,0.06);
+    --wash-caustic: rgba(140,185,220,0.16);
+    --wash-shaft:   rgba(155,200,235,0.06);
+    --wash-deep:    rgba(6,14,22,0.55);
 
 }
 
@@ -139,9 +153,23 @@ p, li, figcaption { line-height: 1.65; }
 
 /* Stops the transition flash on first paint. Every page's <body> carries
    .preload; components.js removes it after the first frame. */
+.preload,
 .preload * {
     transition: none !important;
     animation: none !important;
+}
+
+/* Theme switching is atomic. Without this the page changes theme at four
+   different speeds — an untransitioned <html>, 150ms `transition-colors`
+   utilities, a 500ms <body>, and assorted duration-300/700 elements — so
+   for up to half a second it sits visibly half-light, half-dark. The class
+   is added around the .dark swap and removed on the next frame, which
+   makes the whole page flip in one paint. */
+html.theme-switching,
+html.theme-switching *,
+html.theme-switching *::before,
+html.theme-switching *::after {
+    transition: none !important;
 }
 
 div, section, main, header, footer { max-width: 100%; box-sizing: border-box; }
@@ -428,3 +456,329 @@ button:focus-visible {
     .border-themed, .border-solid-themed { border-color: #e5e7eb !important; }
     a { text-decoration: none; color: black !important; }
 }
+
+
+/* ============================================================
+   2026 REMODEL — display type, wash background, preview stacks
+   ------------------------------------------------------------
+   The display face lives in --font-display (tokens above): Gabarito,
+   lowercase, on the name, the section rows and the page headers.
+   Captions and body stay Plus Jakarta Sans. The wash is the soft
+   drifting tint behind the top of every page; the thumb stack is the
+   overlapped row of square previews on the homepage rows.
+   ============================================================ */
+
+h1, h2, h3, h4 { font-family: var(--font-display); }
+.font-display  { font-family: var(--font-display); }
+
+/* The name, and any heading meant to read as the "monument". */
+.hero-name {
+    font-family: var(--font-display);
+    font-weight: 800;
+    text-transform: lowercase;
+    letter-spacing: -0.025em;
+    line-height: 0.98;
+}
+
+/* --- underwater wash -----------------------------------------
+   Light from the surface, drifting pools of caustic light, and faint
+   shafts angled down through the water. Soft gradients composited at low
+   alpha — no filters.
+
+   Anchored to the DOCUMENT rather than the viewport, so scrolling travels
+   down through the water instead of dragging a fixed panel along. body is
+   position:relative so this can size to the full page height.
+
+   Transform and opacity only, so it stays cheap on a phone.
+   ------------------------------------------------------------ */
+body { position: relative; }
+
+/* The wash is positioned, so without this it paints above static page
+   content: a positioned element with z-index 0 sits above non-positioned
+   blocks in the same stacking context. */
+body > main,
+body > footer { position: relative; z-index: 1; }
+
+.site-wash {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Light from above, darkness gathering below. */
+.site-wash::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(130% 46% at 50% -12%, var(--wash-1), transparent 62%),
+        linear-gradient(0deg, var(--wash-deep) 0%, transparent 42%);
+}
+
+/* Oversized so a drifting edge never enters the frame. */
+.wash-orb {
+    position: absolute;
+    inset: -55%;
+    background-repeat: no-repeat;
+    will-change: transform;
+}
+
+/* Irregular pools of light: two sheets drifting in opposite directions on
+   different periods. Where they overlap the brightness adds, and because
+   the periods differ those bright spots wander. */
+.wash-orb.a {
+    background-image:
+        radial-gradient(30% 22% at 22% 20%, var(--wash-caustic), transparent 70%),
+        radial-gradient(24% 17% at 66% 30%, var(--wash-caustic), transparent 70%),
+        radial-gradient(21% 25% at 45% 60%, var(--wash-caustic), transparent 72%),
+        radial-gradient(27% 15% at 81% 72%, var(--wash-caustic), transparent 70%),
+        radial-gradient(17% 21% at 13% 77%, var(--wash-caustic), transparent 72%);
+    animation: wash-a 34s ease-in-out infinite;
+}
+.wash-orb.b {
+    background-image:
+        radial-gradient(25% 18% at 37% 26%, var(--wash-caustic), transparent 72%),
+        radial-gradient(20% 26% at 73% 55%, var(--wash-caustic), transparent 70%),
+        radial-gradient(29% 16% at 19% 49%, var(--wash-caustic), transparent 72%),
+        radial-gradient(19% 21% at 59% 83%, var(--wash-caustic), transparent 70%);
+    animation: wash-b 47s ease-in-out infinite;
+}
+
+/* Shafts of light from the surface, faded out with depth. */
+.site-wash::after {
+    content: "";
+    position: absolute;
+    inset: -20% -40%;
+    background: repeating-linear-gradient(
+        96deg,
+        transparent 0 130px,
+        var(--wash-shaft) 210px,
+        transparent 290px 460px);
+    -webkit-mask-image: linear-gradient(180deg, #000 0%, rgba(0,0,0,0.4) 52%, transparent 86%);
+            mask-image: linear-gradient(180deg, #000 0%, rgba(0,0,0,0.4) 52%, transparent 86%);
+    will-change: transform, opacity;
+    animation: wash-shafts 38s ease-in-out infinite;
+}
+
+@keyframes wash-a {
+    0%,100% { transform: translate3d(0, 0, 0) scale(1); opacity: 0.85; }
+    50%     { transform: translate3d(4%, 3%, 0) scale(1.07); opacity: 1; }
+}
+@keyframes wash-b {
+    0%,100% { transform: translate3d(0, 0, 0) scale(1.05); opacity: 1; }
+    50%     { transform: translate3d(-4%, -2%, 0) scale(1); opacity: 0.75; }
+}
+@keyframes wash-shafts {
+    0%,100% { transform: translate3d(0, 0, 0); opacity: 0.7; }
+    50%     { transform: translate3d(3%, 0, 0); opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .wash-orb, .site-wash::after { animation: none; }
+}
+
+/* --- homepage preview stacks --------------------------------- */
+.thumb-stack { display: flex; }
+.thumb-stack img {
+    width: 68px; height: 68px;
+    object-fit: cover;
+    border-radius: 11px;
+    border: 1px solid var(--color-border-solid);
+    box-shadow: 0 0 0 3px var(--color-page);
+    transition: opacity 0.35s ease;
+}
+.thumb-stack img + img { margin-left: -16px; }
+@media (max-width: 767px) {
+    .thumb-stack img { width: 56px; height: 56px; border-radius: 9px; }
+    .thumb-stack img + img { margin-left: -13px; }
+}
+/* The accordion summary is a single row at every width, so a five-deep
+   stack pushes the page wider than a phone. Below the sm breakpoint the
+   stack shows three; the carousel only cycles what is visible. */
+@media (max-width: 639px) {
+    .thumb-stack img { width: 50px; height: 50px; }
+    .thumb-stack img:nth-child(n+4) { display: none; }
+}
+
+
+/* ============================================================
+   WORK ACCORDION — the three homepage sections
+   ------------------------------------------------------------
+   Built on <details>/<summary> so it works with no JavaScript and
+   gets keyboard support and screen-reader semantics for free. The
+   shared name="work" makes the three mutually exclusive in browsers
+   that support it; older ones simply allow more than one open.
+
+   Opening animates, closing does not: <details> hides its panel
+   immediately on close, so there is nothing left to animate. Rather
+   than script around that, the open state gets the animation and the
+   close stays instant.
+   ============================================================ */
+
+.work-row               { border-top: 1px solid var(--color-divider); }
+.work-row:last-of-type  { border-bottom: 1px solid var(--color-divider); }
+
+.work-row-summary {
+    list-style: none;              /* Firefox */
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    padding: 1.6rem 0.5rem;
+}
+.work-row-summary::-webkit-details-marker { display: none; }   /* Safari */
+.work-row-summary:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+    border-radius: 8px;
+}
+
+/* The title is the only thing that reacts to hover — the row is wide,
+   and tinting the whole strip reads as a button rather than a heading. */
+.work-row-summary .work-title { transition: color 0.15s ease; }
+@media (hover: hover) {
+    .work-row-summary:hover .work-title { color: var(--color-accent-text); }
+}
+
+.work-chevron { transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1); flex-shrink: 0; }
+.work-row.is-open .work-chevron { transform: rotate(180deg); }
+
+/* The panel's height is animated in pixels, set inline by the controller in
+   index.html (it measures, then hands back to `auto` once open so the row
+   still reflows on resize). The grid 0fr -> 1fr trick is tidier but resolves
+   to zero here, so this is the version that actually works. .is-open only
+   picks the timing: opening is slower and eases out hard, which is what
+   makes it settle instead of snap. */
+.work-row-panel {
+    height: 0;
+    overflow: hidden;
+    transition: height 0.42s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.work-row.is-open .work-row-panel {
+    transition: height 0.62s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* The contents drift up and fade a beat behind the height, so the panel
+   reads as unfolding rather than as a box that simply got taller. */
+.work-row-body {
+    padding: 0 0.5rem 2.25rem;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.22s ease, transform 0.28s ease;
+}
+.work-row.is-open .work-row-body {
+    opacity: 1;
+    transform: none;
+    transition: opacity 0.4s ease 0.12s,
+                transform 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.1s;
+}
+
+/* Project rows inside an open panel.
+   These sit below the section blurb and are visually a different kind of
+   thing, so they get their own label, their own rule, and enough vertical
+   room that each row reads as a project rather than a list item. */
+.work-projects-label {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    margin-bottom: 0.25rem;
+}
+
+.work-highlight {
+    display: flex;
+    align-items: center;
+    gap: 1.125rem;
+    padding: 1.125rem 0;
+    border-top: 1px solid var(--color-border);
+}
+.work-highlight:last-child { border-bottom: 1px solid var(--color-border); }
+
+.wh-thumb {
+    width: 104px;
+    height: 78px;
+    flex-shrink: 0;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 1px solid var(--color-border-solid);
+    background: var(--color-wash);
+}
+.wh-text  { display: flex; flex-direction: column; gap: 0.2rem; min-width: 0; }
+.wh-title { font-weight: 600; }
+.wh-arrow { flex-shrink: 0; transition: transform 0.15s ease; }
+
+@media (hover: hover) {
+    .work-highlight:hover .wh-title { color: var(--color-accent-text); }
+    .work-highlight:hover .wh-arrow { transform: translateX(2px); }
+}
+
+@media (max-width: 639px) {
+    .work-highlight { gap: 0.875rem; padding: 1rem 0; }
+    .wh-thumb { width: 76px; height: 57px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .work-row-panel, .work-row.is-open .work-row-panel,
+    .work-row-body, .work-row.is-open .work-row-body { transition: none; }
+    .work-chevron, .wh-arrow, .work-row-summary .work-title { transition: none; }
+}
+
+
+/* ============================================================
+   CORNERS — measured against apple.com, August 2026
+   ------------------------------------------------------------
+   Measured off Apple's own pages rather than guessed:
+
+     apple.com (home)    every rounded element is corner-shape: round;
+                         buttons are capsules (980px), small chrome 5px
+     apple.com/store     18px on 75 tiles and cards
+     apple.com/iphone    28px on large marketing panels (759x604),
+                         20px on medium tiles (120x129)
+
+   Two findings worth stating plainly. Apple does NOT use squircles on
+   the web — every rounded element on all three pages computed as
+   `round`, i.e. an ordinary circular corner. And their radii are far
+   more restrained than the 22.37% icon ratio, which is an iOS *icon*
+   rule and does not transfer to web surfaces.
+
+   So this is a literal match: Apple's web radius scale, with `round`
+   corners exactly as they use. `corner-shape: round` is the CSS initial
+   value, so these rules change nothing on their own — they are kept as
+   an explicit statement of intent, and as the one place to change if a
+   superellipse is ever wanted: swap `round` for `superellipse(3)` here
+   and in the @supports guard.
+
+   Capsules are untouched: `rounded-full` buttons are already correct,
+   and Apple's own buttons are capsules too.
+
+   TO REMOVE: delete this block and rerun `npm run build`.
+   ============================================================ */
+/* Not wrapped in @supports on purpose. `round` is the CSS initial value,
+   so the corner-shape lines below are declarative no-ops that a browser
+   without the property simply ignores — while the radius scale, which is
+   the part that actually matters, still applies everywhere. */
+:root {
+    --radius-xs:  0.625rem;   /* 10px — chips, pills                    */
+    --radius-xl:  0.75rem;    /* 12px — buttons, small controls         */
+    --radius-2xl: 1.25rem;    /* 20px — nav, inner images, medium tiles */
+    --radius-3xl: 1.75rem;    /* 28px — cards and large panels          */
+}
+
+.rounded-xs, .rounded-xl, .rounded-2xl, .rounded-3xl,
+.glass-card, .wh-thumb, .thumb-stack img,
+.work-row-summary, .skip-link, .tech-pill,
+.work-row-panel img, .nav-pill {
+    corner-shape: round;
+}
+
+/* Concentric: an inner surface carries the outer radius minus the gap
+   between them, or the two curves visibly fight. The archive card is
+   28px with 16px of padding, so its image is 12px. */
+.glass-card > div:first-child { border-radius: 0.75rem; }
+
+/* The small previews are their own smallest surface, so they sit at the
+   control step rather than the card step. */
+.wh-thumb       { border-radius: 0.75rem; }
+.thumb-stack img { border-radius: 0.75rem; }
+
