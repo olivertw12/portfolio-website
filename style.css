@@ -311,6 +311,21 @@ button:focus-visible {
     background-color: var(--color-page);
     color: var(--color-text-body);
     border-color: transparent;
+    /* Fixed square with flex centering, shared by the theme toggle and the
+       mobile hamburger. Padding alone gave them different heights: the
+       theme icons are display:block (from the sun/moon swap) while the
+       hamburger's sits inline on the text baseline, inflating the box. */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    padding: 0;
+}
+/* The display above beats the hamburger's md:hidden utility (same
+   specificity, later sheet), so restate the breakpoint hide here. */
+@media (min-width: 768px) {
+    #nav-mobile-button { display: none; }
 }
 .theme-toggle:hover {
     background-color: var(--color-wash);
@@ -441,6 +456,7 @@ button:focus-visible {
         margin: 0 !important; padding: 0 !important;
     }
     nav, button, footer { display: none !important; }
+    .site-wash { display: none !important; }
     main { padding: 0 !important; margin: 0 !important; width: 100% !important; }
     .print-container {
         width: 100% !important; max-width: none !important;
@@ -507,20 +523,38 @@ body > footer { position: relative; z-index: 1; }
     z-index: 0;
 }
 
-/* Light from above, darkness gathering below. */
+/* Light from above, darkness gathering below.
+
+   Every layer here is sized in --wash-unit and anchored to the top or
+   bottom of the document — never a percentage of document height. When the
+   page grows (accordion opens, long project page) the painted layers keep
+   their size and the middle simply extends with plain page color; short
+   pages crop them via the container's overflow:hidden. Sizing to the
+   document instead would restretch the gradients whenever height changes.
+
+   The unit is max() of both viewport axes rather than plain vh: sized by
+   vh alone, a wide-short window squashes the caustic pools into hard-edged
+   bands. Taking the larger axis keeps every layer's proportions roughly
+   square at any aspect ratio. */
+:root { --wash-unit: max(100vh, 75vw); }
+
 .site-wash::before {
     content: "";
     position: absolute;
     inset: 0;
-    background:
+    background-image:
         radial-gradient(130% 46% at 50% -12%, var(--wash-1), transparent 62%),
-        linear-gradient(0deg, var(--wash-deep) 0%, transparent 42%);
+        linear-gradient(0deg, var(--wash-deep), transparent);
+    background-size: 100% calc(1.15 * var(--wash-unit)), 100% calc(0.48 * var(--wash-unit));
+    background-position: top center, bottom center;
+    background-repeat: no-repeat;
 }
 
 /* Oversized so a drifting edge never enters the frame. */
 .wash-orb {
     position: absolute;
-    inset: -55%;
+    top: calc(-0.6 * var(--wash-unit)); left: -55%; right: -55%;
+    height: calc(2.3 * var(--wash-unit));
     background-repeat: no-repeat;
     will-change: transform;
 }
@@ -550,7 +584,8 @@ body > footer { position: relative; z-index: 1; }
 .site-wash::after {
     content: "";
     position: absolute;
-    inset: -20% -40%;
+    top: 0; left: -40%; right: -40%;
+    height: calc(1.35 * var(--wash-unit));
     background: repeating-linear-gradient(
         96deg,
         transparent 0 130px,
@@ -579,6 +614,26 @@ body > footer { position: relative; z-index: 1; }
     .wash-orb, .site-wash::after { animation: none; }
 }
 
+/* --- dithered wash canvases ----------------------------------
+   The gradients above band on 8-bit displays. components.js re-renders
+   them onto these canvases in float precision and quantizes through a
+   blue-noise threshold matrix (ordered dithering), then adds
+   .wash-dithered, which switches the CSS gradients off. Without JS the
+   gradients above simply stay on. Boxes match the gradient boxes above:
+   canvases are viewport-sized and anchored, so page growth never
+   stretches them, and only the deep layer moves with the bottom. */
+.wash-canvas {
+    position: absolute;
+    left: 0; width: 100%;
+    pointer-events: none;
+}
+.wash-canvas.top  { top: 0;    height: calc(1.15 * var(--wash-unit)); }
+.wash-canvas.deep { bottom: 0; height: calc(0.48 * var(--wash-unit)); }
+.wash-orb canvas  { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+.wash-dithered::before { background-image: none; }
+.wash-dithered .wash-orb { background-image: none !important; }
+
 /* --- homepage preview stacks --------------------------------- */
 .thumb-stack { display: flex; }
 .thumb-stack img {
@@ -586,20 +641,47 @@ body > footer { position: relative; z-index: 1; }
     object-fit: cover;
     border-radius: 11px;
     border: 1px solid var(--color-border-solid);
-    box-shadow: 0 0 0 3px var(--color-page);
     transition: opacity 0.35s ease;
 }
 .thumb-stack img + img { margin-left: -16px; }
+
+/* The gap between overlapping thumbs. This used to be a page-colored
+   box-shadow ring, which stopped matching once the wash put a varying
+   tint behind the stacks. Instead, every thumb with a neighbor on top of
+   it gets a rounded-rect hole punched where that neighbor (plus a 3px
+   rim) overlaps — the gap is real transparency, so whatever the
+   background is doing shows through. The SVG masks are sized to each
+   breakpoint's thumb geometry (size / corner radius / overlap). */
+.thumb-stack img:not(:last-child) {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='68' height='68'%3E%3Cpath fill='white' fill-rule='evenodd' d='M0 0h68v68H0z M63 -3h46a14 14 0 0 1 14 14v46a14 14 0 0 1 -14 14h-46a14 14 0 0 1 -14 -14v-46a14 14 0 0 1 14 -14z'/%3E%3C/svg%3E");
+            mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='68' height='68'%3E%3Cpath fill='white' fill-rule='evenodd' d='M0 0h68v68H0z M63 -3h46a14 14 0 0 1 14 14v46a14 14 0 0 1 -14 14h-46a14 14 0 0 1 -14 -14v-46a14 14 0 0 1 14 -14z'/%3E%3C/svg%3E");
+    -webkit-mask-repeat: no-repeat;
+            mask-repeat: no-repeat;
+}
 @media (max-width: 767px) {
     .thumb-stack img { width: 56px; height: 56px; border-radius: 9px; }
     .thumb-stack img + img { margin-left: -13px; }
+    .thumb-stack img:not(:last-child) {
+        -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='56'%3E%3Cpath fill='white' fill-rule='evenodd' d='M0 0h56v56H0z M52 -3h38a12 12 0 0 1 12 12v38a12 12 0 0 1 -12 12h-38a12 12 0 0 1 -12 -12v-38a12 12 0 0 1 12 -12z'/%3E%3C/svg%3E");
+                mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='56'%3E%3Cpath fill='white' fill-rule='evenodd' d='M0 0h56v56H0z M52 -3h38a12 12 0 0 1 12 12v38a12 12 0 0 1 -12 12h-38a12 12 0 0 1 -12 -12v-38a12 12 0 0 1 12 -12z'/%3E%3C/svg%3E");
+    }
 }
 /* The accordion summary is a single row at every width, so a five-deep
    stack pushes the page wider than a phone. Below the sm breakpoint the
-   stack shows three; the carousel only cycles what is visible. */
+   stack shows three. */
 @media (max-width: 639px) {
     .thumb-stack img { width: 50px; height: 50px; }
     .thumb-stack img:nth-child(n+4) { display: none; }
+    .thumb-stack img:not(:last-child) {
+        -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='50' height='50'%3E%3Cpath fill='white' fill-rule='evenodd' d='M0 0h50v50H0z M46 -3h32a12 12 0 0 1 12 12v32a12 12 0 0 1 -12 12h-32a12 12 0 0 1 -12 -12v-32a12 12 0 0 1 12 -12z'/%3E%3C/svg%3E");
+                mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='50' height='50'%3E%3Cpath fill='white' fill-rule='evenodd' d='M0 0h50v50H0z M46 -3h32a12 12 0 0 1 12 12v32a12 12 0 0 1 -12 12h-32a12 12 0 0 1 -12 -12v-32a12 12 0 0 1 12 -12z'/%3E%3C/svg%3E");
+    }
+    /* the 4th and 5th are display:none here, so the 3rd is the top of the
+       visible stack — nothing overlaps it, so no hole */
+    .thumb-stack img:nth-child(3) {
+        -webkit-mask-image: none;
+                mask-image: none;
+    }
 }
 
 
