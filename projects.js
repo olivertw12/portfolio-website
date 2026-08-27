@@ -40,7 +40,7 @@ const projectData = {
     title: "Brushfactory",
     card: {
       chip: "Live Product",
-      blurb: "A converter for brush files between Photoshop, Procreate, Clip Studio Paint and Krita, and the test harness I built to check that a brush still behaves the same after it moves. Live now, with a published report on what carries over per format.",
+      blurb: "A converter for brush files between Photoshop, Procreate, Clip Studio Paint and Krita, alongside the test harness I built to check that a brush still behaves the same after it moves. Live now, with a published report on what carries over per format.",
       image: "images/brushfactory-home.jpg"
     },
     meta: [
@@ -66,13 +66,13 @@ const projectData = {
       ]
     },
     lede: [
-      { label: "The Problem", text: "If you switch drawing apps, your brushes do not come with you. Every app stores them in its own binary format, none of which are documented, and the settings do not line up one to one. Most converters get around this by flattening the brush tip into a stamp. That throws away the pressure settings and the grain, which are the parts that matter most." },
-      { label: "What It Is",  text: "Brushfactory reads a brush into a universal format and then writes real settings for the target app instead of faking them. It handles Photoshop, Procreate, Clip Studio Paint and Krita in any direction. It is live now, with three free conversions a month and a paid tier for unlimited use and batch conversion." }
+      { label: "The Problem", text: "If you switch drawing apps, your brushes do not come with you. Every app stores them in its own binary format, none of which are documented, and the settings do not line up one to one. Most converters get around this by flattening the brush tip into a stamp, but there is a growing need for artists to keep their brushes when moving between programs, I built this site to try and remedy this issue!" },
+      { label: "What It Is",  text: "Brushfactory reads a brush into a universal format and then writes real settings for the target app instead of faking them. It handles Photoshop, Procreate, Clip Studio Paint and Krita in any direction. It is live now with three free conversions a month and a paid tier for unlimited use and batch conversion." }
     ],
     sections: [
       {
         heading: "Four formats, none of them documented",
-        body: "Each app stores brushes differently and none of them publish a spec. Working out what each field does meant writing a file, opening it in the real app, and seeing what changed. I did that a lot. I also put the engine behind a small CLI so I could run conversions without going through the site, which made the testing much faster. MyPaint and Affinity are listed as upcoming on the site, but they are not wired up yet.",
+        body: "Each app stores brushes differently. Working out what each field does meant writing a file, opening it in the real app, and seeing what changed. I did that a lot, while also putting the engine behind a small CLI so I could run conversions without going through the site, which made the testing much faster. MyPaint and Affinity are listed as upcoming on the site, but they are not wired up yet.",
         code: {
           file: "Terminal",
           src: `python main.py inspect  some.brushset
@@ -82,11 +82,11 @@ python main.py batch    packs/ --to sut -o bundle.zip`
       },
       {
         heading: "The hard part is feel, not settings",
-        body: "Copying the numbers across is the easy half. Two brushes can have the same size, spacing and opacity and still feel nothing alike, because each app interprets those numbers differently and because the grain and the pressure response carry most of the character. I was checking this by eye at first, but I could not stay consistent across four formats and a few hundred conversions, so I started measuring it instead."
+        body: "Copying the numbers across is the easy half. Two brushes can have the same size, spacing and opacity and still feel nothing alike. Each app interprets those numbers differently, and the grain and pressure response carry most of the character. I was checking this by eye at first, but I could not stay consistent across four formats and a few hundred conversions. So, I started measuring it instead."
       },
       {
         heading: "Measuring drift instead of eyeballing it",
-        body: "I built a harness that takes a brush, converts it to every other format, reads each one back through the real codecs, and compares them to the source. It reports size, spacing, opacity, grain and dynamics for each format and flags anything that moved more than 2%. It also renders a sheet with the tip, the grain and a test stroke for every format, all drawn by the same renderer, so anything I can see in it is real mapping drift and not one app's brush engine looking different from another's.",
+        body: "I built a harness that takes a brush, converts it to every other format, reads each one back through the real codecs, and compares them to the source. It reports size, spacing, opacity, grain and dynamics for each format and flags anything that moved more than 2%. It also renders a sheet with the tip, the grain and a test stroke for every format. All of this is drawn by the same renderer, so anything I can see in it is real mapping drift and not just one app's brush engine looking different from another's.",
         code: {
           file: "test_brushes/converted/<brush>/",
           src: `cohesion_sheet.png     tip, grain and a test stroke per format
@@ -98,12 +98,12 @@ cohesion_report.txt    size / spacing / opacity / grain / dynamics
       },
       {
         heading: "Saying plainly what doesn't work",
-        body: "The home page carries a table of what carries over, marked either as exact or as matched as closely as the app allows, and behind it there is a longer fidelity report with the support status of each format and the limits written out. Wet media between Procreate and Clip Studio is approximated, tilt and speed dynamics only partly map onto Krita, and Clip Studio resamples textures over 1024 pixels. This probably costs me some conversions, since people can see the rough edges up front. I would rather do that than have someone find out after importing fifty brushes.",
+        body: "The home page carries a table of what carries over, marked either as exact or as matched as closely as the app allows. Behind it, there is a longer fidelity report with the support status of each format and the limits written out. Wet media between Procreate and Clip Studio is approximated, tilt and speed dynamics only partly map onto Krita, and Clip Studio resamples textures over 1024 pixels. This probably costs me some conversions since people can see the rough edges up front. I would rather do that than have someone find out after importing fifty brushes.",
         note: "The table on the home page, the fidelity report behind it and the support status shown in the converter are three views of the same information, so a fix has to land in three places. I put cross-references in each file to keep them from drifting apart."
       },
       {
-        heading: "The rest of it",
-        body: "Accounts with a monthly quota, three free conversions a month before anyone has to pay, Stripe for the paid tier at $7.99 a month, email verification, per-IP rate limiting, and 75 tests that run before anything ships. Uploads are deleted from the server as soon as the conversion finishes. It is deployed on a DigitalOcean droplet. None of this is the interesting part of the project, but it all had to work before I was willing to put the site up."
+        heading: "Building for the future",
+        body: "What is set up right now is a really solid foundation that proves cross-platform brush parity is actually possible. My focus moving forward will be refining those edge cases and adding support for even more design software to the ecosystem."
       }
     ],
     links: [
@@ -119,7 +119,7 @@ cohesion_report.txt    size / spacing / opacity / grain / dynamics
     title: "DMARC Network Analysis",
     card: {
       chip: "R Pipeline",
-      blurb: "A reproducible R pipeline for cleaning visitor logs from 90+ food pantry locations, joined with ACS Census data, then mapped geographically and used to forecast future demand.",
+      blurb: "A reproducible R pipeline for cleaning visitor logs from 90+ food pantry locations. It joins logs with ACS Census data, maps them geographically, and forecasts future demand.",
       image: "images/dmarc4.png"
     },
     meta: [
@@ -150,7 +150,7 @@ cohesion_report.txt    size / spacing / opacity / grain / dynamics
     sections: [
       {
         heading: "Data Standardization Pipeline",
-        body: "The first step involved ingesting raw transaction logs from over 90 pantry locations. I wrote a cleaning script to standardize variables, calculate visitor ages from birthdates, and bucket income levels according to Federal Poverty Guidelines. This created a \"universal\" dataset ready for downstream analysis. I calculated age against the service date rather than trusting a stored age field, since the same visitor shows up across several years of logs.",
+        body: "The first step involved ingesting raw transaction logs from over 90 pantry locations. I wrote a cleaning script to standardize variables, calculate visitor ages from birthdates, and bucket income levels according to Federal Poverty Guidelines. This created a universal dataset ready for downstream analysis. I calculated age against the service date rather than trusting a stored age field, since the same visitor shows up across several years of logs.",
         code: {
           file: "clean_dmarc_data.R",
           src: `# 3c: Fixing age from DOB
@@ -177,7 +177,7 @@ data <- data %>%
       },
       {
         heading: "Geographic Visit Density",
-        body: "I utilized Leaflet to map the density of repeat visitors across Central Iowa. The analysis revealed that while Des Moines proper has high engagement (up to 8.2% of the population in certain zip codes), there is significant variation in the suburbs, with areas like Urbandale and Windsor Heights showing distinct utilization patterns. Zip codes with no data are labelled that way rather than drawn as zero, which would have made coverage look worse than it is.",
+        body: "I used Leaflet to map the density of repeat visitors across Central Iowa. The analysis revealed that while Des Moines proper has high engagement, reaching up to 8.2% of the population in certain zip codes, there is significant variation in the suburbs. Areas like Urbandale and Windsor Heights showed distinct utilization patterns. Zip codes with no data are labelled that way rather than drawn as zero, which would have made coverage look artificially poor.",
         code: {
           file: "zip_map_final.R",
           src: `# Create the Leaflet map
@@ -199,7 +199,7 @@ leaflet_map <- leaflet(iowa_map_data) %>%
       },
       {
         heading: "Time-Series Forecasting",
-        body: "To help DMARC prepare for future demand, I developed a Poisson regression model combined with Generalized Additive Models (GAMs) to forecast monthly visits. The model accounts for seasonal trends and predicts a continued rise in pantry usage, estimating a new peak of approximately 40,000 monthly visits by late 2025. I built the prediction intervals on the link scale and transformed them back afterwards, which keeps them from dipping below zero visits.",
+        body: "To help DMARC prepare for future demand, I developed a Poisson regression model combined with Generalized Additive Models to forecast monthly visits. The model accounts for seasonal trends and predicts a continued rise in pantry usage. It estimates a new peak of approximately 40,000 monthly visits by late 2025. I built the prediction intervals on the link scale and transformed them back afterwards, which keeps them from dipping below zero visits.",
         code: {
           file: "predictive_modelling.R",
           src: `# Fit GLM with seasonal factors
@@ -222,7 +222,7 @@ future_df <- future_df %>%
       },
       {
         heading: "Analyzing Demographic Shifts",
-        body: "By comparing visitor data from 2018 to 2024, I identified the fastest-growing demographic groups accessing DMARC services. The data shows that Hispanic families (specifically adults and minors below the poverty line without SNAP benefits) have nearly doubled their visit share, rising from roughly 4% to 8% of the total visitor base. Both years had to be recoded onto matching ACS categories first, otherwise the comparison would have partly been measuring changes in how the data was recorded.",
+        body: "By comparing visitor data from 2018 to 2024, I identified the fastest-growing demographic groups accessing DMARC services. The data shows that Hispanic families have nearly doubled their visit share, rising from roughly 4% to 8% of the total visitor base. Both years had to be recoded onto matching ACS categories first. Otherwise, the comparison would have partly been measuring changes in how the data was recorded.",
         code: {
           file: "acs_compatible_demographics.R",
           src: `# Recode demographics for comparison
@@ -243,7 +243,7 @@ ggplot(top_growth, aes(x = reorder(acs_demo_ext, change), y = change)) +
       },
       {
         heading: "Strategic Gap Analysis",
-        body: "Finally, I performed a gap analysis by overlaying ACS Census data onto the pantry network map. I calculated the density of the \"Target Demographic\" (Hispanic adults, No SNAP, Below Poverty) per zip code. This revealed underserved \"hotspots,\" particularly in the River Bend area, where the target population density is high (approx. 2.8%) but pantry coverage is low. The density is a chain of separate proportions, which assumes those characteristics are independent within a zip code. That isn't exactly true, but the joint distribution isn't published at that level, and it was enough to rank zip codes against each other.",
+        body: "Finally, I performed a gap analysis by overlaying ACS Census data onto the pantry network map. I calculated the density of the target demographic per zip code. This revealed underserved hotspots, particularly in the River Bend area, where the target population density is high but pantry coverage is low. The density is a chain of separate proportions, which assumes those characteristics are independent within a zip code. That isn't exactly true, but the joint distribution isn't published at that level and it was enough to rank zip codes against each other.",
         code: {
           file: "acs_zipmap.R",
           src: `# Calculate Target Group Density
@@ -273,7 +273,7 @@ iowa_map_data <- iowa_zips %>%
     title: "Personal Site Build",
     card: {
       chip: "Static Site",
-      blurb: "The story behind how I created this website. HTML and Tailwind CSS for the layout, and a CI/CD pipeline via GitHub and Cloudflare for updates on my laptop.",
+      blurb: "The story behind how I created this website. I used HTML and Tailwind CSS for the layout, plus a CI/CD pipeline via GitHub and Cloudflare for easy updates from my laptop.",
       image: null
     },
     meta: [
@@ -307,13 +307,13 @@ iowa_map_data <- iowa_zips %>%
       ]
     },
     lede: [
-      { label: "The Goal",     text: "For the last few years I have made several attempts to create a website/portfolio for myself that I could easily access and update. I had already gone through using both Wordpress and Canva but I was not satisfied with the amount of customization available to me, and was left paying monthly subscription fees." },
-      { label: "The Solution", text: "So, I decided to build a static site from scratch using standard HTML and Tailwind CSS. It was a good opportunity to get more comfortable with code and set up a proper development workflow. It enabled me to have full control over the domain and hosting without the overhead of a website builder." }
+      { label: "The Goal",     text: "For the last few years I have made several attempts to create a website for myself that I could easily access and update. I had already tried both Wordpress and Canva, but I was not satisfied with the limited customization available and was left paying monthly subscription fees." },
+      { label: "The Solution", text: "So, I decided to build a static site from scratch using standard HTML and Tailwind CSS. It was a good opportunity to get more comfortable with code and set up a proper development workflow. This enabled me to have full control over the domain and hosting without the overhead of a website builder." }
     ],
     sections: [
       {
-        heading: "Escaping the \"Builder\" Trap",
-        body: "The main driver for this project was cost and flexibility. Website builders are convenient, but they lock you into their ecosystem. By switching to HTML, I could create the exact minimalist layout I wanted. I used Tailwind CSS to handle the styling because it keeps the file small, manageable, and easy to update. The color palette lives in one CSS file as variables, and the Tailwind config points at those variables instead of repeating the hex codes, so changing a color is a single edit in a single place.",
+        heading: "Escaping the Builder Trap",
+        body: "The main driver for this project was cost and flexibility. Website builders are convenient, but they lock you into their ecosystem. By switching to HTML, I could create the exact minimalist layout I wanted. I used Tailwind CSS to handle the styling because it keeps the file small, manageable, and easy to update. The color palette lives in one CSS file as variables, and the Tailwind config points at those variables instead of repeating the hex codes. Changing a color is a single edit in a single place.",
         code: {
           file: "tailwind.config.cjs",
           src: `module.exports = {
@@ -349,7 +349,7 @@ git push origin main`
       },
       {
         heading: "The Deployment Workflow",
-        body: "I wanted the site to be as easy to update as possible. To do this I set up a continuous deployment pipeline using GitHub and Cloudflare Pages. Now, when I want to add a new project or fix a typo, I just edit the code on my laptop and push the changes with my command Terminal to the repository. Cloudflare detects the commit and rebuilds the site automatically in seconds.",
+        body: "I wanted the site to be as easy to update as possible. To do this, I set up a continuous deployment pipeline using GitHub and Cloudflare Pages. Now, when I want to add a new project or fix a typo, I just edit the code on my laptop and push the changes with my command Terminal to the repository. Cloudflare detects the commit and rebuilds the site automatically in seconds.",
         code: {
           file: "Terminal",
           src: `# The entire update process takes three commands
@@ -362,7 +362,7 @@ git push origin main
       },
       {
         heading: "My Project Update System",
-        body: "Early on, I used a custom HTML page for each individual project. But quickly I realized this was both wasteful with repetitive code, and was very time consuming. Every time I wanted to change the layout, I'd have to edit twenty different files. So after some research, I managed to build a single reusable template and a central JavaScript file to pull information from. Every case study on the site now comes out of this one file, including this page.",
+        body: "Early on, I used a custom HTML page for each individual project. I quickly realized this was wasteful with repetitive code and extremely time consuming. Every time I wanted to change the layout, I would have to edit twenty different files. After some research, I managed to build a single reusable template and a central JavaScript file to pull information from. Every case study on the site now comes out of this one file.",
         code: {
           file: "projects.js",
           src: `const projectData = {
@@ -387,7 +387,7 @@ git push origin main
       },
       {
         heading: "How the Template Picks a Project",
-        body: "Each project is an object, and a set of functions turn it into HTML. Which function runs depends on a layout field, so design projects get the case study format with the image gallery, and the data and product pages get a version with code panels and figures next to them. I kept those functions free of anything browser-specific, which turned out to matter more than I expected. It means the build can run the same code on my laptop and write each finished page out to its own file. So I still only maintain one template, but what gets deployed is a real HTML page per project instead of an empty one that fills itself in.",
+        body: "Each project is an object, and a set of functions turn it into HTML. Which function runs depends on a layout field. Design projects get the case study format with the image gallery, while data and product pages get a version with code panels and figures next to them. I kept those functions free of anything browser-specific, which turned out to matter more than I expected. It means the build can run the same code on my laptop and write each finished page out to its own file. So I still only maintain one template, but what gets deployed is a real HTML page per project.",
         code: {
           file: "prerender.js",
           src: `// the same renderers the browser would use,
@@ -426,10 +426,10 @@ for (const id of Object.keys(projectData)) {
     ],
     hero: "images/mainframe2.png",
     heroCaption: "The final poster design displayed in the Anderson Gallery.",
-    background: "Mainframe Studios is one of the largest non-profit art studios in the nation, providing permanent, affordable workspaces for hundreds of artists in Des Moines, Iowa. They are known for their vibrant creative community and their visually iconic building.",
-    challenge: "The studio needed a unique poster design to advertise their First Friday event. A monthly opportunity for local people to tour the facility and view art. The primary challenge was to capture the essence of their most recognizable asset, the colorful, geometric-painted exterior, without simply resorting to photography.",
-    solution: "To solve this, the design process began with an in-depth analysis of the studio's exterior, deconstructing its geometric patterns and bold color palette. These core shapes and angles were then abstracted and systematized to build the letterforms of a new custom display typeface.",
-    result: "The resulting poster provided Mainframe Studios with a powerful and original piece of visual communication that was a true extension of its physical identity. The design was highly successful and received significant external recognition, winning an award at the 52nd Annual Juried Student Exhibition.",
+    background: "Mainframe Studios is one of the largest non-profit art studios in the nation, providing permanent and affordable workspaces for hundreds of artists in Des Moines. They are known for their vibrant creative community and their visually iconic building.",
+    challenge: "The studio needed a unique poster design to advertise their First Friday event, which is a monthly opportunity for locals to tour the facility and view art. We needed to capture the essence of their most recognizable asset, the colorful geometric-painted exterior, without simply resorting to photography.",
+    solution: "The design process began with an in-depth analysis of the studio's exterior to deconstruct its geometric patterns and bold color palette. These core shapes and angles were then abstracted and systematized to build the letterforms of a new custom display typeface.",
+    result: "The resulting poster provided Mainframe Studios with a powerful and original piece of visual communication that served as a true extension of its physical identity. The design was highly successful and won an award at the 52nd Annual Juried Student Exhibition.",
     gallery: [
       { src: "images/mainframe3.png", caption: "View of Mainframe Studios in Des Moines." },
       { src: "images/mainframe4.png", caption: "Conceptual merchandise with the custom typography." },
@@ -450,10 +450,10 @@ for (const id of Object.keys(projectData)) {
     ],
     hero: "images/forged2.png",
     heroCaption: "Business cards showcasing the primary brand identity.",
-    background: "The Forged Group is a financial consultation firm based in North Carolina, specializing in business consulting and human resources optimization. As a firm dealing with high-level corporate strategy and financial health, they required a brand image that conveyed strength, stability, and professional reliability to their diverse clientele.",
-    challenge: "The primary challenge was to create a brand identity that was flexible enough to house multiple distinct sub-brands, specifically 'Forged Human Resources', 'Forged Financial Services' and 'Forged Operational Excellence', without fracturing the overall brand image. The system needed to feel unified and monolithic while allowing each division to have its own clear designation on business cards, stationery, and digital assets.",
-    solution: "We developed a visual system anchored by a stylized 'Anvil' icon, a symbol of craftsmanship, durability, and creation. This icon serves as the unifying element across all collateral. A clean, typographic hierarchy was established to differentiate the sub-brands, ensuring that while the parent identity remains dominant, the specific service area is immediately clear to the client.",
-    result: "The final deliverable was a comprehensive brand identity suite, including logo variations for each sub-brand, a stationery package (business cards, letterheads, notebooks), and merchandise assets like mugs and pens. The result is a cohesive, professional visual language that projects authority and trust, perfectly aligning with the firm's financial consultation services.",
+    background: "The Forged Group is a financial consultation firm based in North Carolina specializing in business consulting and human resources optimization. As a firm dealing with high-level corporate strategy, they required a brand image that conveyed strength, stability, and professional reliability to their diverse clientele.",
+    challenge: "We needed to create a brand identity flexible enough to house multiple distinct sub-brands without fracturing the overall image. The system had to feel unified and monolithic while allowing each division its own clear designation on business cards and digital assets.",
+    solution: "We developed a visual system anchored by a stylized anvil icon to act as a symbol of craftsmanship and durability. This icon serves as the unifying element across all collateral. A clean typographic hierarchy was established to clearly differentiate the sub-brands.",
+    result: "The final deliverable was a comprehensive brand identity suite including logo variations for each sub-brand along with a stationery package and merchandise assets. The result is a cohesive professional visual language that projects authority and trust.",
     gallery: [
       { src: "images/forged3.png", caption: "Branded notebooks featuring the unified Anvil icon." },
       { src: "images/forged4.png", caption: "Merchandise application demonstrating the logo's versatility." },
@@ -465,7 +465,7 @@ for (const id of Object.keys(projectData)) {
     group: "design", layout: "case",
     category: "Event Branding",
     title: "Drake Relays 2025",
-    card: { chip: "Event", blurb: "Relays event logo & theme for Drake University.", image: "images/relays2.png" },
+    card: { chip: "Event", blurb: "Relays event logo and theme for Drake University.", image: "images/relays2.png" },
     meta: [
       { label: "Client", value: "Drake University" },
       { label: "Role", value: "Visual Design" },
@@ -474,40 +474,37 @@ for (const id of Object.keys(projectData)) {
     ],
     hero: "images/relays2.png",
     heroCaption: "Primary visual logo featured on a keychain.",
-    background: "The Drake Relays is a premier athletic event held annually at Drake University. It is a long-standing tradition that attracts athletes from around the world. Each year, a student is selected through a competitive process to design the official logo and visual theme for the relays, ensuring the event maintains a fresh and student-centric identity.",
-    challenge: "The mandated theme for the 2025 Relays was \"Racing Through Time.\" The challenge was to interpret this broad concept into a cohesive visual brand that felt energetic and athletic while honoring the history of the event. The design needed to be versatile enough to work on large-scale campus banners, small merchandise items, and digital media without losing legibility or impact.",
-    solution: "I developed a logo and visual system anchored in a retro-futurist aesthetic and used a neon-inspired color palette to evoke the speed and energy of the event. A key component of the design was the integration of the Des Moines city skyline, grounding the \"Racing Through Time\" concept in the specific location of the city.",
-    result: "The final design was implemented successfully across the entire event ecosystem. The logo was placed prominently around the Drake University campus, creating an immersive atmosphere for attendees. Additionally, the design was adapted into a wide range of popular merchandise, solidifying the 2025 Relays' visual identity.",
+    background: "The Drake Relays is a premier athletic event held annually at Drake University. Each year a student is selected through a competitive process to design the official logo and visual theme to ensure the event maintains a fresh and student-centric identity.",
+    challenge: "The mandated theme for the 2025 Relays was \"Racing Through Time.\" I needed to interpret this broad concept into a cohesive visual brand that felt energetic and athletic while honoring the history of the event. The design also had to scale flawlessly across everything from massive campus banners to small merchandise items.",
+    solution: "I developed a logo and visual system anchored in a retro-futurist aesthetic and used a neon-inspired color palette to evoke the speed and energy of the event. A key component of the design was the integration of the Des Moines city skyline to ground the concept in the specific location of the city.",
+    result: "The final design was implemented successfully across the entire event ecosystem. The logo was placed prominently around the Drake University campus to create an immersive atmosphere for attendees.",
     gallery: [
-      { src: "images/relays3.png", caption: "Merchandise application on steel cups, handed out at events." },
+      { src: "images/relays3.png", caption: "Merchandise application on steel cups handed out at events." },
       { src: "images/relays4.png", caption: "Raffle prize given at reveal event." },
       { src: "images/relays5.png", caption: "Banner displayed on Drake campus grounds." }
     ]
   },
 
-  /* PLACEHOLDER CONTENT — every string below is a draft written to get the
-     page standing up. Facts, dates and claims here are invented; replace
-     them before this goes live. */
   "brushfactory-identity": {
     group: "design", layout: "case",
     category: "Brand Identity",
     title: "Brushfactory Identity",
-    card: { title: "Brushfactory Identity", chip: "Branding", blurb: "PLACEHOLDER — Logo, wordmark and the visual system behind the Brushfactory product.", image: "images/bfid1.png" },
+    card: { title: "Brushfactory Identity", chip: "Branding", blurb: "The complete brand identity, logo, and wordmark for the Brushfactory converter. Designed to adapt across both light and dark interfaces while clearly communicating its purpose to digital artists.", image: "images/bfid-lockup-light.png" },
     meta: [
       { label: "Client", value: "Self-initiated" },
       { label: "Role", value: "Brand Design" },
-      { label: "Year", value: "[YEAR]" },
+      { label: "Year", value: "2026" },
       { label: "Deliverables", value: "Logo, wordmark, palette" }
     ],
-    hero: "images/bfid1.png",
-    heroCaption: "PLACEHOLDER — The primary lockup on the product's dark surface.",
-    background: "PLACEHOLDER — Brushfactory needed an identity of its own before launch. Describe here what the product is, who it is for, and what the brand had to do that the interface could not.",
-    challenge: "PLACEHOLDER — Describe the actual constraint. Something like: the mark had to read at favicon size, survive on both a dark app chrome and a light marketing page, and say \"tool for artists\" without leaning on a paintbrush cliche.",
-    solution: "PLACEHOLDER — Describe what you drew and why. The nib and the loop of ink, the decision to set the wordmark in a soft serif, how the orange was chosen and where it is allowed to appear.",
-    result: "PLACEHOLDER — Describe where the identity ended up: the site, the app chrome, the favicon and social cards, and anything you would change now.",
+    hero: "images/bfid-lockup-light.png",
+    heroCaption: "The primary Brushfactory logo and wordmark lockup displayed in its light mode variant.",
+    background: "Brushfactory needed a distinct visual identity before its public launch. The product is a highly technical tool that converts proprietary brush files between different drawing apps. I needed a brand that looked approachable to artists while still feeling like a reliable piece of software. The identity had to live outside the application interface to drive marketing and user signups.",
+    challenge: "The main hurdle was designing a mark that clearly communicated \"digital art tool\" without relying on a literal paintbrush cliché. The logo needed to remain perfectly legible at tiny favicon sizes. It also had to be versatile enough to survive on both the dark application interface and a light marketing page. I restricted the design to solid colors without any gradients to ensure it would scale flawlessly across the web architecture.",
+    solution: "I designed a geometric, stylized fountain pen nib as the primary icon. A vibrant orange ink stroke flows horizontally from the tip to ground the mark and add a sense of movement. I paired this sharp icon with a heavy, rounded serif typeface for the wordmark. The soft curves of the typography balance the sharp angles of the nib. To accommodate the dual-mode environment, the identity shifts seamlessly. The text renders in a deep charcoal for light backgrounds and a stark white for dark mode, while the vivid orange acts as the constant anchor.",
+    result: "The final identity system shipped alongside the Brushfactory product launch in August 2026. The vivid orange branding cuts through both the dark UI of the app chrome and the bright marketing pages. The solid vector mark scales perfectly down to a browser tab icon and looks incredibly sharp on social media preview cards.",
     gallery: [
-      { src: "images/bfid2.png", caption: "PLACEHOLDER — The mark on its own, at two sizes." },
-      { src: "images/bfid3.png", caption: "PLACEHOLDER — The core palette." }
+      { src: "images/bfid-mark-scales.png", caption: "The geometric pen nib mark shown at varying scales." },
+      { src: "images/bfid-palette-modes.png", caption: "The core solid color palette adapting to light and dark themes." }
     ]
   },
 
@@ -525,7 +522,7 @@ for (const id of Object.keys(projectData)) {
     hero: "images/dessa1.png",
     heroCaption: "Teaser preview of tour.",
     background: "Dessa was preparing to announce a March 2026 tour run with stops in Boston, Philadelphia, Brooklyn, and D.C. Management needed a suite of digital assets optimized for Instagram feeds and stories to support the announcement.",
-    challenge: "The visual direction needed to pivot mid-project. While the initial concept used moody photography, the client felt it was too somber for the tour's energy. The goal shifted to matching the specific pink-hued aesthetic of a recent EP cover.",
+    challenge: "The visual direction needed to pivot mid-project. The initial concept used moody photography and the client felt it was too somber for the tour's energy. The goal shifted to matching the specific pink-hued aesthetic of a recent EP cover.",
     solution: "I manually recreated the specific pink color grade to align with the EP's branding. To complement the new visual tone, I introduced a fresh font pairing that balanced the atmosphere with clear legibility.",
     result: "The final designs were approved by the team and successfully rolled out for the tour announcement in mid-January 2026.",
     gallery: [
@@ -548,8 +545,8 @@ for (const id of Object.keys(projectData)) {
     hero: "images/jeremy1.png",
     heroCaption: "Final promotional poster for PILLLAR songwriting workshop.",
     background: "Jeremy Messersmith was hosting two related events in February 2026: a free songwriting workshop and a songwriter circle performance. The project required two distinct digital flyers that felt cohesive as a series but clearly differentiated the nature of each event.",
-    challenge: "The challenge was to develop a design that would feel inviting and organic, reflecting the intimate nature of the events and capturing the specific whimsy associated with Jeremy's brand.",
-    solution: "I conceptualized a 'scrapbook' aesthetic to mirror the hands-on, constructive nature of a songwriting workshop. To distinguish the events, I used unique colorways for the workshop versus the show. As a nod to Jeremy's hit song 'Everybody Gets a Kitten,' I also integrated cats into the collage.",
+    challenge: "I needed to develop a design that would feel inviting and organic. It had to reflect the intimate nature of the events and capture the specific whimsy associated with Jeremy's brand.",
+    solution: "I conceptualized a scrapbook aesthetic to mirror the hands-on and constructive nature of a songwriting workshop. To distinguish the events, I used unique colorways for the workshop versus the show. I also integrated cats into the collage as a nod to Jeremy's hit song Everybody Gets a Kitten.",
     result: "The final posters were praised for capturing his aesthetic and effectively communicating the distinct vibe of the events. The flyers were used successfully across social media channels and ticketing platforms.",
     gallery: [
       { src: "images/jeremy2.png", caption: "Original draft of planned layout." },
@@ -570,10 +567,10 @@ for (const id of Object.keys(projectData)) {
     ],
     hero: "images/xmas2.png",
     heroCaption: "Overview of the event map designed for the first-ever Christmas Market in Excelsior.",
-    background: "The International Lions Club organized the first-ever Christmas Market in Excelsior, a major community initiative aimed at bringing residents and visitors together for the holiday season, anticipating an estimated attendance of 50,000 people.",
-    challenge: "With such a significant influx of visitors to a new event layout, clarity and navigation were critical safety and logistical concerns. Attendees needed to intuitively find specific vendor zones, food areas, restrooms, and event features.",
-    solution: "I volunteered to design a comprehensive area map that prioritized readability and functional navigation. The design clearly highlighted efficient walking routes, distinct vendor zones, and key landmarks, optimized for print.",
-    result: "The map became a central piece of the visitor experience, distributed in printed pamphlets to the estimated audience of 50,000, successfully directing foot traffic and reducing bottlenecks.",
+    background: "The International Lions Club organized the first-ever Christmas Market in Excelsior as a major community initiative. It aimed at bringing residents and visitors together for the holiday season with an anticipated attendance of 50,000 people.",
+    challenge: "With such a significant influx of visitors to a new event layout, clarity and navigation were critical safety concerns. Attendees needed to intuitively find specific vendor zones, food areas, and restrooms.",
+    solution: "I volunteered to design a comprehensive area map that prioritized readability and functional navigation. The design clearly highlighted efficient walking routes, distinct vendor zones, and key landmarks optimized for print.",
+    result: "The map became a central piece of the visitor experience. It was distributed in printed pamphlets to the estimated audience of 50,000, successfully directing foot traffic and reducing bottlenecks.",
     gallery: []
   },
 
@@ -590,10 +587,10 @@ for (const id of Object.keys(projectData)) {
     ],
     hero: "images/pyrkia2.png",
     heroCaption: "Primary brand visual emphasizing balance and nature.",
-    background: "Pyrkia Health Services is a nature-focused health program dedicated to holistic wellness. Their mission is to integrate physical health with the restorative power of the natural world, fostering a sense of unity between the individual and their environment.",
-    challenge: "The health and wellness sector is crowded with generic imagery. The client needed a logo that was distinct yet immediately recognizable as a symbol of care and unity. The challenge was to create a mark that felt organic and human-centered without relying on clichéd health tropes.",
+    background: "Pyrkia Health Services is a nature-focused health program dedicated to holistic wellness. Their mission is to integrate physical health with the restorative power of the natural world to foster a sense of unity between the individual and their environment.",
+    challenge: "The health and wellness sector is crowded with generic imagery. The client needed a logo that was distinct yet immediately recognizable as a symbol of care and unity. It had to feel organic and human-centered without relying on clichéd health tropes.",
     solution: "I developed the client's vision by focusing on an abstract figure that symbolizes the human element within the natural world. To reinforce the concepts of completeness and self-emphasis, I integrated this figure with a prominent abstract circle representing the cycle of health and unity.",
-    result: "The final design is a clean, modern logo that successfully bridges the gap between professional healthcare and organic wellness. The abstract circle and figure create a memorable icon that anchors the brand's visual identity.",
+    result: "The final design is a clean modern logo that successfully bridges the gap between professional healthcare and organic wellness. The abstract circle and figure create a memorable icon that anchors the brand's visual identity.",
     gallery: [
       { src: "images/pyrkia3.png", caption: "Digital application on the Pyrkia webpage." },
       { src: "images/pyrkia4.png", caption: "Icon shown in yoga environment." }
@@ -614,9 +611,9 @@ for (const id of Object.keys(projectData)) {
     hero: "images/citymap2.png",
     heroCaption: "A custom illustrated rug designed to help children visualize their community.",
     background: "This project began as a university initiative to design a functional prototype that would benefit a local community. The goal was to create an educational tool that fostered a sense of place and belonging for younger residents.",
-    challenge: "Learning city layouts and navigation can be abstract and difficult for children when relying on traditional 2D maps or digital screens. The challenge was to translate complex geographic data into a format that was intuitive, playful, and physically interactive.",
-    solution: "I developed a custom illustrated rug that functions as a large-scale play mat with a stylized yet accurate map of Shorewood. Key landmarks were illustrated with distinct icons, and roads were designed wide enough for toy cars.",
-    result: "The final prototype effectively depicts Shorewood, Minnesota, along with its real city landmarks and surrounding townships, bridging the gap between a toy and an educational resource.",
+    challenge: "Learning city layouts and navigation can be abstract and difficult for children when relying on traditional 2D maps or digital screens. I needed to translate complex geographic data into a format that was intuitive, playful, and physically interactive.",
+    solution: "I developed a custom illustrated rug that functions as a large-scale play mat with a stylized yet accurate map of Shorewood. Key landmarks were illustrated with distinct icons and roads were designed wide enough for toy cars.",
+    result: "The final prototype effectively depicts Shorewood along with its real city landmarks and surrounding townships. It successfully bridges the gap between a toy and an educational resource.",
     gallery: [
       { src: "images/citymap3.png", caption: "View of the rug at eye-level." },
       { src: "images/citymap4.png", caption: "2nd view of the rug at eye-level." }
@@ -636,10 +633,10 @@ for (const id of Object.keys(projectData)) {
     ],
     hero: "images/cityintern2.png",
     heroCaption: "A selection of standardized, fillable PDF forms created for the city government.",
-    background: "The City of Shorewood, Minnesota, manages a wide variety of administrative processes that require documentation, from permits to internal HR forms. I joined the team as a Graphic Design Intern to assist in modernizing their communication materials.",
-    challenge: "Many of the city's existing documents were outdated, visually inconsistent, and difficult to use. The challenge was to audit these legacy documents and transform them into a cohesive system that aligned with the Shorewood Branding Kit while drastically improving usability.",
-    solution: "I utilized Adobe Acrobat and InDesign to redesign and engineer a suite of fillable PDFs. I strictly applied the Shorewood Branding Kit and focused on user experience by adding interactive form fields, dropdown menus, and clear instructional hierarchy.",
-    result: "The project resulted in a library of modernized, user-friendly documents that streamlined administrative workflows. The shift to fillable PDFs reduced paper waste and data entry errors.",
+    background: "The City of Shorewood manages a wide variety of administrative processes that require documentation from permits to internal HR forms. I joined the team as a Graphic Design Intern to assist in modernizing their communication materials.",
+    challenge: "Many of the city's existing documents were outdated, visually inconsistent, and difficult to use. My goal was to audit these legacy documents and transform them into a cohesive system that aligned with the Shorewood Branding Kit while drastically improving usability.",
+    solution: "I utilized Adobe Acrobat and InDesign to redesign and engineer a suite of fillable PDFs. I strictly applied the Shorewood Branding Kit and focused on user experience by adding interactive form fields, dropdown menus, and a clear instructional hierarchy.",
+    result: "The project resulted in a library of modernized and user-friendly documents that streamlined administrative workflows. The shift to fillable PDFs successfully reduced paper waste and data entry errors.",
     gallery: []
   },
 
@@ -655,18 +652,18 @@ for (const id of Object.keys(projectData)) {
       { label: "Deliverables", value: "Mixed Media Studies" }
     ],
     hero: "images/art1.jpg",
-    heroCaption: "Cloth Vignette - Drawing cloth from sight using charcoal paints reductively. [18 x 25 in.]. Featured at the Drake University Anderson Gallery 52nd Annual Juried Student Exhibition in March 2023.",
+    heroCaption: "Cloth Vignette, Drawing cloth from sight using charcoal paints reductively. [18 x 25 in.]. Featured at the Drake University Anderson Gallery 52nd Annual Juried Student Exhibition in March 2023.",
     background: "While my professional work focuses on digital design and analytics, I maintain a dedicated practice in traditional fine art. This collection represents a compilation of studies created between 2021 and 2024.",
-    challenge: "The challenge in traditional media is the lack of an 'undo' button. Working with charcoal and ink requires commitment to every stroke and a deep understanding of physical materials.",
-    solution: "I primarily work with a variety of charcoals and pastels. My studies focus on recreating form in high-contrast lighting scenarios, relying on value and texture to communicate volume and emotion.",
-    result: "This ongoing practice keeps my fundamental artistic skills sharp. The discipline required for traditional drawing directly translates to my digital work, improving my eye for composition and balance.",
+    challenge: "The main challenge in traditional media is the lack of an undo button. Working with charcoal and ink requires total commitment to every stroke and a deep understanding of the physical materials.",
+    solution: "I primarily work with a variety of charcoals and pastels. My studies focus on recreating form in high-contrast lighting scenarios by relying on value and texture to communicate volume and emotion.",
+    result: "This ongoing practice keeps my fundamental artistic skills sharp. The discipline required for traditional drawing directly translates to my digital work by constantly improving my eye for composition and balance.",
     gallery: [
-      { src: "images/art2.jpg", caption: "Marble - Drawn from sight using oil pastels. [18 x 25 in.]" },
-      { src: "images/art4.jpg", caption: "Untitled - 30 minute photo study w/ charcoal. [8.5 x 11 in.]" },
-      { src: "images/art6.jpg", caption: "Untitled - 30 minute photo study w/ oil pastel. [11 x 8.5 in.]" },
-      { src: "images/art3.jpg", caption: "C.M.Y.K. - Psychological space w/ mixed media. [12 x 18 in.]" },
-      { src: "images/art5.jpg", caption: "Dissonance - Oil pastel. [18 x 25 in.]" },
-      { src: "images/art7.png", caption: "25 Fruits - Color & abstraction w/ mixed media. [4 x 4 in.]" }
+      { src: "images/art2.jpg", caption: "Marble, Drawn from sight using oil pastels. [18 x 25 in.]" },
+      { src: "images/art4.jpg", caption: "Untitled, 30 minute photo study w/ charcoal. [8.5 x 11 in.]" },
+      { src: "images/art6.jpg", caption: "Untitled, 30 minute photo study w/ oil pastel. [11 x 8.5 in.]" },
+      { src: "images/art3.jpg", caption: "C.M.Y.K., Psychological space w/ mixed media. [12 x 18 in.]" },
+      { src: "images/art5.jpg", caption: "Dissonance, Oil pastel. [18 x 25 in.]" },
+      { src: "images/art7.png", caption: "25 Fruits, Color & abstraction w/ mixed media. [4 x 4 in.]" }
     ]
   },
 
@@ -684,9 +681,9 @@ for (const id of Object.keys(projectData)) {
     hero: "images/data1.png",
     heroCaption: "Promotional flyers designed for the 'Save the Data' cybersecurity event.",
     background: "I partnered with the Tech Association of Iowa as President of the DATA Club to organize a tabletop ransomware exercise demonstrating business responses to cybersecurity crises for students and industry professionals.",
-    challenge: "The workshop needed a visual identity to attract students and professionals to a three-hour morning session, requiring a clear theme to distinguish it from standard academic lectures.",
-    solution: "I created a retro-computing visual style using pixelated icons and distressed typography, producing two colorways: 'System Blue' for light mode and 'Critical Pink' for dark mode, displayed side-by-side in science halls.",
-    result: "The campaign distinguished the event from other campus activities and drew attendance from students and tech professionals.",
+    challenge: "The workshop needed a visual identity to attract students and professionals to a three-hour morning session. It required a really clear theme to distinguish it from standard academic lectures.",
+    solution: "I created a retro-computing visual style using pixelated icons and distressed typography. I produced two colorways including System Blue for light mode and Critical Pink for dark mode that were displayed side-by-side in science halls.",
+    result: "The campaign easily distinguished the event from other campus activities and drew strong attendance from both students and tech professionals.",
     gallery: [
       { src: "images/data2.png", caption: "Light mode variant." },
       { src: "images/data3.png", caption: "Dark mode variant." }
@@ -706,9 +703,9 @@ for (const id of Object.keys(projectData)) {
     ],
     hero: "images/duolingo2.png",
     heroCaption: "Concept art for the Duolingo x Rocket League crossover event.",
-    background: "This project was a submission for the One Club for Creativity's 'Young Ones' competition. The national brief challenged students to develop innovative marketing strategies to help global brands, such as Duolingo, achieve specific growth goals.",
-    challenge: "Duolingo sought to penetrate a new demographic. We identified the gaming community as a prime target due to its reliance on cross-cultural communication. We selected Rocket League as the specific vehicle, leveraging its massive international player base.",
-    solution: "We pitched an immersive in-game crossover event. I spearheaded the visual development, utilizing Adobe Illustrator to merge official assets from the Duolingo brand kit with the Rocket League aesthetic.",
+    background: "This project was a submission for the One Club for Creativity's 'Young Ones' competition. The national brief challenged students to develop innovative marketing strategies to help global brands such as Duolingo achieve specific growth goals.",
+    challenge: "Duolingo sought to penetrate a new demographic. We identified the gaming community as a prime target due to its reliance on cross-cultural communication, so we selected Rocket League as the specific vehicle to leverage its massive international player base.",
+    solution: "We pitched an immersive in-game crossover event. I spearheaded the visual development utilizing Adobe Illustrator to merge official assets from the Duolingo brand kit seamlessly with the Rocket League aesthetic.",
     result: "Delivered a comprehensive campaign deck and video pitch that successfully merged two distinct brand identities, resulting in a professional-grade presentation suitable for a major tech client.",
     gallery: [
       { src: "images/duolingo4.png", caption: "Initial illustration sketch." }
@@ -729,9 +726,9 @@ for (const id of Object.keys(projectData)) {
     hero: "images/icymi2.png",
     heroCaption: "The official cover art for the ICYMI (In Case You Missed It) podcast.",
     background: "ICYMI was a weekly news podcast dedicated to covering stories around Drake University and the greater Des Moines area. As both a co-host and the lead designer, I aimed to keep the student body informed through an accessible audio format.",
-    challenge: "Podcasts are an audio medium, making visual discoverability a significant hurdle on a physical campus. We needed a strong visual identity that could translate from a digital thumbnail on Spotify to physical posters on crowded bulletin boards.",
-    solution: "I designed a bold, distinct podcast cover that served as the anchor for our visual brand, then developed a templated poster system for weekly episode rollouts to quickly generate fresh promotional assets.",
-    result: "The visual campaign successfully established ICYMI's presence across Drake University. The consistent poster distribution helped drive listenership and built a recognizable brand on campus.",
+    challenge: "Podcasts are strictly an audio medium, making visual discoverability a significant hurdle on a physical campus. We needed a strong visual identity that could translate from a tiny digital thumbnail on Spotify to physical posters on crowded bulletin boards.",
+    solution: "I designed a bold and distinct podcast cover that served as the anchor for our visual brand. I then developed a templated poster system for weekly episode rollouts to quickly generate fresh promotional assets.",
+    result: "The visual campaign successfully established ICYMI's presence across Drake University, and the consistent poster distribution helped drive listenership to build a recognizable brand on campus.",
     gallery: [
       { src: "images/icymi3.jpg", caption: "'Generic' poster displayed on campus whiteboard." },
       { src: "images/icymi6.png", caption: "Example of the variable flyer, posted onto Instagram." }

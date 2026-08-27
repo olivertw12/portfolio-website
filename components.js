@@ -130,7 +130,7 @@ const navConfig = {
                     </button>
                     <button role="menuitem" onclick="downloadResume('ats')" class="download-option">
                         <span class="download-option-title">ATS-friendly PDF</span>
-                        <span class="download-option-note">One column, no icons or rules. For résumé parsers.</span>
+                        <span class="download-option-note">One column without icons or rules for resume parsers.</span>
                     </button>
                 </div>
             </div>
