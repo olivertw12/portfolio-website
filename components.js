@@ -94,7 +94,7 @@ const HOME_LINKS = [
 const navConfig = {
     home: `
         <a href="/" class="flex items-center gap-3 group">
-            <span class="w-2.5 h-2.5 rounded-full bg-accent" aria-hidden="true"></span>
+            ${anchorMark('text-accent w-5 h-5 shrink-0')}
             <span class="text-ink font-display font-bold text-base lowercase tracking-tight">oliver t. williams</span>
         </a>
         <div class="flex items-center gap-2 md:gap-6">
