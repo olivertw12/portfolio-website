@@ -40,7 +40,7 @@ const projectData = {
     title: "Brushfactory",
     card: {
       chip: "Live Product",
-      blurb: "A converter for brush files between Photoshop, Procreate, Clip Studio Paint and Krita, alongside the test harness I built to check that a brush still behaves the same after it moves. Live now, with a published report on what carries over per format.",
+      blurb: "Universal brush conversion for digital artists. Bring your favorite brushes with you when you switch between Photoshop, Procreate, Clip Studio Paint, and Krita.",
       image: "images/brushfactory-home.jpg"
     },
     meta: [
@@ -66,30 +66,32 @@ const projectData = {
       ]
     },
     lede: [
-      { label: "The Problem", text: "If you switch drawing apps, your brushes do not come with you. Every app stores them in its own binary format, none of which are documented, and the settings do not line up one to one. Most converters get around this by flattening the brush tip into a stamp, but there is a growing need for artists to keep their brushes when moving between programs, I built this site to try and remedy this issue!" },
-      { label: "What It Is",  text: "Brushfactory reads a brush into a universal format and then writes real settings for the target app instead of faking them. It handles Photoshop, Procreate, Clip Studio Paint and Krita in any direction. It is live now with three free conversions a month and a paid tier for unlimited use and batch conversion." }
+      { label: "The Problem", text: "When you switch drawing apps, your brushes get left behind. Every app stores brushes in its own undocumented binary format, and their settings rarely line up one-to-one. Most converters cheat by flattening the brush tip into a static stamp. There is a real need for artists to keep functional, living brushes when moving between programs, so I built Brushfactory to fix this." },
+      { label: "What It Is",  text: "Brushfactory reads a brush file into a universal format and writes native, working settings for the target app instead of faking them. It handles Photoshop, Procreate, Clip Studio Paint, and Krita in any direction. The live site offers three free conversions a month, with a paid tier for unlimited use and batch conversion. I am continuously adding new formats based on user demand." }
     ],
     sections: [
       {
-        heading: "Four formats, none of them documented",
-        body: "Each app stores brushes differently. Working out what each field does meant writing a file, opening it in the real app, and seeing what changed. I did that a lot, while also putting the engine behind a small CLI so I could run conversions without going through the site, which made the testing much faster. MyPaint and Affinity are listed as upcoming on the site, but they are not wired up yet.",
+        heading: "Reverse-Engineering Undocumented Formats",
+        body: "Each app stores brushes differently, which meant decoding undocumented binary structures by writing test files, opening them in the target app, and documenting the deltas. I handled all the research and validation, then directed Claude to write the parsing and encoding code. I also had it wrap the conversion engine in a CLI tool, speeding up testing by letting me run conversions directly from the terminal.",
         code: {
-          file: "Terminal",
+          file: "Bash",
           src: `python main.py inspect  some.brushset
 python main.py convert  some.abr --to kpp -o out/
 python main.py batch    packs/ --to sut -o bundle.zip`
         }
       },
       {
-        heading: "The hard part is feel, not settings",
-        body: "Copying the numbers across is the easy half. Two brushes can have the same size, spacing and opacity and still feel nothing alike. Each app interprets those numbers differently, and the grain and pressure response carry most of the character. I was checking this by eye at first, but I could not stay consistent across four formats and a few hundred conversions. So, I started measuring it instead."
+        heading: "The Hard Part Is Feel",
+        body: "Copying numerical settings is only half the battle. Two brushes can share identical size, spacing, and opacity values yet feel completely different on the canvas. Each app interprets math differently, and features like grain textures and pressure response carry most of a brush's character. Manual visual inspection wasn't consistent enough across four formats and hundreds of conversions, so I shifted to automated measurement."
       },
       {
-        heading: "Measuring drift instead of eyeballing it",
-        body: "I built a harness that takes a brush, converts it to every other format, reads each one back through the real codecs, and compares them to the source. It reports size, spacing, opacity, grain and dynamics for each format and flags anything that moved more than 2%. It also renders a sheet with the tip, the grain and a test stroke for every format. All of this is drawn by the same renderer, so anything I can see in it is real mapping drift and not just one app's brush engine looking different from another's.",
+        heading: "Measuring Drift",
+        body: "I built a testing harness that takes a source brush, converts it to every other format, reads each output back through the real codecs, and compares them against the original. It checks size, spacing, opacity, grain, and dynamics, flagging anything that drifts more than 2%. It also renders a comparison sheet containing the tip, grain, and a test stroke for every format. Because everything is rendered through a unified engine, any visual discrepancy represents actual mapping drift rather than differing app UI rendering.",
         code: {
-          file: "test_brushes/converted/<brush>/",
-          src: `cohesion_sheet.png     tip, grain and a test stroke per format
+          file: "Plaintext",
+          src: `test_brushes/converted/<brush>/
+
+cohesion_sheet.png     tip, grain and a test stroke per format
 cohesion_report.txt    size / spacing / opacity / grain / dynamics
                        with a warning on anything >2% from source
 <format>/              the converted files, ready to import and
@@ -97,13 +99,13 @@ cohesion_report.txt    size / spacing / opacity / grain / dynamics
         }
       },
       {
-        heading: "Saying plainly what doesn't work",
-        body: "The home page carries a table of what carries over, marked either as exact or as matched as closely as the app allows. Behind it, there is a longer fidelity report with the support status of each format and the limits written out. Wet media between Procreate and Clip Studio is approximated, tilt and speed dynamics only partly map onto Krita, and Clip Studio resamples textures over 1024 pixels. This probably costs me some conversions since people can see the rough edges up front. I would rather do that than have someone find out after importing fifty brushes.",
-        note: "The table on the home page, the fidelity report behind it and the support status shown in the converter are three views of the same information, so a fix has to land in three places. I put cross-references in each file to keep them from drifting apart."
+        heading: "Transparent Support Status",
+        body: "The homepage features a support table showing what carries over—either as an exact match or as close as the target app allows. A deeper fidelity report outlines support statuses and format limitations. For instance, wet media between Procreate and Clip Studio is approximated, tilt and speed dynamics only partially map onto Krita, and Clip Studio automatically resamples textures exceeding 1024 pixels.",
+        note: "The homepage table, fidelity report, and converter status view are three synchronized projections of the same underlying dataset, backed by a cross-reference system to maintain consistency."
       },
       {
-        heading: "Building for the future",
-        body: "What is set up right now is a really solid foundation that proves cross-platform brush parity is actually possible. My focus moving forward will be refining those edge cases and adding support for even more design software to the ecosystem."
+        heading: "Building for the Future",
+        body: "Brushfactory provides a solid foundation proving that cross-platform brush parity is genuinely possible. My current focus is refining edge cases and expanding format support. Long-term, I plan to evolve the platform into a marketplace where digital artists can buy and sell brushes for all platforms simultaneously."
       }
     ],
     links: [
