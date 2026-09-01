@@ -14,6 +14,18 @@
    build after changing either file (see tailwind-build/README.md).
    ============================================================ */
 
+/* Plus Jakarta Sans shares one glyph between hyphen and minus, and
+   Chrome's print-to-PDF maps that glyph back to U+2212 — so text copied
+   out of a saved resume PDF pastes with math minuses in the phone number
+   and every hyphenated word. Serving just U+002D from a system font
+   keeps the copied text ASCII; where none of these locals exist the
+   stack falls through to Jakarta and nothing changes visually. */
+@font-face {
+    font-family: 'ascii-hyphen';
+    src: local('Arial'), local('Helvetica Neue'), local('Roboto');
+    unicode-range: U+2D;
+}
+
 :root {
     /* --- Surfaces --- */
     --color-page:    #EEF1F3;   /* page base                                  */
@@ -73,7 +85,7 @@
     --color-syn-number:  #d19a66;
     --color-syn-comment: #8b9299;
     /* --- Typography --- */
-    --font-sans: 'Plus Jakarta Sans', sans-serif;
+    --font-sans: 'ascii-hyphen', 'Plus Jakarta Sans', sans-serif;
     --font-display: 'Gabarito', 'Plus Jakarta Sans', sans-serif;  /* the name + all display text; swap here to try another */
     --font-mono: 'JetBrains Mono', monospace;
 

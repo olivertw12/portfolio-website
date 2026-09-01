@@ -9,6 +9,17 @@
     <style>
         @media print {
             body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+            /* The styled sheet has to land on one page, and Chrome can't split
+               the body grid across pages — if the sheet runs even a point long,
+               the whole grid drops to page two. The main column sits within a
+               few points of the fold, so the sheet trades 0.1in of vertical
+               padding for that headroom. ATS mode has its own margins and is
+               allowed two pages; the cover letter doesn't use this rule. */
+            html[data-format="styled"] .print-container {
+                padding-top: 0.4in !important;
+                padding-bottom: 0.4in !important;
+            }
         }
 
         /* Mode toggle visibility */
@@ -66,15 +77,15 @@
 
             /* This version is allowed two pages, so nothing here is fighting for
                space. Everything below buys legibility with room. */
-            html[data-format="ats"] { font-size: 13px !important; }
+            html[data-format="ats"] { font-size: 12.5px !important; }
             [data-format="ats"] .print-container { padding: 0 !important; }
             [data-format="ats"] p,
             [data-format="ats"] li { line-height: 1.55; }
-            [data-format="ats"] li + li { margin-top: 0.25rem; }
-            [data-format="ats"] h3 { margin-top: 1.6rem; padding-bottom: 0.3rem; }
+            [data-format="ats"] li + li { margin-top: 0.2rem; }
+            [data-format="ats"] h3 { margin-top: 1.35rem; padding-bottom: 0.3rem; }
             [data-format="ats"] aside > section:first-child h3,
             [data-format="ats"] .print-container > .grid > div > section:first-child h3 { margin-top: 0; }
-            [data-format="ats"] section > div { margin-bottom: 1.1rem; }
+            [data-format="ats"] section > div { margin-bottom: 0.95rem; }
             [data-format="ats"] h4 { margin-bottom: 0.1rem; }
 
             /* Break control. Keep each job whole, never strand a section heading at
@@ -102,8 +113,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Gabarito:wght@600;700;800&family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/assets/tailwind.css?v=138e544e">
-    <link rel="stylesheet" href="/style.css?v=faf26939">
+    <link rel="stylesheet" href="/assets/tailwind.css?v=83a9863f">
+    <link rel="stylesheet" href="/style.css?v=8adf910d">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body class="preload bg-page font-sans flex flex-col transition-colors duration-500" data-mode="design">
@@ -141,7 +152,7 @@
                     </a>
                     <span class="h-4 w-px bg-divider self-center hidden md:block print:block"></span>
                     <span class="md:justify-self-start flex items-center gap-2">
-                        Minnetonka, MN <i class="fa-solid fa-location-dot text-xs text-muted"></i>
+                        Chicago, IL <i class="fa-solid fa-location-dot text-xs text-muted"></i>
                     </span>
 
                     <a href="mailto:oliver_tw@icloud.com" class="md:justify-self-end hover:text-accent transition-colors flex items-center gap-2">
@@ -330,13 +341,9 @@
                                 <span class="text-muted text-xs font-mono print:text-sm whitespace-nowrap shrink-0 ml-4">Aug 2026 &ndash; Present</span>
                             </div>
                             <p class="text-body font-medium text-sm mb-1 print:mb-0.5 print:text-sm">Brushfactory.co</p>
-                            <ul class="list-disc list-outside ml-4 text-body font-normal text-sm space-y-0.5 marker-muted print:text-base design-only">
-                                <li>Designed and shipped a live conversion tool that translates brushes between Photoshop, Procreate, Clip Studio Paint, and Krita while preserving pressure response and grain.</li>
-                                <li>Executed the complete brand identity and UI/UX from the ground up including color system, typography, custom wordmark, logo, and responsive front end.</li>
-                            </ul>
-                            <ul class="list-disc list-outside ml-4 text-body font-normal text-sm space-y-0.5 marker-muted print:text-base data-only">
-                                <li>Built a bidirectional converter mapping brush settings across four proprietary undocumented formats (Photoshop, Procreate, Clip Studio Paint, Krita).</li>
-                                <li>Engineered a test harness that round-trips each brush through every format measuring drift in size, spacing, opacity, grain, and dynamics to flag deviations over 2%.</li>
+                            <ul class="list-disc list-outside ml-4 text-body font-normal text-sm space-y-0.5 marker-muted print:text-base">
+                                <li>Designed and shipped a responsive web application (HTML/Tailwind/JS) to convert digital illustration brushes across major platforms, executing the complete UI/UX and brand identity from the ground up.</li>
+                                <li>Built the backend conversion logic and test harness in Python to parse proprietary formats, measuring drift in brush size, spacing, and pressure response.</li>
                             </ul>
                         </div>
 
