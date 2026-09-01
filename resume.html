@@ -78,6 +78,13 @@
             [data-format="ats"] .ats-combined { display: none !important; }
             [data-format="ats"] .ats-only { display: block; }
 
+            /* Skills flatten to comma-separated lines — the form parsers expect
+               for a skills section, and one line per category instead of one
+               per tool keeps the sheet at two pages. */
+            [data-format="ats"] .skills-list { list-style: none; }
+            [data-format="ats"] .skills-list li { display: inline; }
+            [data-format="ats"] .skills-list li:not(:last-child)::after { content: ", "; }
+
             /* Icon glyphs arrive in that stream as stray characters, and rules and
                separators as noise. Text only. */
             [data-format="ats"] i,
@@ -198,7 +205,7 @@
 
                         <div class="design-only">
                             <p class="text-muted text-xs font-semibold uppercase tracking-wide mb-1">Design</p>
-                            <ul class="text-body font-normal text-sm space-y-0.5 list-disc list-inside marker-muted mb-3 print:text-base">
+                            <ul class="skills-list text-body font-normal text-sm space-y-0.5 list-disc list-inside marker-muted mb-3 print:text-base">
                                 <li>Adobe Illustrator</li>
                                 <li>Adobe InDesign</li>
                                 <li>Adobe Photoshop</li>
@@ -206,24 +213,32 @@
                                 <li>Blender</li>
                             </ul>
                             <p class="text-muted text-xs font-semibold uppercase tracking-wide mb-1">Data &amp; Technical</p>
-                            <ul class="text-body font-normal text-sm space-y-0.5 list-disc list-inside marker-muted print:text-base">
+                            <ul class="skills-list text-body font-normal text-sm space-y-0.5 list-disc list-inside marker-muted print:text-base">
                                 <li>R</li>
                                 <li>Python</li>
+                                <li>SQL</li>
+                                <li>Tableau</li>
+                                <li>Power BI</li>
                                 <li>Microsoft Excel</li>
-                                <li>HTML / CSS</li>
+                                <li>HTML / CSS / JavaScript</li>
+                                <li>Git / GitHub</li>
                             </ul>
                         </div>
 
                         <div class="data-only">
                             <p class="text-muted text-xs font-semibold uppercase tracking-wide mb-1">Data &amp; Technical</p>
-                            <ul class="text-body font-normal text-sm space-y-0.5 list-disc list-inside marker-muted mb-3 print:text-base">
+                            <ul class="skills-list text-body font-normal text-sm space-y-0.5 list-disc list-inside marker-muted mb-3 print:text-base">
                                 <li>R</li>
                                 <li>Python</li>
+                                <li>SQL</li>
+                                <li>Tableau</li>
+                                <li>Power BI</li>
                                 <li>Microsoft Excel</li>
-                                <li>HTML / CSS</li>
+                                <li>HTML / CSS / JavaScript</li>
+                                <li>Git / GitHub</li>
                             </ul>
                             <p class="text-muted text-xs font-semibold uppercase tracking-wide mb-1">Design</p>
-                            <ul class="text-body font-normal text-sm space-y-0.5 list-disc list-inside marker-muted print:text-base">
+                            <ul class="skills-list text-body font-normal text-sm space-y-0.5 list-disc list-inside marker-muted print:text-base">
                                 <li>Adobe Illustrator</li>
                                 <li>Adobe InDesign</li>
                                 <li>Adobe Photoshop</li>
