@@ -26,6 +26,10 @@
         [data-mode="design"] .data-only   { display: none !important; }
         [data-mode="data"]   .design-only { display: none !important; }
 
+        /* Entries that exist only on the ATS sheet (shown by the ATS print
+           rules below). */
+        .ats-only { display: none; }
+
         /* Mode buttons — they live inside the nav-pill in the navbar.
            Both colors come from tokens that flip in .dark, so there is no
            dark-mode variant to keep in sync here. */
@@ -67,6 +71,13 @@
             [data-format="ats"] header a,
             [data-format="ats"] header span { justify-self: start; }
 
+            /* On screen and on the styled sheet, Handshake and DataAnnotation
+               share one AI Trainer entry to hold the one-page budget. A parser
+               reads one employer per entry, so the ATS sheet swaps the combined
+               entry for the two separate roles, worded as on LinkedIn. */
+            [data-format="ats"] .ats-combined { display: none !important; }
+            [data-format="ats"] .ats-only { display: block; }
+
             /* Icon glyphs arrive in that stream as stray characters, and rules and
                separators as noise. Text only. */
             [data-format="ats"] i,
@@ -77,20 +88,21 @@
 
             /* This version is allowed two pages, so nothing here is fighting for
                space. Everything below buys legibility with room. */
-            html[data-format="ats"] { font-size: 12.5px !important; }
+            html[data-format="ats"] { font-size: 12px !important; }
             [data-format="ats"] .print-container { padding: 0 !important; }
             [data-format="ats"] p,
-            [data-format="ats"] li { line-height: 1.55; }
-            [data-format="ats"] li + li { margin-top: 0.2rem; }
-            [data-format="ats"] h3 { margin-top: 1.35rem; padding-bottom: 0.3rem; }
+            [data-format="ats"] li { line-height: 1.45; }
+            [data-format="ats"] h3 { margin-top: 1.1rem; padding-bottom: 0.3rem; }
             [data-format="ats"] aside > section:first-child h3,
             [data-format="ats"] .print-container > .grid > div > section:first-child h3 { margin-top: 0; }
-            [data-format="ats"] section > div { margin-bottom: 0.95rem; }
+            [data-format="ats"] section > div { margin-bottom: 0.85rem; }
             [data-format="ats"] h4 { margin-bottom: 0.1rem; }
 
-            /* Break control. Keep each job whole, never strand a section heading at
-               the foot of a page, and never leave a single line behind. */
-            [data-format="ats"] section > div { break-inside: avoid; }
+            /* Break control. An entry may split between bullets — with the split
+               roles this sheet packs too tightly for whole-job blocks, which
+               left a page mostly empty and pushed the sheet to three pages.
+               Headings still stay with what follows them, and no line is ever
+               stranded alone. */
             [data-format="ats"] h3,
             [data-format="ats"] h4 { break-after: avoid; }
             [data-format="ats"] p,
@@ -279,7 +291,7 @@
                             </ul>
                         </div>
 
-                        <div class="mb-3 print:mb-1.5">
+                        <div class="mb-3 print:mb-1.5 ats-combined">
                             <div class="flex justify-between items-baseline">
                                 <h4 class="text-ink text-lg font-bold print:text-xl leading-tight">AI Trainer</h4>
                                 <span class="text-muted text-xs font-mono print:text-sm whitespace-nowrap shrink-0 ml-4">Apr 2026 &ndash; Present</span>
@@ -289,6 +301,33 @@
                                 <li>Authored complex graphic design project briefs to stress-test AI model capabilities across 2D software including GIMP, Inkscape, and Krita.</li>
                                 <li>Reviewed and graded AI-generated text and images for accuracy, quality, and logical flow while providing detailed written rationales for each decision.</li>
                                 <li>Developed structured evaluation rubrics and scoring datasets to train machine learning models on professional design standards.</li>
+                            </ul>
+                        </div>
+
+                        <div class="mb-3 print:mb-1.5 ats-only">
+                            <div class="flex justify-between items-baseline">
+                                <h4 class="text-ink text-lg font-bold print:text-xl leading-tight">AI Trainer</h4>
+                                <span class="text-muted text-xs font-mono print:text-sm whitespace-nowrap shrink-0 ml-4">Apr 2026 &ndash; Present</span>
+                            </div>
+                            <p class="text-body font-medium text-sm mb-1 print:mb-0.5 print:text-sm">DataAnnotation</p>
+                            <ul class="list-disc list-outside ml-4 text-body font-normal text-sm space-y-0.5 marker-muted print:text-base">
+                                <li>Applying a dual background in data analytics and graphic design to evaluate and refine unreleased AI models through rigorous human-feedback data curation.</li>
+                                <li>Evaluated the composition, lighting, and aesthetic quality of AI-generated imagery, specifically identifying structural inconsistencies, prompt adherence, and visual artifacts.</li>
+                                <li>Critically reviewed and graded AI-generated text for factual accuracy, natural phrasing, and logical flow across a wide variety of complex topics.</li>
+                                <li>Provided detailed, written rationales for model grading, contributing to high-quality datasets used to train and align language and vision models.</li>
+                            </ul>
+                        </div>
+
+                        <div class="mb-3 print:mb-1.5 ats-only">
+                            <div class="flex justify-between items-baseline">
+                                <h4 class="text-ink text-lg font-bold print:text-xl leading-tight">2D Design Specialist</h4>
+                                <span class="text-muted text-xs font-mono print:text-sm whitespace-nowrap shrink-0 ml-4">Apr 2026 &ndash; Jul 2026</span>
+                            </div>
+                            <p class="text-body font-medium text-sm mb-1 print:mb-0.5 print:text-sm">Handshake AI</p>
+                            <ul class="list-disc list-outside ml-4 text-body font-normal text-sm space-y-0.5 marker-muted print:text-base">
+                                <li>Authored complex graphic design project briefs to stress-test model capabilities and tool execution within 2D design software including GIMP, LibreSprite, Inkscape, and Krita.</li>
+                                <li>Developed structured, binary evaluation rubrics and scoring datasets that directly train machine learning models to evaluate design outputs.</li>
+                                <li>Translated advanced design workflows into deterministic, step-by-step verification processes used by automated systems to grade outputs and optimize model weights.</li>
                             </ul>
                         </div>
 
