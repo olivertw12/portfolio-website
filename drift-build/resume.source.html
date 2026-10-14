@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth" data-format="styled">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume_Oliver_Williams</title>
+    <meta name="description" content="Resume of Oliver T. Williams.">
+
+    <style>
+        @media print {
+            body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+            /* The styled sheet has to land on one page, and Chrome can't split
+               the body grid across pages — if the sheet runs even a point long,
+               the whole grid drops to page two. The main column sits within a
+               few points of the fold, so the sheet trades 0.1in of vertical
+               padding for that headroom. ATS mode has its own margins and is
+               allowed two pages; the cover letter doesn't use this rule. */
+            html[data-format="styled"] .print-container {
+                padding-top: 0.4in !important;
+                padding-bottom: 0.4in !important;
+            }
+        }
+
+        /* Mode toggle visibility */
+        [data-mode="design"] .data-only   { display: none !important; }
+        [data-mode="data"]   .design-only { display: none !important; }
+
+        /* Entries that exist only on the ATS sheet (shown by the ATS print
+           rules below). */
+        .ats-only { display: none; }
+
+        /* Mode buttons — they live inside the nav-pill in the navbar.
+           Both colors come from tokens that flip in .dark, so there is no
+           dark-mode variant to keep in sync here. */
+        .mode-btn {
+            padding: 5px 12px;
+            border-radius: 7px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            color: var(--color-text-muted);
+            border: none;
+            background: transparent;
+            font-family: var(--font-sans);
+            white-space: nowrap;
+        }
+        .mode-btn.active {
+            background: var(--color-surface);
+            color: var(--color-text-primary);
+            box-shadow: var(--shadow-soft);
+        }
+        .mode-btn:not(.active):hover { color: var(--color-text-body); }
+
+        /* ATS layout.
+           Résumé parsers read a PDF as a stream of text. Multi-column layouts
+           interleave the columns in that stream, icon glyphs come through as
+           stray characters, and rules and separators become noise. This mode
+           collapses the sheet to a single column and strips anything that is
+           not text, while keeping the same content and the same section
+           headings the parser keys on. Screen layout is untouched. */
+        @media print {
+            /* Single column. A parser reads the PDF as one stream of text, so a
+               two-column sheet interleaves the two columns into nonsense. */
+            [data-format="ats"] .print-container > .grid { display: block; }
+            [data-format="ats"] aside,
+            [data-format="ats"] .print-container > .grid > div { width: 100%; }
+            [data-format="ats"] header { display: block; }
+            [data-format="ats"] header > div:last-child { display: block; margin-top: 0.5rem; }
+            [data-format="ats"] header a,
+            [data-format="ats"] header span { justify-self: start; }
+
+            /* On screen and on the styled sheet, Handshake and DataAnnotation
+               share one AI Trainer entry to hold the one-page budget. A parser
+               reads one employer per entry, so the ATS sheet swaps the combined
+               entry for the two separate roles, worded as on LinkedIn. */
+            [data-format="ats"] .ats-combined { display: none !important; }
+            [data-format="ats"] .ats-only { display: block; }
+
+            /* Skills flatten to comma-separated lines — the form parsers expect
+               for a skills section, and one line per category instead of one
+               per tool keeps the sheet at two pages. */
+            [data-format="ats"] .skills-list { list-style: none; }
+            [data-format="ats"] .skills-list li { display: inline; }
+            [data-format="ats"] .skills-list li:not(:last-child)::after { content: ", "; }
+
+            /* Icon glyphs arrive in that stream as stray characters, and rules and
+               separators as noise. Text only. */
+            [data-format="ats"] i,
+            [data-format="ats"] svg,
+            [data-format="ats"] .bg-divider { display: none !important; }
+            [data-format="ats"] * { border-color: transparent !important; }
+            [data-format="ats"] h3 { border-bottom: 1px solid #000 !important; }
+
+            /* This version is allowed two pages, so nothing here is fighting for
+               space. Everything below buys legibility with room. */
+            html[data-format="ats"] { font-size: 12px !important; }
+            [data-format="ats"] .print-container { padding: 0 !important; }
+            [data-format="ats"] p,
+            [data-format="ats"] li { line-height: 1.45; }
+            [data-format="ats"] h3 { margin-top: 1.1rem; padding-bottom: 0.3rem; }
+            [data-format="ats"] aside > section:first-child h3,
+            [data-format="ats"] .print-container > .grid > div > section:first-child h3 { margin-top: 0; }
+            [data-format="ats"] section > div { margin-bottom: 0.85rem; }
+            [data-format="ats"] h4 { margin-bottom: 0.1rem; }
+
+            /* Break control. An entry may split between bullets — with the split
+               roles this sheet packs too tightly for whole-job blocks, which
+               left a page mostly empty and pushed the sheet to three pages.
+               Headings still stay with what follows them, and no line is ever
+               stranded alone. */
+            [data-format="ats"] h3,
+            [data-format="ats"] h4 { break-after: avoid; }
+            [data-format="ats"] p,
+            [data-format="ats"] li { orphans: 2; widows: 2; }
+        }
+    </style>
+
+    <script>
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else { document.documentElement.classList.remove('dark'); }
+    </script>
+
+    <meta name="theme-color" content="#EEF1F3" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#10151A" media="(prefers-color-scheme: dark)">
+    <link rel="icon" href="/images/favicon-dark.png" media="(prefers-color-scheme: light)">
+    <link rel="icon" href="/images/favicon-light.png" media="(prefers-color-scheme: dark)">
+    <link rel="icon" href="/images/favicon-dark.png">
+    <link rel="canonical" href="https://olivertwilliams.com/resume.html">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gabarito:wght@600;700;800&family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/tailwind.css?v=71152ad5">
+    <link rel="stylesheet" href="/style.css?v=8adf910d">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="preload bg-page font-sans flex flex-col transition-colors duration-500" data-mode="design">
+
+    <a href="#main" class="skip-link">Skip to content</a>
+
+
+    <div class="site-wash" aria-hidden="true"><div class="wash-orb a"></div><div class="wash-orb b"></div></div>
+
+    <nav id="navbar-placeholder" data-type="resume" class="fixed top-4 left-0 right-0 z-nav px-4 md:px-8 print:hidden"></nav>
+
+    <main id="main" tabindex="-1" class="pt-36 pb-12 px-4 md:px-8 flex justify-center mb-12 print:p-0 print:m-0 print:block">
+
+        <!-- The sheet is letter-sized from lg up and full width below it, so a
+             phone gets a readable stacked resume rather than a pinch-zoom PDF.
+             The print: variants force the paper layout back regardless of the
+             viewport the browser reports while printing. -->
+        <div class="print-container w-full lg:w-page lg:min-h-page bg-surface p-6 md:p-8 rounded-3xl shadow-paper border border-themed transition-colors duration-500 box-border print:min-h-0 print:h-auto print:w-full print:shadow-none print:border-none print:rounded-none print:p-0 print:m-0">
+
+            <!-- ── HEADER ── -->
+            <header class="flex flex-col md:flex-row md:justify-between md:items-center gap-4 md:gap-0 mb-4 print:flex-row print:justify-between print:items-center print:mb-8">
+                <div class="flex flex-col">
+                    <div class="flex items-center">
+                        <h1 class="text-ink text-3xl font-bold tracking-tight leading-none">Oliver T. Williams</h1>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="text-ink inline-block w-6 h-6 ml-3 opacity-90">
+                            <path d="M12 6v16"/><path d="m19 13 2-1a9 9 0 0 1-18 0l2 1"/><path d="M9 11h6"/><circle cx="12" cy="4" r="2"/>
+                        </svg>
+                    </div>
+                    <p class="text-muted text-lg mt-1 lg:whitespace-nowrap design-only">Graphic Designer &amp; Data Analyst</p>
+                    <p class="text-muted text-lg mt-1 lg:whitespace-nowrap data-only">Data Analyst &amp; Graphic Designer</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-resume-contact print:grid-cols-resume-contact gap-x-4 gap-y-1 text-sm font-medium text-body print:text-base">
+                    <a href="tel:3179148047" class="md:justify-self-end hover:text-accent transition-colors flex items-center gap-2">
+                        317-914-8047 <i class="fa-solid fa-phone text-xs text-muted"></i>
+                    </a>
+                    <span class="h-4 w-px bg-divider self-center hidden md:block print:block"></span>
+                    <span class="md:justify-self-start lg:whitespace-nowrap flex items-center gap-2">
+                        Chicago, IL (relocating Oct 2026) <i class="fa-solid fa-location-dot text-xs text-muted"></i>
+                    </span>
+
+                    <a href="mailto:oliver_tw@icloud.com" class="md:justify-self-end hover:text-accent transition-colors flex items-center gap-2">
+                        oliver_tw@icloud.com <i class="fa-solid fa-envelope text-xs text-muted"></i>
+                    </a>
+                    <span class="h-4 w-px bg-divider self-center hidden md:block print:block"></span>
+                    <a href="https://olivertwilliams.com" target="_blank" rel="noopener" class="md:justify-self-start hover:text-accent transition-colors flex items-center gap-2">
+                        olivertwilliams.com <i class="fa-solid fa-globe text-xs text-muted"></i>
+                    </a>
+                </div>
+            </header>
+
+            <!-- ── BODY GRID ── -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 print:grid-cols-12 gap-8 print:gap-4">
+
+                <!-- ── SIDEBAR ── -->
+                <aside class="lg:col-span-3 print:col-span-3 space-y-4 print:space-y-2">
+
+                    <section>
+                        <h3 class="text-muted text-sm font-bold mb-2 border-b border-solid-themed pb-1.5">Profile</h3>
+                        <p class="text-body font-normal text-sm print:text-base design-only">
+                            Designer with a background in data analytics currently working in AI training and evaluation. I use my dual experience to review and benchmark model outputs for design quality.
+                        </p>
+                        <p class="text-body font-normal text-sm print:text-base data-only">
+                            Data analyst with a background in graphic design currently working in AI model evaluation. I build reproducible data pipelines and benchmarking systems, drawing on both degrees to assess and improve model outputs.
+                        </p>
+                    </section>
+
+                    <section>
+                        <h3 class="text-muted text-sm font-bold mb-2 border-b border-solid-themed pb-1.5">Skills &amp; Tools</h3>
+
+                        <div class="design-only">
+                            <p class="text-muted text-xs font-semibold uppercase tracking-wide mb-1">Design</p>
+                            <ul class="skills-list text-body font-normal text-sm space-y-0.5 list-disc list-inside marker-muted mb-3 print:text-base">
+                                <li>Adobe Illustrator</li>
+                                <li>Adobe InDesign</li>
+                                <li>Adobe Photoshop</li>
+                                <li>Acrobat Pro</li>
+                                <li>Blender</li>
+                            </ul>
+                            <p class="text-muted text-xs font-semibold uppercase tracking-wide mb-1">Data &amp; Technical</p>
+                            <ul class="skills-list text-body font-normal text-sm space-y-0.5 list-disc list-inside marker-muted print:text-base">
+                                <li>R</li>
+                                <li>Python</li>
+                                <li>SQL</li>
+                                <li>Tableau</li>
+                                <li>Power BI</li>
+                                <li>Microsoft Excel</li>
+                                <li>HTML / CSS / JavaScript</li>
+                                <li>Git / GitHub</li>
+                            </ul>
+                        </div>
+
+                        <div class="data-only">
+                            <p class="text-muted text-xs font-semibold uppercase tracking-wide mb-1">Data &amp; Technical</p>
+                            <ul class="skills-list text-body font-normal text-sm space-y-0.5 list-disc list-inside marker-muted mb-3 print:text-base">
+                                <li>R</li>
+                                <li>Python</li>
+                                <li>SQL</li>
+                                <li>Tableau</li>
+                                <li>Power BI</li>
+                                <li>Microsoft Excel</li>
+                                <li>HTML / CSS / JavaScript</li>
+                                <li>Git / GitHub</li>
+                            </ul>
+                            <p class="text-muted text-xs font-semibold uppercase tracking-wide mb-1">Design</p>
+                            <ul class="skills-list text-body font-normal text-sm space-y-0.5 list-disc list-inside marker-muted print:text-base">
+                                <li>Adobe Illustrator</li>
+                                <li>Adobe InDesign</li>
+                                <li>Adobe Photoshop</li>
+                                <li>Acrobat Pro</li>
+                                <li>Blender</li>
+                            </ul>
+                        </div>
+                    </section>
+
+                    <section>
+                        <h3 class="text-muted text-sm font-bold mb-2 border-b border-solid-themed pb-1.5">Education</h3>
+                        <div class="design-only">
+                            <div class="mb-3 print:mb-1.5">
+                                <h4 class="text-ink font-bold print:text-lg">BA Graphic Design</h4>
+                                <p class="text-body font-normal text-sm mt-0.5 print:text-base">Drake University</p>
+                                <p class="text-muted text-xs mt-0.5 print:text-sm whitespace-nowrap">May 2025</p>
+                            </div>
+                            <div>
+                                <h4 class="text-ink font-bold print:text-lg">BS Data Analytics</h4>
+                                <p class="text-body font-normal text-sm mt-0.5 print:text-base">Drake University</p>
+                                <p class="text-muted text-xs mt-0.5 print:text-sm whitespace-nowrap">May 2025</p>
+                            </div>
+                        </div>
+                        <div class="data-only">
+                            <div class="mb-3 print:mb-1.5">
+                                <h4 class="text-ink font-bold print:text-lg">BS Data Analytics</h4>
+                                <p class="text-body font-normal text-sm mt-0.5 print:text-base">Drake University</p>
+                                <p class="text-muted text-xs mt-0.5 print:text-sm whitespace-nowrap">May 2025</p>
+                            </div>
+                            <div>
+                                <h4 class="text-ink font-bold print:text-lg">BA Graphic Design</h4>
+                                <p class="text-body font-normal text-sm mt-0.5 print:text-base">Drake University</p>
+                                <p class="text-muted text-xs mt-0.5 print:text-sm whitespace-nowrap">May 2025</p>
+                            </div>
+                        </div>
+                    </section>
+
+                </aside>
+
+                <!-- ── MAIN COLUMN ── -->
+                <div class="lg:col-span-9 print:col-span-9 space-y-4 print:space-y-2">
+
+                    <section>
+                        <h3 class="text-muted text-sm font-bold mb-3 print:mb-1.5 border-b border-solid-themed pb-1.5">Work Experience</h3>
+
+                        <!-- Mercor: title, employer and both bullet sets below are Mercor's
+                             own approved wording. The client and the client's tooling and
+                             project names are confidential and must not appear here, on the
+                             site, or on LinkedIn. -->
+                        <div class="mb-3 print:mb-1.5">
+                            <div class="flex justify-between items-baseline">
+                                <h4 class="text-ink text-lg font-bold print:text-xl leading-tight">Generalist Expert [Contract]</h4>
+                                <span class="text-muted text-xs font-mono print:text-sm whitespace-nowrap shrink-0 ml-4">Aug 2026 &ndash; Present</span>
+                            </div>
+                            <p class="text-body font-medium text-sm mb-1 print:mb-0.5 print:text-sm">Mercor</p>
+                            <ul class="list-disc list-outside ml-4 text-body font-normal text-sm space-y-0.5 marker-muted print:text-base design-only">
+                                <li>Conducted qualitative and visual evaluations of AI model outputs regarding UI/UX, visual hierarchy, and layout consistency.</li>
+                                <li>Evaluated visual/multimodal model responses against established design standards and functional criteria.</li>
+                                <li>Formulated detailed design tasks and provided structured feedback to refine model performance on design-centric requests.</li>
+                            </ul>
+                            <ul class="list-disc list-outside ml-4 text-body font-normal text-sm space-y-0.5 marker-muted print:text-base data-only">
+                                <li>Evaluated, annotated, and curated complex datasets to support AI model training and fine-tuning.</li>
+                                <li>Maintained high data quality and throughput standards in structured evaluation and QA workflows.</li>
+                                <li>Formulated edge-case tasks and benchmarked model outputs against strict accuracy guidelines.</li>
+                            </ul>
+                        </div>
+
+                        <div class="mb-3 print:mb-1.5 ats-combined">
+                            <div class="flex justify-between items-baseline">
+                                <h4 class="text-ink text-lg font-bold print:text-xl leading-tight">AI Trainer [Contract]</h4>
+                                <span class="text-muted text-xs font-mono print:text-sm whitespace-nowrap shrink-0 ml-4">Apr 2026 &ndash; Present</span>
+                            </div>
+                            <p class="text-body font-medium text-sm mb-1 print:mb-0.5 print:text-sm">Handshake AI &amp; DataAnnotation</p>
+                            <ul class="list-disc list-outside ml-4 text-body font-normal text-sm space-y-0.5 marker-muted print:text-base">
+                                <li>Authored complex graphic design project briefs to stress-test AI model capabilities across 2D software including GIMP, Inkscape, and Krita.</li>
+                                <li>Reviewed and graded AI-generated text and images for accuracy, quality, and logical flow while providing detailed written rationales for each decision.</li>
+                                <li>Developed structured evaluation rubrics and scoring datasets to train machine learning models on professional design standards.</li>
+                            </ul>
+                        </div>
+
+                        <div class="mb-3 print:mb-1.5 ats-only">
+                            <div class="flex justify-between items-baseline">
+                                <h4 class="text-ink text-lg font-bold print:text-xl leading-tight">AI Trainer [Contract]</h4>
+                                <span class="text-muted text-xs font-mono print:text-sm whitespace-nowrap shrink-0 ml-4">Apr 2026 &ndash; Present</span>
+                            </div>
+                            <p class="text-body font-medium text-sm mb-1 print:mb-0.5 print:text-sm">DataAnnotation</p>
+                            <ul class="list-disc list-outside ml-4 text-body font-normal text-sm space-y-0.5 marker-muted print:text-base">
+                                <li>Applying a dual background in data analytics and graphic design to evaluate and refine unreleased AI models through rigorous human-feedback data curation.</li>
+                                <li>Evaluated the composition, lighting, and aesthetic quality of AI-generated imagery, specifically identifying structural inconsistencies, prompt adherence, and visual artifacts.</li>
+                                <li>Critically reviewed and graded AI-generated text for factual accuracy, natural phrasing, and logical flow across a wide variety of complex topics.</li>
+                                <li>Provided detailed, written rationales for model grading, contributing to high-quality datasets used to train and align language and vision models.</li>
+                            </ul>
+                        </div>
+
+                        <div class="mb-3 print:mb-1.5 ats-only">
+                            <div class="flex justify-between items-baseline">
+                                <h4 class="text-ink text-lg font-bold print:text-xl leading-tight">2D Design Specialist [Contract]</h4>
+                                <span class="text-muted text-xs font-mono print:text-sm whitespace-nowrap shrink-0 ml-4">Apr 2026 &ndash; Jul 2026</span>
+                            </div>
+                            <p class="text-body font-medium text-sm mb-1 print:mb-0.5 print:text-sm">Handshake AI</p>
+                            <ul class="list-disc list-outside ml-4 text-body font-normal text-sm space-y-0.5 marker-muted print:text-base">
+                                <li>Authored complex graphic design project briefs to stress-test model capabilities and tool execution within 2D design software including GIMP, LibreSprite, Inkscape, and Krita.</li>
+                                <li>Developed structured, binary evaluation rubrics and scoring datasets that directly train machine learning models to evaluate design outputs.</li>
+                                <li>Translated advanced design workflows into deterministic, step-by-step verification processes used by automated systems to grade outputs and optimize model weights.</li>
+                            </ul>
+                        </div>
+
+                        <div class="mb-3 print:mb-1.5">
+                            <div class="flex justify-between items-baseline">
+                                <h4 class="text-ink text-lg font-bold print:text-xl leading-tight">Tax Verification Associate</h4>
+                                <span class="text-muted text-xs font-mono print:text-sm whitespace-nowrap shrink-0 ml-4">Feb 2026 &ndash; Apr 2026</span>
+                            </div>
+                            <p class="text-body font-medium text-sm mb-1 print:mb-0.5 print:text-sm">Thomson Reuters</p>
+                            <ul class="list-disc list-outside ml-4 text-body font-normal text-sm space-y-0.5 marker-muted print:text-base">
+                                <li>Reviewed and categorized sensitive tax data using Excel and internal software, consistently exceeding high-volume daily targets during peak tax season.</li>
+                            </ul>
+                        </div>
+
+                        <div class="mb-3 print:mb-1.5">
+                            <div class="flex justify-between items-baseline">
+                                <h4 class="text-ink text-lg font-bold print:text-xl leading-tight">Graphic Design Intern</h4>
+                                <span class="text-muted text-xs font-mono print:text-sm whitespace-nowrap shrink-0 ml-4">Dec 2024 &ndash; Feb 2025</span>
+                            </div>
+                            <p class="text-body font-medium text-sm mb-1 print:mb-0.5 print:text-sm">City of Shorewood</p>
+                            <ul class="list-disc list-outside ml-4 text-body font-normal text-sm space-y-0.5 marker-muted print:text-base">
+                                <li>Designed print and digital materials for city events including brochures, flyers, and social media graphics while ensuring adherence to municipal branding guidelines.</li>
+                                <li>Standardized all public forms by converting them into accessible fillable PDFs using Adobe Acrobat Pro to improve office efficiency.</li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between items-baseline">
+                                <h4 class="text-ink text-lg font-bold print:text-xl leading-tight">Drake Relays Logo Designer</h4>
+                                <span class="text-muted text-xs font-mono print:text-sm whitespace-nowrap shrink-0 ml-4">Dec 2024 &ndash; May 2025</span>
+                            </div>
+                            <p class="text-body font-medium text-sm mb-1 print:mb-0.5 print:text-sm">Drake University</p>
+                            <ul class="list-disc list-outside ml-4 text-body font-normal text-sm space-y-0.5 marker-muted print:text-base">
+                                <li>Selected from 11 finalists to design the official logo and visual theme for the 2025 Drake Relays ("Racing Through Time").</li>
+                                <li>Brand identity deployed across merchandise, campus signage, and digital platforms for an event drawing thousands of attendees.</li>
+                            </ul>
+                        </div>
+                    </section>
+
+                    <section>
+                        <h3 class="text-muted text-sm font-bold mb-3 print:mb-1.5 border-b border-solid-themed pb-1.5">Projects</h3>
+                        <!-- Projects is budgeted for two entries. Brushfactory shows in both modes;
+                             the sheet only fits one more, so Freelance is design-only and DMARC is
+                             data-only. Adding a third entry to either mode pushes the styled sheet
+                             onto a second page. -->
+
+                        <div class="mb-3 print:mb-1.5">
+                            <div class="flex justify-between items-baseline">
+                                <h4 class="text-ink text-lg font-bold print:text-xl leading-tight">Brushfactory</h4>
+                                <span class="text-muted text-xs font-mono print:text-sm whitespace-nowrap shrink-0 ml-4">Aug 2026 &ndash; Present</span>
+                            </div>
+                            <p class="text-body font-medium text-sm mb-1 print:mb-0.5 print:text-sm">Brushfactory.co</p>
+                            <ul class="list-disc list-outside ml-4 text-body font-normal text-sm space-y-0.5 marker-muted print:text-base">
+                                <li>Designed and shipped a responsive web application (HTML/Tailwind/JS) to convert digital illustration brushes across major platforms, executing the complete UI/UX and brand identity from the ground up.</li>
+                                <li>Built the backend conversion logic and test harness in Python to parse proprietary formats, measuring drift in brush size, spacing, and pressure response.</li>
+                            </ul>
+                        </div>
+
+                        <div class="mb-3 print:mb-1.5 design-only">
+                            <div class="flex justify-between items-baseline">
+                                <h4 class="text-ink text-lg font-bold print:text-xl leading-tight">Freelance Branding &amp; Design</h4>
+                                <span class="text-muted text-xs font-mono print:text-sm whitespace-nowrap shrink-0 ml-4">Aug 2021 &ndash; Present</span>
+                            </div>
+                            <p class="text-body font-medium text-sm mb-1 print:mb-0.5 print:text-sm">Various Clients</p>
+                            <ul class="list-disc list-outside ml-4 text-body font-normal text-sm space-y-0.5 marker-muted print:text-base">
+                                <li>Designed tour and performance flyers for Minneapolis musicians Dessa and Jeremy Messersmith, delivered in print and digital formats.</li>
+                                <li>Provided logo systems, brand guidelines, and promotional assets for clients including The Forged Group and Pyrkia Health.</li>
+                            </ul>
+                        </div>
+
+                        <div class="data-only">
+                            <div class="flex justify-between items-baseline">
+                                <h4 class="text-ink text-lg font-bold print:text-xl leading-tight">Data Visualization &amp; Modeling</h4>
+                                <span class="text-muted text-xs font-mono print:text-sm whitespace-nowrap shrink-0 ml-4">Aug 2025 &ndash; Dec 2025</span>
+                            </div>
+                            <p class="text-body font-medium text-sm mb-1 print:mb-0.5 print:text-sm">DMARC Food Pantry Network</p>
+                            <ul class="list-disc list-outside ml-4 text-body font-normal text-sm space-y-0.5 marker-muted print:text-base">
+                                <li>Built a reproducible R pipeline to clean and analyze visitor logs from 90+ pantry locations, enriched with ACS Census demographic data.</li>
+                                <li>Created Leaflet geospatial maps to identify service gaps and developed a Poisson regression model to forecast future pantry demand by region.</li>
+                            </ul>
+                        </div>
+                    </section>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer id="footer-placeholder" class="w-full bg-surface border-t border-themed py-8 px-4 md:px-8 print:hidden"></footer>
+
+    <script src="/components.js?v=11d979bd"></script>
+    <script>
+        /* Page margins have to come from @page to apply to every page, and @page
+           cannot be scoped by a selector, so the rule is swapped out before
+           printing. The styled sheet keeps margin 0 and pads its own container,
+           because it is one page and the padding draws the sheet edge on screen. */
+        function setPageMargin(format) {
+            let el = document.getElementById('page-rule');
+            if (!el) {
+                el = document.createElement('style');
+                el.id = 'page-rule';
+                document.head.appendChild(el);
+            }
+            el.textContent = format === 'ats'
+                ? '@page { size: letter portrait; margin: 0.75in; }'
+                : '@page { size: letter portrait; margin: 0; }';
+        }
+        setPageMargin('styled');
+
+        /* --- download menu --- */
+        function toggleDownloadMenu(force) {
+            const menu = document.getElementById('download-menu');
+            const btn  = document.getElementById('download-button');
+            if (!menu) return;
+            const open = force !== undefined ? force : menu.classList.contains('hidden');
+            menu.classList.toggle('hidden', !open);
+            if (btn) btn.setAttribute('aria-expanded', String(open));
+        }
+
+        /* Both options print the same document. 'ats' swaps in the single-column
+           print rules above; 'styled' is the layout you see on screen. The title
+           becomes the suggested filename in the browser's save dialog, so it names
+           which one you got. */
+        function downloadResume(format) {
+            toggleDownloadMenu(false);
+            const mode = document.body.getAttribute('data-mode');
+            const previousTitle = document.title;
+            document.documentElement.setAttribute('data-format', format);
+            setPageMargin(format);
+            document.title = format === 'ats'
+                ? 'Resume_Oliver_Williams_ATS'
+                : 'Resume_Oliver_Williams_' + (mode === 'data' ? 'Data' : 'Design');
+            window.addEventListener('afterprint', () => {
+                document.documentElement.setAttribute('data-format', 'styled');
+                setPageMargin('styled');
+                document.title = previousTitle;
+            }, { once: true });
+            window.print();
+        }
+
+        document.addEventListener('click', e => {
+            const menu = document.getElementById('download-menu');
+            if (!menu || menu.classList.contains('hidden')) return;
+            if (e.target.closest('#download-menu, #download-button')) return;
+            toggleDownloadMenu(false);
+        });
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') toggleDownloadMenu(false);
+        });
+
+        function setMode(mode) {
+            document.body.setAttribute('data-mode', mode);
+            const btnDesign = document.getElementById('btn-design');
+            const btnData   = document.getElementById('btn-data');
+            if (btnDesign) btnDesign.classList.toggle('active', mode === 'design');
+            if (btnData)   btnData.classList.toggle('active', mode === 'data');
+            document.title = mode === 'design'
+                ? 'Resume_Oliver_Williams_Design'
+                : 'Resume_Oliver_Williams_Data';
+        }
+    </script>
+</body>
+</html>

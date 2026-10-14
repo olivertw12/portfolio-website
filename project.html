@@ -1,138 +1,34 @@
-<!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<!doctype html>
+<html lang="en" data-format="styled">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Case-study template — see tailwind-build/prerender.js. -->
-    <!--SLOT:META-->
-    <title>Case Study | Oliver T. Williams</title>
-    <meta name="robots" content="noindex">
-    <meta name="description" content="Case study by Oliver T. Williams.">
-    <meta property="og:title" content="Case Study | Oliver T. Williams">
-    <meta property="og:description" content="In-depth look at the process, method, and results.">
-    <meta property="og:image" content="https://olivertwilliams.com/images/og-image.png">
-    <meta property="og:type" content="article">
-    <meta name="twitter:card" content="summary_large_image">
-    <link rel="canonical" href="https://olivertwilliams.com/">
-    <!--/SLOT-->
-    <script>
-        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            document.documentElement.classList.add('dark');
-        } else { document.documentElement.classList.remove('dark'); }
-    </script>
-    <meta name="theme-color" content="#EEF1F3" media="(prefers-color-scheme: light)">
-    <meta name="theme-color" content="#10151A" media="(prefers-color-scheme: dark)">
-    <link rel="icon" href="/images/favicon-dark.png" media="(prefers-color-scheme: light)">
-    <link rel="icon" href="/images/favicon-light.png" media="(prefers-color-scheme: dark)">
-    <link rel="icon" href="/images/favicon-dark.png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Gabarito:wght@600;700;800&family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/assets/tailwind.css?v=71152ad5">
-    <link rel="stylesheet" href="/style.css?v=8adf910d">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="description" content="Portfolio of Oliver T. Williams. Graphic designer and data analyst, working full time as a remote AI evaluator and building Brushfactory, a web-based brush converter for digital artists.">
+<link rel="canonical" href="https://olivertwilliams.com/project.html">
+<meta property="og:title" content="Find a project — Oliver T. Williams">
+<meta property="og:description" content="Portfolio of Oliver T. Williams. Graphic designer and data analyst, working full time as a remote AI evaluator and building Brushfactory, a web-based brush converter for digital artists.">
+<meta property="og:image" content="https://olivertwilliams.com/images/og-image.png">
+<meta property="og:url" content="https://olivertwilliams.com/project.html">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#062048">
+<title>Find a project — Oliver T. Williams</title>
+<link rel="icon" href="/images/favicon-light.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@600;800&family=Manrope:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="/drift/drift.css?v=3c4e0333">
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"}}</script>
 </head>
-<body class="preload bg-page font-sans flex flex-col min-h-screen transition-colors duration-500">
-
-
-    <div class="site-wash" aria-hidden="true"><div class="wash-orb a"></div><div class="wash-orb b"></div></div>
-
-    <a href="#main-content" class="skip-link">Skip to content</a>
-
-    <!-- ═══ LIGHTBOX ═══ -->
-    <div id="lightbox" class="bg-scrim fixed inset-0 z-lightbox hidden flex-col items-center justify-center opacity-0 transition-opacity duration-300 backdrop-blur-sm">
-        <button onclick="closeLightbox()" aria-label="Close" class="lightbox-close-idle absolute top-6 right-6 p-2 transition-colors z-lightbox-ui bg-white/10 rounded-full hover:bg-white/20">
-            <i class="fa-solid fa-xmark text-2xl"></i>
-        </button>
-        <button onclick="changeLbImage(event,-1)" aria-label="Previous image" class="lightbox-btn-idle absolute left-2 md:left-8 z-lightbox-ui transition-colors p-4 hover:bg-white/10 rounded-full group">
-            <i class="fa-solid fa-chevron-left text-3xl md:text-5xl group-hover:-translate-x-1 transition-transform"></i>
-        </button>
-        <button onclick="changeLbImage(event,1)" aria-label="Next image" class="lightbox-btn-idle absolute right-2 md:right-8 z-lightbox-ui transition-colors p-4 hover:bg-white/10 rounded-full group">
-            <i class="fa-solid fa-chevron-right text-3xl md:text-5xl group-hover:translate-x-1 transition-transform"></i>
-        </button>
-        <div class="w-full h-full flex items-center justify-center p-4" onclick="closeLightboxOnBg(event)">
-            <div class="relative max-w-full max-h-full inline-block group">
-                <img id="lb-image" src="" alt="Full view" class="max-w-full max-h-lightbox object-contain shadow-2xl rounded-sm transition-transform duration-300">
-                <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/90 via-black/60 to-transparent rounded-b-sm transition-opacity duration-300 group-hover:opacity-0">
-                    <p id="lb-caption" class="text-white text-sm md:text-base font-medium italic tracking-wide text-center drop-shadow-md"></p>
-                    <p id="lb-counter" class="text-white/50 text-xs mt-1 uppercase tracking-widest text-center"></p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <nav id="navbar-placeholder" data-type="project" class="fixed top-4 left-0 right-0 z-nav px-4 md:px-8"></nav>
-
-    <main id="main-content" tabindex="-1" class="pt-32 pb-20 px-4 md:px-8 max-w-7xl mx-auto flex-grow w-full opacity-0 js-fade">
-
-        <header id="p-header" class="mb-12"><!--SLOT:HEADER--><!--/SLOT--></header>
-
-        <div id="p-body"><!--SLOT:BODY--><!--/SLOT--></div>
-
-        <div id="p-next" class="border-t border-themed pt-12 flex flex-col md:flex-row justify-between items-start md:items-center gap-4"><!--SLOT:NEXT--><!--/SLOT--></div>
-    </main>
-
-    <!--SLOT:NOTFOUND-->
-    <!-- Only reachable through /project.html?id=unknown. -->
-    <div id="error-screen" class="hidden fixed inset-0 flex-col items-center justify-center bg-page z-40">
-        <section class="flex flex-col items-center justify-center text-center px-4">
-            <div class="mb-6 p-4 bg-wash rounded-full shadow-soft">
-                <i class="fa-solid fa-file-circle-question text-5xl text-muted"></i>
-            </div>
-            <h1 class="text-ink text-3xl font-bold mb-4">Case Study In Progress</h1>
-            <p class="text-muted font-normal max-w-md mb-8">I am currently documenting the process for this project.</p>
-            <a href="/archive.html" class="btn-primary inline-flex items-center gap-2 px-6 py-3">Back to the archive</a>
-        </section>
-    </div>
-    <!--/SLOT-->
-
-    <!-- ── CONTACT ── -->
-    <section id="contact" class="px-4 md:px-8 pb-20">
-        <div class="max-w-7xl mx-auto bg-surface rounded-3xl p-8 md:p-12 shadow-soft border border-themed transition-colors duration-500 text-center">
-            <h2 class="text-ink text-3xl md:text-4xl font-bold mb-4">Let's work together!</h2>
-            <p class="text-muted font-normal text-lg mb-8 max-w-xl mx-auto">Looking for assistance with a project? Please reach out and let me know how I can help.</p>
-            <a href="mailto:oliver_tw@icloud.com" class="btn-primary inline-flex items-center gap-2 px-8 py-3.5">
-                <i class="fa-solid fa-envelope"></i> Email Me
-            </a>
-        </div>
-    </section>
-
-    <footer id="footer-placeholder" class="w-full bg-surface border-t border-themed py-8 px-4 md:px-8 mt-auto"></footer>
-
-    <script src="/components.js?v=11d979bd"></script>
-    <script src="/projects.js?v=1df94b21"></script>
-    <script src="/render.js?v=b047ce16"></script>
-    <script src="/lightbox.js?v=c9f1ff7f"></script>
-    <!--SLOT:BOOT-->
-    <script>
-    (function () {
-        'use strict';
-        var id = new URLSearchParams(window.location.search).get('id');
-        var d  = projectData[id];
-
-        if (!d) {
-            document.getElementById('main-content').style.display = 'none';
-            var err = document.getElementById('error-screen');
-            err.classList.remove('hidden');
-            err.classList.add('flex');
-            return;
-        }
-
-        document.title = d.title + ' | Oliver T. Williams';
-        var desc = (d.card && d.card.blurb) || '';
-        document.querySelector('meta[name="description"]').setAttribute('content', desc);
-        document.querySelector('meta[property="og:title"]').setAttribute('content', d.title + ' | Oliver T. Williams');
-        document.querySelector('meta[property="og:description"]').setAttribute('content', desc);
-        document.querySelector('link[rel="canonical"]').setAttribute('href', 'https://olivertwilliams.com' + projectHref(id));
-
-        document.getElementById('p-header').innerHTML = projectHeader(d);
-        document.getElementById('p-body').innerHTML   = projectLayout(d);
-        document.getElementById('p-next').innerHTML   = nextProjectHTML(id);
-
-        if (d.layout !== 'technical') initLightbox(galleryImages(d));
-        document.getElementById('main-content').classList.remove('opacity-0');
-    })();
-    </script>
-    <!--/SLOT-->
+<body class="" >
+<a class="skip" href="#top">Skip to content</a>
+<canvas id="gl" aria-hidden="true"></canvas>
+<div id="rail" aria-hidden="true"></div>
+<div id="page"><div class="wrap">
+<header class="bar"><a class="me" href="/index.html">oliver t. williams</a><nav aria-label="Main"><a href="/archive.html">work</a><a href="/index.html#about">about</a><a href="/resume.html">resume</a><a href="/index.html#contact">contact</a></nav></header>
+<main id="top"><section class="page-hero"><h1 class="glow cased"><span class="ln">Find a project</span></h1></section><div class="actions gapless"><a class="pill solid" href="/archive.html">View all work</a></div><section class="floor sub"></section></main>
+<footer class="foot"><span>© 2026 Oliver T. Williams</span><div class="links"><button id="motion" type="button" aria-pressed="false">Pause motion</button><a href="/archive.html">All work</a><a href="https://www.instagram.com/oliver_williams1212/" target="_blank" rel="me noopener">Instagram</a><a href="https://www.linkedin.com/in/oliver-t-williams/" target="_blank" rel="me noopener">LinkedIn</a><a href="https://github.com/olivertw12" target="_blank" rel="me noopener">GitHub</a></div></footer>
+</div></div>
+<div id="toast" role="status"></div>
+<script>const id=new URLSearchParams(location.search).get('id');const ids=["brushfactory","dmarc","site-build","mainframe","forged","relays","brushfactory-identity","dessa","jeremy","xmas","pyrkia","citymap","cityintern","art","data","duolingo","icymi"];if(ids.includes(id))location.replace('/projects/'+encodeURIComponent(id)+'.html');</script><script type="module" src="/drift/drift.js?v=3c4e0333"></script>
 </body>
 </html>

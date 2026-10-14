@@ -1,164 +1,103 @@
-<!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<!doctype html>
+<html lang="en" data-format="styled">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Case-study template — see tailwind-build/prerender.js. -->
-    <title>DMARC Network Analysis | Oliver T. Williams</title>
-    <meta name="description" content="A reproducible R pipeline for cleaning visitor logs from 90+ food pantry locations. It joins logs with ACS Census data, maps them geographically, and forecasts future demand.">
-    <meta property="og:title" content="DMARC Network Analysis | Oliver T. Williams">
-    <meta property="og:description" content="A reproducible R pipeline for cleaning visitor logs from 90+ food pantry locations. It joins logs with ACS Census data, maps them geographically, and forecasts future demand.">
-    <meta property="og:image" content="https://olivertwilliams.com/images/dmarc4.png">
-    <meta property="og:url" content="https://olivertwilliams.com/projects/dmarc.html">
-    <meta property="og:type" content="article">
-    <meta name="twitter:card" content="summary_large_image">
-    <link rel="canonical" href="https://olivertwilliams.com/projects/dmarc.html">
-    <script>
-        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            document.documentElement.classList.add('dark');
-        } else { document.documentElement.classList.remove('dark'); }
-    </script>
-    <meta name="theme-color" content="#EEF1F3" media="(prefers-color-scheme: light)">
-    <meta name="theme-color" content="#10151A" media="(prefers-color-scheme: dark)">
-    <link rel="icon" href="/images/favicon-dark.png" media="(prefers-color-scheme: light)">
-    <link rel="icon" href="/images/favicon-light.png" media="(prefers-color-scheme: dark)">
-    <link rel="icon" href="/images/favicon-dark.png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Gabarito:wght@600;700;800&family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/assets/tailwind.css?v=71152ad5">
-    <link rel="stylesheet" href="/style.css?v=8adf910d">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="DMARC Network Analysis: Food pantry access mapped and forecast in R. A case study by Oliver T. Williams.">
+<link rel="canonical" href="https://olivertwilliams.com/projects/dmarc.html">
+<meta property="og:title" content="DMARC Network Analysis — Oliver T. Williams">
+<meta property="og:description" content="DMARC Network Analysis: Food pantry access mapped and forecast in R. A case study by Oliver T. Williams.">
+<meta property="og:image" content="https://olivertwilliams.com/images/og-image.png">
+<meta property="og:url" content="https://olivertwilliams.com/projects/dmarc.html">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#062048">
+<title>DMARC Network Analysis — Oliver T. Williams</title>
+<link rel="icon" href="/images/favicon-light.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@600;800&family=Manrope:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="/drift/drift.css?v=3c4e0333">
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"}}</script>
 </head>
-<body class="preload bg-page font-sans flex flex-col min-h-screen transition-colors duration-500">
-
-
-    <div class="site-wash" aria-hidden="true"><div class="wash-orb a"></div><div class="wash-orb b"></div></div>
-
-    <a href="#main-content" class="skip-link">Skip to content</a>
-
-    <!-- ═══ LIGHTBOX ═══ -->
-    <div id="lightbox" class="bg-scrim fixed inset-0 z-lightbox hidden flex-col items-center justify-center opacity-0 transition-opacity duration-300 backdrop-blur-sm">
-        <button onclick="closeLightbox()" aria-label="Close" class="lightbox-close-idle absolute top-6 right-6 p-2 transition-colors z-lightbox-ui bg-white/10 rounded-full hover:bg-white/20">
-            <i class="fa-solid fa-xmark text-2xl"></i>
-        </button>
-        <button onclick="changeLbImage(event,-1)" aria-label="Previous image" class="lightbox-btn-idle absolute left-2 md:left-8 z-lightbox-ui transition-colors p-4 hover:bg-white/10 rounded-full group">
-            <i class="fa-solid fa-chevron-left text-3xl md:text-5xl group-hover:-translate-x-1 transition-transform"></i>
-        </button>
-        <button onclick="changeLbImage(event,1)" aria-label="Next image" class="lightbox-btn-idle absolute right-2 md:right-8 z-lightbox-ui transition-colors p-4 hover:bg-white/10 rounded-full group">
-            <i class="fa-solid fa-chevron-right text-3xl md:text-5xl group-hover:translate-x-1 transition-transform"></i>
-        </button>
-        <div class="w-full h-full flex items-center justify-center p-4" onclick="closeLightboxOnBg(event)">
-            <div class="relative max-w-full max-h-full inline-block group">
-                <img id="lb-image" src="" alt="Full view" class="max-w-full max-h-lightbox object-contain shadow-2xl rounded-sm transition-transform duration-300">
-                <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/90 via-black/60 to-transparent rounded-b-sm transition-opacity duration-300 group-hover:opacity-0">
-                    <p id="lb-caption" class="text-white text-sm md:text-base font-medium italic tracking-wide text-center drop-shadow-md"></p>
-                    <p id="lb-counter" class="text-white/50 text-xs mt-1 uppercase tracking-widest text-center"></p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <nav id="navbar-placeholder" data-type="project" class="fixed top-4 left-0 right-0 z-nav px-4 md:px-8"></nav>
-
-    <main id="main-content" tabindex="-1" class="pt-32 pb-20 px-4 md:px-8 max-w-7xl mx-auto flex-grow w-full">
-
-        <header id="p-header" class="mb-12"><span class="text-accent text-sm font-bold tracking-wider uppercase mb-4 block">Data Pipeline &amp; Modeling</span><h1 class="text-ink text-4xl md:text-5xl lg:text-6xl font-bold mb-8 tracking-tight break-words max-w-4xl">DMARC Network Analysis</h1><div class="grid grid-cols-2 md:grid-cols-4 gap-6 border-y border-themed py-6"><div class="min-w-0"><span class="text-muted text-xs font-bold uppercase tracking-wider block mb-1">Organization</span><span class="text-ink font-medium block">DMARC Food Pantry</span></div><div class="min-w-0"><span class="text-muted text-xs font-bold uppercase tracking-wider block mb-1">Role</span><span class="text-ink font-medium block">Predictive Modeling</span></div><div class="min-w-0"><span class="text-muted text-xs font-bold uppercase tracking-wider block mb-1">Tech Stack</span><span class="text-ink font-medium block">R, Tidyverse, GIS</span></div><div class="min-w-0"><span class="text-muted text-xs font-bold uppercase tracking-wider block mb-1">Focus</span><span class="text-ink font-medium block">Methodology</span></div></div></header>
-
-        <div id="p-body"><div class="text-lg text-body font-normal mb-20 max-w-4xl"><p class="mb-6 last:mb-0"><strong class="text-ink font-semibold">The Challenge:</strong> The DMARC Food Pantry Network generates a massive dataset of transactional visitor logs. However, the data was unstructured and lacked the demographic context needed to make informed decisions about resource allocation and new pantry locations.</p><p class="mb-6 last:mb-0"><strong class="text-ink font-semibold">The Solution:</strong> I built a reproducible data pipeline in R that cleaned raw logs, enriched them with ACS Census data, and utilized predictive modeling. This analysis provided DMARC with actionable insights into seasonal trends, shifting demographics, and geographic service gaps.</p></div><div><section class="mb-24"><div class="flex items-baseline gap-3 mb-6"><span class="text-accent font-mono font-bold text-xl">01</span><h2 class="text-ink text-2xl md:text-3xl font-bold">Data Standardization Pipeline</h2></div><p class="text-body font-normal mb-8 text-lg max-w-4xl">The first step involved ingesting raw transaction logs from over 90 pantry locations. I wrote a cleaning script to standardize variables, calculate visitor ages from birthdates, and bucket income levels according to Federal Poverty Guidelines. This created a universal dataset ready for downstream analysis. I calculated age against the service date rather than trusting a stored age field, since the same visitor shows up across several years of logs.</p><div class="bg-surface rounded-3xl p-5 border border-themed shadow-soft"><div class="bg-code rounded-2xl overflow-hidden border-code border flex flex-col w-full min-w-0"><div class="flex items-center justify-between px-4 py-2.5 bg-code-titlebar border-b border-code shrink-0"><span class="text-code-label text-xs font-mono">clean_dmarc_data.R</span><div class="flex gap-1.5"><div class="w-3 h-3 rounded-full chrome-close"></div><div class="w-3 h-3 rounded-full chrome-minimize"></div><div class="w-3 h-3 rounded-full chrome-maximize"></div></div></div><div class="p-4 overflow-x-auto flex-grow font-mono text-sm text-code"><pre><code><span class="token-comment"># 3c: Fixing age from DOB</span>
+<body class="" >
+<a class="skip" href="#top">Skip to content</a>
+<canvas id="gl" aria-hidden="true"></canvas>
+<div id="rail" aria-hidden="true"></div>
+<div id="page"><div class="wrap">
+<header class="bar"><a class="me" href="/index.html">oliver t. williams</a><nav aria-label="Main"><a href="/archive.html" aria-current="page">work</a><a href="/index.html#about">about</a><a href="/resume.html">resume</a><a href="/index.html#contact">contact</a></nav></header>
+<main id="top" data-morph="data" class="pl"><section class="pl-head"><h1 class="glow cased pl-title">DMARC Network Analysis</h1><p class="pl-sub">Food pantry access mapped and forecast in R</p><dl class="facts-line"><div><dt>Organization</dt><dd>DMARC Food Pantry</dd></div><div><dt>Role</dt><dd>Predictive Modeling</dd></div><div><dt>Tech Stack</dt><dd>R, Tidyverse, GIS</dd></div><div><dt>Focus</dt><dd>Methodology</dd></div></dl></section><article aria-label="DMARC Network Analysis case study"><figure class="pl-fig"><button data-plate data-ar="1.6699" data-iar="1.6699" data-turn="0" style="aspect-ratio:1.6699;--ar:1.6699" type="button" data-image="/images/dmarc4.png" data-caption="" aria-label="Enlarge: project image"><img src="/drift/img/dmarc4.jpg" alt="" loading="lazy"></button></figure><div class="pl-text"><p>The DMARC Food Pantry Network generates a massive dataset of transactional visitor logs. However, the data was unstructured and lacked the demographic context needed to make informed decisions about resource allocation and new pantry locations.</p></div><div class="pl-text"><p>I built a reproducible data pipeline in R that cleaned raw logs, enriched them with ACS Census data, and utilized predictive modeling. This analysis provided DMARC with actionable insights into seasonal trends, shifting demographics, and geographic service gaps.</p></div><section class="pl-ch"><h2>Standardizing the visitor logs</h2><p>The first step involved ingesting raw transaction logs from over 90 pantry locations. I wrote a cleaning script to standardize variables, calculate visitor ages from birthdates, and bucket income levels according to Federal Poverty Guidelines. This created a universal dataset ready for downstream analysis. I calculated age against the service date rather than trusting a stored age field, since the same visitor shows up across several years of logs.</p></section><details class="code pl-code"><summary>Show the code <span>clean_dmarc_data.R</span></summary><pre><code># 3c: Fixing age from DOB
 data &lt;- data %&gt;%
-  <span class="token-func">mutate</span>(
-    dob = <span class="token-func">ymd</span>(dob),
-    served_date = <span class="token-func">ymd</span>(served_date),
-    age = <span class="token-func">round</span>(<span class="token-func">as.numeric</span>(<span class="token-func">difftime</span>(served_date, dob, units = <span class="token-str">&quot;days&quot;</span>)) / <span class="token-num">365.25</span>)
+  mutate(
+    dob = ymd(dob),
+    served_date = ymd(served_date),
+    age = round(as.numeric(difftime(served_date, dob, units = &quot;days&quot;)) / 365.25)
   ) %&gt;%
-  <span class="token-func">filter</span>(age &gt; -<span class="token-num">0.1</span>, age &lt;= <span class="token-num">102</span>)
+  filter(age &gt; -0.1, age &lt;= 102)
 
-<span class="token-comment"># 4a: Binning Income into Federal Poverty Brackets</span>
+# 4a: Binning Income into Federal Poverty Brackets
 data &lt;- data %&gt;%
-  <span class="token-func">mutate</span>(
-    fed_bracket = <span class="token-func">case_when</span>(
-      poverty_level == <span class="token-num">0</span>   ~ <span class="token-str">&quot;0&quot;</span>,
-      poverty_level &lt;= <span class="token-num">25</span>  ~ <span class="token-str">&quot;0 - 25&quot;</span>,
-      poverty_level &lt;= <span class="token-num">50</span>  ~ <span class="token-str">&quot;25 - 50&quot;</span>,
-      poverty_level &lt;= <span class="token-num">100</span> ~ <span class="token-str">&quot;50 - 100&quot;</span>,
-      <span class="token-kw">TRUE</span>                 ~ <span class="token-str">&quot;Over 100&quot;</span>
+  mutate(
+    fed_bracket = case_when(
+      poverty_level == 0   ~ &quot;0&quot;,
+      poverty_level &lt;= 25  ~ &quot;0 - 25&quot;,
+      poverty_level &lt;= 50  ~ &quot;25 - 50&quot;,
+      poverty_level &lt;= 100 ~ &quot;50 - 100&quot;,
+      TRUE                 ~ &quot;Over 100&quot;
     )
-  )</code></pre></div></div></div></section><section class="mb-24"><div class="flex items-baseline gap-3 mb-6"><span class="text-accent font-mono font-bold text-xl">02</span><h2 class="text-ink text-2xl md:text-3xl font-bold">Geographic Visit Density</h2></div><p class="text-body font-normal mb-8 text-lg max-w-4xl">I used Leaflet to map the density of repeat visitors across Central Iowa. The analysis revealed that while Des Moines proper has high engagement, reaching up to 8.2% of the population in certain zip codes, there is significant variation in the suburbs. Areas like Urbandale and Windsor Heights showed distinct utilization patterns. Zip codes with no data are labelled that way rather than drawn as zero, which would have made coverage look artificially poor.</p><div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start"><div class="bg-surface rounded-3xl p-5 border border-themed shadow-soft"><div class="bg-code rounded-2xl overflow-hidden border-code border flex flex-col w-full min-w-0"><div class="flex items-center justify-between px-4 py-2.5 bg-code-titlebar border-b border-code shrink-0"><span class="text-code-label text-xs font-mono">zip_map_final.R</span><div class="flex gap-1.5"><div class="w-3 h-3 rounded-full chrome-close"></div><div class="w-3 h-3 rounded-full chrome-minimize"></div><div class="w-3 h-3 rounded-full chrome-maximize"></div></div></div><div class="p-4 overflow-x-auto flex-grow font-mono text-sm text-code"><pre><code><span class="token-comment"># Create the Leaflet map</span>
-leaflet_map &lt;- <span class="token-func">leaflet</span>(iowa_map_data) %&gt;%
-  <span class="token-func">addPolygons</span>(
-    fillColor   = ~<span class="token-func">pal</span>(individual_density * <span class="token-num">100</span>),
-    color       = <span class="token-str">&quot;grey80&quot;</span>,
-    weight      = <span class="token-num">0.4</span>,
-    fillOpacity = <span class="token-num">0.3</span>,
-    label = ~<span class="token-func">paste0</span>(
-      <span class="token-func">ifelse</span>(individual_density &gt; <span class="token-num">0</span>,
-             <span class="token-func">sprintf</span>(<span class="token-str">&quot;%.1f%%&quot;</span>, individual_density * <span class="token-num">100</span>),
-             <span class="token-str">&quot;No Data&quot;</span>)
+  )</code></pre></details><section class="pl-ch"><h2>Mapping repeat-visit density</h2><p>I used Leaflet to map the density of repeat visitors across Central Iowa. The analysis revealed that while Des Moines proper has high engagement, reaching up to 8.2% of the population in certain zip codes, there is significant variation in the suburbs. Areas like Urbandale and Windsor Heights showed distinct utilization patterns. Zip codes with no data are labelled that way rather than drawn as zero, which would have made coverage look artificially poor.</p></section><figure class="pl-fig"><button data-plate data-ar="1.5805" data-iar="1.5805" data-turn="0" style="aspect-ratio:1.5805;--ar:1.5805" type="button" data-image="/images/dmarc1.png" data-caption="Visitor density map by zip code" aria-label="Enlarge: Visitor density map by zip code"><img src="/drift/img/dmarc1.jpg" alt="Visitor density map by zip code" loading="lazy"></button><figcaption>Visitor density map by zip code</figcaption></figure><details class="code pl-code"><summary>Show the code <span>zip_map_final.R</span></summary><pre><code># Create the Leaflet map
+leaflet_map &lt;- leaflet(iowa_map_data) %&gt;%
+  addPolygons(
+    fillColor   = ~pal(individual_density * 100),
+    color       = &quot;grey80&quot;,
+    weight      = 0.4,
+    fillOpacity = 0.3,
+    label = ~paste0(
+      ifelse(individual_density &gt; 0,
+             sprintf(&quot;%.1f%%&quot;, individual_density * 100),
+             &quot;No Data&quot;)
     )
   ) %&gt;%
-  <span class="token-func">addProviderTiles</span>(providers$CartoDB.Positron)</code></pre></div></div></div><figure class="bg-surface rounded-3xl p-5 border border-themed shadow-soft"><div class="bg-wash rounded-2xl border border-themed overflow-hidden flex items-center justify-center min-h-panel"><img src="/images/dmarc1.png" alt="Visitor density map by zip code" loading="lazy" class="w-full h-auto object-contain"></div></figure></div></section><section class="mb-24"><div class="flex items-baseline gap-3 mb-6"><span class="text-accent font-mono font-bold text-xl">03</span><h2 class="text-ink text-2xl md:text-3xl font-bold">Time-Series Forecasting</h2></div><p class="text-body font-normal mb-8 text-lg max-w-4xl">To help DMARC prepare for future demand, I developed a Poisson regression model combined with Generalized Additive Models to forecast monthly visits. The model accounts for seasonal trends and predicts a continued rise in pantry usage. It estimates a new peak of approximately 40,000 monthly visits by late 2025. I built the prediction intervals on the link scale and transformed them back afterwards, which keeps them from dipping below zero visits.</p><div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start"><div class="bg-surface rounded-3xl p-5 border border-themed shadow-soft"><div class="bg-code rounded-2xl overflow-hidden border-code border flex flex-col w-full min-w-0"><div class="flex items-center justify-between px-4 py-2.5 bg-code-titlebar border-b border-code shrink-0"><span class="text-code-label text-xs font-mono">predictive_modelling.R</span><div class="flex gap-1.5"><div class="w-3 h-3 rounded-full chrome-close"></div><div class="w-3 h-3 rounded-full chrome-minimize"></div><div class="w-3 h-3 rounded-full chrome-maximize"></div></div></div><div class="p-4 overflow-x-auto flex-grow font-mono text-sm text-code"><pre><code><span class="token-comment"># Fit GLM with seasonal factors</span>
-glm_fit &lt;- <span class="token-func">glm</span>(
-  total_visits ~ time_index + <span class="token-func">factor</span>(month) + avg_age + avg_household,
+  addProviderTiles(providers$CartoDB.Positron)</code></pre></details><section class="pl-ch"><h2>Forecasting monthly visits</h2><p>To help DMARC prepare for future demand, I developed a Poisson regression model combined with Generalized Additive Models to forecast monthly visits. The model accounts for seasonal trends and predicts a continued rise in pantry usage. It estimates a new peak of approximately 40,000 monthly visits by late 2025. I built the prediction intervals on the link scale and transformed them back afterwards, which keeps them from dipping below zero visits.</p></section><figure class="pl-fig"><button data-plate data-ar="1.4985" data-iar="1.4985" data-turn="0" style="aspect-ratio:1.4985;--ar:1.4985" type="button" data-image="/images/dmarc2.png" data-caption="Predictive model graph" aria-label="Enlarge: Predictive model graph"><img src="/drift/img/dmarc2.jpg" alt="Predictive model graph" loading="lazy"></button><figcaption>Predictive model graph</figcaption></figure><details class="code pl-code"><summary>Show the code <span>predictive_modelling.R</span></summary><pre><code># Fit GLM with seasonal factors
+glm_fit &lt;- glm(
+  total_visits ~ time_index + factor(month) + avg_age + avg_household,
   data   = monthly_data,
-  family = <span class="token-func">poisson</span>()
+  family = poisson()
 )
 
-pred &lt;- <span class="token-func">predict</span>(glm_fit, newdata = future_df, type = <span class="token-str">&quot;link&quot;</span>, se.fit = <span class="token-kw">TRUE</span>)
+pred &lt;- predict(glm_fit, newdata = future_df, type = &quot;link&quot;, se.fit = TRUE)
 
 future_df &lt;- future_df %&gt;%
-  <span class="token-func">mutate</span>(
-    predicted_visits = <span class="token-func">exp</span>(pred$fit),
-    lower            = <span class="token-func">exp</span>(pred$fit - <span class="token-num">1.96</span> * pred$se.fit),
-    upper            = <span class="token-func">exp</span>(pred$fit + <span class="token-num">1.96</span> * pred$se.fit)
-  )</code></pre></div></div></div><figure class="bg-surface rounded-3xl p-5 border border-themed shadow-soft"><div class="bg-wash rounded-2xl border border-themed overflow-hidden flex items-center justify-center min-h-panel"><img src="/images/dmarc2.png" alt="Predictive model graph" loading="lazy" class="w-full h-auto object-contain"></div></figure></div></section><section class="mb-24"><div class="flex items-baseline gap-3 mb-6"><span class="text-accent font-mono font-bold text-xl">04</span><h2 class="text-ink text-2xl md:text-3xl font-bold">Analyzing Demographic Shifts</h2></div><p class="text-body font-normal mb-8 text-lg max-w-4xl">By comparing visitor data from 2018 to 2024, I identified the fastest-growing demographic groups accessing DMARC services. The data shows that Hispanic families have nearly doubled their visit share, rising from roughly 4% to 8% of the total visitor base. Both years had to be recoded onto matching ACS categories first. Otherwise, the comparison would have partly been measuring changes in how the data was recorded.</p><div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start"><div class="bg-surface rounded-3xl p-5 border border-themed shadow-soft"><div class="bg-code rounded-2xl overflow-hidden border-code border flex flex-col w-full min-w-0"><div class="flex items-center justify-between px-4 py-2.5 bg-code-titlebar border-b border-code shrink-0"><span class="text-code-label text-xs font-mono">acs_compatible_demographics.R</span><div class="flex gap-1.5"><div class="w-3 h-3 rounded-full chrome-close"></div><div class="w-3 h-3 rounded-full chrome-minimize"></div><div class="w-3 h-3 rounded-full chrome-maximize"></div></div></div><div class="p-4 overflow-x-auto flex-grow font-mono text-sm text-code"><pre><code><span class="token-comment"># Recode demographics for comparison</span>
+  mutate(
+    predicted_visits = exp(pred$fit),
+    lower            = exp(pred$fit - 1.96 * pred$se.fit),
+    upper            = exp(pred$fit + 1.96 * pred$se.fit)
+  )</code></pre></details><section class="pl-ch"><h2>Demographic shifts, 2018–2024</h2><p>By comparing visitor data from 2018 to 2024, I identified the fastest-growing demographic groups accessing DMARC services. The data shows that Hispanic families have nearly doubled their visit share, rising from roughly 4% to 8% of the total visitor base. Both years had to be recoded onto matching ACS categories first. Otherwise, the comparison would have partly been measuring changes in how the data was recorded.</p></section><figure class="pl-fig"><button data-plate data-ar="1.5752" data-iar="1.5752" data-turn="0" style="aspect-ratio:1.5752;--ar:1.5752" type="button" data-image="/images/dmarc3.png" data-caption="Demographic growth chart" aria-label="Enlarge: Demographic growth chart"><img src="/drift/img/dmarc3.jpg" alt="Demographic growth chart" loading="lazy"></button><figcaption>Demographic growth chart</figcaption></figure><details class="code pl-code"><summary>Show the code <span>acs_compatible_demographics.R</span></summary><pre><code># Recode demographics for comparison
 current_recode &lt;- current %&gt;%
-  <span class="token-func">mutate</span>(
-    acs_demo_ext = <span class="token-func">paste</span>(acs_age_group, acs_race, acs_snap,
-                         acs_poverty, acs_household_structure, sep = <span class="token-str">&quot; | &quot;</span>)
+  mutate(
+    acs_demo_ext = paste(acs_age_group, acs_race, acs_snap,
+                         acs_poverty, acs_household_structure, sep = &quot; | &quot;)
   )
 
 top_growth &lt;- type_changes %&gt;%
-  <span class="token-func">slice_max</span>(order_by = change, n = <span class="token-num">5</span>)
+  slice_max(order_by = change, n = 5)
 
-<span class="token-func">ggplot</span>(top_growth, <span class="token-func">aes</span>(x = <span class="token-func">reorder</span>(acs_demo_ext, change), y = change)) +
-  <span class="token-func">geom_col</span>() +
-  <span class="token-func">coord_flip</span>()</code></pre></div></div></div><figure class="bg-surface rounded-3xl p-5 border border-themed shadow-soft"><div class="bg-wash rounded-2xl border border-themed overflow-hidden flex items-center justify-center min-h-panel"><img src="/images/dmarc3.png" alt="Demographic growth chart" loading="lazy" class="w-full h-auto object-contain"></div></figure></div></section><section class="mb-24"><div class="flex items-baseline gap-3 mb-6"><span class="text-accent font-mono font-bold text-xl">05</span><h2 class="text-ink text-2xl md:text-3xl font-bold">Strategic Gap Analysis</h2></div><p class="text-body font-normal mb-8 text-lg max-w-4xl">Finally, I performed a gap analysis by overlaying ACS Census data onto the pantry network map. I calculated the density of the target demographic per zip code. This revealed underserved hotspots, particularly in the River Bend area, where the target population density is high but pantry coverage is low. The density is a chain of separate proportions, which assumes those characteristics are independent within a zip code. That isn't exactly true, but the joint distribution isn't published at that level and it was enough to rank zip codes against each other.</p><div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start"><div class="bg-surface rounded-3xl p-5 border border-themed shadow-soft"><div class="bg-code rounded-2xl overflow-hidden border-code border flex flex-col w-full min-w-0"><div class="flex items-center justify-between px-4 py-2.5 bg-code-titlebar border-b border-code shrink-0"><span class="text-code-label text-xs font-mono">acs_zipmap.R</span><div class="flex gap-1.5"><div class="w-3 h-3 rounded-full chrome-close"></div><div class="w-3 h-3 rounded-full chrome-minimize"></div><div class="w-3 h-3 rounded-full chrome-maximize"></div></div></div><div class="p-4 overflow-x-auto flex-grow font-mono text-sm text-code"><pre><code><span class="token-comment"># Calculate Target Group Density</span>
+ggplot(top_growth, aes(x = reorder(acs_demo_ext, change), y = change)) +
+  geom_col() +
+  coord_flip()</code></pre></details><section class="pl-ch"><h2>Finding service gaps with Census data</h2><p>Finally, I performed a gap analysis by overlaying ACS Census data onto the pantry network map. I calculated the density of the target demographic per zip code. This revealed underserved hotspots, particularly in the River Bend area, where the target population density is high but pantry coverage is low. The density is a chain of separate proportions, which assumes those characteristics are independent within a zip code. That isn&#39;t exactly true, but the joint distribution isn&#39;t published at that level and it was enough to rank zip codes against each other.</p></section><figure class="pl-fig"><button data-plate data-ar="1.6699" data-iar="1.6699" data-turn="0" style="aspect-ratio:1.6699;--ar:1.6699" type="button" data-image="/images/dmarc4.png" data-caption="Target demographic map" aria-label="Enlarge: Target demographic map"><img src="/drift/img/dmarc4.jpg" alt="Target demographic map" loading="lazy"></button><figcaption>Target demographic map</figcaption></figure><details class="code pl-code"><summary>Show the code <span>acs_zipmap.R</span></summary><pre><code># Calculate Target Group Density
 acs &lt;- acs %&gt;%
-  <span class="token-func">mutate</span>(
-    target_group_count = <span class="token-func">round</span>(
+  mutate(
+    target_group_count = round(
       total_pop * combined_adult_prop * hispanic_prop *
-      (<span class="token-num">1</span> - snap_rate) * poverty_rate
+      (1 - snap_rate) * poverty_rate
     ),
     target_group_density = target_group_count / total_pop
   )
 
 iowa_map_data &lt;- iowa_zips %&gt;%
-  <span class="token-func">left_join</span>(acs, by = <span class="token-func">c</span>(<span class="token-str">&quot;zip&quot;</span> = <span class="token-str">&quot;ZIP&quot;</span>)) %&gt;%
-  <span class="token-func">filter</span>(!<span class="token-func">is.na</span>(target_group_density))</code></pre></div></div></div><figure class="bg-surface rounded-3xl p-5 border border-themed shadow-soft"><div class="bg-wash rounded-2xl border border-themed overflow-hidden flex items-center justify-center min-h-panel"><img src="/images/dmarc4.png" alt="Target demographic map" loading="lazy" class="w-full h-auto object-contain"></div></figure></div></section></div></div>
-
-        <div id="p-next" class="border-t border-themed pt-12 flex flex-col md:flex-row justify-between items-start md:items-center gap-4"><span class="text-muted text-sm font-medium">Next</span><a href="/projects/site-build.html" class="group text-ink hover:text-accent flex items-center gap-4 text-xl md:text-3xl font-bold transition-colors w-full md:w-auto"><span class="break-words">Personal Site Build</span><i class="fa-solid fa-arrow-right text-2xl md:text-4xl group-hover:translate-x-2 transition-transform shrink-0"></i></a></div>
-    </main>
-
-    
-
-    <!-- ── CONTACT ── -->
-    <section id="contact" class="px-4 md:px-8 pb-20">
-        <div class="max-w-7xl mx-auto bg-surface rounded-3xl p-8 md:p-12 shadow-soft border border-themed transition-colors duration-500 text-center">
-            <h2 class="text-ink text-3xl md:text-4xl font-bold mb-4">Let's work together!</h2>
-            <p class="text-muted font-normal text-lg mb-8 max-w-xl mx-auto">Looking for assistance with a project? Please reach out and let me know how I can help.</p>
-            <a href="mailto:oliver_tw@icloud.com" class="btn-primary inline-flex items-center gap-2 px-8 py-3.5">
-                <i class="fa-solid fa-envelope"></i> Email Me
-            </a>
-        </div>
-    </section>
-
-    <footer id="footer-placeholder" class="w-full bg-surface border-t border-themed py-8 px-4 md:px-8 mt-auto"></footer>
-
-    <script src="/components.js?v=11d979bd"></script>
-    <script src="/projects.js?v=1df94b21"></script>
-    <script src="/render.js?v=b047ce16"></script>
-    <script src="/lightbox.js?v=c9f1ff7f"></script>
-    
+  left_join(acs, by = c(&quot;zip&quot; = &quot;ZIP&quot;)) %&gt;%
+  filter(!is.na(target_group_density))</code></pre></details></article><a class="pl-next" href="/projects/site-build.html"><span class="nx-label">Next project</span><span class="nx-title">Personal Site Build</span><span data-plate data-ar="1.7778" data-iar="1.3333" data-turn="0" style="aspect-ratio:1.7778;--ar:1.7778" ><img src="/drift/img/p-sitebuild-t.jpg" alt="" loading="lazy"></span></a><section class="floor sub"><h2 class="h2">Something in mind?</h2><p>Reach out and let me know how I can help.</p><div class="actions"><button class="copy-mail" type="button" data-copy aria-label="Copy email address oliver_tw@icloud.com"><span class="mail">oliver_tw@icloud.com</span><svg class="copy-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="8.5" y="8.5" width="11" height="11" rx="2.6"/><path d="M15.5 8.5V6.6A2.1 2.1 0 0 0 13.4 4.5H6.6A2.1 2.1 0 0 0 4.5 6.6v6.8a2.1 2.1 0 0 0 2.1 2.1h1.9"/></svg></button><a class="pill" href="/archive.html">All work</a></div></section></main>
+<footer class="foot"><span>© 2026 Oliver T. Williams</span><div class="links"><button id="motion" type="button" aria-pressed="false">Pause motion</button><a href="/archive.html">All work</a><a href="https://www.instagram.com/oliver_williams1212/" target="_blank" rel="me noopener">Instagram</a><a href="https://www.linkedin.com/in/oliver-t-williams/" target="_blank" rel="me noopener">LinkedIn</a><a href="https://github.com/olivertw12" target="_blank" rel="me noopener">GitHub</a></div></footer>
+</div></div>
+<div id="toast" role="status"></div>
+<dialog class="viewer" aria-label="Picture viewer"><div class="viewer-bar"><button class="viewer-prev" type="button">Previous</button><button class="viewer-next" type="button">Next</button><span class="viewer-count"></span><button class="viewer-close" type="button">Close</button></div><img alt=""><p class="viewer-caption"></p></dialog><script type="module" src="/drift/drift.js?v=3c4e0333"></script>
 </body>
 </html>

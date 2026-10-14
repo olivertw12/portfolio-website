@@ -1,94 +1,33 @@
-<!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<!doctype html>
+<html lang="en" data-format="styled">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Case-study template — see tailwind-build/prerender.js. -->
-    <title>Duolingo x Rocket League | Oliver T. Williams</title>
-    <meta name="description" content="Ad campaign concept expanding Duolingo into Rocket League.">
-    <meta property="og:title" content="Duolingo x Rocket League | Oliver T. Williams">
-    <meta property="og:description" content="Ad campaign concept expanding Duolingo into Rocket League.">
-    <meta property="og:image" content="https://olivertwilliams.com/images/duolingo2.png">
-    <meta property="og:url" content="https://olivertwilliams.com/projects/duolingo.html">
-    <meta property="og:type" content="article">
-    <meta name="twitter:card" content="summary_large_image">
-    <link rel="canonical" href="https://olivertwilliams.com/projects/duolingo.html">
-    <script>
-        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            document.documentElement.classList.add('dark');
-        } else { document.documentElement.classList.remove('dark'); }
-    </script>
-    <meta name="theme-color" content="#EEF1F3" media="(prefers-color-scheme: light)">
-    <meta name="theme-color" content="#10151A" media="(prefers-color-scheme: dark)">
-    <link rel="icon" href="/images/favicon-dark.png" media="(prefers-color-scheme: light)">
-    <link rel="icon" href="/images/favicon-light.png" media="(prefers-color-scheme: dark)">
-    <link rel="icon" href="/images/favicon-dark.png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Gabarito:wght@600;700;800&family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/assets/tailwind.css?v=71152ad5">
-    <link rel="stylesheet" href="/style.css?v=8adf910d">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Duolingo × Rocket League: Campaign concept for the Young Ones competition. A case study by Oliver T. Williams.">
+<link rel="canonical" href="https://olivertwilliams.com/projects/duolingo.html">
+<meta property="og:title" content="Duolingo x Rocket League — Oliver T. Williams">
+<meta property="og:description" content="Duolingo × Rocket League: Campaign concept for the Young Ones competition. A case study by Oliver T. Williams.">
+<meta property="og:image" content="https://olivertwilliams.com/images/og-image.png">
+<meta property="og:url" content="https://olivertwilliams.com/projects/duolingo.html">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#062048">
+<title>Duolingo x Rocket League — Oliver T. Williams</title>
+<link rel="icon" href="/images/favicon-light.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@600;800&family=Manrope:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="/drift/drift.css?v=3c4e0333">
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"}}</script>
 </head>
-<body class="preload bg-page font-sans flex flex-col min-h-screen transition-colors duration-500">
-
-
-    <div class="site-wash" aria-hidden="true"><div class="wash-orb a"></div><div class="wash-orb b"></div></div>
-
-    <a href="#main-content" class="skip-link">Skip to content</a>
-
-    <!-- ═══ LIGHTBOX ═══ -->
-    <div id="lightbox" class="bg-scrim fixed inset-0 z-lightbox hidden flex-col items-center justify-center opacity-0 transition-opacity duration-300 backdrop-blur-sm">
-        <button onclick="closeLightbox()" aria-label="Close" class="lightbox-close-idle absolute top-6 right-6 p-2 transition-colors z-lightbox-ui bg-white/10 rounded-full hover:bg-white/20">
-            <i class="fa-solid fa-xmark text-2xl"></i>
-        </button>
-        <button onclick="changeLbImage(event,-1)" aria-label="Previous image" class="lightbox-btn-idle absolute left-2 md:left-8 z-lightbox-ui transition-colors p-4 hover:bg-white/10 rounded-full group">
-            <i class="fa-solid fa-chevron-left text-3xl md:text-5xl group-hover:-translate-x-1 transition-transform"></i>
-        </button>
-        <button onclick="changeLbImage(event,1)" aria-label="Next image" class="lightbox-btn-idle absolute right-2 md:right-8 z-lightbox-ui transition-colors p-4 hover:bg-white/10 rounded-full group">
-            <i class="fa-solid fa-chevron-right text-3xl md:text-5xl group-hover:translate-x-1 transition-transform"></i>
-        </button>
-        <div class="w-full h-full flex items-center justify-center p-4" onclick="closeLightboxOnBg(event)">
-            <div class="relative max-w-full max-h-full inline-block group">
-                <img id="lb-image" src="" alt="Full view" class="max-w-full max-h-lightbox object-contain shadow-2xl rounded-sm transition-transform duration-300">
-                <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/90 via-black/60 to-transparent rounded-b-sm transition-opacity duration-300 group-hover:opacity-0">
-                    <p id="lb-caption" class="text-white text-sm md:text-base font-medium italic tracking-wide text-center drop-shadow-md"></p>
-                    <p id="lb-counter" class="text-white/50 text-xs mt-1 uppercase tracking-widest text-center"></p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <nav id="navbar-placeholder" data-type="project" class="fixed top-4 left-0 right-0 z-nav px-4 md:px-8"></nav>
-
-    <main id="main-content" tabindex="-1" class="pt-32 pb-20 px-4 md:px-8 max-w-7xl mx-auto flex-grow w-full">
-
-        <header id="p-header" class="mb-12"><span class="text-accent text-sm font-bold tracking-wider uppercase mb-4 block">Advertising Campaign</span><h1 class="text-ink text-4xl md:text-5xl lg:text-6xl font-bold mb-8 tracking-tight break-words max-w-4xl">Duolingo x Rocket League</h1><div class="grid grid-cols-2 md:grid-cols-4 gap-6 border-y border-themed py-6"><div class="min-w-0"><span class="text-muted text-xs font-bold uppercase tracking-wider block mb-1">Client</span><span class="text-ink font-medium block">Young Ones Competition</span></div><div class="min-w-0"><span class="text-muted text-xs font-bold uppercase tracking-wider block mb-1">Role</span><span class="text-ink font-medium block">Illustration</span></div><div class="min-w-0"><span class="text-muted text-xs font-bold uppercase tracking-wider block mb-1">Year</span><span class="text-ink font-medium block">2024</span></div><div class="min-w-0"><span class="text-muted text-xs font-bold uppercase tracking-wider block mb-1">Deliverables</span><span class="text-ink font-medium block">Deck, Video, Illustration</span></div></div></header>
-
-        <div id="p-body"><figure class="mb-20"><div class="w-full aspect-video bg-wash rounded-3xl overflow-hidden shadow-soft mb-3 border border-themed group cursor-pointer relative" onclick="openLightbox(0)"><img src="/images/duolingo2.png" alt="Concept art for the Duolingo x Rocket League crossover event." class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"><div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100 duration-300"><div class="bg-white/20 backdrop-blur-md p-3 rounded-full"><i class="fa-solid fa-up-right-and-down-left-from-center text-white text-lg"></i></div></div></div><figcaption class="text-muted font-normal text-sm text-center italic px-4">Concept art for the Duolingo x Rocket League crossover event.</figcaption></figure><div class="flex flex-col md:grid md:grid-cols-12 gap-y-10 md:gap-x-12 mb-24"><div class="w-full md:col-span-4"><div class="flex items-baseline gap-3"><span class="text-accent font-mono font-bold text-xl">01</span><h2 class="text-ink text-2xl font-bold">Background</h2></div></div><div class="w-full md:col-span-8"><p class="text-body font-normal text-base md:text-lg break-words">This project was a submission for the One Club for Creativity's 'Young Ones' competition. The national brief challenged students to develop innovative marketing strategies to help global brands such as Duolingo achieve specific growth goals.</p></div><div class="w-full md:col-span-4"><div class="flex items-baseline gap-3"><span class="text-accent font-mono font-bold text-xl">02</span><h2 class="text-ink text-2xl font-bold">The Challenge</h2></div></div><div class="w-full md:col-span-8"><p class="text-body font-normal text-base md:text-lg break-words">Duolingo sought to penetrate a new demographic. We identified the gaming community as a prime target due to its reliance on cross-cultural communication, so we selected Rocket League as the specific vehicle to leverage its massive international player base.</p></div><div class="w-full md:col-span-4"><div class="flex items-baseline gap-3"><span class="text-accent font-mono font-bold text-xl">03</span><h2 class="text-ink text-2xl font-bold">The Solution</h2></div></div><div class="w-full md:col-span-8"><p class="text-body font-normal text-base md:text-lg break-words">We pitched an immersive in-game crossover event. I spearheaded the visual development utilizing Adobe Illustrator to merge official assets from the Duolingo brand kit seamlessly with the Rocket League aesthetic.</p></div><div class="w-full md:col-span-4"><div class="flex items-baseline gap-3"><span class="text-accent font-mono font-bold text-xl">04</span><h2 class="text-ink text-2xl font-bold">The Result</h2></div></div><div class="w-full md:col-span-8"><p class="text-body font-normal text-base md:text-lg break-words">Delivered a comprehensive campaign deck and video pitch that successfully merged two distinct brand identities, resulting in a professional-grade presentation suitable for a major tech client.</p></div></div><div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-20"><figure class=" group cursor-pointer" onclick="openLightbox(1)"><div class="bg-wash rounded-2xl overflow-hidden aspect-photo border border-themed shadow-soft mb-3 relative"><img src="/images/duolingo4.png" alt="Initial illustration sketch." loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"><div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100 duration-300"><div class="bg-white/20 backdrop-blur-md p-3 rounded-full"><i class="fa-solid fa-up-right-and-down-left-from-center text-white text-lg"></i></div></div></div><figcaption class="text-muted font-normal text-sm px-1">Initial illustration sketch.</figcaption></figure></div></div>
-
-        <div id="p-next" class="border-t border-themed pt-12 flex flex-col md:flex-row justify-between items-start md:items-center gap-4"><span class="text-muted text-sm font-medium">Next</span><a href="/projects/icymi.html" class="group text-ink hover:text-accent flex items-center gap-4 text-xl md:text-3xl font-bold transition-colors w-full md:w-auto"><span class="break-words">ICYMI Podcast</span><i class="fa-solid fa-arrow-right text-2xl md:text-4xl group-hover:translate-x-2 transition-transform shrink-0"></i></a></div>
-    </main>
-
-    
-
-    <!-- ── CONTACT ── -->
-    <section id="contact" class="px-4 md:px-8 pb-20">
-        <div class="max-w-7xl mx-auto bg-surface rounded-3xl p-8 md:p-12 shadow-soft border border-themed transition-colors duration-500 text-center">
-            <h2 class="text-ink text-3xl md:text-4xl font-bold mb-4">Let's work together!</h2>
-            <p class="text-muted font-normal text-lg mb-8 max-w-xl mx-auto">Looking for assistance with a project? Please reach out and let me know how I can help.</p>
-            <a href="mailto:oliver_tw@icloud.com" class="btn-primary inline-flex items-center gap-2 px-8 py-3.5">
-                <i class="fa-solid fa-envelope"></i> Email Me
-            </a>
-        </div>
-    </section>
-
-    <footer id="footer-placeholder" class="w-full bg-surface border-t border-themed py-8 px-4 md:px-8 mt-auto"></footer>
-
-    <script src="/components.js?v=11d979bd"></script>
-    <script src="/projects.js?v=1df94b21"></script>
-    <script src="/render.js?v=b047ce16"></script>
-    <script src="/lightbox.js?v=c9f1ff7f"></script>
-    <script>initLightbox([{"src":"/images/duolingo2.png","caption":"Concept art for the Duolingo x Rocket League crossover event."},{"src":"/images/duolingo4.png","caption":"Initial illustration sketch."}]);</script>
+<body class="" >
+<a class="skip" href="#top">Skip to content</a>
+<canvas id="gl" aria-hidden="true"></canvas>
+<div id="rail" aria-hidden="true"></div>
+<div id="page"><div class="wrap">
+<header class="bar"><a class="me" href="/index.html">oliver t. williams</a><nav aria-label="Main"><a href="/archive.html" aria-current="page">work</a><a href="/index.html#about">about</a><a href="/resume.html">resume</a><a href="/index.html#contact">contact</a></nav></header>
+<main id="top" data-morph="design" class="pl"><section class="pl-head"><h1 class="glow cased pl-title">Duolingo × Rocket League</h1><p class="pl-sub">Campaign concept for the Young Ones competition</p><dl class="facts-line"><div><dt>Client</dt><dd>Young Ones Competition</dd></div><div><dt>Role</dt><dd>Illustration</dd></div><div><dt>Year</dt><dd>2024</dd></div><div><dt>Deliverables</dt><dd>Deck, Video, Illustration</dd></div></dl></section><article aria-label="Duolingo x Rocket League case study"><figure class="pl-fig"><button data-plate data-ar="1.7778" data-iar="1.7778" data-turn="0" style="aspect-ratio:1.7778;--ar:1.7778" type="button" data-image="/images/duolingo2.png" data-caption="Concept art for the Duolingo x Rocket League crossover event." aria-label="Enlarge: Concept art for the Duolingo x Rocket League crossover event."><img src="/drift/img/duolingo2.jpg" alt="Concept art for the Duolingo x Rocket League crossover event." loading="lazy"></button><figcaption>Concept art for the Duolingo x Rocket League crossover event.</figcaption></figure><div class="pl-text"><p>Our team made this campaign for the One Club for Creativity’s Young Ones competition, which asks students to develop marketing strategies that help global brands reach specific goals. We responded to Duolingo’s brief.</p></div><div class="pl-text"><p>Duolingo wanted to reach a new audience. We chose gamers, whose play depends on communicating across languages, and picked Rocket League for its large international player base.</p></div><figure class="pl-fig"><button data-plate data-ar="1.7790" data-iar="1.7790" data-turn="0" style="aspect-ratio:1.7790;--ar:1.7790" type="button" data-image="/images/duolingo4.png" data-caption="Initial illustration sketch." aria-label="Enlarge: Initial illustration sketch."><img src="/drift/img/duolingo4.jpg" alt="Initial illustration sketch." loading="lazy"></button><figcaption>Initial illustration sketch.</figcaption></figure><div class="pl-text"><p>We pitched an in-game crossover event. I led the visual development in Adobe Illustrator, combining assets from Duolingo’s brand kit with the look of Rocket League.</p></div><div class="pl-text"><p>We presented the concept as a campaign deck and a video pitch.</p></div></article><a class="pl-next" href="/projects/xmas.html"><span class="nx-label">Next project</span><span class="nx-title">Christmas in Excelsior</span><span data-plate data-ar="1.7778" data-iar="1.3333" data-turn="0" style="aspect-ratio:1.7778;--ar:1.7778" ><img src="/drift/img/xmas2-t.jpg" alt="" loading="lazy"></span></a><section class="floor sub"><h2 class="h2">Something in mind?</h2><p>Reach out and let me know how I can help.</p><div class="actions"><button class="copy-mail" type="button" data-copy aria-label="Copy email address oliver_tw@icloud.com"><span class="mail">oliver_tw@icloud.com</span><svg class="copy-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="8.5" y="8.5" width="11" height="11" rx="2.6"/><path d="M15.5 8.5V6.6A2.1 2.1 0 0 0 13.4 4.5H6.6A2.1 2.1 0 0 0 4.5 6.6v6.8a2.1 2.1 0 0 0 2.1 2.1h1.9"/></svg></button><a class="pill" href="/archive.html">All work</a></div></section></main>
+<footer class="foot"><span>© 2026 Oliver T. Williams</span><div class="links"><button id="motion" type="button" aria-pressed="false">Pause motion</button><a href="/archive.html">All work</a><a href="https://www.instagram.com/oliver_williams1212/" target="_blank" rel="me noopener">Instagram</a><a href="https://www.linkedin.com/in/oliver-t-williams/" target="_blank" rel="me noopener">LinkedIn</a><a href="https://github.com/olivertw12" target="_blank" rel="me noopener">GitHub</a></div></footer>
+</div></div>
+<div id="toast" role="status"></div>
+<dialog class="viewer" aria-label="Picture viewer"><div class="viewer-bar"><button class="viewer-prev" type="button">Previous</button><button class="viewer-next" type="button">Next</button><span class="viewer-count"></span><button class="viewer-close" type="button">Close</button></div><img alt=""><p class="viewer-caption"></p></dialog><script type="module" src="/drift/drift.js?v=3c4e0333"></script>
 </body>
 </html>

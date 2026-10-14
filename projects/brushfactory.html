@@ -1,102 +1,41 @@
-<!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<!doctype html>
+<html lang="en" data-format="styled">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Case-study template — see tailwind-build/prerender.js. -->
-    <title>Brushfactory | Oliver T. Williams</title>
-    <meta name="description" content="Universal brush conversion for digital artists. Bring your favorite brushes with you when you switch between Photoshop, Procreate, Clip Studio Paint, and Krita.">
-    <meta property="og:title" content="Brushfactory | Oliver T. Williams">
-    <meta property="og:description" content="Universal brush conversion for digital artists. Bring your favorite brushes with you when you switch between Photoshop, Procreate, Clip Studio Paint, and Krita.">
-    <meta property="og:image" content="https://olivertwilliams.com/images/brushfactory-home.jpg">
-    <meta property="og:url" content="https://olivertwilliams.com/projects/brushfactory.html">
-    <meta property="og:type" content="article">
-    <meta name="twitter:card" content="summary_large_image">
-    <link rel="canonical" href="https://olivertwilliams.com/projects/brushfactory.html">
-    <script>
-        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            document.documentElement.classList.add('dark');
-        } else { document.documentElement.classList.remove('dark'); }
-    </script>
-    <meta name="theme-color" content="#EEF1F3" media="(prefers-color-scheme: light)">
-    <meta name="theme-color" content="#10151A" media="(prefers-color-scheme: dark)">
-    <link rel="icon" href="/images/favicon-dark.png" media="(prefers-color-scheme: light)">
-    <link rel="icon" href="/images/favicon-light.png" media="(prefers-color-scheme: dark)">
-    <link rel="icon" href="/images/favicon-dark.png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Gabarito:wght@600;700;800&family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/assets/tailwind.css?v=71152ad5">
-    <link rel="stylesheet" href="/style.css?v=8adf910d">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Brushfactory: A brush converter I design, build and run. A case study by Oliver T. Williams.">
+<link rel="canonical" href="https://olivertwilliams.com/projects/brushfactory.html">
+<meta property="og:title" content="Brushfactory — Oliver T. Williams">
+<meta property="og:description" content="Brushfactory: A brush converter I design, build and run. A case study by Oliver T. Williams.">
+<meta property="og:image" content="https://olivertwilliams.com/images/og-image.png">
+<meta property="og:url" content="https://olivertwilliams.com/projects/brushfactory.html">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#062048">
+<title>Brushfactory — Oliver T. Williams</title>
+<link rel="icon" href="/images/favicon-light.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@600;800&family=Manrope:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="/drift/drift.css?v=3c4e0333">
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"}}</script>
 </head>
-<body class="preload bg-page font-sans flex flex-col min-h-screen transition-colors duration-500">
-
-
-    <div class="site-wash" aria-hidden="true"><div class="wash-orb a"></div><div class="wash-orb b"></div></div>
-
-    <a href="#main-content" class="skip-link">Skip to content</a>
-
-    <!-- ═══ LIGHTBOX ═══ -->
-    <div id="lightbox" class="bg-scrim fixed inset-0 z-lightbox hidden flex-col items-center justify-center opacity-0 transition-opacity duration-300 backdrop-blur-sm">
-        <button onclick="closeLightbox()" aria-label="Close" class="lightbox-close-idle absolute top-6 right-6 p-2 transition-colors z-lightbox-ui bg-white/10 rounded-full hover:bg-white/20">
-            <i class="fa-solid fa-xmark text-2xl"></i>
-        </button>
-        <button onclick="changeLbImage(event,-1)" aria-label="Previous image" class="lightbox-btn-idle absolute left-2 md:left-8 z-lightbox-ui transition-colors p-4 hover:bg-white/10 rounded-full group">
-            <i class="fa-solid fa-chevron-left text-3xl md:text-5xl group-hover:-translate-x-1 transition-transform"></i>
-        </button>
-        <button onclick="changeLbImage(event,1)" aria-label="Next image" class="lightbox-btn-idle absolute right-2 md:right-8 z-lightbox-ui transition-colors p-4 hover:bg-white/10 rounded-full group">
-            <i class="fa-solid fa-chevron-right text-3xl md:text-5xl group-hover:translate-x-1 transition-transform"></i>
-        </button>
-        <div class="w-full h-full flex items-center justify-center p-4" onclick="closeLightboxOnBg(event)">
-            <div class="relative max-w-full max-h-full inline-block group">
-                <img id="lb-image" src="" alt="Full view" class="max-w-full max-h-lightbox object-contain shadow-2xl rounded-sm transition-transform duration-300">
-                <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/90 via-black/60 to-transparent rounded-b-sm transition-opacity duration-300 group-hover:opacity-0">
-                    <p id="lb-caption" class="text-white text-sm md:text-base font-medium italic tracking-wide text-center drop-shadow-md"></p>
-                    <p id="lb-counter" class="text-white/50 text-xs mt-1 uppercase tracking-widest text-center"></p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <nav id="navbar-placeholder" data-type="project" class="fixed top-4 left-0 right-0 z-nav px-4 md:px-8"></nav>
-
-    <main id="main-content" tabindex="-1" class="pt-32 pb-20 px-4 md:px-8 max-w-7xl mx-auto flex-grow w-full">
-
-        <header id="p-header" class="mb-12"><span class="text-accent text-sm font-bold tracking-wider uppercase mb-4 block">Product · Design &amp; Build</span><h1 class="text-ink text-4xl md:text-5xl lg:text-6xl font-bold mb-8 tracking-tight break-words max-w-4xl">Brushfactory</h1><div class="grid grid-cols-2 md:grid-cols-4 gap-6 border-y border-themed py-6"><div class="min-w-0"><span class="text-muted text-xs font-bold uppercase tracking-wider block mb-1">Type</span><span class="text-ink font-medium block">Live product</span></div><div class="min-w-0"><span class="text-muted text-xs font-bold uppercase tracking-wider block mb-1">Role</span><span class="text-ink font-medium block">Design &amp; build</span></div><div class="min-w-0"><span class="text-muted text-xs font-bold uppercase tracking-wider block mb-1">Stack</span><span class="text-ink font-medium block">Python, SQLite, Stripe</span></div><div class="min-w-0"><span class="text-muted text-xs font-bold uppercase tracking-wider block mb-1">Status</span><span class="text-ink font-medium block">In development</span></div></div></header>
-
-        <div id="p-body"><div class="text-lg text-body font-normal mb-20 max-w-4xl"><p class="mb-6 last:mb-0"><strong class="text-ink font-semibold">The Problem:</strong> When you switch drawing apps, your brushes get left behind. Every app stores brushes in its own undocumented binary format, and their settings rarely line up one-to-one. Most converters cheat by flattening the brush tip into a static stamp. There is a real need for artists to keep functional, living brushes when moving between programs, so I built Brushfactory to fix this.</p><p class="mb-6 last:mb-0"><strong class="text-ink font-semibold">What It Is:</strong> Brushfactory reads a brush file into a universal format and writes native, working settings for the target app instead of faking them. It handles Photoshop, Procreate, Clip Studio Paint, and Krita in any direction. The live site offers three free conversions a month, with a paid tier for unlimited use and batch conversion. I am continuously adding new formats based on user demand.</p></div><div><section class="mb-24"><div class="flex items-baseline gap-3 mb-6"><span class="text-accent font-mono font-bold text-xl">01</span><h2 class="text-ink text-2xl md:text-3xl font-bold">Reverse-Engineering Undocumented Formats</h2></div><p class="text-body font-normal mb-8 text-lg max-w-4xl">Each app stores brushes differently, which meant decoding undocumented binary structures by writing test files, opening them in the target app, and documenting the deltas. I handled all the research and validation, then directed Claude to write the parsing and encoding code. I also had it wrap the conversion engine in a CLI tool, speeding up testing by letting me run conversions directly from the terminal.</p><div class="bg-surface rounded-3xl p-5 border border-themed shadow-soft"><div class="bg-code rounded-2xl overflow-hidden border-code border flex flex-col w-full min-w-0"><div class="flex items-center justify-between px-4 py-2.5 bg-code-titlebar border-b border-code shrink-0"><span class="text-code-label text-xs font-mono">Bash</span><div class="flex gap-1.5"><div class="w-3 h-3 rounded-full chrome-close"></div><div class="w-3 h-3 rounded-full chrome-minimize"></div><div class="w-3 h-3 rounded-full chrome-maximize"></div></div></div><div class="p-4 overflow-x-auto flex-grow font-mono text-sm text-code"><pre><code>python main.py inspect  some.brushset
+<body class="" >
+<a class="skip" href="#top">Skip to content</a>
+<canvas id="gl" aria-hidden="true"></canvas>
+<div id="rail" aria-hidden="true"></div>
+<div id="page"><div class="wrap">
+<header class="bar"><a class="me" href="/index.html">oliver t. williams</a><nav aria-label="Main"><a href="/archive.html" aria-current="page">work</a><a href="/index.html#about">about</a><a href="/resume.html">resume</a><a href="/index.html#contact">contact</a></nav></header>
+<main id="top" data-morph="brushfactory" class="pl"><section class="pl-head"><h1 class="glow cased pl-title">Brushfactory</h1><p class="pl-sub">A brush converter I design, build and run</p><dl class="facts-line"><div><dt>Type</dt><dd>Live product</dd></div><div><dt>Role</dt><dd>Design &amp; build</dd></div><div><dt>Stack</dt><dd>Python, SQLite, Stripe</dd></div><div><dt>Status</dt><dd>In development</dd></div></dl></section><article aria-label="Brushfactory case study"><figure class="pl-fig"><button data-plate data-ar="2.1002" data-iar="2.1002" data-turn="0" style="aspect-ratio:2.1002;--ar:2.1002" type="button" data-image="/images/brushfactory-home.jpg" data-caption="" aria-label="Enlarge: project image"><img src="/drift/img/brushfactory-home.jpg" alt="" loading="lazy"></button></figure><div class="pl-text"><p>When you switch drawing apps, your brushes get left behind. Every app stores brushes in its own undocumented binary format, and their settings rarely line up one-to-one. Most converters cheat by flattening the brush tip into a static stamp. There is a real need for artists to keep functional, living brushes when moving between programs, so I built Brushfactory to fix this.</p></div><div class="pl-text"><p>Brushfactory reads a brush file into a universal format and writes native, working settings for the target app instead of faking them. It handles Photoshop, Procreate, Clip Studio Paint, and Krita in any direction. The live site offers three free conversions a month, with a paid tier for unlimited use and batch conversion. I am continuously adding new formats based on user demand.</p></div><section class="pl-ch"><h2>Reverse-engineering undocumented formats</h2><p>Each app stores brushes differently, which meant decoding undocumented binary structures by writing test files, opening them in the target app, and documenting the deltas. I handled all the research and validation, then directed Claude to write the parsing and encoding code. I also had it wrap the conversion engine in a CLI tool, speeding up testing by letting me run conversions directly from the terminal.</p></section><details class="code pl-code"><summary>Show the code <span>Bash</span></summary><pre><code>python main.py inspect  some.brushset
 python main.py convert  some.abr --to kpp -o out/
-python main.py batch    packs/ --to sut -o bundle.zip</code></pre></div></div></div></section><section class="mb-24"><div class="flex items-baseline gap-3 mb-6"><span class="text-accent font-mono font-bold text-xl">02</span><h2 class="text-ink text-2xl md:text-3xl font-bold">The Hard Part Is Feel</h2></div><p class="text-body font-normal mb-8 text-lg max-w-4xl">Copying numerical settings is only half the battle. Two brushes can share identical size, spacing, and opacity values yet feel completely different on the canvas. Each app interprets math differently, and features like grain textures and pressure response carry most of a brush's character. Manual visual inspection wasn't consistent enough across four formats and hundreds of conversions, so I shifted to automated measurement.</p></section><section class="mb-24"><div class="flex items-baseline gap-3 mb-6"><span class="text-accent font-mono font-bold text-xl">03</span><h2 class="text-ink text-2xl md:text-3xl font-bold">Measuring Drift</h2></div><p class="text-body font-normal mb-8 text-lg max-w-4xl">I built a testing harness that takes a source brush, converts it to every other format, reads each output back through the real codecs, and compares them against the original. It checks size, spacing, opacity, grain, and dynamics, flagging anything that drifts more than 2%. It also renders a comparison sheet containing the tip, grain, and a test stroke for every format. Because everything is rendered through a unified engine, any visual discrepancy represents actual mapping drift rather than differing app UI rendering.</p><div class="bg-surface rounded-3xl p-5 border border-themed shadow-soft"><div class="bg-code rounded-2xl overflow-hidden border-code border flex flex-col w-full min-w-0"><div class="flex items-center justify-between px-4 py-2.5 bg-code-titlebar border-b border-code shrink-0"><span class="text-code-label text-xs font-mono">Plaintext</span><div class="flex gap-1.5"><div class="w-3 h-3 rounded-full chrome-close"></div><div class="w-3 h-3 rounded-full chrome-minimize"></div><div class="w-3 h-3 rounded-full chrome-maximize"></div></div></div><div class="p-4 overflow-x-auto flex-grow font-mono text-sm text-code"><pre><code>test_brushes/converted/&lt;brush&gt;/
+python main.py batch    packs/ --to sut -o bundle.zip</code></pre></details><section class="pl-ch"><h2>Matching how a brush feels</h2><p>Copying numerical settings is only half the battle. Two brushes can share identical size, spacing, and opacity values yet feel completely different on the canvas. Each app interprets math differently, and features like grain textures and pressure response carry most of a brush&#39;s character. Manual visual inspection wasn&#39;t consistent enough across four formats and hundreds of conversions, so I shifted to automated measurement.</p></section><section class="pl-ch"><h2>Measuring drift between formats</h2><p>I built a testing harness that takes a source brush, converts it to every other format, reads each output back through the real codecs, and compares them against the original. It checks size, spacing, opacity, grain, and dynamics, flagging anything that drifts more than 2%. It also renders a comparison sheet containing the tip, grain, and a test stroke for every format. Because everything is rendered through a unified engine, any visual discrepancy represents actual mapping drift rather than differing app UI rendering.</p></section><details class="code pl-code"><summary>Show the code <span>Plaintext</span></summary><pre><code>test_brushes/converted/&lt;brush&gt;/
 
 cohesion_sheet.png     tip, grain and a test stroke per format
 cohesion_report.txt    size / spacing / opacity / grain / dynamics
-                       with a warning on anything &gt;<span class="token-num">2</span>% <span class="token-kw">from</span> source
-&lt;format&gt;/              the converted files, ready to <span class="token-kw">import</span> and
-                       feel-test on a real canvas</code></pre></div></div></div></section><section class="mb-24"><div class="flex items-baseline gap-3 mb-6"><span class="text-accent font-mono font-bold text-xl">04</span><h2 class="text-ink text-2xl md:text-3xl font-bold">Transparent Support Status</h2></div><p class="text-body font-normal mb-8 text-lg max-w-4xl">The homepage features a support table showing what carries over—either as an exact match or as close as the target app allows. A deeper fidelity report outlines support statuses and format limitations. For instance, wet media between Procreate and Clip Studio is approximated, tilt and speed dynamics only partially map onto Krita, and Clip Studio automatically resamples textures exceeding 1024 pixels.</p><aside class="callout mt-8">The homepage table, fidelity report, and converter status view are three synchronized projections of the same underlying dataset, backed by a cross-reference system to maintain consistency.</aside></section><section class="mb-24"><div class="flex items-baseline gap-3 mb-6"><span class="text-accent font-mono font-bold text-xl">05</span><h2 class="text-ink text-2xl md:text-3xl font-bold">Building for the Future</h2></div><p class="text-body font-normal mb-8 text-lg max-w-4xl">Brushfactory provides a solid foundation proving that cross-platform brush parity is genuinely possible. My current focus is refining edge cases and expanding format support. Long-term, I plan to evolve the platform into a marketplace where digital artists can buy and sell brushes for all platforms simultaneously.</p></section></div><div class="mb-20"><a href="https://brushfactory.co" target="_blank" rel="noopener" class="inline-flex items-center gap-2 mr-3 mb-3 px-5 py-3 rounded-xl font-semibold text-sm border border-themed bg-surface text-ink hover:text-accent transition-colors"><i class="fa-solid fa-link"></i>brushfactory.co</a><a href="https://brushfactory.co/fidelity" target="_blank" rel="noopener" class="inline-flex items-center gap-2 mr-3 mb-3 px-5 py-3 rounded-xl font-semibold text-sm border border-themed bg-surface text-ink hover:text-accent transition-colors"><i class="fa-solid fa-link"></i>Fidelity report</a></div></div>
-
-        <div id="p-next" class="border-t border-themed pt-12 flex flex-col md:flex-row justify-between items-start md:items-center gap-4"><span class="text-muted text-sm font-medium">Next</span><a href="/projects/dmarc.html" class="group text-ink hover:text-accent flex items-center gap-4 text-xl md:text-3xl font-bold transition-colors w-full md:w-auto"><span class="break-words">DMARC Network Analysis</span><i class="fa-solid fa-arrow-right text-2xl md:text-4xl group-hover:translate-x-2 transition-transform shrink-0"></i></a></div>
-    </main>
-
-    
-
-    <!-- ── CONTACT ── -->
-    <section id="contact" class="px-4 md:px-8 pb-20">
-        <div class="max-w-7xl mx-auto bg-surface rounded-3xl p-8 md:p-12 shadow-soft border border-themed transition-colors duration-500 text-center">
-            <h2 class="text-ink text-3xl md:text-4xl font-bold mb-4">Let's work together!</h2>
-            <p class="text-muted font-normal text-lg mb-8 max-w-xl mx-auto">Looking for assistance with a project? Please reach out and let me know how I can help.</p>
-            <a href="mailto:oliver_tw@icloud.com" class="btn-primary inline-flex items-center gap-2 px-8 py-3.5">
-                <i class="fa-solid fa-envelope"></i> Email Me
-            </a>
-        </div>
-    </section>
-
-    <footer id="footer-placeholder" class="w-full bg-surface border-t border-themed py-8 px-4 md:px-8 mt-auto"></footer>
-
-    <script src="/components.js?v=11d979bd"></script>
-    <script src="/projects.js?v=1df94b21"></script>
-    <script src="/render.js?v=b047ce16"></script>
-    <script src="/lightbox.js?v=c9f1ff7f"></script>
-    
+                       with a warning on anything &gt;2% from source
+&lt;format&gt;/              the converted files, ready to import and
+                       feel-test on a real canvas</code></pre></details><section class="pl-ch"><h2>Publishing what carries over</h2><p>The homepage features a support table showing what carries over—either as an exact match or as close as the target app allows. A deeper fidelity report outlines support statuses and format limitations. For instance, wet media between Procreate and Clip Studio is approximated, tilt and speed dynamics only partially map onto Krita, and Clip Studio automatically resamples textures exceeding 1024 pixels.</p><p class="pl-note">The homepage table, fidelity report, and converter status view are three synchronized projections of the same underlying dataset, backed by a cross-reference system to maintain consistency.</p></section><section class="pl-ch"><h2>Next: edge cases and new formats</h2><p>Brushfactory provides a solid foundation proving that cross-platform brush parity is genuinely possible. My current focus is refining edge cases and expanding format support. Long-term, I plan to evolve the platform into a marketplace where digital artists can buy and sell brushes for all platforms simultaneously.</p></section><p class="pl-links"><a href="https://brushfactory.co" target="_blank" rel="noopener">brushfactory.co&nbsp;↗</a><a href="https://brushfactory.co/fidelity" target="_blank" rel="noopener">Fidelity report&nbsp;↗</a></p></article><a class="pl-next" href="/projects/brushfactory-identity.html"><span class="nx-label">Next project</span><span class="nx-title">Brushfactory Identity</span><span data-plate data-ar="1.7778" data-iar="1.3333" data-turn="0" style="aspect-ratio:1.7778;--ar:1.7778" ><img src="/drift/img/bfid-lockup-light-t.jpg" alt="" loading="lazy"></span></a><section class="floor sub"><h2 class="h2">Something in mind?</h2><p>Reach out and let me know how I can help.</p><div class="actions"><button class="copy-mail" type="button" data-copy aria-label="Copy email address oliver_tw@icloud.com"><span class="mail">oliver_tw@icloud.com</span><svg class="copy-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="8.5" y="8.5" width="11" height="11" rx="2.6"/><path d="M15.5 8.5V6.6A2.1 2.1 0 0 0 13.4 4.5H6.6A2.1 2.1 0 0 0 4.5 6.6v6.8a2.1 2.1 0 0 0 2.1 2.1h1.9"/></svg></button><a class="pill" href="/archive.html">All work</a></div></section></main>
+<footer class="foot"><span>© 2026 Oliver T. Williams</span><div class="links"><button id="motion" type="button" aria-pressed="false">Pause motion</button><a href="/archive.html">All work</a><a href="https://www.instagram.com/oliver_williams1212/" target="_blank" rel="me noopener">Instagram</a><a href="https://www.linkedin.com/in/oliver-t-williams/" target="_blank" rel="me noopener">LinkedIn</a><a href="https://github.com/olivertw12" target="_blank" rel="me noopener">GitHub</a></div></footer>
+</div></div>
+<div id="toast" role="status"></div>
+<dialog class="viewer" aria-label="Picture viewer"><div class="viewer-bar"><button class="viewer-prev" type="button">Previous</button><button class="viewer-next" type="button">Next</button><span class="viewer-count"></span><button class="viewer-close" type="button">Close</button></div><img alt=""><p class="viewer-caption"></p></dialog><script type="module" src="/drift/drift.js?v=3c4e0333"></script>
 </body>
 </html>

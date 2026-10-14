@@ -1,94 +1,33 @@
-<!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<!doctype html>
+<html lang="en" data-format="styled">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Case-study template — see tailwind-build/prerender.js. -->
-    <title>Drake Relays 2025 | Oliver T. Williams</title>
-    <meta name="description" content="Relays event logo and theme for Drake University.">
-    <meta property="og:title" content="Drake Relays 2025 | Oliver T. Williams">
-    <meta property="og:description" content="Relays event logo and theme for Drake University.">
-    <meta property="og:image" content="https://olivertwilliams.com/images/relays2.png">
-    <meta property="og:url" content="https://olivertwilliams.com/projects/relays.html">
-    <meta property="og:type" content="article">
-    <meta name="twitter:card" content="summary_large_image">
-    <link rel="canonical" href="https://olivertwilliams.com/projects/relays.html">
-    <script>
-        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            document.documentElement.classList.add('dark');
-        } else { document.documentElement.classList.remove('dark'); }
-    </script>
-    <meta name="theme-color" content="#EEF1F3" media="(prefers-color-scheme: light)">
-    <meta name="theme-color" content="#10151A" media="(prefers-color-scheme: dark)">
-    <link rel="icon" href="/images/favicon-dark.png" media="(prefers-color-scheme: light)">
-    <link rel="icon" href="/images/favicon-light.png" media="(prefers-color-scheme: dark)">
-    <link rel="icon" href="/images/favicon-dark.png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Gabarito:wght@600;700;800&family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/assets/tailwind.css?v=71152ad5">
-    <link rel="stylesheet" href="/style.css?v=8adf910d">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Drake Relays 2025: Official logo and visual theme. A case study by Oliver T. Williams.">
+<link rel="canonical" href="https://olivertwilliams.com/projects/relays.html">
+<meta property="og:title" content="Drake Relays 2025 — Oliver T. Williams">
+<meta property="og:description" content="Drake Relays 2025: Official logo and visual theme. A case study by Oliver T. Williams.">
+<meta property="og:image" content="https://olivertwilliams.com/images/og-image.png">
+<meta property="og:url" content="https://olivertwilliams.com/projects/relays.html">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#062048">
+<title>Drake Relays 2025 — Oliver T. Williams</title>
+<link rel="icon" href="/images/favicon-light.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@600;800&family=Manrope:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="/drift/drift.css?v=3c4e0333">
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"}}</script>
 </head>
-<body class="preload bg-page font-sans flex flex-col min-h-screen transition-colors duration-500">
-
-
-    <div class="site-wash" aria-hidden="true"><div class="wash-orb a"></div><div class="wash-orb b"></div></div>
-
-    <a href="#main-content" class="skip-link">Skip to content</a>
-
-    <!-- ═══ LIGHTBOX ═══ -->
-    <div id="lightbox" class="bg-scrim fixed inset-0 z-lightbox hidden flex-col items-center justify-center opacity-0 transition-opacity duration-300 backdrop-blur-sm">
-        <button onclick="closeLightbox()" aria-label="Close" class="lightbox-close-idle absolute top-6 right-6 p-2 transition-colors z-lightbox-ui bg-white/10 rounded-full hover:bg-white/20">
-            <i class="fa-solid fa-xmark text-2xl"></i>
-        </button>
-        <button onclick="changeLbImage(event,-1)" aria-label="Previous image" class="lightbox-btn-idle absolute left-2 md:left-8 z-lightbox-ui transition-colors p-4 hover:bg-white/10 rounded-full group">
-            <i class="fa-solid fa-chevron-left text-3xl md:text-5xl group-hover:-translate-x-1 transition-transform"></i>
-        </button>
-        <button onclick="changeLbImage(event,1)" aria-label="Next image" class="lightbox-btn-idle absolute right-2 md:right-8 z-lightbox-ui transition-colors p-4 hover:bg-white/10 rounded-full group">
-            <i class="fa-solid fa-chevron-right text-3xl md:text-5xl group-hover:translate-x-1 transition-transform"></i>
-        </button>
-        <div class="w-full h-full flex items-center justify-center p-4" onclick="closeLightboxOnBg(event)">
-            <div class="relative max-w-full max-h-full inline-block group">
-                <img id="lb-image" src="" alt="Full view" class="max-w-full max-h-lightbox object-contain shadow-2xl rounded-sm transition-transform duration-300">
-                <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/90 via-black/60 to-transparent rounded-b-sm transition-opacity duration-300 group-hover:opacity-0">
-                    <p id="lb-caption" class="text-white text-sm md:text-base font-medium italic tracking-wide text-center drop-shadow-md"></p>
-                    <p id="lb-counter" class="text-white/50 text-xs mt-1 uppercase tracking-widest text-center"></p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <nav id="navbar-placeholder" data-type="project" class="fixed top-4 left-0 right-0 z-nav px-4 md:px-8"></nav>
-
-    <main id="main-content" tabindex="-1" class="pt-32 pb-20 px-4 md:px-8 max-w-7xl mx-auto flex-grow w-full">
-
-        <header id="p-header" class="mb-12"><span class="text-accent text-sm font-bold tracking-wider uppercase mb-4 block">Event Branding</span><h1 class="text-ink text-4xl md:text-5xl lg:text-6xl font-bold mb-8 tracking-tight break-words max-w-4xl">Drake Relays 2025</h1><div class="grid grid-cols-2 md:grid-cols-4 gap-6 border-y border-themed py-6"><div class="min-w-0"><span class="text-muted text-xs font-bold uppercase tracking-wider block mb-1">Client</span><span class="text-ink font-medium block">Drake University</span></div><div class="min-w-0"><span class="text-muted text-xs font-bold uppercase tracking-wider block mb-1">Role</span><span class="text-ink font-medium block">Visual Design</span></div><div class="min-w-0"><span class="text-muted text-xs font-bold uppercase tracking-wider block mb-1">Year</span><span class="text-ink font-medium block">2025</span></div><div class="min-w-0"><span class="text-muted text-xs font-bold uppercase tracking-wider block mb-1">Deliverables</span><span class="text-ink font-medium block">Logo, Merch, Signage</span></div></div></header>
-
-        <div id="p-body"><figure class="mb-20"><div class="w-full aspect-video bg-wash rounded-3xl overflow-hidden shadow-soft mb-3 border border-themed group cursor-pointer relative" onclick="openLightbox(0)"><img src="/images/relays2.png" alt="Primary visual logo featured on a keychain." class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"><div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100 duration-300"><div class="bg-white/20 backdrop-blur-md p-3 rounded-full"><i class="fa-solid fa-up-right-and-down-left-from-center text-white text-lg"></i></div></div></div><figcaption class="text-muted font-normal text-sm text-center italic px-4">Primary visual logo featured on a keychain.</figcaption></figure><div class="flex flex-col md:grid md:grid-cols-12 gap-y-10 md:gap-x-12 mb-24"><div class="w-full md:col-span-4"><div class="flex items-baseline gap-3"><span class="text-accent font-mono font-bold text-xl">01</span><h2 class="text-ink text-2xl font-bold">Background</h2></div></div><div class="w-full md:col-span-8"><p class="text-body font-normal text-base md:text-lg break-words">The Drake Relays is a premier athletic event held annually at Drake University. Each year a student is selected through a competitive process to design the official logo and visual theme to ensure the event maintains a fresh and student-centric identity.</p></div><div class="w-full md:col-span-4"><div class="flex items-baseline gap-3"><span class="text-accent font-mono font-bold text-xl">02</span><h2 class="text-ink text-2xl font-bold">The Challenge</h2></div></div><div class="w-full md:col-span-8"><p class="text-body font-normal text-base md:text-lg break-words">The mandated theme for the 2025 Relays was &quot;Racing Through Time.&quot; I needed to interpret this broad concept into a cohesive visual brand that felt energetic and athletic while honoring the history of the event. The design also had to scale flawlessly across everything from massive campus banners to small merchandise items.</p></div><div class="w-full md:col-span-4"><div class="flex items-baseline gap-3"><span class="text-accent font-mono font-bold text-xl">03</span><h2 class="text-ink text-2xl font-bold">The Solution</h2></div></div><div class="w-full md:col-span-8"><p class="text-body font-normal text-base md:text-lg break-words">I developed a logo and visual system anchored in a retro-futurist aesthetic and used a neon-inspired color palette to evoke the speed and energy of the event. A key component of the design was the integration of the Des Moines city skyline to ground the concept in the specific location of the city.</p></div><div class="w-full md:col-span-4"><div class="flex items-baseline gap-3"><span class="text-accent font-mono font-bold text-xl">04</span><h2 class="text-ink text-2xl font-bold">The Result</h2></div></div><div class="w-full md:col-span-8"><p class="text-body font-normal text-base md:text-lg break-words">The final design was implemented successfully across the entire event ecosystem. The logo was placed prominently around the Drake University campus to create an immersive atmosphere for attendees.</p></div></div><div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-20"><figure class=" group cursor-pointer" onclick="openLightbox(1)"><div class="bg-wash rounded-2xl overflow-hidden aspect-photo border border-themed shadow-soft mb-3 relative"><img src="/images/relays3.png" alt="Merchandise application on steel cups handed out at events." loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"><div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100 duration-300"><div class="bg-white/20 backdrop-blur-md p-3 rounded-full"><i class="fa-solid fa-up-right-and-down-left-from-center text-white text-lg"></i></div></div></div><figcaption class="text-muted font-normal text-sm px-1">Merchandise application on steel cups handed out at events.</figcaption></figure><figure class=" group cursor-pointer" onclick="openLightbox(2)"><div class="bg-wash rounded-2xl overflow-hidden aspect-photo border border-themed shadow-soft mb-3 relative"><img src="/images/relays4.png" alt="Raffle prize given at reveal event." loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"><div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100 duration-300"><div class="bg-white/20 backdrop-blur-md p-3 rounded-full"><i class="fa-solid fa-up-right-and-down-left-from-center text-white text-lg"></i></div></div></div><figcaption class="text-muted font-normal text-sm px-1">Raffle prize given at reveal event.</figcaption></figure><figure class="md:col-span-2 group cursor-pointer" onclick="openLightbox(3)"><div class="bg-wash rounded-2xl overflow-hidden aspect-video border border-themed shadow-soft mb-3 relative"><img src="/images/relays5.png" alt="Banner displayed on Drake campus grounds." loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"><div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100 duration-300"><div class="bg-white/20 backdrop-blur-md p-3 rounded-full"><i class="fa-solid fa-up-right-and-down-left-from-center text-white text-lg"></i></div></div></div><figcaption class="text-muted font-normal text-sm px-1">Banner displayed on Drake campus grounds.</figcaption></figure></div></div>
-
-        <div id="p-next" class="border-t border-themed pt-12 flex flex-col md:flex-row justify-between items-start md:items-center gap-4"><span class="text-muted text-sm font-medium">Next</span><a href="/projects/brushfactory-identity.html" class="group text-ink hover:text-accent flex items-center gap-4 text-xl md:text-3xl font-bold transition-colors w-full md:w-auto"><span class="break-words">Brushfactory Identity</span><i class="fa-solid fa-arrow-right text-2xl md:text-4xl group-hover:translate-x-2 transition-transform shrink-0"></i></a></div>
-    </main>
-
-    
-
-    <!-- ── CONTACT ── -->
-    <section id="contact" class="px-4 md:px-8 pb-20">
-        <div class="max-w-7xl mx-auto bg-surface rounded-3xl p-8 md:p-12 shadow-soft border border-themed transition-colors duration-500 text-center">
-            <h2 class="text-ink text-3xl md:text-4xl font-bold mb-4">Let's work together!</h2>
-            <p class="text-muted font-normal text-lg mb-8 max-w-xl mx-auto">Looking for assistance with a project? Please reach out and let me know how I can help.</p>
-            <a href="mailto:oliver_tw@icloud.com" class="btn-primary inline-flex items-center gap-2 px-8 py-3.5">
-                <i class="fa-solid fa-envelope"></i> Email Me
-            </a>
-        </div>
-    </section>
-
-    <footer id="footer-placeholder" class="w-full bg-surface border-t border-themed py-8 px-4 md:px-8 mt-auto"></footer>
-
-    <script src="/components.js?v=11d979bd"></script>
-    <script src="/projects.js?v=1df94b21"></script>
-    <script src="/render.js?v=b047ce16"></script>
-    <script src="/lightbox.js?v=c9f1ff7f"></script>
-    <script>initLightbox([{"src":"/images/relays2.png","caption":"Primary visual logo featured on a keychain."},{"src":"/images/relays3.png","caption":"Merchandise application on steel cups handed out at events."},{"src":"/images/relays4.png","caption":"Raffle prize given at reveal event."},{"src":"/images/relays5.png","caption":"Banner displayed on Drake campus grounds."}]);</script>
+<body class="" >
+<a class="skip" href="#top">Skip to content</a>
+<canvas id="gl" aria-hidden="true"></canvas>
+<div id="rail" aria-hidden="true"></div>
+<div id="page"><div class="wrap">
+<header class="bar"><a class="me" href="/index.html">oliver t. williams</a><nav aria-label="Main"><a href="/archive.html" aria-current="page">work</a><a href="/index.html#about">about</a><a href="/resume.html">resume</a><a href="/index.html#contact">contact</a></nav></header>
+<main id="top" data-morph="design" class="pl"><section class="pl-head"><h1 class="glow cased pl-title">Drake Relays 2025</h1><p class="pl-sub">Official logo and visual theme</p><dl class="facts-line"><div><dt>Client</dt><dd>Drake University</dd></div><div><dt>Role</dt><dd>Visual Design</dd></div><div><dt>Year</dt><dd>2025</dd></div><div><dt>Deliverables</dt><dd>Logo, Merch, Signage</dd></div></dl></section><article aria-label="Drake Relays 2025 case study"><figure class="pl-fig"><button data-plate data-ar="1.4177" data-iar="1.4177" data-turn="0" style="aspect-ratio:1.4177;--ar:1.4177" type="button" data-image="/images/relays2.png" data-caption="Primary visual logo featured on a keychain." aria-label="Enlarge: Primary visual logo featured on a keychain."><img src="/drift/img/relays2.jpg" alt="Primary visual logo featured on a keychain." loading="lazy"></button><figcaption>Primary visual logo featured on a keychain.</figcaption></figure><div class="pl-text"><p>The Drake Relays is an annual track and field event at Drake University. Each year one student is selected through a competitive process to design the official logo and visual theme, so the event’s identity stays fresh and student-led. I was selected from 11 finalists to design the 2025 identity.</p></div><div class="pl-text"><p>The theme for 2025 was “Racing Through Time.” I needed to turn that broad idea into an identity that felt energetic and athletic while honoring the event’s history, and that worked at every scale, from large campus banners to small merchandise.</p></div><figure class="pl-fig"><button data-plate data-ar="0.9942" data-iar="0.9942" data-turn="0" style="aspect-ratio:0.9942;--ar:0.9942" type="button" data-image="/images/relays3.png" data-caption="Merchandise application on steel cups handed out at events." aria-label="Enlarge: Merchandise application on steel cups handed out at events."><img src="/drift/img/relays3.jpg" alt="Merchandise application on steel cups handed out at events." loading="lazy"></button><figcaption>Merchandise application on steel cups handed out at events.</figcaption></figure><div class="pl-text"><p>I built the logo and visual system on a retro-futurist style, with a neon-inspired palette to suggest speed and energy. I worked the Des Moines skyline into the mark so the design is tied to the city that hosts the event.</p></div><div class="pl-pair"><figure class="pl-fig"><button data-plate data-ar="1.6000" data-iar="1.1573" data-turn="0" style="aspect-ratio:1.6000;--ar:1.6000" type="button" data-image="/images/relays4.png" data-caption="Raffle prize given at reveal event." aria-label="Enlarge: Raffle prize given at reveal event."><img src="/drift/img/relays4.jpg" alt="Raffle prize given at reveal event." loading="lazy"></button><figcaption>Raffle prize given at reveal event.</figcaption></figure><figure class="pl-fig"><button data-plate data-ar="1.6000" data-iar="1.9855" data-turn="0" style="aspect-ratio:1.6000;--ar:1.6000" type="button" data-image="/images/relays5.png" data-caption="Banner displayed on Drake campus grounds." aria-label="Enlarge: Banner displayed on Drake campus grounds."><img src="/drift/img/relays5.jpg" alt="Banner displayed on Drake campus grounds." loading="lazy"></button><figcaption>Banner displayed on Drake campus grounds.</figcaption></figure></div><div class="pl-text"><p>The identity was used across the event, on campus banners, merchandise such as steel cups handed out at events, and a raffle prize at the reveal.</p></div></article><a class="pl-next" href="/projects/pyrkia.html"><span class="nx-label">Next project</span><span class="nx-title">Pyrkia Health</span><span data-plate data-ar="1.7778" data-iar="1.2173" data-turn="0" style="aspect-ratio:1.7778;--ar:1.7778" ><img src="/drift/img/pyrkia2-t.jpg" alt="" loading="lazy"></span></a><section class="floor sub"><h2 class="h2">Something in mind?</h2><p>Reach out and let me know how I can help.</p><div class="actions"><button class="copy-mail" type="button" data-copy aria-label="Copy email address oliver_tw@icloud.com"><span class="mail">oliver_tw@icloud.com</span><svg class="copy-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="8.5" y="8.5" width="11" height="11" rx="2.6"/><path d="M15.5 8.5V6.6A2.1 2.1 0 0 0 13.4 4.5H6.6A2.1 2.1 0 0 0 4.5 6.6v6.8a2.1 2.1 0 0 0 2.1 2.1h1.9"/></svg></button><a class="pill" href="/archive.html">All work</a></div></section></main>
+<footer class="foot"><span>© 2026 Oliver T. Williams</span><div class="links"><button id="motion" type="button" aria-pressed="false">Pause motion</button><a href="/archive.html">All work</a><a href="https://www.instagram.com/oliver_williams1212/" target="_blank" rel="me noopener">Instagram</a><a href="https://www.linkedin.com/in/oliver-t-williams/" target="_blank" rel="me noopener">LinkedIn</a><a href="https://github.com/olivertw12" target="_blank" rel="me noopener">GitHub</a></div></footer>
+</div></div>
+<div id="toast" role="status"></div>
+<dialog class="viewer" aria-label="Picture viewer"><div class="viewer-bar"><button class="viewer-prev" type="button">Previous</button><button class="viewer-next" type="button">Next</button><span class="viewer-count"></span><button class="viewer-close" type="button">Close</button></div><img alt=""><p class="viewer-caption"></p></dialog><script type="module" src="/drift/drift.js?v=3c4e0333"></script>
 </body>
 </html>
