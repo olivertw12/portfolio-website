@@ -80,7 +80,7 @@ ${index ? '' : '<meta name="robots" content="noindex">\n'}<meta name="descriptio
 <meta name="theme-color" content="#062048">
 <title>${esc(title)}</title>
 <link rel="icon" href="/favicon.ico" sizes="48x48"><link rel="icon" href="/images/favicon/favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/images/favicon/apple-touch-icon.png">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@600;800&family=Manrope:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@600;800&family=Manrope:wght@400;600;700&display=swap">
 ${extra}<link rel="stylesheet" href="${assets}/drift.css?v=${VER}">
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"}}</script>
 </head>

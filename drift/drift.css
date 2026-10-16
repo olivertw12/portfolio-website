@@ -4,7 +4,7 @@
 :root{
   color-scheme:dark;
   --abyss:#020a1c; --navy:#062048; --beam:#58b7ff; --ice:#a9d8ff; --foam:#f1f9ff; --mute:#9dbfe0;
-  --display:'Syne','Arial Black',system-ui,sans-serif;
+  --display:'Red Hat Display','Arial Black',system-ui,sans-serif;
   --body:'Manrope','Segoe UI',system-ui,sans-serif;
   --gutter:clamp(20px,5vw,72px);   /* phones; wider screens get the margins below */ --rail:clamp(96px,9vw,128px); --gap:clamp(16px,2.2vw,32px);
   --s1:8px; --s2:16px; --s3:24px; --s4:40px; --s5:clamp(56px,7vw,96px); --s6:clamp(96px,12vw,176px);
@@ -404,8 +404,8 @@ figcaption{margin-top:var(--s2);font-size:14px;line-height:1.4;color:var(--mute)
 .copy-mail .copy-ico{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;opacity:.8;transition:opacity .2s,transform .2s}
 .copy-mail:hover .copy-ico{opacity:1;transform:scale(1.12)}
 .copy-mail:hover{text-shadow:0 0 14px var(--beam)}
-/* the name and the links share one optical centre line: Syne's small lowercase is set larger to match Manrope's */
-.bar .me{font-size:19px;letter-spacing:-.005em;transform:translateY(-1px)}
+/* the name and the links share one optical centre line: Red Hat Display is set a touch larger than the Manrope links so the two read as one line */
+.bar .me{font-size:18px;letter-spacing:-.005em}
 
 /* closing: the email sits beside the invitation */
 .floor-row{display:flex;flex-wrap:wrap;align-items:center;gap:var(--s2) var(--s5);margin:var(--s4) 0 var(--s3)}

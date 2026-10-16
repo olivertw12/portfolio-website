@@ -472,7 +472,7 @@ if (renderer) {
   });
   measureFns.push(() => { plates.forEach(o => { o.box = boxOf(o.el); o.side = o.box.x < V.vw * .46 ? -1 : 1; }); icons.forEach(o => { o.box = boxOf(o.el); }); });
   watchLayout(() => { measure(); renderer.setSize(V.vw, V.vh, false); pxCamera(cam, FOV); water.resize(); sceneRT?.dispose(); const bw = Math.round(V.vw * DPR), bh = Math.round(V.vh * DPR); sceneRT = new THREE.WebGLRenderTarget(bw, bh, { minFilter: THREE.LinearFilter, magFilter: THREE.LinearFilter }); G.tScene.value = sceneRT.texture; G.uRes.value.set(bw, bh); });
-  document.fonts?.load('800 80px Syne').then(measure, () => {});
+  document.fonts?.load('800 80px "Red Hat Display"').then(measure, () => {});
 
   const mix3 = (a, b, t) => a.map((v, i) => v + (b[i] - v) * t);
   runLoop(() => {
