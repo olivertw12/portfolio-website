@@ -4,3 +4,6 @@ _to_delete/
 
 # working notes, not part of the deployed site
 claude_*.md
+
+# private, never published
+cover-letter*

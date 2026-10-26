@@ -17,4 +17,4 @@ Run it from the repo root after changing any of these, then commit what it write
 
 It writes the pages at the root and in `../projects/`, `../drift/drift.js`, `../drift/drift.css` and `../sitemap.xml`. Pictures live in `../drift/img/` (1600px, plus 800px `-t` thumbnails); the full-size originals stay in `../images/` for the picture viewer.
 
-The cover letter (`../cover-letter.html`) is private and is not built or linked here.
+The cover letter is private: it is not kept in this repo or built into the site.
