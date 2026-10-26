@@ -1,6 +1,4 @@
 User-agent: *
 Allow: /
 
-# Dated correspondence, not meant to be indexed.
-
 Sitemap: https://olivertwilliams.com/sitemap.xml
