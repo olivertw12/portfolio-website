@@ -190,23 +190,26 @@ figure.fig figcaption{margin-top:22px;font-size:15px;color:var(--body)}
 
 /* ---------- resume ---------- */
 body.doc .wrap{max-width:1340px}
-.doc-layout{display:flex;flex-wrap:wrap;gap:40px;align-items:flex-start;padding:clamp(16px,3vw,40px) 0 96px}
-.doc-panel{flex:1 1 280px;max-width:100%;padding:32px 28px;border-radius:26px;display:flex;flex-direction:column;gap:26px}
-.doc-panel .art{width:150px}
-.doc-panel h1{margin:0;font-size:48px;line-height:1;letter-spacing:-.03em}
-.doc-panel p{margin:14px 0 0;color:var(--body)}
+/* the controls sit in one wide card above the sheet, so the sheet gets the full width */
+.doc-layout{display:flex;flex-direction:column;gap:40px;max-width:1080px;margin:0 auto;padding:clamp(16px,3vw,40px) 0 96px}
+.doc-panel{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:20px 36px;align-items:center;padding:28px 32px;border-radius:26px}
+.doc-panel .art{width:120px}
+.doc-panel h1{margin:0;font-size:44px;line-height:1;letter-spacing:-.03em}
+.doc-panel p{margin:12px 0 0;max-width:48ch;color:var(--body)}
+.doc-controls{display:flex;flex-direction:column;gap:16px;min-width:250px}
 .switch{border:0;padding:0;margin:0;min-width:0}
 .switch legend{padding:0 0 8px;font-weight:700}
 .segments{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;padding:5px;border:3px solid var(--ink);border-radius:14px;background:#fff}
 .segments label{position:relative;cursor:pointer}
 .segments input{position:absolute;opacity:0;width:1px;height:1px}
-.segments span{display:flex;align-items:center;justify-content:center;min-height:44px;padding:0 8px;border-radius:9px;font-weight:700;font-size:14px;text-align:center;white-space:nowrap}
+.segments span{display:flex;align-items:center;justify-content:center;min-height:42px;padding:0 10px;border-radius:9px;font-weight:700;font-size:14px;text-align:center;white-space:nowrap}
 .segments input:checked+span{background:var(--ink);color:#fff}
 .segments input:focus-visible+span{outline:3px solid var(--orange);outline-offset:2px}
-.doc-panel .contact-links{display:flex;flex-direction:column;gap:2px;font-weight:600}
+.doc-panel .contact-links{display:flex;flex-wrap:wrap;gap:0 24px;margin-top:8px;font-weight:600}
 .doc-panel .contact-links .copy-mail{min-height:44px;font-size:16px}
 .doc-panel .contact-links a{display:inline-flex;align-items:center;min-height:44px;text-decoration:none}
-.sheet-frame{flex:999 1 560px;min-width:0;max-width:880px;padding:0;border-radius:16px;border:3px solid var(--ink);box-shadow:0 0 0 5px #fff,0 12px 0 5px var(--lift);background:#fff;overflow:hidden;color:var(--color-text-body,#274255);font-family:var(--font-sans,'Plus Jakarta Sans',sans-serif);font-size:16px;line-height:1.5}
+.sheet-frame{width:100%;min-width:0;padding:0;border-radius:16px;border:3px solid var(--ink);box-shadow:0 0 0 5px #fff,0 12px 0 5px var(--lift);background:#fff;overflow:hidden;color:var(--color-text-body,#274255);font-family:var(--font-sans,'Plus Jakarta Sans',sans-serif);font-size:16px;line-height:1.5}
+@media (max-width:900px){.doc-panel{grid-template-columns:minmax(0,1fr)}.doc-panel .art{display:none}.doc-controls{min-width:0}}
 .sheet-frame #document-content{padding:0!important;margin:0!important;display:block!important}
 .sheet-frame .print-container{width:100%!important;min-height:0!important;margin:0!important;border:0!important;border-radius:0!important;box-shadow:none!important}
 .sheet-frame a{text-decoration:underline;text-underline-offset:3px}
