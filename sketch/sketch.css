@@ -94,16 +94,18 @@ a.tile:hover{transform:translateY(-3px);color:var(--ink)}
 .pcard{display:flex;flex-direction:column;text-decoration:none;color:var(--ink);border-radius:24px;overflow:hidden}
 .pcard .art{position:relative;aspect-ratio:3/2;overflow:hidden}
 .pcard .art .peek{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.06);transition:transform .9s ease}
-.pcard .art svg{position:absolute;inset:0;width:100%;height:100%}
+.pcard .art svg{position:absolute;inset:-2px;width:calc(100% + 4px);height:calc(100% + 4px)}
 /* the scrub: a thick scribble in the drawing's mask draws itself in, wiping the drawing away */
 .scrub{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset .9s cubic-bezier(.55,.1,.35,1)}
 .pcard:hover .scrub,.pcard:focus-visible .scrub,.pcard.revealed .scrub{stroke-dashoffset:0}
 .pcard:hover .peek,.pcard:focus-visible .peek,.pcard.revealed .peek{transform:scale(1)}
 @media (prefers-reduced-motion:reduce){.scrub,.pcard .art .peek{transition:none}}
-.pcard .txt{padding:24px 26px 28px}
+.pcard .txt{flex:1;display:flex;flex-direction:column;align-items:flex-start;padding:24px 26px 28px}
 .pcard h3{margin:0 0 8px;font-size:25px}
-.pcard p{margin:0;color:var(--body)}
-.pcard .go{display:inline-block;margin-top:18px;font-weight:700;color:var(--link)}
+.pcard p{margin:0 0 24px;color:var(--body)}
+/* the card's link, a small outlined button pinned to the bottom; it fills in when the card is hovered */
+.pcard .go{display:inline-flex;align-items:center;min-height:44px;margin-top:auto;padding:0 18px;border:3px solid var(--ink);border-radius:12px;font-weight:700;color:var(--ink);background:#fff;white-space:nowrap;transition:background .2s ease,color .2s ease}
+.pcard:hover .go,.pcard:focus-visible .go{background:var(--ink);color:#fff}
 .facts4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:28px;margin:0}
 .fact{padding:24px;border-radius:20px}
 .fact .icon{width:56px;height:56px;margin-bottom:14px;padding:6px;border-radius:50%;background:var(--band)}
