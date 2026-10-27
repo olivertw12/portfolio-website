@@ -170,6 +170,8 @@ figure.fig figcaption{margin-top:22px;font-size:15px;color:var(--body)}
 
 /* ---------- fullscreen gallery ---------- */
 .image-zoom{display:block;position:relative;cursor:zoom-in;text-decoration:none;border-radius:22px}
+.image-zoom:focus:not(:focus-visible){outline:none}
+.image-zoom:focus-visible{outline:2px solid var(--link);outline-offset:8px;border-radius:22px}
 .image-zoom:hover .stk{transform:none}
 .image-zoom::after{content:'⤢';position:absolute;right:14px;bottom:14px;width:38px;height:38px;display:grid;place-items:center;border:2px solid var(--ink);border-radius:12px;background:var(--paper);color:var(--ink);font:700 24px/1 var(--text);pointer-events:none}
 html.image-viewer-open, .image-viewer-open body{overflow:hidden}
@@ -178,6 +180,8 @@ html.image-viewer-open{scrollbar-gutter:stable}
 .image-viewer[open]{display:grid;grid-template-rows:auto minmax(0,1fr) auto;gap:16px}
 .image-viewer::backdrop{background:var(--ink-deep)}
 .image-viewer [hidden]{display:none}
+.image-viewer :focus:not(:focus-visible){outline:none}
+.image-viewer :focus-visible{outline:2px solid var(--sky);outline-offset:4px}
 .viewer-toolbar{display:flex;align-items:center;gap:24px;min-height:48px}
 .viewer-count{font-weight:700;font-variant-numeric:tabular-nums}
 .viewer-original{margin-left:auto;color:var(--paper);font-weight:600;text-decoration:none;min-height:44px;display:inline-flex;align-items:center;gap:8px}
