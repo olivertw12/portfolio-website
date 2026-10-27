@@ -733,7 +733,7 @@ for (const id of Object.keys(projectData)) {
     result: "The visual campaign successfully established ICYMI's presence across Drake University, and the consistent poster distribution helped drive listenership to build a recognizable brand on campus.",
     gallery: [
       { src: "images/icymi3.jpg", caption: "'Generic' poster displayed on campus whiteboard." },
-      { src: "images/icymi6.png", caption: "Example of the variable flyer, posted onto Instagram." }
+      { src: "images/icymi6.PNG", caption: "Example of the variable flyer, posted onto Instagram." }
     ]
   }
 };

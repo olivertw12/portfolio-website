@@ -63,7 +63,10 @@ ${index ? '' : '<meta name="robots" content="noindex">\n'}<meta name="descriptio
 <link rel="canonical" href="${url}">
 <meta property="og:title" content="${esc(title)}">
 <meta property="og:description" content="${esc(desc)}">
-<meta property="og:image" content="${SITE}/images/og-image.png">
+<meta property="og:image" content="${SITE}/images/og-sketch.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Oliver T. Williams — design, data and AI evaluation, with a blue anchor on sand.">
 <meta property="og:url" content="${url}">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
@@ -185,7 +188,7 @@ ${fact('icon_tools', 'Tools', 'Illustrator, InDesign, Photoshop, R, Python, SQL,
   const main = original.match(/<main[\s\S]*?<\/main>/)[0].replace(/<path d="M12 6v16"\/><path d="m19 13 2-1a9 9 0 0 1-18 0l2 1"\/><path d="M9 11h6"\/><circle cx="12" cy="4" r="2"\/>/, `<path fill="currentColor" stroke="currentColor" stroke-width="0.4" stroke-linejoin="round" fill-rule="evenodd" d="${LOGO_D}"/>`).replace('<main id="main"', '<div id="document-content"').replace(/<\/main>$/, '</div>').replace(/relocating Oct 2026/g, 'relocating Dec 2026');
   const scripts = [...original.matchAll(/<script>([\s\S]*?)<\/script>/g)].map(m => m[1]).filter(s => /function (setPageMargin|setMode)/.test(s)).map(s => `<script>${s}</script>`).join('');
   const seg = (legend, name, opts) => `<fieldset class="switch"><legend>${legend}</legend><div class="segments">${opts.map(([v, l], i) => `<label><input type="radio" name="${name}" value="${v}"${i ? '' : ' checked'}><span>${l}</span></label>`).join('')}</div></fieldset>`;
-  const panel = `<aside class="doc-panel stk-card">${draw('paper', 'art')}<div class="doc-intro"><h1>Resume</h1><p>Pick the version that fits the role. Both save as a one-page PDF, and the ATS version is plain text that application systems can read.</p><div class="contact-links">${mail()}<a href="https://www.linkedin.com/in/oliver-t-williams/" rel="noopener">LinkedIn profile</a></div></div><div class="doc-controls">${seg('Focus', 'resume-focus', [['design', 'Design'], ['data', 'Data']])}${seg('PDF format', 'resume-format', [['styled', 'Styled'], ['ats', 'ATS-friendly']])}<button class="btn" type="button" data-resume-save>Save PDF</button></div></aside>`;
+  const panel = `<aside class="doc-panel stk-card">${draw('paper', 'art')}<div class="doc-intro"><h1>Resume</h1><p>Pick the version that fits the role. The styled PDF is one page. The ATS-friendly PDF is two pages, with a plain-text layout for application systems.</p><div class="contact-links">${mail()}<a href="https://www.linkedin.com/in/oliver-t-williams/" rel="noopener">LinkedIn profile</a></div></div><div class="doc-controls">${seg('Focus', 'resume-focus', [['design', 'Design'], ['data', 'Data']])}${seg('PDF format', 'resume-format', [['styled', 'Styled'], ['ats', 'ATS-friendly']])}<button class="btn" type="button" data-resume-save>Save PDF</button></div></aside>`;
   page('resume.html', 'Resume of Oliver T. Williams', `<main id="top"><div class="doc-layout">${panel}<div class="sheet-frame">${relink(main)}</div></div></main>`, {
     active: 'Resume', bodyAttrs: 'class="doc" data-mode="design" data-document="true"', scripts,
     extra: `${fonts}<link rel="stylesheet" href="/assets/tailwind.css"><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">${inline}\n`,
