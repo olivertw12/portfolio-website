@@ -123,11 +123,14 @@ a.tile:hover{transform:translateY(-3px);color:var(--ink)}
 .fact dt{font-family:var(--display);font-weight:900;font-size:19px}
 .fact dd{margin:8px 0 0;color:var(--body)}
 .contact{position:relative;overflow:hidden;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:32px 48px;padding:clamp(40px,6vw,80px);border-radius:32px;background:var(--teal);margin-bottom:72px}
-.contact .env{position:absolute;right:-24px;bottom:-70px;width:300px;height:300px}
+/* the envelope sits to the right; the email button tucks in front of its lower-left corner, leaving the envelope and stamp in view */
+.contact .mailbox{position:relative;flex:0 0 auto;width:340px;height:280px;margin:-24px -16px -24px 0}
+.contact .env{position:absolute;top:-56px;right:-28px;width:300px;height:300px}
+.contact .mailbox .btn{position:absolute;left:0;bottom:6px}
 .contact .say{position:relative;flex:1 1 420px}
 .contact h2{margin:0;font-size:clamp(36px,4.4vw,60px);line-height:1.02;letter-spacing:-.03em}
 .contact p{margin:18px 0 0;max-width:48ch;color:var(--body-2)}
-.contact .btn{position:relative;min-height:60px}
+.contact .btn{min-height:60px;box-shadow:0 0 0 5px #fff,0 5px 0 5px var(--ink-deep)}
 section.block{padding-bottom:clamp(80px,9vw,128px)}
 
 /* ---------- page heroes (work, case studies) ---------- */
@@ -228,7 +231,7 @@ body.doc .wrap{max-width:1340px}
   .tiles{grid-template-columns:repeat(2,minmax(0,1fr))}
   .facts,.facts4,.stats{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
-@media (max-width:700px){.contact .env{display:none}}
+@media (max-width:760px){.contact .mailbox{width:auto;height:auto;margin:0}.contact .env{display:none}.contact .mailbox .btn{position:static}}
 @media (max-width:900px){.track{grid-auto-columns:calc((100% - 28px) / 2)}}
 @media (max-width:560px){
   .track{grid-auto-columns:84%}
