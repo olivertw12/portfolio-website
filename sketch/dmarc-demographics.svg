@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="boil " viewBox="0 0 900 360" role="img" aria-label="Bar chart: Hispanic families' share of DMARC visits was about 4% in 2018 and about 8% in 2024"><rect width="900" height="360" fill="#f5f3ee"/>
+<line class="b1" x1="200" y1="96" x2="860" y2="96" stroke="#e2ebf6" stroke-width="3"></line>
+<line class="b1" x1="200" y1="196" x2="860" y2="196" stroke="#e2ebf6" stroke-width="3"></line>
+<line class="b1" x1="200" y1="296" x2="860" y2="296" stroke="#e2ebf6" stroke-width="3"></line>
+<text x="190" y="102" text-anchor="end" font-family="Manrope, sans-serif" font-weight="600" font-size="18" fill="#45506b">8%</text>
+<text x="190" y="202" text-anchor="end" font-family="Manrope, sans-serif" font-weight="600" font-size="18" fill="#45506b">4%</text>
+<text x="190" y="302" text-anchor="end" font-family="Manrope, sans-serif" font-weight="600" font-size="18" fill="#45506b">0%</text>
+<rect class="b3" x="300" y="196" width="160" height="100" rx="8" fill="none" stroke="#ffffff" stroke-width="18"></rect>
+<rect x="300" y="196" width="160" height="100" rx="8" fill="#a9c7ec"></rect>
+<rect x="420" y="204" width="28" height="84" rx="5" fill="#8fb2de"></rect>
+<rect class="b1" x="300" y="196" width="160" height="100" rx="8" fill="none" stroke="#1a2547" stroke-width="6"></rect>
+<rect class="b3" x="600" y="96" width="160" height="200" rx="8" fill="none" stroke="#ffffff" stroke-width="18"></rect>
+<rect x="600" y="96" width="160" height="200" rx="8" fill="#e8803a"></rect>
+<rect x="720" y="104" width="28" height="184" rx="5" fill="#c9692b"></rect>
+<line x1="616" y1="112" x2="652" y2="112" stroke="#ffffff" stroke-width="5" stroke-linecap="round" opacity="0.85"></line>
+<rect class="b1" x="600" y="96" width="160" height="200" rx="8" fill="none" stroke="#1a2547" stroke-width="6"></rect>
+<line class="b1" x1="200" y1="296" x2="860" y2="296" stroke="#1a2547" stroke-width="6" stroke-linecap="round"></line>
+<text x="380" y="180" text-anchor="middle" font-family="Red Hat Display, sans-serif" font-weight="900" font-size="30" fill="#1a2547">about 4%</text>
+<text x="680" y="80" text-anchor="middle" font-family="Red Hat Display, sans-serif" font-weight="900" font-size="30" fill="#1a2547">about 8%</text>
+<text x="380" y="334" text-anchor="middle" font-family="Manrope, sans-serif" font-weight="700" font-size="20" fill="#1a2547">2018</text>
+<text x="680" y="334" text-anchor="middle" font-family="Manrope, sans-serif" font-weight="700" font-size="20" fill="#1a2547">2024</text>
+</svg>

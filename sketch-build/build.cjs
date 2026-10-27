@@ -25,9 +25,12 @@ const collOf = id => collections.find(c => c.ids.includes(id));
 const nextOf = id => order[(order.indexOf(id) + 1) % order.length];
 
 /* a picture from drift/img, sized so the page does not jump while it loads */
-function img(src, alt, { thumb = false, cls = 'stk', eager = false } = {}) {
+const zoomLink = (markup, src, caption) => `<a class="image-zoom" href="${esc(src)}" data-gallery-image data-caption="${esc(caption)}" aria-label="${esc('View full size: ' + (caption || 'Project image'))}">${markup}</a>`;
+function img(src, alt, { thumb = false, cls = 'stk', eager = false, zoom = false } = {}) {
   const k = key(src), s = sizes[k] || [1600, 1200], w = thumb ? 800 : Math.min(1600, s[0]), h = Math.round(w * s[1] / s[0]);
-  return `<img class="${cls}" src="/drift/img/${k}${thumb ? '-t' : ''}.jpg" width="${w}" height="${h}" alt="${esc(alt)}" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'}>`;
+  const markup = `<img class="${cls}" src="/drift/img/${k}${thumb ? '-t' : ''}.jpg" width="${w}" height="${h}" alt="${esc(alt)}" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'}>`;
+  const full = fs.existsSync(path.join(root, src)) ? '/' + src : `/drift/img/${k}.jpg`;
+  return zoom ? zoomLink(markup, full, alt) : markup;
 }
 
 /* the anchor from my logo: Lucide's anchor, outlined and thickened; used everywhere the mark appears */
@@ -101,27 +104,32 @@ for (const [id, p] of Object.entries(projectData)) {
   if (p.layout === 'case') {
     const [s1, s2, s3, s4] = c.story, g = p.gallery || [], t = stepTitles[id];
     body += pageHero(c.title, c.sub, heroArt[collOf(id).id]) + facts(p);
-    body += `<figure class="lead-img stk" style="margin:0">${img(p.hero, p.heroCaption || c.title, { eager: true, cls: '' })}</figure>`;
+    body += `<figure class="lead-img stk" style="margin:0">${img(p.hero, p.heroCaption || c.title, { eager: true, cls: '', zoom: true })}</figure>`;
     body += `<section class="story first"><p>${esc(s1)}</p></section>`;
     const part = (title, text, pic, flip) => pic
-      ? `<section class="row${flip ? ' flip' : ''}"><div class="pic">${img(pic.src, pic.caption || '')}</div><div><h2 class="h3">${esc(title)}</h2><p>${esc(text)}</p></div></section>`
+      ? `<section class="row${flip ? ' flip' : ''}"><div class="pic">${img(pic.src, pic.caption || '', { zoom: true })}</div><div><h2 class="h3">${esc(title)}</h2><p>${esc(text)}</p></div></section>`
       : `<section class="story" style="padding:0"><h2 class="h3">${esc(title)}</h2><p>${esc(text)}</p></section>`;
     const mid = part(t[0], s2, g[0], false) + `<div style="height:clamp(56px,7vw,96px)"></div>` + part(t[1], s3, g[1], true);
     body += g.length ? band(mid) : `<div style="padding-bottom:clamp(56px,7vw,96px)">${mid}</div>`;
     body += `<section class="story" style="padding-top:${g.length ? '0' : 'clamp(56px,7vw,96px)'}"><h2 class="h3">${esc(t[2])}</h2><p>${esc(s4)}</p></section>`;
     const rest = g.slice(2);
-    if (rest.length) body += `<div class="pics${rest.length === 1 ? ' one' : ''}">${rest.map(x => img(x.src, x.caption || '')).join('')}</div>`;
+    if (rest.length) body += `<div class="pics${rest.length === 1 ? ' one' : ''}">${rest.map(x => img(x.src, x.caption || '', { zoom: true })).join('')}</div>`;
   } else {
     const lead = p.feature?.media?.type === 'image' ? p.feature.media.src : p.card.image;
     body += pageHero(c.title, longLede[id] || c.sub, longArt[id]) + facts(p);
     if (stats[id]) body += `<section class="stats" aria-label="Key figures">${stats[id].map(([n, l]) => `<div class="stat stk-card"><p class="n">${esc(n)}</p><p class="l">${esc(l)}</p></div>`).join('')}</section>`;
     body += `<section class="story first" style="padding-top:0">${p.lede.map(l => `<p style="margin-bottom:18px">${esc(l.text)}</p>`).join('')}</section>`;
-    if (!p.sections.some(s => s.image && key(s.image.src) === key(lead))) body += `<figure class="lead-img stk" style="margin:0 0 clamp(72px,8vw,112px)">${img(lead, p.feature?.media?.alt || '', { cls: '' })}</figure>`;
+    if (!p.sections.some(s => s.image && key(s.image.src) === key(lead))) body += `<figure class="lead-img stk" style="margin:0 0 clamp(72px,8vw,112px)">${img(lead, p.feature?.media?.alt || c.title, { cls: '', zoom: true })}</figure>`;
     const chapter = (s, n) => {
       const title = chapterTitles[id]?.[n] || s.heading;
       let fig = '';
-      if (id === 'dmarc' && n === 3) fig = `<figure class="chart stk-card">${draw('dmarc_demographics')}<figcaption>Hispanic families' share of all DMARC visits, 2018 and 2024.</figcaption></figure>`;
-      else if (s.image) fig = `<figure class="fig">${img(s.image.src, s.image.alt || s.image.caption || '')}${s.image.caption ? `<figcaption>${esc(s.image.caption)}</figcaption>` : ''}</figure>`;
+      if (id === 'dmarc' && n === 3) {
+        const chart = draw('dmarc_demographics'), caption = "Hispanic families' share of all DMARC visits, 2018 and 2024.";
+        const standalone = chart.replace('<svg ', '<svg xmlns="http://www.w3.org/2000/svg" ').replace(/(<svg[^>]*>)/, '$1<rect width="900" height="360" fill="#f5f3ee"/>');
+        fs.writeFileSync(path.join(root, 'sketch/dmarc-demographics.svg'), standalone);
+        fig = `<figure class="chart stk-card">${zoomLink(chart, '/sketch/dmarc-demographics.svg', caption)}<figcaption>${esc(caption)}</figcaption></figure>`;
+      }
+      else if (s.image) fig = `<figure class="fig">${img(s.image.src, s.image.alt || s.image.caption || '', { zoom: true })}${s.image.caption ? `<figcaption>${esc(s.image.caption)}</figcaption>` : ''}</figure>`;
       const code = s.code ? `<details class="code"><summary>${CODE_ICON}Show the code: ${esc(s.code.file)}</summary><pre><code>${esc(s.code.src)}</code></pre></details>` : '';
       return `<section class="chapter"><div class="copy"><h2 class="h3">${esc(title)}</h2>${s.body ? `<p>${esc(s.body)}</p>` : ''}${s.note ? `<p class="note">${esc(s.note)}</p>` : ''}${fig ? '' : code}</div>${fig}${fig && code ? `<div class="copy" style="margin-top:24px">${code}</div>` : ''}</section>`;
     };
