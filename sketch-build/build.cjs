@@ -83,7 +83,7 @@ ${scripts}<script src="${A}/sketch.js?v=${VER}" defer></script>
   const out = path.join(root, file); fs.mkdirSync(path.dirname(out), { recursive: true }); fs.writeFileSync(out, html); built.push(file);
 }
 
-const tile = id => `<a class="tile" href="/projects/${id}.html">${img(projectData[id].card.image, '', { thumb: true })}<h3>${esc(copy[id].title)}</h3><p>${esc(copy[id].sub)}</p></a>`;
+const tile = id => `<a class="tile stk" href="/projects/${id}.html">${img(projectData[id].card.image, '', { thumb: true, cls: '' })}<h3>${esc(copy[id].title)}</h3><p>${esc(copy[id].sub)}</p></a>`;
 const nextCard = id => { const k = nextOf(id);
   return `<a class="next-card stk-card" href="/projects/${k}.html">${img(projectData[k].card.image, '', { thumb: true, cls: '' })}<div><h2>Next case study: ${esc(copy[k].title)}</h2><p>${esc(copy[k].sub)}</p></div></a>`; };
 const facts = p => `<dl class="facts stk-card">${p.meta.map(m => `<div><dt>${esc(m.label)}</dt><dd>${esc(m.value)}</dd></div>`).join('')}</dl>`;

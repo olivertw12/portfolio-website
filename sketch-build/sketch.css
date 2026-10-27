@@ -79,10 +79,12 @@ a.stk-card:hover{transform:translateY(-3px);box-shadow:0 13px 0 var(--lift)}
 
 /* ---------- tiles: picture, name, one line ---------- */
 .tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:44px 28px}
-.tile{text-decoration:none;color:var(--ink)}
-.tile img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:20px}
-.tile h3{margin:18px 0 4px;font-size:23px;line-height:1.15}
-.tile p{margin:0;color:var(--body)}
+/* the whole tile, picture and words, sits in one sticker card */
+.tile{display:flex;flex-direction:column;padding:12px 12px 24px;border-radius:24px;text-decoration:none;color:var(--ink)}
+a.tile:hover{transform:translateY(-3px);color:var(--ink)}
+.tile img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:15px;background:var(--band)}
+.tile h3{margin:18px 10px 4px;font-size:23px;line-height:1.15}
+.tile p{margin:0 10px;color:var(--body)}
 
 /* ---------- homepage ---------- */
 .home-hero{display:grid;grid-template-columns:minmax(0,11fr) minmax(0,10fr);gap:48px;align-items:center;padding:clamp(32px,5vw,72px) 0 clamp(72px,9vw,120px)}
