@@ -30,3 +30,14 @@ if (matchMedia('(hover: none)').matches && 'IntersectionObserver' in window) {
   const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('revealed'); io.unobserve(e.target); } }), { threshold: 0.75 });
   document.querySelectorAll('.pcard').forEach(c => io.observe(c));
 }
+
+/* recent projects carousel: Previous / Next move one card; they switch off at either end */
+document.querySelectorAll('.carousel').forEach(car => {
+  const track = car.querySelector('.track'), btns = car.querySelectorAll('[data-car]');
+  const step = () => { const li = track.querySelector('li'); return li ? li.getBoundingClientRect().width + parseFloat(getComputedStyle(track).columnGap || 0) : track.clientWidth; };
+  const update = () => { const max = track.scrollWidth - track.clientWidth - 2;
+    btns.forEach(b => { b.disabled = b.dataset.car < 0 ? track.scrollLeft <= 2 : track.scrollLeft >= max; }); };
+  btns.forEach(b => b.addEventListener('click', () => track.scrollBy({ left: step() * Number(b.dataset.car), behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' })));
+  track.addEventListener('scroll', () => requestAnimationFrame(update), { passive: true });
+  addEventListener('resize', update); update();
+});

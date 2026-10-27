@@ -87,6 +87,17 @@ a.tile:hover{transform:translateY(-3px);color:var(--ink)}
 .tile p{margin:0 10px;color:var(--body)}
 
 /* ---------- homepage ---------- */
+/* recent projects: a sideways strip of tiles that snaps to each card, with Previous and Next */
+.car-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px 32px}
+.car-head .intro{margin-bottom:28px}
+.car-nav{display:flex;gap:12px;margin-bottom:28px}
+.car-btn{min-height:44px;padding:0 18px;border:3px solid var(--ink);border-radius:12px;background:#fff;font:700 16px var(--text);color:var(--ink);cursor:pointer;box-shadow:0 4px 0 var(--lift);transition:background .2s ease,color .2s ease}
+.car-btn:hover:not(:disabled){background:var(--ink);color:#fff}
+.car-btn:disabled{opacity:.4;cursor:default;box-shadow:none}
+.track{display:grid;grid-auto-flow:column;grid-auto-columns:calc((100% - 56px) / 3.25);gap:28px;margin:-10px -8px 0;padding:10px 8px 24px;list-style:none;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding:0 8px;scrollbar-width:none;overscroll-behavior-x:contain}
+.track::-webkit-scrollbar{display:none}
+.track li{scroll-snap-align:start;display:flex}
+.track .tile{flex:1}
 .home-hero{display:grid;grid-template-columns:minmax(0,11fr) minmax(0,10fr);gap:48px;align-items:center;padding:clamp(32px,5vw,72px) 0 clamp(72px,9vw,120px)}
 .home-hero h1{margin:0;font-size:clamp(44px,5.6vw,78px);line-height:1.02;letter-spacing:-.03em}
 .home-hero .lede{margin:28px 0 40px;max-width:50ch;font-size:clamp(18px,1.45vw,20px);color:var(--body)}
@@ -218,7 +229,9 @@ body.doc .wrap{max-width:1340px}
   .facts,.facts4,.stats{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media (max-width:700px){.contact .env{display:none}}
+@media (max-width:900px){.track{grid-auto-columns:calc((100% - 28px) / 2)}}
 @media (max-width:560px){
+  .track{grid-auto-columns:84%}
   .tiles,.pics,.facts4{grid-template-columns:minmax(0,1fr)}
   .bar nav{gap:4px 22px}
 }
