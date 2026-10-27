@@ -92,22 +92,7 @@ const nextCard = id => { const k = nextOf(id);
 const facts = p => `<dl class="facts stk-card">${p.meta.map(m => `<div><dt>${esc(m.label)}</dt><dd>${esc(m.value)}</dd></div>`).join('')}</dl>`;
 const heroArt = { product: 'tablet_hero', data: 'map_hero', identity: 'type_card', campaigns: 'prints', maps: 'map_hero', studio: 'prints' };
 const longArt = { brushfactory: 'tablet_hero', dmarc: 'map_hero', 'site-build': 'prints' };
-/* the "expansive" backdrop behind the top of each page: big soft shapes bleeding off the right edge,
-   two bold hand-drawn curves, halftone dots, and a wavy edge that closes the section */
-const scene = (inner, cls = '') => `<div class="scene${cls ? ' ' + cls : ''}"><div class="scene-bg" aria-hidden="true"><svg class="boil" viewBox="0 0 1440 820" preserveAspectRatio="xMaxYMax slice">
-<path class="b2" d="M-20 600 C 60 560 160 590 200 650 C 240 710 200 790 120 820 L -20 820 Z" fill="#e2ebf6" stroke="#e2ebf6" stroke-width="12"/>
-<path class="b2" d="M780 120 C 900 30 1080 0 1240 40 C 1360 70 1460 40 1460 40 L 1460 780 L 900 780 C 800 700 700 640 720 520 C 740 420 680 220 780 120 Z" fill="#d9e6f6" stroke="#d9e6f6" stroke-width="12"/>
-<path class="b2" d="M1240 60 C 1320 20 1430 40 1460 80 L 1460 300 C 1420 280 1380 230 1330 200 C 1270 160 1190 110 1240 60 Z" fill="#dcd5f0" stroke="#dcd5f0" stroke-width="12"/>
-<path class="b2" d="M1040 260 C 1140 200 1280 230 1330 330 C 1380 430 1300 520 1200 520 C 1100 520 960 470 960 380 C 960 320 990 290 1040 260 Z" fill="#c9daef" stroke="#c9daef" stroke-width="12"/>
-<path class="b2" d="M860 560 C 980 470 1160 480 1260 560 C 1340 620 1440 600 1460 600 L 1460 820 L 820 820 C 790 720 800 610 860 560 Z" fill="#cfe8e1" stroke="#cfe8e1" stroke-width="12"/>
-<path class="b2" d="M1150 330 C 1180 300 1230 310 1236 345 C 1242 380 1196 392 1168 378 C 1140 364 1130 350 1150 330 Z" fill="#f4c29c" stroke="#f4c29c" stroke-width="10"/>
-<circle cx="1120" cy="640" r="150" fill="url(#ht)" opacity="0.12"/>
-<circle cx="1330" cy="150" r="110" fill="url(#ht)" opacity="0.1"/>
-<path class="b2" d="M850 190 C 960 160 1000 240 1020 320 C 1046 430 1160 480 1300 478 C 1380 478 1440 500 1460 520" fill="none" stroke="#1a2547" stroke-width="8" stroke-linecap="round"/>
-<path class="b2" d="M1180 610 C 1260 600 1340 630 1460 710" fill="none" stroke="#1a2547" stroke-width="8" stroke-linecap="round"/>
-<path d="M-20 760 C 220 720 420 790 700 770 C 960 750 1160 700 1460 740 L 1460 840 L -20 840 Z" fill="#f5f3ee"/>
-</svg></div>${inner}</div>`;
-const pageHero = (title, lede, artName, back = true) => scene(`<section class="page-hero"><div>${back ? '<a class="back" href="/archive.html">All work</a>' : ''}<h1>${esc(title)}</h1>${lede ? `<p class="lede">${esc(lede)}</p>` : ''}</div>${draw(artName, 'art')}</section>`, 'sm');
+const pageHero = (title, lede, artName, back = true) => `<section class="page-hero"><div>${back ? '<a class="back" href="/archive.html">All work</a>' : ''}<h1>${esc(title)}</h1>${lede ? `<p class="lede">${esc(lede)}</p>` : ''}</div>${draw(artName, 'art')}</section>`;
 
 /* ---------- case studies ---------- */
 for (const [id, p] of Object.entries(projectData)) {
@@ -164,7 +149,7 @@ for (const [id, p] of Object.entries(projectData)) {
   const pcard = (href, bg, artName, pic, picAlt, title, text, go) => `<a class="pcard stk-card" href="${href}"><div class="art">${img(pic, picAlt, { thumb: true, cls: 'peek' })}${scrub(artName, bg)}</div><div class="txt"><h3>${title}</h3><p>${text}</p><span class="go">${go}</span></div></a>`;
   const fact = (icon, dt, dd) => `<div class="fact stk-card">${draw(icon, 'icon')}<dt>${dt}</dt><dd>${dd}</dd></div>`;
   const body = `<main id="top">
-${scene(`<section class="home-hero"><div><h1>I design brand identities and turn data into clear visuals.</h1><p class="lede">I'm Oliver, a graphic designer and data analyst. I evaluate AI model output for design quality, and I design, build and run Brushfactory, a brush converter for digital artists.</p><div class="actions"><a class="btn" href="/resume.html">Resume</a>${mail()}</div></div>${draw('anchor_scene')}</section>`)}
+<section class="home-hero"><div><h1>I design brand identities and turn data into clear visuals.</h1><p class="lede">I'm Oliver, a graphic designer and data analyst. I evaluate AI model output for design quality, and I design, build and run Brushfactory, a brush converter for digital artists.</p><div class="actions"><a class="btn" href="/resume.html">Resume</a>${mail()}</div></div>${draw('anchor')}</section>
 <section class="block"><h2 class="h2">What I work on</h2><p class="intro">My work splits three ways: a product I run, data I analyze, and identities I design for clients.</p><div class="practice">
 ${pcard('/projects/brushfactory.html', '#dbe7f6', 'tablet_card', 'images/brushfactory-home.jpg', 'The Brushfactory converter', 'Brushfactory', 'A web app that converts brushes between Photoshop, Procreate, Clip Studio Paint and Krita. I design, build and run it, from the conversion code to the brand.', 'Read the case study')}
 ${pcard('/projects/dmarc.html', '#d3ebe5', 'chart_card', 'images/dmarc1.jpg', 'Map of repeat pantry visits by zip code', 'Data analysis', 'Mapping and forecasting in R, Python and SQL, presented as charts people can read at a glance. Most recently, food pantry access across the Des Moines metro.', 'Read the case study')}
@@ -206,8 +191,8 @@ page('references.html', 'Sources for this site', `<main id="top">${pageHero('Sou
 <section class="stk-card"><h2>The pictures</h2><p>Every project picture is the real work: the finished pieces, photographed or exported from the files I delivered.</p></section>
 <section class="stk-card"><h2>How it's built</h2><p>Plain HTML and CSS generated from one data file of projects, with no framework, deployed from GitHub. The <a href="/projects/site-build.html">Personal Site Build</a> case study explains how.</p></section>
 </div></main>`);
-page('404.html', 'Page not found', `<main id="top">${scene(`<section class="nf"><div><h1>This page isn't here</h1><p>The link may be out of date, or the page moved when the site was rebuilt. Every project is still on the work page.</p><div class="actions"><a class="btn" href="/archive.html">See all work</a><a class="text-link" href="/index.html">Back to the homepage</a></div></div>${draw('bottle', 'art')}</section>`)}</main>`, { index: false });
-page('project.html', 'Find a project', `<main id="top">${scene(`<section class="nf"><div><h1>Finding that project</h1><p>Old project links send you to the right page here. If nothing happens, the full list is on the work page.</p><div class="actions"><a class="btn" href="/archive.html">See all work</a></div></div>${draw('prints', 'art')}</section>`)}</main>`, { index: false, scripts: `<script>const id=new URLSearchParams(location.search).get('id');const ids=${JSON.stringify(ids)};if(ids.includes(id))location.replace('/projects/'+encodeURIComponent(id)+'.html');</script>` });
+page('404.html', 'Page not found', `<main id="top" class="nf"><div><h1>This page isn't here</h1><p>The link may be out of date, or the page moved when the site was rebuilt. Every project is still on the work page.</p><div class="actions"><a class="btn" href="/archive.html">See all work</a><a class="text-link" href="/index.html">Back to the homepage</a></div></div>${draw('bottle', 'art')}</main>`, { index: false });
+page('project.html', 'Find a project', `<main id="top" class="nf"><div><h1>Finding that project</h1><p>Old project links send you to the right page here. If nothing happens, the full list is on the work page.</p><div class="actions"><a class="btn" href="/archive.html">See all work</a></div></div>${draw('prints', 'art')}</main>`, { index: false, scripts: `<script>const id=new URLSearchParams(location.search).get('id');const ids=${JSON.stringify(ids)};if(ids.includes(id))location.replace('/projects/'+encodeURIComponent(id)+'.html');</script>` });
 
 fs.writeFileSync(path.join(root, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<!-- Generated by sketch-build/build.cjs. -->\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${['', 'archive.html', 'resume.html', ...order.map(k => 'projects/' + k + '.html'), 'references.html'].map(u => `  <url><loc>${SITE}/${u}</loc></url>`).join('\n')}\n</urlset>\n`);
 console.log(`Built ${built.length} pages.`);
