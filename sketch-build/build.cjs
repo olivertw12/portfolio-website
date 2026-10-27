@@ -138,14 +138,19 @@ for (const [id, p] of Object.entries(projectData)) {
 
 /* ---------- home ---------- */
 {
-  const pcard = (href, bg, artName, title, text, go) => `<a class="pcard stk-card" href="${href}"><div class="art" style="background:${bg}">${draw(artName)}</div><div class="txt"><h3>${title}</h3><p>${text}</p><span class="go">${go}</span></div></a>`;
+  /* a practice card: the drawing sits over a picture of the work; on hover, focus or (on touch screens) scrolling into view,
+     a scribbled mask scrubs the drawing away to show the picture underneath */
+  let scrubN = 0;
+  const scrub = (artName, bg) => { const n = ++scrubN, inner = draw(artName).replace(/^<svg[^>]*>/, '').replace(/<\/svg>$/, '');
+    return `<svg class="boil scrubber" viewBox="0 0 360 240" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><mask id="scrub-${n}" maskUnits="userSpaceOnUse" x="0" y="0" width="360" height="240"><rect width="360" height="240" fill="#fff"/><path class="scrub" pathLength="1" d="M-30 18 L390 -14 L-30 66 L390 34 L-30 114 L390 82 L-30 162 L390 130 L-30 210 L390 178 L-30 258 L390 226" fill="none" stroke="#000" stroke-width="64" stroke-linecap="round" stroke-linejoin="round"/></mask></defs><g mask="url(#scrub-${n})"><rect width="360" height="240" fill="${bg}"/><g transform="translate(36 30) scale(.8)">${inner}</g></g></svg>`; };
+  const pcard = (href, bg, artName, pic, picAlt, title, text, go) => `<a class="pcard stk-card" href="${href}"><div class="art">${img(pic, picAlt, { thumb: true, cls: 'peek' })}${scrub(artName, bg)}</div><div class="txt"><h3>${title}</h3><p>${text}</p><span class="go">${go}</span></div></a>`;
   const fact = (icon, dt, dd) => `<div class="fact stk-card">${draw(icon, 'icon')}<dt>${dt}</dt><dd>${dd}</dd></div>`;
   const body = `<main id="top">
 <section class="home-hero"><div><h1>I design brand identities and turn data into clear visuals.</h1><p class="lede">I'm Oliver, a graphic designer and data analyst. I evaluate AI model output for design quality, and I design, build and run Brushfactory, a brush converter for digital artists.</p><div class="actions"><a class="btn" href="/resume.html">Resume</a>${mail()}</div></div>${draw('anchor')}</section>
 <section class="block"><h2 class="h2">What I work on</h2><p class="intro">My work splits three ways: a product I run, data I analyze, and identities I design for clients.</p><div class="practice">
-${pcard('/projects/brushfactory.html', '#dbe7f6', 'tablet_card', 'Brushfactory', 'A web app that converts brushes between Photoshop, Procreate, Clip Studio Paint and Krita. I design, build and run it, from the conversion code to the brand.', 'Read the case study')}
-${pcard('/projects/dmarc.html', '#d3ebe5', 'chart_card', 'Data analysis', 'Mapping and forecasting in R, Python and SQL, presented as charts people can read at a glance. Most recently, food pantry access across the Des Moines metro.', 'Read the DMARC analysis')}
-${pcard('/projects/mainframe.html', '#e6e2f3', 'type_card', 'Brand identity', 'Logos, typefaces and visual systems for studios, firms and events, from a custom typeface for Mainframe Studios to the official Drake Relays 2025 theme.', 'Read the Mainframe case study')}
+${pcard('/projects/brushfactory.html', '#dbe7f6', 'tablet_card', 'images/brushfactory-home.jpg', 'The Brushfactory converter', 'Brushfactory', 'A web app that converts brushes between Photoshop, Procreate, Clip Studio Paint and Krita. I design, build and run it, from the conversion code to the brand.', 'Read the case study')}
+${pcard('/projects/dmarc.html', '#d3ebe5', 'chart_card', 'images/dmarc1.jpg', 'Map of repeat pantry visits by zip code', 'Data analysis', 'Mapping and forecasting in R, Python and SQL, presented as charts people can read at a glance. Most recently, food pantry access across the Des Moines metro.', 'Read the DMARC analysis')}
+${pcard('/projects/mainframe.html', '#e6e2f3', 'type_card', 'images/mainframe2.png', 'The Mainframe Studios First Friday poster', 'Brand identity', 'Logos, typefaces and visual systems for studios, firms and events, from a custom typeface for Mainframe Studios to the official Drake Relays 2025 theme.', 'Read the Mainframe case study')}
 </div></section>
 ${band(`<h2 class="h2">Recent projects</h2><p class="intro">Identity work for my own product, a consulting firm and a university track meet.</p><div class="tiles">${['brushfactory-identity', 'forged', 'relays'].map(tile).join('')}</div><a class="more" href="/archive.html">See all projects</a>`)}
 <section class="block" id="about"><h2 class="h2">About</h2><p class="intro">Graphic designer and data analyst, working full time as a remote AI evaluator and building Brushfactory on the side.</p><dl class="facts4">

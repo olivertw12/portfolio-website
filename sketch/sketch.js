@@ -24,3 +24,9 @@ document.querySelector('[data-resume-save]')?.addEventListener('click', () => {
   set(saved);
   btn?.addEventListener('click', () => { const on = !root.classList.contains('still'); set(on); try { localStorage.setItem('still', on ? '1' : '0'); } catch (e) {} });
 }
+
+/* practice cards: on touch screens there is no hover, so the drawing scrubs away once the card is well in view */
+if (matchMedia('(hover: none)').matches && 'IntersectionObserver' in window) {
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('revealed'); io.unobserve(e.target); } }), { threshold: 0.75 });
+  document.querySelectorAll('.pcard').forEach(c => io.observe(c));
+}

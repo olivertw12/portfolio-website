@@ -92,8 +92,14 @@ a.tile:hover{transform:translateY(-3px);color:var(--ink)}
 .home-hero .lede{margin:28px 0 40px;max-width:50ch;font-size:clamp(18px,1.45vw,20px);color:var(--body)}
 .practice{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px}
 .pcard{display:flex;flex-direction:column;text-decoration:none;color:var(--ink);border-radius:24px;overflow:hidden}
-.pcard .art{padding:18px 18px 6px;transition:transform .3s ease}
-.pcard:hover .art{transform:translateY(-4px)}
+.pcard .art{position:relative;aspect-ratio:3/2;overflow:hidden}
+.pcard .art .peek{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.06);transition:transform .9s ease}
+.pcard .art svg{position:absolute;inset:0;width:100%;height:100%}
+/* the scrub: a thick scribble in the drawing's mask draws itself in, wiping the drawing away */
+.scrub{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset .9s cubic-bezier(.55,.1,.35,1)}
+.pcard:hover .scrub,.pcard:focus-visible .scrub,.pcard.revealed .scrub{stroke-dashoffset:0}
+.pcard:hover .peek,.pcard:focus-visible .peek,.pcard.revealed .peek{transform:scale(1)}
+@media (prefers-reduced-motion:reduce){.scrub,.pcard .art .peek{transition:none}}
 .pcard .txt{padding:24px 26px 28px}
 .pcard h3{margin:0 0 8px;font-size:25px}
 .pcard p{margin:0;color:var(--body)}
