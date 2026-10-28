@@ -29,6 +29,7 @@
         /* Entries that exist only on the ATS sheet (shown by the ATS print
            rules below). */
         .ats-only { display: none; }
+        .ats-role-heading { display: none; }
 
         /* Mode buttons — they live inside the nav-pill in the navbar.
            Both colors come from tokens that flip in .dark, so there is no
@@ -75,6 +76,12 @@
                separate DataAnnotation and Handshake roles, worded as on LinkedIn. */
             [data-format="ats"] .ats-combined { display: none !important; }
             [data-format="ats"] .ats-only { display: block; }
+            [data-format="ats"] .resume-visual-heading,
+            [data-format="ats"] .resume-visual-employer { display: none !important; }
+            [data-format="ats"] .ats-role-heading { display: block; break-inside: avoid; break-after: avoid; }
+            [data-format="ats"] .ats-role-heading h4 { font-weight: 700; font-size: 12px; line-height: 1.35; }
+            [data-format="ats"] .ats-role-heading p { margin: 0 0 0.25rem; font-size: 11px; }
+            [data-format="ats"] .ats-role-heading + ul { break-before: avoid; }
 
             /* Skills flatten to comma-separated lines — the form parsers expect
                for a skills section, and one line per category instead of one
@@ -94,6 +101,8 @@
             /* This version is allowed two pages, so nothing here is fighting for
                space. Everything below buys legibility with room. */
             html[data-format="ats"] { font-size: 12px !important; }
+            [data-format="ats"] .print-container,
+            [data-format="ats"] .print-container * { font-family: Arial, sans-serif !important; letter-spacing: normal !important; }
             [data-format="ats"] .print-container { padding: 0 !important; }
             [data-format="ats"] p,
             [data-format="ats"] li { line-height: 1.45; }
@@ -251,25 +260,25 @@
                         <div class="design-only">
                             <div class="mb-3 print:mb-1.5">
                                 <h4 class="text-ink font-bold print:text-lg">BA Graphic Design</h4>
-                                <p class="text-body font-normal text-sm mt-0.5 print:text-base">Drake University</p>
-                                <p class="text-muted text-xs mt-0.5 print:text-sm whitespace-nowrap">May 2025</p>
+                                <p class="text-body font-normal text-sm mt-0.5 print:text-base">Drake University<br>Des Moines, Iowa</p>
+                                <p class="text-muted text-xs mt-0.5 print:text-sm whitespace-nowrap">May 2025 | GPA: 3.6</p>
                             </div>
                             <div>
                                 <h4 class="text-ink font-bold print:text-lg">BS Data Analytics</h4>
-                                <p class="text-body font-normal text-sm mt-0.5 print:text-base">Drake University</p>
-                                <p class="text-muted text-xs mt-0.5 print:text-sm whitespace-nowrap">May 2025</p>
+                                <p class="text-body font-normal text-sm mt-0.5 print:text-base">Drake University<br>Des Moines, Iowa</p>
+                                <p class="text-muted text-xs mt-0.5 print:text-sm whitespace-nowrap">May 2025 | GPA: 3.6</p>
                             </div>
                         </div>
                         <div class="data-only">
                             <div class="mb-3 print:mb-1.5">
                                 <h4 class="text-ink font-bold print:text-lg">BS Data Analytics</h4>
-                                <p class="text-body font-normal text-sm mt-0.5 print:text-base">Drake University</p>
-                                <p class="text-muted text-xs mt-0.5 print:text-sm whitespace-nowrap">May 2025</p>
+                                <p class="text-body font-normal text-sm mt-0.5 print:text-base">Drake University<br>Des Moines, Iowa</p>
+                                <p class="text-muted text-xs mt-0.5 print:text-sm whitespace-nowrap">May 2025 | GPA: 3.6</p>
                             </div>
                             <div>
                                 <h4 class="text-ink font-bold print:text-lg">BA Graphic Design</h4>
-                                <p class="text-body font-normal text-sm mt-0.5 print:text-base">Drake University</p>
-                                <p class="text-muted text-xs mt-0.5 print:text-sm whitespace-nowrap">May 2025</p>
+                                <p class="text-body font-normal text-sm mt-0.5 print:text-base">Drake University<br>Des Moines, Iowa</p>
+                                <p class="text-muted text-xs mt-0.5 print:text-sm whitespace-nowrap">May 2025 | GPA: 3.6</p>
                             </div>
                         </div>
                     </section>
@@ -287,11 +296,15 @@
                              project names are confidential and must not appear here, on the
                              site, or on LinkedIn. -->
                         <div class="mb-3 print:mb-1.5">
-                            <div class="flex justify-between items-baseline">
+                            <div class="resume-visual-heading flex justify-between items-baseline">
                                 <h4 class="text-ink text-lg font-bold print:text-xl leading-tight">Generalist Expert [Contract]</h4>
                                 <span class="text-muted text-xs font-mono print:text-sm whitespace-nowrap shrink-0 ml-4">Aug 2026 &ndash; Present</span>
                             </div>
-                            <p class="text-body font-medium text-sm mb-1 print:mb-0.5 print:text-sm">Mercor</p>
+                            <p class="resume-visual-employer text-body font-medium text-sm mb-1 print:mb-0.5 print:text-sm">Mercor</p>
+                            <div class="ats-role-heading">
+                                <h4>Generalist Expert [Contract] | Mercor</h4>
+                                <p>Aug 2026 - Present</p>
+                            </div>
                             <ul class="list-disc list-outside ml-4 text-body font-normal text-sm space-y-0.5 marker-muted print:text-base design-only">
                                 <li>Conducted qualitative and visual evaluations of AI model outputs regarding UI/UX, visual hierarchy, and layout consistency.</li>
                                 <li>Evaluated visual/multimodal model responses against established design standards and functional criteria.</li>
@@ -305,11 +318,15 @@
                         </div>
 
                         <div class="mb-3 print:mb-1.5 ats-combined">
-                            <div class="flex justify-between items-baseline">
+                            <div class="resume-visual-heading flex justify-between items-baseline">
                                 <h4 class="text-ink text-lg font-bold print:text-xl leading-tight">AI Trainer [Contract]</h4>
                                 <span class="text-muted text-xs font-mono print:text-sm  shrink-0 ml-4" style="text-align:right; max-width:55%">Apr 2026 &ndash; Jul 2026;<wbr> Oct 2026 &ndash; Present</span>
                             </div>
-                            <p class="text-body font-medium text-sm mb-1 print:mb-0.5 print:text-sm">Handshake AI</p>
+                            <p class="resume-visual-employer text-body font-medium text-sm mb-1 print:mb-0.5 print:text-sm">Handshake AI</p>
+                            <div class="ats-role-heading">
+                                <h4>AI Trainer [Contract] | Handshake AI</h4>
+                                <p>Apr 2026 - Jul 2026; Oct 2026 - Present</p>
+                            </div>
                             <ul class="list-disc list-outside ml-4 text-body font-normal text-sm space-y-0.5 marker-muted print:text-base">
                                 <li>Authored complex graphic design project briefs to stress-test AI model capabilities across 2D software including GIMP, Inkscape, and Krita.</li>
                                 <li>Reviewed and graded AI-generated text and images for accuracy, quality, and logical flow while providing detailed written rationales for each decision.</li>
@@ -318,11 +335,15 @@
                         </div>
 
                         <div class="mb-3 print:mb-1.5 ats-only">
-                            <div class="flex justify-between items-baseline">
+                            <div class="resume-visual-heading flex justify-between items-baseline">
                                 <h4 class="text-ink text-lg font-bold print:text-xl leading-tight">AI Trainer [Contract]</h4>
                                 <span class="text-muted text-xs font-mono print:text-sm whitespace-nowrap shrink-0 ml-4">Apr 2026 &ndash; Present</span>
                             </div>
-                            <p class="text-body font-medium text-sm mb-1 print:mb-0.5 print:text-sm">DataAnnotation</p>
+                            <p class="resume-visual-employer text-body font-medium text-sm mb-1 print:mb-0.5 print:text-sm">DataAnnotation</p>
+                            <div class="ats-role-heading">
+                                <h4>AI Trainer [Contract] | DataAnnotation</h4>
+                                <p>Apr 2026 - Present</p>
+                            </div>
                             <ul class="list-disc list-outside ml-4 text-body font-normal text-sm space-y-0.5 marker-muted print:text-base">
                                 <li>Applying a dual background in data analytics and graphic design to evaluate and refine unreleased AI models through rigorous human-feedback data curation.</li>
                                 <li>Evaluated the composition, lighting, and aesthetic quality of AI-generated imagery, specifically identifying structural inconsistencies, prompt adherence, and visual artifacts.</li>
@@ -332,11 +353,15 @@
                         </div>
 
                         <div class="mb-3 print:mb-1.5 ats-only" style="break-inside:avoid">
-                            <div class="flex justify-between items-baseline">
+                            <div class="resume-visual-heading flex justify-between items-baseline">
                                 <h4 class="text-ink text-lg font-bold print:text-xl leading-tight">2D Design Specialist [Contract]</h4>
                                 <span class="text-muted text-xs font-mono print:text-sm  shrink-0 ml-4" style="text-align:right; max-width:55%">Apr 2026 &ndash; Jul 2026;<wbr> Oct 2026 &ndash; Present</span>
                             </div>
-                            <p class="text-body font-medium text-sm mb-1 print:mb-0.5 print:text-sm">Handshake AI</p>
+                            <p class="resume-visual-employer text-body font-medium text-sm mb-1 print:mb-0.5 print:text-sm">Handshake AI</p>
+                            <div class="ats-role-heading">
+                                <h4>2D Design Specialist [Contract] | Handshake AI</h4>
+                                <p>Apr 2026 - Jul 2026; Oct 2026 - Present</p>
+                            </div>
                             <ul class="list-disc list-outside ml-4 text-body font-normal text-sm space-y-0.5 marker-muted print:text-base">
                                 <li>Authored complex graphic design project briefs to stress-test model capabilities and tool execution within 2D design software including GIMP, LibreSprite, Inkscape, and Krita.</li>
                                 <li>Developed structured, binary evaluation rubrics and scoring datasets that directly train machine learning models to evaluate design outputs.</li>
@@ -345,22 +370,30 @@
                         </div>
 
                         <div class="mb-3 print:mb-1.5">
-                            <div class="flex justify-between items-baseline">
+                            <div class="resume-visual-heading flex justify-between items-baseline">
                                 <h4 class="text-ink text-lg font-bold print:text-xl leading-tight">Tax Verification Associate</h4>
                                 <span class="text-muted text-xs font-mono print:text-sm whitespace-nowrap shrink-0 ml-4">Feb 2026 &ndash; Apr 2026</span>
                             </div>
-                            <p class="text-body font-medium text-sm mb-1 print:mb-0.5 print:text-sm">Thomson Reuters</p>
+                            <p class="resume-visual-employer text-body font-medium text-sm mb-1 print:mb-0.5 print:text-sm">Thomson Reuters</p>
+                            <div class="ats-role-heading">
+                                <h4>Tax Verification Associate | Thomson Reuters</h4>
+                                <p>Feb 2026 - Apr 2026</p>
+                            </div>
                             <ul class="list-disc list-outside ml-4 text-body font-normal text-sm space-y-0.5 marker-muted print:text-base">
                                 <li>Reviewed and categorized sensitive tax data using Excel and internal software, consistently exceeding high-volume daily targets during peak tax season.</li>
                             </ul>
                         </div>
 
                         <div class="mb-3 print:mb-1.5">
-                            <div class="flex justify-between items-baseline">
+                            <div class="resume-visual-heading flex justify-between items-baseline">
                                 <h4 class="text-ink text-lg font-bold print:text-xl leading-tight">Graphic Design Intern</h4>
                                 <span class="text-muted text-xs font-mono print:text-sm whitespace-nowrap shrink-0 ml-4">Dec 2024 &ndash; Feb 2025</span>
                             </div>
-                            <p class="text-body font-medium text-sm mb-1 print:mb-0.5 print:text-sm">City of Shorewood</p>
+                            <p class="resume-visual-employer text-body font-medium text-sm mb-1 print:mb-0.5 print:text-sm">City of Shorewood</p>
+                            <div class="ats-role-heading">
+                                <h4>Graphic Design Intern | City of Shorewood</h4>
+                                <p>Dec 2024 - Feb 2025</p>
+                            </div>
                             <ul class="list-disc list-outside ml-4 text-body font-normal text-sm space-y-0.5 marker-muted print:text-base">
                                 <li>Designed print and digital materials for city events including brochures, flyers, and social media graphics while ensuring adherence to municipal branding guidelines.</li>
                                 <li>Standardized all public forms by converting them into accessible fillable PDFs using Adobe Acrobat Pro to improve office efficiency.</li>
@@ -368,11 +401,15 @@
                         </div>
 
                         <div>
-                            <div class="flex justify-between items-baseline">
+                            <div class="resume-visual-heading flex justify-between items-baseline">
                                 <h4 class="text-ink text-lg font-bold print:text-xl leading-tight">Drake Relays Logo Designer</h4>
                                 <span class="text-muted text-xs font-mono print:text-sm whitespace-nowrap shrink-0 ml-4">Dec 2024 &ndash; May 2025</span>
                             </div>
-                            <p class="text-body font-medium text-sm mb-1 print:mb-0.5 print:text-sm">Drake University</p>
+                            <p class="resume-visual-employer text-body font-medium text-sm mb-1 print:mb-0.5 print:text-sm">Drake University</p>
+                            <div class="ats-role-heading">
+                                <h4>Drake Relays Logo Designer | Drake University</h4>
+                                <p>Dec 2024 - May 2025</p>
+                            </div>
                             <ul class="list-disc list-outside ml-4 text-body font-normal text-sm space-y-0.5 marker-muted print:text-base">
                                 <li>Selected from 11 finalists to design the official logo and visual theme for the 2025 Drake Relays ("Racing Through Time").</li>
                                 <li>Brand identity deployed across merchandise, campus signage, and digital platforms for an event drawing thousands of attendees.</li>
@@ -388,11 +425,15 @@
                              onto a second page. -->
 
                         <div class="mb-3 print:mb-1.5">
-                            <div class="flex justify-between items-baseline">
+                            <div class="resume-visual-heading flex justify-between items-baseline">
                                 <h4 class="text-ink text-lg font-bold print:text-xl leading-tight">Brushfactory</h4>
                                 <span class="text-muted text-xs font-mono print:text-sm whitespace-nowrap shrink-0 ml-4">Aug 2026 &ndash; Present</span>
                             </div>
-                            <p class="text-body font-medium text-sm mb-1 print:mb-0.5 print:text-sm">Brushfactory.co</p>
+                            <p class="resume-visual-employer text-body font-medium text-sm mb-1 print:mb-0.5 print:text-sm">Brushfactory.co</p>
+                            <div class="ats-role-heading">
+                                <h4>Brushfactory | Brushfactory.co</h4>
+                                <p>Aug 2026 - Present</p>
+                            </div>
                             <ul class="list-disc list-outside ml-4 text-body font-normal text-sm space-y-0.5 marker-muted print:text-base">
                                 <li>Designed and shipped a responsive web application (HTML/Tailwind/JS) to convert digital illustration brushes across major platforms, executing the complete UI/UX and brand identity from the ground up.</li>
                                 <li>Built the backend conversion logic and test harness in Python to parse proprietary formats, measuring drift in brush size, spacing, and pressure response.</li>
@@ -400,11 +441,15 @@
                         </div>
 
                         <div class="mb-3 print:mb-1.5 design-only">
-                            <div class="flex justify-between items-baseline">
+                            <div class="resume-visual-heading flex justify-between items-baseline">
                                 <h4 class="text-ink text-lg font-bold print:text-xl leading-tight">Freelance Branding &amp; Design</h4>
                                 <span class="text-muted text-xs font-mono print:text-sm whitespace-nowrap shrink-0 ml-4">Aug 2021 &ndash; Present</span>
                             </div>
-                            <p class="text-body font-medium text-sm mb-1 print:mb-0.5 print:text-sm">Various Clients</p>
+                            <p class="resume-visual-employer text-body font-medium text-sm mb-1 print:mb-0.5 print:text-sm">Various Clients</p>
+                            <div class="ats-role-heading">
+                                <h4>Freelance Branding &amp; Design | Various Clients</h4>
+                                <p>Aug 2021 - Present</p>
+                            </div>
                             <ul class="list-disc list-outside ml-4 text-body font-normal text-sm space-y-0.5 marker-muted print:text-base">
                                 <li>Designed tour and performance flyers for Minneapolis musicians Dessa and Jeremy Messersmith, delivered in print and digital formats.</li>
                                 <li>Provided logo systems, brand guidelines, and promotional assets for clients including The Forged Group and Pyrkia Health.</li>
@@ -412,11 +457,15 @@
                         </div>
 
                         <div class="data-only">
-                            <div class="flex justify-between items-baseline">
+                            <div class="resume-visual-heading flex justify-between items-baseline">
                                 <h4 class="text-ink text-lg font-bold print:text-xl leading-tight">Data Visualization &amp; Modeling</h4>
                                 <span class="text-muted text-xs font-mono print:text-sm whitespace-nowrap shrink-0 ml-4">Aug 2025 &ndash; Dec 2025</span>
                             </div>
-                            <p class="text-body font-medium text-sm mb-1 print:mb-0.5 print:text-sm">DMARC Food Pantry Network</p>
+                            <p class="resume-visual-employer text-body font-medium text-sm mb-1 print:mb-0.5 print:text-sm">DMARC Food Pantry Network</p>
+                            <div class="ats-role-heading">
+                                <h4>Data Visualization &amp; Modeling | DMARC Food Pantry Network</h4>
+                                <p>Aug 2025 - Dec 2025</p>
+                            </div>
                             <ul class="list-disc list-outside ml-4 text-body font-normal text-sm space-y-0.5 marker-muted print:text-base">
                                 <li>Built a reproducible R pipeline to clean and analyze visitor logs from 90+ pantry locations, enriched with ACS Census demographic data.</li>
                                 <li>Created Leaflet geospatial maps to identify service gaps and developed a Poisson regression model to forecast future pantry demand by region.</li>
