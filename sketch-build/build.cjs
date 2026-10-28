@@ -4,7 +4,7 @@
 // Writes: the pages at the repo root and in projects/, sketch/sketch.css, sketch/sketch.js and sitemap.xml.
 // Pictures come from drift/img/ (1600px, and 800px "-t" thumbnails). The cover letter is private and is never built.
 const fs = require('node:fs'), path = require('node:path'), vm = require('node:vm'), crypto = require('node:crypto');
-const root = path.resolve(__dirname, '..'), A = '/sketch', SITE = 'https://olivertwilliams.com', EMAIL = 'oliver_tw@icloud.com';
+const root = path.resolve(__dirname, '..'), A = '/sketch', SITE = 'https://olivertwilliams.com', EMAIL = 'olivertwilliams2016@gmail.com';
 const CSS = fs.readFileSync(path.join(__dirname, 'sketch.css'), 'utf8'), JS = fs.readFileSync(path.join(__dirname, 'sketch.js'), 'utf8');
 fs.mkdirSync(path.join(root, 'sketch'), { recursive: true });
 fs.writeFileSync(path.join(root, 'sketch/sketch.css'), CSS); fs.writeFileSync(path.join(root, 'sketch/sketch.js'), JS);

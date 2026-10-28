@@ -25,7 +25,7 @@ const iar = src => { const s = sizes[key(src)]; return s ? s[0] / s[1] : 4 / 3; 
 const orig = src => { const rel = src.replace(/^\//, ''), dir = path.dirname(rel); if (fs.existsSync(path.join(root, rel))) return '/' + rel;
   const hit = fs.readdirSync(path.join(root, dir)).find(f => f.toLowerCase() === path.basename(rel).toLowerCase()); return '/' + (hit ? path.join(dir, hit) : rel); };
 const lines = s => s.split('|').map(l => `<span class="ln">${esc(l)}</span>`).join('');
-const EMAIL = 'oliver_tw@icloud.com';
+const EMAIL = 'olivertwilliams2016@gmail.com';
 
 const names = { brushfactory: 'Brushfactory', dmarc: 'DMARC Network|Analysis', 'site-build': 'Personal|Site Build', mainframe: 'Mainframe Studios|First Friday', forged: 'The Forged|Group', relays: 'Drake Relays|2025', 'brushfactory-identity': 'Brushfactory|Identity', dessa: 'Dessa 2026|East Coast Tour', jeremy: 'Songwriting Workshop|& Performance', xmas: 'Christmas in|Excelsior', pyrkia: 'Pyrkia Health', citymap: 'City of Shorewood|Map', cityintern: 'Shorewood|Internship', art: 'Traditional|Artwork', data: 'Save the Data', duolingo: 'Duolingo ×|Rocket League', icymi: 'ICYMI Podcast' };
 /* headings that say what each part is about, instead of generic labels */

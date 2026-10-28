@@ -2,7 +2,7 @@
       <section class="hero">
         <h1 class="glow"><span class="ln">oliver t.</span><span class="ln">williams</span></h1>
         <p class="sub">Design, Data &amp; AI Evaluation.</p>
-        <div class="hero-links"><a class="pill solid" href="/mockups/drift/resume.html">Resume</a><button class="copy-mail" type="button" data-copy aria-label="Copy email address oliver_tw@icloud.com"><span class="mail">oliver_tw@icloud.com</span><svg class="copy-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="8.5" y="8.5" width="11" height="11" rx="2.6"/><path d="M15.5 8.5V6.6A2.1 2.1 0 0 0 13.4 4.5H6.6A2.1 2.1 0 0 0 4.5 6.6v6.8a2.1 2.1 0 0 0 2.1 2.1h1.9"/></svg></button></div>
+        <div class="hero-links"><a class="pill solid" href="/mockups/drift/resume.html">Resume</a><button class="copy-mail" type="button" data-copy aria-label="Copy email address olivertwilliams2016@gmail.com"><span class="mail">olivertwilliams2016@gmail.com</span><svg class="copy-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="8.5" y="8.5" width="11" height="11" rx="2.6"/><path d="M15.5 8.5V6.6A2.1 2.1 0 0 0 13.4 4.5H6.6A2.1 2.1 0 0 0 4.5 6.6v6.8a2.1 2.1 0 0 0 2.1 2.1h1.9"/></svg></button></div>
       </section>
       <section class="about" id="about" data-morph="anchor">
         <header class="about-head"><h2 class="glow"><span class="ln">about.</span></h2><p class="about-lead">Graphic designer and data analyst, working full time as a remote AI evaluator and building Brushfactory, a web-based brush converter for digital artists.</p></header>
@@ -39,6 +39,6 @@
       </section>
       <section class="floor" id="contact" data-morph="anchor">
         <h2 class="glow"><span class="ln">let's work</span><span class="ln">together.</span></h2>
-        <div class="floor-row"><p>Looking for assistance with a project? Reach out and let me know how I can help.</p><button class="copy-mail" type="button" data-copy aria-label="Copy email address oliver_tw@icloud.com"><span class="mail">oliver_tw@icloud.com</span><svg class="copy-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="8.5" y="8.5" width="11" height="11" rx="2.6"/><path d="M15.5 8.5V6.6A2.1 2.1 0 0 0 13.4 4.5H6.6A2.1 2.1 0 0 0 4.5 6.6v6.8a2.1 2.1 0 0 0 2.1 2.1h1.9"/></svg></button></div>
+        <div class="floor-row"><p>Looking for assistance with a project? Reach out and let me know how I can help.</p><button class="copy-mail" type="button" data-copy aria-label="Copy email address olivertwilliams2016@gmail.com"><span class="mail">olivertwilliams2016@gmail.com</span><svg class="copy-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="8.5" y="8.5" width="11" height="11" rx="2.6"/><path d="M15.5 8.5V6.6A2.1 2.1 0 0 0 13.4 4.5H6.6A2.1 2.1 0 0 0 4.5 6.6v6.8a2.1 2.1 0 0 0 2.1 2.1h1.9"/></svg></button></div>
       </section>
     </main>

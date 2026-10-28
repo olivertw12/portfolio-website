@@ -12,7 +12,7 @@ const toast = document.getElementById('toast'); let toastT;
 function say(m){ toast.textContent = m; toast.classList.add('on'); clearTimeout(toastT); toastT = setTimeout(() => toast.classList.remove('on'), 2600); }
 const isLocal = location.pathname.includes('/mockups/');
 document.querySelectorAll('#copy, [data-copy]').forEach(btn => btn.addEventListener('click', () => {
-  const t = 'oliver_tw@icloud.com';
+  const t = 'olivertwilliams2016@gmail.com';
   (navigator.clipboard?.writeText(t) ?? Promise.reject()).then(() => say('Email address copied'), () => { const r = document.createRange(); r.selectNodeContents(btn.querySelector('.mail')); const s = getSelection(); s.removeAllRanges(); s.addRange(r); say('Address selected. Press Ctrl or Cmd + C to copy.'); });
 }));
 const motionBtn = document.getElementById('motion');
