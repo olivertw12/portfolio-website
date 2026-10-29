@@ -109,7 +109,7 @@
             [data-format="ats"] h3 { margin-top: 1.1rem; padding-bottom: 0.3rem; }
             [data-format="ats"] aside > section:first-child h3,
             [data-format="ats"] .print-container > .grid > div > section:first-child h3 { margin-top: 0; }
-            [data-format="ats"] section > div { margin-bottom: 0.85rem; }
+            [data-format="ats"] section > div { margin-bottom: 0.6rem; }
             [data-format="ats"] h4 { margin-bottom: 0.1rem; }
 
             /* Break control. An entry may split between bullets — with the split
@@ -178,7 +178,7 @@
                     </a>
                     <span class="h-4 w-px bg-divider self-center hidden md:block print:block"></span>
                     <span class="md:justify-self-start lg:whitespace-nowrap flex items-center gap-2">
-                        Chicago, IL (relocating Oct 2026) <i class="fa-solid fa-location-dot text-xs text-muted"></i>
+                        <span class="ats-combined">Chicago, IL (relocating Oct 2026)</span><span class="ats-only">5835 Brentridge Drive<br>Excelsior, Minnesota 55331</span> <i class="fa-solid fa-location-dot text-xs text-muted"></i>
                     </span>
 
                     <a href="mailto:olivertwilliams2016@gmail.com" class="md:justify-self-end hover:text-accent transition-colors flex items-center gap-2">
@@ -259,24 +259,24 @@
                         <h3 class="text-muted text-sm font-bold mb-2 border-b border-solid-themed pb-1.5">Education</h3>
                         <div class="design-only">
                             <div class="mb-3 print:mb-1.5">
-                                <h4 class="text-ink font-bold print:text-lg">BA Graphic Design</h4>
+                                <h4 class="text-ink font-bold print:text-lg"><span class="ats-combined">BA Graphic Design</span><span class="ats-only">Bachelor of Arts in Graphic Design</span></h4>
                                 <p class="text-body font-normal text-sm mt-0.5 print:text-base">Drake University<br>Des Moines, Iowa</p>
                                 <p class="text-muted text-xs mt-0.5 print:text-sm whitespace-nowrap">May 2025 | GPA: 3.6</p>
                             </div>
                             <div>
-                                <h4 class="text-ink font-bold print:text-lg">BS Data Analytics</h4>
+                                <h4 class="text-ink font-bold print:text-lg"><span class="ats-combined">BS Data Analytics</span><span class="ats-only">Bachelor of Science in Data Analytics</span></h4>
                                 <p class="text-body font-normal text-sm mt-0.5 print:text-base">Drake University<br>Des Moines, Iowa</p>
                                 <p class="text-muted text-xs mt-0.5 print:text-sm whitespace-nowrap">May 2025 | GPA: 3.6</p>
                             </div>
                         </div>
                         <div class="data-only">
                             <div class="mb-3 print:mb-1.5">
-                                <h4 class="text-ink font-bold print:text-lg">BS Data Analytics</h4>
+                                <h4 class="text-ink font-bold print:text-lg"><span class="ats-combined">BS Data Analytics</span><span class="ats-only">Bachelor of Science in Data Analytics</span></h4>
                                 <p class="text-body font-normal text-sm mt-0.5 print:text-base">Drake University<br>Des Moines, Iowa</p>
                                 <p class="text-muted text-xs mt-0.5 print:text-sm whitespace-nowrap">May 2025 | GPA: 3.6</p>
                             </div>
                             <div>
-                                <h4 class="text-ink font-bold print:text-lg">BA Graphic Design</h4>
+                                <h4 class="text-ink font-bold print:text-lg"><span class="ats-combined">BA Graphic Design</span><span class="ats-only">Bachelor of Arts in Graphic Design</span></h4>
                                 <p class="text-body font-normal text-sm mt-0.5 print:text-base">Drake University<br>Des Moines, Iowa</p>
                                 <p class="text-muted text-xs mt-0.5 print:text-sm whitespace-nowrap">May 2025 | GPA: 3.6</p>
                             </div>
@@ -302,7 +302,8 @@
                             </div>
                             <p class="resume-visual-employer text-body font-medium text-sm mb-1 print:mb-0.5 print:text-sm">Mercor</p>
                             <div class="ats-role-heading">
-                                <h4>Generalist Expert [Contract] | Mercor</h4>
+                                <h4>Company: Mercor</h4>
+                                <p>Job Title: Generalist Expert (Contract)</p>
                                 <p>Aug 2026 - Present</p>
                             </div>
                             <ul class="list-disc list-outside ml-4 text-body font-normal text-sm space-y-0.5 marker-muted print:text-base design-only">
@@ -324,7 +325,8 @@
                             </div>
                             <p class="resume-visual-employer text-body font-medium text-sm mb-1 print:mb-0.5 print:text-sm">Handshake AI</p>
                             <div class="ats-role-heading">
-                                <h4>AI Trainer [Contract] | Handshake AI</h4>
+                                <h4>Company: Handshake AI</h4>
+                                <p>Job Title: AI Trainer (Contract)</p>
                                 <p>Apr 2026 - Jul 2026; Oct 2026 - Present</p>
                             </div>
                             <ul class="list-disc list-outside ml-4 text-body font-normal text-sm space-y-0.5 marker-muted print:text-base">
@@ -341,7 +343,8 @@
                             </div>
                             <p class="resume-visual-employer text-body font-medium text-sm mb-1 print:mb-0.5 print:text-sm">DataAnnotation</p>
                             <div class="ats-role-heading">
-                                <h4>AI Trainer [Contract] | DataAnnotation</h4>
+                                <h4>Company: DataAnnotation</h4>
+                                <p>Job Title: AI Trainer (Contract)</p>
                                 <p>Apr 2026 - Present</p>
                             </div>
                             <ul class="list-disc list-outside ml-4 text-body font-normal text-sm space-y-0.5 marker-muted print:text-base">
@@ -359,8 +362,25 @@
                             </div>
                             <p class="resume-visual-employer text-body font-medium text-sm mb-1 print:mb-0.5 print:text-sm">Handshake AI</p>
                             <div class="ats-role-heading">
-                                <h4>2D Design Specialist [Contract] | Handshake AI</h4>
-                                <p>Apr 2026 - Jul 2026; Oct 2026 - Present</p>
+                                <h4>Company: Handshake AI</h4>
+                                <p>Job Title: 2D Design Specialist (Contract)</p>
+                                <p>October 2026 - Present</p>
+                            </div>
+                            <ul class="list-disc list-outside ml-4 text-body font-normal text-sm space-y-0.5 marker-muted print:text-base">
+                                <li>Resumed contract work developing graphic design tasks and evaluation rubrics for AI models.</li>
+                            </ul>
+                        </div>
+
+<div class="mb-3 print:mb-1.5 ats-only" style="break-inside:avoid">
+                            <div class="resume-visual-heading flex justify-between items-baseline">
+                                <h4 class="text-ink text-lg font-bold print:text-xl leading-tight">2D Design Specialist [Contract]</h4>
+                                <span class="text-muted text-xs font-mono print:text-sm  shrink-0 ml-4" style="text-align:right; max-width:55%">Apr 2026 &ndash; Jul 2026;<wbr> Oct 2026 &ndash; Present</span>
+                            </div>
+                            <p class="resume-visual-employer text-body font-medium text-sm mb-1 print:mb-0.5 print:text-sm">Handshake AI</p>
+                            <div class="ats-role-heading">
+                                <h4>Company: Handshake AI</h4>
+                                <p>Job Title: 2D Design Specialist (Contract)</p>
+                                <p>April 2026 - July 2026</p>
                             </div>
                             <ul class="list-disc list-outside ml-4 text-body font-normal text-sm space-y-0.5 marker-muted print:text-base">
                                 <li>Authored complex graphic design project briefs to stress-test model capabilities and tool execution within 2D design software including GIMP, LibreSprite, Inkscape, and Krita.</li>
@@ -376,7 +396,8 @@
                             </div>
                             <p class="resume-visual-employer text-body font-medium text-sm mb-1 print:mb-0.5 print:text-sm">Thomson Reuters</p>
                             <div class="ats-role-heading">
-                                <h4>Tax Verification Associate | Thomson Reuters</h4>
+                                <h4>Company: Thomson Reuters</h4>
+                                <p>Job Title: Tax Verification Associate</p>
                                 <p>Feb 2026 - Apr 2026</p>
                             </div>
                             <ul class="list-disc list-outside ml-4 text-body font-normal text-sm space-y-0.5 marker-muted print:text-base">
@@ -391,7 +412,8 @@
                             </div>
                             <p class="resume-visual-employer text-body font-medium text-sm mb-1 print:mb-0.5 print:text-sm">City of Shorewood</p>
                             <div class="ats-role-heading">
-                                <h4>Graphic Design Intern | City of Shorewood</h4>
+                                <h4>Company: City of Shorewood</h4>
+                                <p>Job Title: Graphic Design Intern</p>
                                 <p>Dec 2024 - Feb 2025</p>
                             </div>
                             <ul class="list-disc list-outside ml-4 text-body font-normal text-sm space-y-0.5 marker-muted print:text-base">
@@ -407,7 +429,8 @@
                             </div>
                             <p class="resume-visual-employer text-body font-medium text-sm mb-1 print:mb-0.5 print:text-sm">Drake University</p>
                             <div class="ats-role-heading">
-                                <h4>Drake Relays Logo Designer | Drake University</h4>
+                                <h4>Company: Drake University</h4>
+                                <p>Job Title: Drake Relays Logo Designer</p>
                                 <p>Dec 2024 - May 2025</p>
                             </div>
                             <ul class="list-disc list-outside ml-4 text-body font-normal text-sm space-y-0.5 marker-muted print:text-base">
@@ -430,10 +453,7 @@
                                 <span class="text-muted text-xs font-mono print:text-sm whitespace-nowrap shrink-0 ml-4">Aug 2026 &ndash; Present</span>
                             </div>
                             <p class="resume-visual-employer text-body font-medium text-sm mb-1 print:mb-0.5 print:text-sm">Brushfactory.co</p>
-                            <div class="ats-role-heading">
-                                <h4>Brushfactory | Brushfactory.co</h4>
-                                <p>Aug 2026 - Present</p>
-                            </div>
+                            <div class="ats-role-heading"><h4>Project: Brushfactory</h4><p>Organization: Brushfactory.co</p></div>
                             <ul class="list-disc list-outside ml-4 text-body font-normal text-sm space-y-0.5 marker-muted print:text-base">
                                 <li>Designed and shipped a responsive web application (HTML/Tailwind/JS) to convert digital illustration brushes across major platforms, executing the complete UI/UX and brand identity from the ground up.</li>
                                 <li>Built the backend conversion logic and test harness in Python to parse proprietary formats, measuring drift in brush size, spacing, and pressure response.</li>
@@ -446,10 +466,7 @@
                                 <span class="text-muted text-xs font-mono print:text-sm whitespace-nowrap shrink-0 ml-4">Aug 2021 &ndash; Present</span>
                             </div>
                             <p class="resume-visual-employer text-body font-medium text-sm mb-1 print:mb-0.5 print:text-sm">Various Clients</p>
-                            <div class="ats-role-heading">
-                                <h4>Freelance Branding &amp; Design | Various Clients</h4>
-                                <p>Aug 2021 - Present</p>
-                            </div>
+                            <div class="ats-role-heading"><h4>Project: Freelance Branding &amp; Design</h4><p>Organization: Various Clients</p></div>
                             <ul class="list-disc list-outside ml-4 text-body font-normal text-sm space-y-0.5 marker-muted print:text-base">
                                 <li>Designed tour and performance flyers for Minneapolis musicians Dessa and Jeremy Messersmith, delivered in print and digital formats.</li>
                                 <li>Provided logo systems, brand guidelines, and promotional assets for clients including The Forged Group and Pyrkia Health.</li>
@@ -462,10 +479,7 @@
                                 <span class="text-muted text-xs font-mono print:text-sm whitespace-nowrap shrink-0 ml-4">Aug 2025 &ndash; Dec 2025</span>
                             </div>
                             <p class="resume-visual-employer text-body font-medium text-sm mb-1 print:mb-0.5 print:text-sm">DMARC Food Pantry Network</p>
-                            <div class="ats-role-heading">
-                                <h4>Data Visualization &amp; Modeling | DMARC Food Pantry Network</h4>
-                                <p>Aug 2025 - Dec 2025</p>
-                            </div>
+                            <div class="ats-role-heading"><h4>Project: Data Visualization &amp; Modeling</h4><p>Organization: DMARC Food Pantry Network</p></div>
                             <ul class="list-disc list-outside ml-4 text-body font-normal text-sm space-y-0.5 marker-muted print:text-base">
                                 <li>Built a reproducible R pipeline to clean and analyze visitor logs from 90+ pantry locations, enriched with ACS Census demographic data.</li>
                                 <li>Created Leaflet geospatial maps to identify service gaps and developed a Poisson regression model to forecast future pantry demand by region.</li>
@@ -519,6 +533,8 @@
             const previousTitle = document.title;
             document.documentElement.setAttribute('data-format', format);
             setPageMargin(format);
+            const atsLinks = format === 'ats' ? Array.from(document.querySelectorAll('.print-container a[href]')).map(link => [link, link.getAttribute('href')]) : [];
+            atsLinks.forEach(([link]) => link.removeAttribute('href'));
             document.title = format === 'ats'
                 ? 'Resume_Oliver_Williams_ATS'
                 : 'Resume_Oliver_Williams_' + (mode === 'data' ? 'Data' : 'Design');
@@ -526,6 +542,7 @@
                 document.documentElement.setAttribute('data-format', 'styled');
                 setPageMargin('styled');
                 document.title = previousTitle;
+                atsLinks.forEach(([link, href]) => link.setAttribute('href', href));
             }, { once: true });
             window.print();
         }
