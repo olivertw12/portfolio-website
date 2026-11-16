@@ -195,7 +195,7 @@ for (const file of ['resume.html']) {
   const original = fs.readFileSync(path.join(__dirname, 'resume.source.html'), 'utf8');
   const fonts = (original.match(/<link href="https:\/\/fonts.googleapis.com[^>]+>/) || [])[0] || '';
   const inline = [...original.matchAll(/<style[\s\S]*?<\/style>/g)].map(m => m[0]).join('');
-  const main = original.match(/<main[\s\S]*?<\/main>/)[0].replace('<main id="main"', '<div id="document-content"').replace(/<\/main>$/, '</div>').replace(/relocating Oct 2026/g, 'relocating Dec 2026');
+  const main = original.match(/<main[\s\S]*?<\/main>/)[0].replace('<main id="main"', '<div id="document-content"').replace(/<\/main>$/, '</div>');
   const scripts = [...original.matchAll(/<script>([\s\S]*?)<\/script>/g)].map(m => m[1]).filter(s => /function (setPageMargin|setMode)/.test(s)).map(s => `<script>${s}</script>`).join('');
   const resume = file.startsWith('resume'), av = file === 'resume-av.html';
   const seg = (legend, name, opts) => `<fieldset class="switch"><legend>${legend}</legend><div class="segments">${opts.map(([v, l], i) => `<label><input type="radio" name="${name}" value="${v}"${i ? '' : ' checked'}><span>${l}</span></label>`).join('')}</div></fieldset>`;
